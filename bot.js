@@ -163,6 +163,7 @@ function cuteFunction(msg) {
     if (msg.content.includes("GG") ||
         msg.content.includes("Gg") ||
         msg.content.includes("gG") ||
+        msg.content.includes("gg") ||
         msg.content.includes("寶寶")) {
         msg.reply("<@411895879935590411> 有寶貝在找你");
     }
