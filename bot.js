@@ -27,7 +27,7 @@ client.on('messageCreate', msg => {
         msg.channel.id == target_channel[2].channel_Id ||
         msg.channel.id == target_channel[3].channel_Id ||
         msg.channel.id == target_channel[4].channel_Id) {
-        confirmReward(msg)
+        confirmReward(msg);
 
 
     }
@@ -106,8 +106,8 @@ function getAvatar(msg) {
 async function confirmReward(msg) {
     let ImageUrlArray = getImageUrlArray(msg)
     ImageUrlArray.forEach(ImageUrl => {
-        const hash = await getHashDataFromUrl(ImageUrl);
-        msg.channel.send('`' + hash + '`')
+        //const hash = await getHashDataFromUrl(ImageUrl);
+        //msg.channel.send('`' + hash + '`')
         /*
         比對HASH
 
