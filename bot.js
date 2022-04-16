@@ -93,13 +93,14 @@ function cutImageUrl(url) {
 }
 
 function getAvatar(msg) {
-    const user = msg.mentions.users.first() || msg.author;
+    const member = msg.mentions.users.first() || msg.author;
     const avatarEmbed = new Discord.MessageEmbed()
-        .setColor(0x333333)
-        .setAuthor(user.username)
-        .setDescription('`h` : 指令說明')
-    //.setImage(user.avatarURL);
-    client.channels.fetch(msg.channel).then(channel => channel.send(avatarEmbed));
+        .setImage(member.user.displayAvatarURL({ size: 4096, dynamic: true }))
+        .setFooter({
+            text: msg.author.tag,
+            iconURL: msg.member.displayAvatarURL({ dynamic: true })
+        });
+    msg.channel.send(avatarEmbed);
 }
 
 async function confirmReward(msg) {
