@@ -99,7 +99,8 @@ async function AdminFunction(msg) {
 
     }
     else if (msg.content == `${prefix}test`) {
-        client.channels.cache.get('id')
+        mesg.author.sendMessage("Your message here.")
+        //client.channels.cache.get('id')
     }
 }
 
