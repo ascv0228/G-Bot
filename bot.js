@@ -9,6 +9,13 @@ const hashDataJson = require('./hashData.json');
 const { send } = require('process');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
+process.on('uncaughtException', (err, origin) => {
+    console.error(err.stack);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+    console.error(reason);
+});
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
@@ -100,7 +107,7 @@ function getAvatar(msg) {
             text: msg.author.tag,
             iconURL: msg.member.displayAvatarURL({ dynamic: true })
         });
-    await msg.channel.send({ embeds: [avatarEmbed] });
+    msg.channel.send({ embeds: [avatarEmbed] });
 }
 
 async function confirmReward(msg) {
