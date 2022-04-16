@@ -91,21 +91,8 @@ function BaseHelp(msg) {
 }
 async function AdminFunction(msg) {
     if (msg.content.startsWith(`${prefix}hash`)) {
-        const hash = await getHashDataFromUrl("https://cdn.discordapp.com/attachments/886269472158138429/964758088672489492/IMG_0037.png");
-        msg.channel.send('`' + hash + '`');
-        hash = await getHashDataFromUrl("https://media.discordapp.net/attachments/886269472158138429/964788383438233620/Screenshot_20220416-152337_Random_Dice.jpg");
-        msg.channel.send('`' + hash + '`');
-        hash = await getHashDataFromUrl("https://media.discordapp.net/attachments/867811395474423838/964788326290845696/Screenshot_20220415-193148_Random_Dice.jpg");
-        msg.channel.send('`' + hash + '`');
-        hash = await getHashDataFromUrl("https://media.discordapp.net/attachments/867811395474423838/964788325875593256/Screenshot_20220416-152337_Random_Dice.jpg");
-        msg.channel.send('`' + hash + '`');
-        hash = await getHashDataFromUrl("https://media.discordapp.net/attachments/867811395474423838/964788326785744946/Screenshot_20220415-222309_Random_Dice.jpg?width=765&height=670");
-        msg.channel.send('`' + hash + '`');
-        hash = await getHashDataFromUrl("https://media.discordapp.net/attachments/867811395474423838/964796676768403506/IMG_6059.png");
-        msg.channel.send('`' + hash + '`');
-        hash = await getHashDataFromUrl("https://media.discordapp.net/attachments/867811395474423838/964796677074604042/IMG_6054.png");
-        msg.channel.send('`' + hash + '`');
-        hash = await getHashDataFromUrl("https://media.discordapp.net/attachments/867811395474423838/964796677691150386/IMG_6046.png");
+
+        const hash = await getHashDataFromUrl(msg.content.split(' ').splice(1).join(' '));
         msg.channel.send('`' + hash + '`');
     }
     else if (msg.content.startsWith(`${prefix}avatar`) ||
