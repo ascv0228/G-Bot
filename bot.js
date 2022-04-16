@@ -6,6 +6,7 @@ const { prefix } = require('./config/config.json');
 const fs = require('fs');
 const target_channel = require('./config/channelId.json');
 const hashDataJson = require('./hashData.json');
+const { send } = require('process');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
 
@@ -26,7 +27,7 @@ client.on('messageCreate', msg => {
         msg.channel.id == target_channel[2].channel_Id ||
         msg.channel.id == target_channel[3].channel_Id ||
         msg.channel.id == target_channel[4].channel_Id) {
-        msg.channel.send(msg.attachments);
+        msg.channel.send('`' + msg.attachments + '`');
         confirmReward(msg)
 
 
@@ -91,6 +92,7 @@ function cutImageUrl(url) {
         if (index == -1) continue;
         return url.slice(0, (index += (i < 2) ? 4 : 5))
     }
+    return 0;
 }
 
 function getAvatar(msg) {
@@ -103,8 +105,19 @@ function getAvatar(msg) {
 }
 
 function confirmReward(msg) {
-    let imgUrl = msg.attachments.first().url
-    let msgAuthor = msg.author
+    for (let i = 0; i < msg.attachments.size; ++i) {
+        let imgUrl = cutImageUrl(msg.attachments[i].url)
+        let msgAuthor = msg.author
+        if (imgUrl != 0) {
+            msg.channel.send('`' + imgUrl + '`')
+        }
+    }
+}
+
+function attachIsImage(msgAttach) {
+    var url = msgAttach.url;
+    //True if this url is a png image.
+    return cutImageUrl(url) != 0;
 }
 
 function getHashDataFromUrl(url) {
