@@ -98,7 +98,7 @@ function getAvatar(msg) {
         .setColor(0x333333)
         .setAuthor(user.username)
         .setImage(user.avatarURL);
-    msg.channel.send(avatarEmbed);
+    client.channels.fetch(msg.channel).then(channel => channel.send(embed));
 }
 
 async function confirmReward(msg) {
