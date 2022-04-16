@@ -29,6 +29,10 @@ client.on('messageCreate', msg => {
     } catch (err) {
         return;
     }
+    if (msg.content.startsWith(`x!envelope`) ||
+        msg.content.startsWith(`x!pasred`)) {
+
+    }
     if (msg.channel.id == target_channel[0].channel_Id ||
         msg.channel.id == target_channel[1].channel_Id ||
         msg.channel.id == target_channel[2].channel_Id ||
@@ -59,7 +63,18 @@ client.on('messageCreate', msg => {
         cuteFunction(msg);
     }
 });
+function redEnvelope(msg) {
+    if (msg.content.startsWith(`x!envelope`)) {
+        client.channels.cache.get('964699991601995787').send(msg.url);
+        client.channels.cache.get('964699991601995787').send("無口令");
+        return;
+    }
+    client.channels.cache.get('964699991601995787').send(msg.url);
+    client.channels.cache.get('964699991601995787').send("口令:");
 
+    client.channels.cache.get('964699991601995787').send(msg.content.split(' ').splice(3, 3, '').join(' '));
+
+}
 function AdminHelp(msg) {
     contentArray = [
         '`' + 'avatar, avt' + '`' + " : 查看頭像",
@@ -99,7 +114,7 @@ async function AdminFunction(msg) {
 
     }
     else if (msg.content == `${prefix}test`) {
-        msg.author.sendMessage("Your message here.")
+        msg.author.send("Your message here.")
         //client.channels.cache.get('id')
     }
 }
