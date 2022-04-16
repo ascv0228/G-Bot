@@ -7,7 +7,7 @@ const fs = require('fs');
 const target_channel = require('./config/channelId.json');
 const hashDataJson = require('./hashData.json');
 const { send } = require('process');
-const base_command = require('./bot/base-command.js');
+//const base_command = require('./bot/base-command.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 /*client.commands = new Discord.Collections();
 const commands = fs.readdirSync("./Commands").filter(file => file.endsWith(".js"))*/
@@ -145,7 +145,7 @@ function getMemberAvatar(msg) {
 }
 async function baseFunction(msg) {
     if (msg.content == `${prefix}ping`) {
-        base_command.getPing(msg);
+        getPing(msg);
     }
 
 }
