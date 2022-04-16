@@ -1,12 +1,13 @@
 const Discord = require('discord.js');
 const { Client, Intents } = require('discord.js');
-const { imageHash } = require('image-hash');
 const { token } = require('./config/token.json');
 const { prefix } = require('./config/config.json');
 const fs = require('fs');
 const target_channel = require('./config/channelId.json');
 const hashDataJson = require('./hashData.json');
 const { send } = require('process');
+const image_hash = require('./bot/image-hash.js');
+const base_command = require('./bot/base-command.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
 process.on('uncaughtException', (err, origin) => {
@@ -31,7 +32,7 @@ client.on('messageCreate', msg => {
     }
     if (msg.content.startsWith(`x!envelope`) ||
         msg.content.startsWith(`x!pasred`)) {
-        redEnvelope(msg)
+        base_command.redEnvelope(msg)
     }
     if (msg.channel.id == target_channel[0].channel_Id ||
         msg.channel.id == target_channel[1].channel_Id ||
@@ -45,7 +46,7 @@ client.on('messageCreate', msg => {
         msg.content.startsWith(`${prefix}`)) {
         if (msg.content == `${prefix}help` ||
             msg.content == `${prefix}h`) {
-            AdminHelp(msg);
+            base_command.AdminHelp(msg);
         }
         else {
             AdminFunction(msg);
@@ -55,7 +56,7 @@ client.on('messageCreate', msg => {
     } else if (msg.content.startsWith(`${prefix}`)) {
         if (msg.content == `${prefix}help` ||
             msg.content == `${prefix}h`) {
-            BaseHelp(msg);
+            base_command.BaseHelp(msg);
         }
         baseFunction(msg);
     }
@@ -63,49 +64,23 @@ client.on('messageCreate', msg => {
         cuteFunction(msg);
     }
 });
-function redEnvelope(msg) {
-    if (msg.content.startsWith(`x!envelope`)) {
-        client.channels.cache.get('964699991601995787').send(msg.url);
-        client.channels.cache.get('964699991601995787').send("無口令");
-        return;
-    }
-    client.channels.cache.get('964699991601995787').send(msg.url);
-    client.channels.cache.get('964699991601995787').send("口令:");
-
-    client.channels.cache.get('964699991601995787').send(msg.content.split(' ').splice(3, 3, '').join(' '));
-
-}
-function AdminHelp(msg) {
-    contentArray = [
-        '`' + 'avatar, avt' + '`' + " : 查看頭像",
-        '`' + 'memberavatar, memavt' + '`' + " : 查看伺服器頭像",
-        '`' + 'ping' + '`' + " : 顯示延遲"
-    ]
-    msg.reply({ content: contentArray.join("\n") });
-}
-function BaseHelp(msg) {
-    contentArray = [
-        '`' + 'ping' + '`' + " : 顯示延遲"
-    ]
-    msg.reply({ content: contentArray.join("\n") });
-}
 async function AdminFunction(msg) {
     if (msg.content.startsWith(`${prefix}hash`)) {
         const url = msg.content.split(' ').splice(1).join(' ');
         if (!url.startsWith("http")) return;
-        const hash = await getHashDataFromUrl();
+        const hash = await image_hash.getHashDataFromUrl();
         msg.channel.send('`' + hash + '`');
     }
     else if (msg.content.startsWith(`${prefix}avatar`) ||
         msg.content.startsWith(`${prefix}avt`)) {
-        getAvatar(msg);
+        base_command.getAvatar(msg);
 
     }
     else if (msg.content.startsWith(`${prefix}memberavatar`) ||
         msg.content.startsWith(`${prefix}memavt`)) {
-        getMemberAvatar(msg);
+        base_command.getMemberAvatar(msg);
 
-    }
+    }/*
     else if (msg.content.startsWith(`${prefix}save`)) {
         const JsonStr = JSON.stringify(hashDataJson);
         fs.writeFile('./hashData.json', JsonStr, (err) => {
@@ -115,7 +90,7 @@ async function AdminFunction(msg) {
             console.log("JSON data is saved.");
         });
 
-    }
+    }*/
     else if (msg.content == `${prefix}test` && msg.author.id == '411895879935590411') {
         client.users.fetch('411895879935590411', false).then((user) => {
             user.send('hello world');
@@ -130,21 +105,11 @@ async function AdminFunction(msg) {
         });
     }
 }
-function getMemberAvatar(msg) {
-    let user = msg.mentions.members.first() || msg.member;
-    const avatarEmbed = new Discord.MessageEmbed()
-        .setImage(user.displayAvatarURL({ size: 4096, dynamic: true }))
-        .setFooter({
-            text: msg.author.tag,
-            iconURL: msg.member.displayAvatarURL({ dynamic: true })
-        });
-    msg.channel.send({ embeds: [avatarEmbed] });
-}
+
 async function baseFunction(msg) {
     if (msg.content == `${prefix}ping`) {
-        getPing(msg);
+        base_command.getPing(msg);
     }
-
 }
 
 function cuteFunction(msg) {
@@ -159,10 +124,7 @@ function cuteFunction(msg) {
     }
 }
 
-function getPing(msg) {
-    msg.channel.send(`Ping is ${Date.now() - msg.createdTimestamp}ms. API Ping is ${Math.round(client.ws.ping)}ms`);
-}
-
+/*
 function cutImageUrl(url) {
     const subFiles = [".png", ".jpg", ".jpeg", ".webp"]
 
@@ -194,58 +156,15 @@ function getMemberAvatar(msg) {
             iconURL: msg.member.displayAvatarURL({ dynamic: true })
         });
     msg.channel.send({ embeds: [avatarEmbed] });
-}
-function getAvatar(msg) {
-    let user = msg.mentions.users.first() || msg.author;
-    const avatarEmbed = new Discord.MessageEmbed()
-        .setImage(user.displayAvatarURL({ size: 4096, dynamic: true }))
-        .setFooter({
-            text: msg.author.tag,
-            iconURL: msg.member.displayAvatarURL({ dynamic: true })
-        });
-    msg.channel.send({ embeds: [avatarEmbed] });
-}
+}*/
 
 async function confirmReward(msg) {
-    let ImageUrlArray = getImageUrlArray(msg)
+    let ImageUrlArray = image_hash.getImageUrlArray(msg)
     for (let i = 0; i < ImageUrlArray.length; ++i) {
-        const hash = await getHashDataFromUrl(ImageUrlArray[i]);
+        const hash = await image_hash.getHashDataFromUrl(ImageUrlArray[i]);
         client.channels.cache.get('863086136180342804').send('`' + hash + '`')
     }
 }
-function IsImage(url) {
-    const subFiles = [".png", ".jpg", ".jpeg", ".webp"]
-
-    for (let i = 0; i < subFiles.length; ++i) {
-        let index = url.indexOf(subFiles[i], 40);
-        if (index == -1) continue;
-        return true
-    }
-    return false;
-}
-function getImageUrlArray(msg) {
-    let ImageUrlArray = new Array();
-    msg.attachments.forEach(attachment => {
-        const ImageUrl = attachment.proxyURL;
-        if (IsImage(ImageUrl)) {
-            ImageUrlArray.push(ImageUrl)
-        }
-    });
-    return ImageUrlArray;
-}
-
-function getHashDataFromUrl(url) {
-    if (!IsImage(url)) return 0;
-    return new Promise((resolve, reject) => {
-        //url = cutImageUrl(url);
-        imageHash(url, 16, true, (error, data) => {
-            if (error) throw error;
-            //hashDataJson.push({ "url": url, "hash": data });
-            resolve(data);
-        });
-    });
-}
-
 
 
 
