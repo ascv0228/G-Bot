@@ -105,13 +105,18 @@ function getAvatar(msg) {
 }
 
 function confirmReward(msg) {
+    /*
     for (let i = 0; i < msg.attachments.size; ++i) {
         let imgUrl = cutImageUrl(msg.attachments[i].url)
         let msgAuthor = msg.author
         if (imgUrl != 0) {
             msg.channel.send('`' + imgUrl + '`')
         }
-    }
+    }*/
+    msg.attachments.forEach(attachment => {
+        const ImageLink = attachment.proxyURL;
+        msg.channel.send(`\`${ImageLink}\``).catch(error)
+    });
 }
 
 function attachIsImage(msgAttach) {
