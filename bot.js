@@ -31,7 +31,7 @@ client.on('messageCreate', msg => {
     }
     if (msg.content.startsWith(`x!envelope`) ||
         msg.content.startsWith(`x!pasred`)) {
-
+        redEnvelope(msg)
     }
     if (msg.channel.id == target_channel[0].channel_Id ||
         msg.channel.id == target_channel[1].channel_Id ||
