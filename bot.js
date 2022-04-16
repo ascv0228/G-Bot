@@ -27,7 +27,6 @@ client.on('messageCreate', msg => {
         msg.channel.id == target_channel[2].channel_Id ||
         msg.channel.id == target_channel[3].channel_Id ||
         msg.channel.id == target_channel[4].channel_Id) {
-        msg.channel.send('`' + msg.attachments + '`');
         confirmReward(msg)
 
 
@@ -105,24 +104,26 @@ function getAvatar(msg) {
 }
 
 function confirmReward(msg) {
-    /*
-    for (let i = 0; i < msg.attachments.size; ++i) {
-        let imgUrl = cutImageUrl(msg.attachments[i].url)
-        let msgAuthor = msg.author
-        if (imgUrl != 0) {
-            msg.channel.send('`' + imgUrl + '`')
-        }
-    }*/
-    msg.attachments.forEach(attachment => {
-        const ImageLink = attachment.proxyURL;
-        msg.channel.send(`\`${ImageLink}\``)
+    let ImageUrlArray = getImageUrlArray(msg)
+    ImageUrlArray.forEach(ImageUrl => {
+        msg.channel.send(getHashDataFromUrl(ImageUrl))
+        /*
+        比對HASH
+        
+        */
     });
 }
 
-function attachIsImage(msgAttach) {
-    var url = msgAttach.url;
-    //True if this url is a png image.
-    return cutImageUrl(url) != 0;
+function getImageUrlArray(msg) {
+    let ImageUrlArray = new Array();
+    msg.attachments.forEach(attachment => {
+        const ImageLink = attachment.proxyURL;
+        if (cutImageUrl(url) != 0) {
+            ImageUrlArray.push(ImageLink)
+        }
+
+    });
+    return ImageUrlArray;
 }
 
 function getHashDataFromUrl(url) {
