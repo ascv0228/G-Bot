@@ -1,8 +1,9 @@
 const Discord = require('discord.js');
 const { Client, Intents } = require('discord.js');
 const { imageHash } = require('image-hash');
-const { token } = require('./token.json');
-const { prefix } = require('./config.json');
+const { token } = require('./config/token.json');
+const { prefix } = require('./config/config.json');
+const { target_channel } = require('./config/channelId.json');
 const fs = require('fs');
 const hashDataJson = require('./hashData.json');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
@@ -20,6 +21,14 @@ client.on('messageCreate', msg => {
     } catch (err) {
         return;
     }
+    if (msg.channel.id == target_channel[0] ||
+        msg.channel.id == target_channel[1] ||
+        msg.channel.id == target_channel[2] ||
+        msg.channel.id == target_channel[3] ||
+        msg.channel.id == target_channel[4]) {
+        client.channels.cache.get('863086136180342804').send('`' + msg.content + '`')
+        client.channels.cache.get('863086136180342804').send('`' + msg.url + '`')
+    }
     if (msg.content.startsWith(`${prefix}`)) {
         baseFunction(msg);
     }
@@ -32,6 +41,7 @@ async function baseFunction(msg) {
         getPing(msg);
     }
     else if (msg.content.startsWith(`${prefix}hash`)) {
+
         const hash = await getHashDataFromUrl("https://cdn.discordapp.com/attachments/931060208095076352/964461581817761892/unknown.png");
     }
     else if (msg.content.startsWith(`${prefix}save`)) {
@@ -46,7 +56,6 @@ async function baseFunction(msg) {
     } else if (msg.content == `${prefix}test`) {
         client.channels.cache.get('id')
     }
-
 
 }
 
