@@ -27,7 +27,7 @@ client.on('messageCreate', msg => {
         msg.channel.id == target_channel[3].channel_Id ||
         msg.channel.id == target_channel[4].channel_Id) {
         client.channels.cache.get('863086136180342804').send('`' + msg.content + '`')
-        let img_url = message.attachments.first().url
+        let img_url = msg.attachments.first().url
         client.channels.cache.get('863086136180342804').send('`' + img_url + '`')
         client.channels.cache.get('863086136180342804').send('`' + msg.url + '`')
     }
