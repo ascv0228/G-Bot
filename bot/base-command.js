@@ -1,12 +1,12 @@
 const Discord = require('discord.js');
 const { Client, Intents } = require('discord.js');
-const { token } = require('./config/token.json');
-const { prefix } = require('./config/config.json');
+const { token } = require('../config/token.json');
+const { prefix } = require('../config/config.json');
 const fs = require('fs');
-const target_channel = require('./config/channelId.json');
-const hashDataJson = require('./hashData.json');
+const target_channel = require('../config/channelId.json');
+const hashDataJson = require('../hashData.json');
 const { send } = require('process');
-const image_hash = require('./bot/image-hash.js');
+const image_hash = require('./image-hash.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
 function getPing(msg) {
