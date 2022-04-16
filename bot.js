@@ -105,14 +105,10 @@ function getAvatar(msg) {
 
 async function confirmReward(msg) {
     let ImageUrlArray = getImageUrlArray(msg)
-    ImageUrlArray.forEach(ImageUrl => {
-        //const hash = await getHashDataFromUrl(ImageUrl);
-        //msg.channel.send('`' + hash + '`')
-        /*
-        比對HASH
-
-        */
-    });
+    for (let i = 0; i < ImageUrlArray.size(); ++i) {
+        const hash = await getHashDataFromUrl(ImageUrl);
+        msg.channel.send('`' + hash + '`')
+    }
 }
 
 function getImageUrlArray(msg) {
