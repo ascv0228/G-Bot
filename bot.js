@@ -109,7 +109,7 @@ function confirmReward(msg) {
         msg.channel.send(getHashDataFromUrl(ImageUrl))
         /*
         比對HASH
-        
+
         */
     });
 }
@@ -117,9 +117,9 @@ function confirmReward(msg) {
 function getImageUrlArray(msg) {
     let ImageUrlArray = new Array();
     msg.attachments.forEach(attachment => {
-        const ImageLink = attachment.proxyURL;
-        if (cutImageUrl(url) != 0) {
-            ImageUrlArray.push(ImageLink)
+        const ImageUrl = attachment.proxyURL;
+        if (cutImageUrl(ImageUrl) != 0) {
+            ImageUrlArray.push(ImageUrl)
         }
 
     });
