@@ -94,7 +94,7 @@ function cutImageUrl(url) {
 
 function getAvatar(msg) {
     const user = msg.mentions.users.first() || msg.author;
-    const avatarEmbed = new Discord.RichEmbed()
+    const avatarEmbed = new Discord.MessageEmbed()
         .setColor(0x333333)
         .setAuthor(user.username)
         .setImage(user.avatarURL);
