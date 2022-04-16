@@ -3,8 +3,8 @@ const { Client, Intents } = require('discord.js');
 const { imageHash } = require('image-hash');
 const { token } = require('./config/token.json');
 const { prefix } = require('./config/config.json');
-const { target_channel } = require('./config/channelId.json');
 const fs = require('fs');
+const target_channel = require('./config/channelId.json');
 const hashDataJson = require('./hashData.json');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
