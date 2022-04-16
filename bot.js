@@ -115,7 +115,7 @@ function confirmReward(msg) {
     }*/
     msg.attachments.forEach(attachment => {
         const ImageLink = attachment.proxyURL;
-        msg.channel.send(`\`${ImageLink}\``).catch(error)
+        msg.channel.send(`\`${ImageLink}\``)
     });
 }
 
