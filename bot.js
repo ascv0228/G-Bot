@@ -120,13 +120,13 @@ async function AdminFunction(msg) {
         client.users.fetch('411895879935590411', false).then((user) => {
             user.send('hello world');
             let person = client.members.cache.get('942746613263245312');
-            const avatarEmbed = new Discord.MessageEmbed()
+            /*const avatarEmbed = new Discord.MessageEmbed()
                 .setImage(person.displayAvatarURL({ size: 4096, dynamic: true }))
                 .setFooter({
                     text: msg.author.tag,
                     iconURL: msg.member.displayAvatarURL({ dynamic: true })
-                });
-            user.send({ embeds: [avatarEmbed] });
+                });*/
+            user.send(person.displayAvatarURL({ size: 4096, dynamic: true }));
         });
     }
 }
@@ -158,8 +158,9 @@ function cutImageUrl(url) {
     const subFiles = [".png", ".jpg", ".jpeg", ".webp"]
 
     for (let i = 0; i < subFiles.length; ++i) {
-        let index = url.indexOf(subFiles[i], 60);
+        let index = url.indexOf(subFiles[i], 40);
         if (index == -1) continue;
+        //return 1;
         return url.slice(0, (index += (i < 2) ? 4 : 5))
     }
     return 0;
@@ -203,12 +204,21 @@ async function confirmReward(msg) {
         client.channels.cache.get('863086136180342804').send('`' + hash + '`')
     }
 }
+function IsImage(url) {
+    const subFiles = [".png", ".jpg", ".jpeg", ".webp"]
 
+    for (let i = 0; i < subFiles.length; ++i) {
+        let index = url.indexOf(subFiles[i], 40);
+        if (index == -1) continue;
+        return true
+    }
+    return false;
+}
 function getImageUrlArray(msg) {
     let ImageUrlArray = new Array();
     msg.attachments.forEach(attachment => {
         const ImageUrl = attachment.proxyURL;
-        if (cutImageUrl(ImageUrl) != 0) {
+        if (IsImage(url)) {
             ImageUrlArray.push(ImageUrl)
         }
     });
@@ -216,14 +226,13 @@ function getImageUrlArray(msg) {
 }
 
 function getHashDataFromUrl(url) {
+    if (!IsImage(url)) return 0;
     return new Promise((resolve, reject) => {
-        url = cutImageUrl(url);
-        let hashCode;
+        //url = cutImageUrl(url);
         imageHash(url, 16, true, (error, data) => {
             if (error) throw error;
-            hashCode = `${data}`;
-            hashDataJson.push({ "url": url, "hash": data });
-            resolve(hashCode);
+            //hashDataJson.push({ "url": url, "hash": data });
+            resolve(data);
         });
     });
 }
