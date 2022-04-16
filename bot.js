@@ -106,7 +106,7 @@ function getAvatar(msg) {
 function confirmReward(msg) {
     let ImageUrlArray = getImageUrlArray(msg)
     ImageUrlArray.forEach(ImageUrl => {
-        msg.channel.send(getHashDataFromUrl(ImageUrl))
+        msg.channel.send('`' + await getHashDataFromUrl(ImageUrl) + '`')
         /*
         比對HASH
 
@@ -121,7 +121,7 @@ function getImageUrlArray(msg) {
         if (cutImageUrl(ImageUrl) != 0) {
             ImageUrlArray.push(ImageUrl)
         }
-
+        msg.channel.send('`' + ImageUrl + '`')
     });
     return ImageUrlArray;
 }
