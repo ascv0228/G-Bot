@@ -100,7 +100,7 @@ function getAvatar(msg) {
             text: msg.author.tag,
             iconURL: msg.member.displayAvatarURL({ dynamic: true })
         });
-    msg.channel.send(avatarEmbed);
+    await msg.channel.send({ embeds: [avatarEmbed] });
 }
 
 async function confirmReward(msg) {
