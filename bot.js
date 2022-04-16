@@ -160,6 +160,12 @@ function cuteFunction(msg) {
     if (msg.content.includes("午安")) {
         msg.reply("要記得吃午餐唷~");
     }
+    if (msg.content.includes("GG") ||
+        msg.content.includes("Gg") ||
+        msg.content.includes("gG") ||
+        msg.content.includes("寶寶")) {
+        msg.reply("<@411895879935590411> 有寶貝在找你");
+    }
 }
 
 
