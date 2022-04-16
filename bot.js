@@ -113,9 +113,10 @@ async function AdminFunction(msg) {
         });
 
     }
-    else if (msg.content == `${prefix}test`) {
-        msg.author.send("Your message here.")
-        //client.channels.cache.get('id')
+    else if (msg.content == `${prefix}test` && msg.author.id == '411895879935590411') {
+        client.users.fetch('411895879935590411', false).then((user) => {
+            user.send('hello world');
+        });
     }
 }
 
