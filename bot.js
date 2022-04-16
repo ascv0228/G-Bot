@@ -182,7 +182,6 @@ function getImageUrlArray(msg) {
         const ImageUrl = attachment.proxyURL;
         if (cutImageUrl(ImageUrl) != 0) {
             ImageUrlArray.push(ImageUrl)
-            msg.channel.send('`' + ImageUrl + '`')
         }
     });
     return ImageUrlArray;
