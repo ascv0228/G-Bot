@@ -36,7 +36,13 @@ client.on('messageCreate', msg => {
         msg.channel.id == target_channel[4].channel_Id) {
         confirmReward(msg);
     }
-    if (msg.content.startsWith(`${prefix}`)) {
+    if ((msg.member.hasPermission('ADMINISTRATOR') ||
+        msg.author.id == "942746613263245312") &&
+        msg.content.startsWith(`${prefix}`)) {
+        AdminHelp(msg);
+        AdminFunction(msg);
+        baseFunction(msg);
+    } else if (msg.content.startsWith(`${prefix}`)) {
         baseFunction(msg);
     }
     if (msg.author.id == "942746613263245312" && !msg.content.startsWith(`${prefix}`)) {
@@ -44,12 +50,8 @@ client.on('messageCreate', msg => {
     }
 });
 
-async function baseFunction(msg) {
-    if (msg.content == `${prefix}ping`) {
-        getPing(msg);
-    }
-    else if (msg.content.startsWith(`${prefix}hash`)) {
-
+async function AdminFunction(msg) {
+    if (msg.content.startsWith(`${prefix}hash`)) {
         const hash = await getHashDataFromUrl("https://cdn.discordapp.com/attachments/931060208095076352/964461581817761892/unknown.png");
     }
     else if (msg.content.startsWith(`${prefix}avatar`) ||
@@ -73,6 +75,12 @@ async function baseFunction(msg) {
 
     } else if (msg.content == `${prefix}test`) {
         client.channels.cache.get('id')
+    }
+}
+
+async function baseFunction(msg) {
+    if (msg.content == `${prefix}ping`) {
+        getPing(msg);
     }
 
 }
