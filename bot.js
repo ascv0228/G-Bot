@@ -130,7 +130,16 @@ async function AdminFunction(msg) {
         });
     }
 }
-
+function getMemberAvatar(msg) {
+    let user = msg.mentions.members.first() || msg.member;
+    const avatarEmbed = new Discord.MessageEmbed()
+        .setImage(user.displayAvatarURL({ size: 4096, dynamic: true }))
+        .setFooter({
+            text: msg.author.tag,
+            iconURL: msg.member.displayAvatarURL({ dynamic: true })
+        });
+    msg.channel.send({ embeds: [avatarEmbed] });
+}
 async function baseFunction(msg) {
     if (msg.content == `${prefix}ping`) {
         getPing(msg);
@@ -218,7 +227,7 @@ function getImageUrlArray(msg) {
     let ImageUrlArray = new Array();
     msg.attachments.forEach(attachment => {
         const ImageUrl = attachment.proxyURL;
-        if (IsImage(url)) {
+        if (IsImage(ImageUrl)) {
             ImageUrlArray.push(ImageUrl)
         }
     });
