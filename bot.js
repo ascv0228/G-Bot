@@ -28,8 +28,6 @@ client.on('messageCreate', msg => {
         msg.channel.id == target_channel[3].channel_Id ||
         msg.channel.id == target_channel[4].channel_Id) {
         confirmReward(msg);
-
-
     }
     if (msg.content.startsWith(`${prefix}`)) {
         baseFunction(msg);
@@ -95,11 +93,13 @@ function cutImageUrl(url) {
 }
 
 function getAvatar(msg) {
+    msg.channel.send('`' + msg.mentions.users.first() + '`');
+    msg.channel.send('`' + msg.author + '`');
     let userID = msg.mentions.users.first() || msg.author;
     const avatarAuthor = new Discord.MessageEmbed()
         .setColor('RANDOM')
         .setAuthor(userID.username)
-        .setImage(userID.displayAvatarURL({ dynamic: true }))
+        .setImage(userID.displayAvatarURL({ dynamic: true }));
     msg.channel.send(avatarAuthor);
 }
 
