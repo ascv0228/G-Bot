@@ -93,9 +93,9 @@ function cutImageUrl(url) {
 }
 
 function getAvatar(msg) {
-    const member = msg.mentions.users.first() || msg.author;
+    const user = msg.mentions.users.first() || msg.author;
     const avatarEmbed = new Discord.MessageEmbed()
-        .setImage(member.user.displayAvatarURL({ size: 4096, dynamic: true }))
+        .setImage(user.displayAvatarURL({ size: 4096, dynamic: true }))
         .setFooter({
             text: msg.author.tag,
             iconURL: msg.member.displayAvatarURL({ dynamic: true })
