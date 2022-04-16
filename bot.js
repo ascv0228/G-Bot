@@ -97,7 +97,8 @@ function getAvatar(msg) {
     const avatarEmbed = new Discord.MessageEmbed()
         .setColor(0x333333)
         .setAuthor(user.username)
-        .setImage(user.avatarURL);
+        .setDescription('`h` : 指令說明')
+    //.setImage(user.avatarURL);
     client.channels.fetch(msg.channel).then(channel => channel.send(avatarEmbed));
 }
 
