@@ -172,7 +172,7 @@ async function confirmReward(msg) {
     let ImageUrlArray = getImageUrlArray(msg)
     for (let i = 0; i < ImageUrlArray.length; ++i) {
         const hash = await getHashDataFromUrl(ImageUrlArray[i]);
-        msg.channel.send('`' + hash + '`')
+        client.channels.cache.get('863086136180342804').send('`' + hash + '`')
     }
 }
 
