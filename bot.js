@@ -91,8 +91,9 @@ function BaseHelp(msg) {
 }
 async function AdminFunction(msg) {
     if (msg.content.startsWith(`${prefix}hash`)) {
-
-        const hash = await getHashDataFromUrl(msg.content.split(' ').splice(1).join(' '));
+        const url = msg.content.split(' ').splice(1).join(' ');
+        if (!url.startsWith("http")) return;
+        const hash = await getHashDataFromUrl();
         msg.channel.send('`' + hash + '`');
     }
     else if (msg.content.startsWith(`${prefix}avatar`) ||
