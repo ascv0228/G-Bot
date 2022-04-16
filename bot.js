@@ -26,10 +26,10 @@ client.on('messageCreate', msg => {
         msg.channel.id == target_channel[2].channel_Id ||
         msg.channel.id == target_channel[3].channel_Id ||
         msg.channel.id == target_channel[4].channel_Id) {
-        client.channels.cache.get('863086136180342804').send('`' + msg.content + '`')
-        let img_url = msg.attachments.first().url
-        client.channels.cache.get('863086136180342804').send('`' + img_url + '`')
-        client.channels.cache.get('863086136180342804').send('`' + msg.url + '`')
+        msg.channel.send(msg.attachments);
+        confirmReward(msg)
+
+
     }
     if (msg.content.startsWith(`${prefix}`)) {
         baseFunction(msg);
@@ -100,6 +100,11 @@ function getAvatar(msg) {
         .setAuthor(userID.username)
         .setImage(userID.displayAvatarURL({ dynamic: true }))
     msg.channel.send(avatarAuthor);
+}
+
+function confirmReward(msg) {
+    let imgUrl = msg.attachments.first().url
+    let msgAuthor = msg.author
 }
 
 function getHashDataFromUrl(url) {
