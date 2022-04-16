@@ -7,6 +7,7 @@ const fs = require('fs');
 const target_channel = require('./config/channelId.json');
 const hashDataJson = require('./hashData.json');
 const { send } = require('process');
+const base_command = require('./bot/base-command.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
 process.on('uncaughtException', (err, origin) => {
@@ -142,7 +143,7 @@ function getMemberAvatar(msg) {
 }
 async function baseFunction(msg) {
     if (msg.content == `${prefix}ping`) {
-        getPing(msg);
+        base_command.getPing(msg);
     }
 
 }
@@ -159,9 +160,6 @@ function cuteFunction(msg) {
     }
 }
 
-function getPing(msg) {
-    msg.channel.send(`Ping is ${Date.now() - msg.createdTimestamp}ms. API Ping is ${Math.round(client.ws.ping)}ms`);
-}
 
 function cutImageUrl(url) {
     const subFiles = [".png", ".jpg", ".jpeg", ".webp"]
