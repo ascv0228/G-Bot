@@ -105,7 +105,7 @@ function getAvatar(msg) {
 
 async function confirmReward(msg) {
     let ImageUrlArray = getImageUrlArray(msg)
-    for (let i = 0; i < ImageUrlArray.size(); ++i) {
+    for (let i = 0; i < ImageUrlArray.length; ++i) {
         const hash = await getHashDataFromUrl(ImageUrl);
         msg.channel.send('`' + hash + '`')
     }
