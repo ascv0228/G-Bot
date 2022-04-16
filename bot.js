@@ -57,8 +57,8 @@ async function baseFunction(msg) {
         getAvatar(msg);
 
     }
-    else if (msg.content.startsWith(`${prefix}avatar`) ||
-        msg.content.startsWith(`${prefix}avt`)) {
+    else if (msg.content.startsWith(`${prefix}memberavatar`) ||
+        msg.content.startsWith(`${prefix}memavt`)) {
         getMemberAvatar(msg);
 
     }
@@ -115,7 +115,7 @@ function getAvatar(msg) {
     msg.channel.send({ embeds: [avatarEmbed] });
 }
 function getMemberAvatar(msg) {
-    let user = msg.mentions.member.first() || msg.member;
+    let user = msg.mentions.members.first() || msg.member;
     const avatarEmbed = new Discord.MessageEmbed()
         .setImage(user.displayAvatarURL({ size: 4096, dynamic: true }))
         .setFooter({
