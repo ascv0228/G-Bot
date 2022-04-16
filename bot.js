@@ -21,11 +21,11 @@ client.on('messageCreate', msg => {
     } catch (err) {
         return;
     }
-    if (msg.channel.id == target_channel[0] ||
-        msg.channel.id == target_channel[1] ||
-        msg.channel.id == target_channel[2] ||
-        msg.channel.id == target_channel[3] ||
-        msg.channel.id == target_channel[4]) {
+    if (msg.channel.id == target_channel[0].channel_Id ||
+        msg.channel.id == target_channel[1].channel_Id ||
+        msg.channel.id == target_channel[2].channel_Id ||
+        msg.channel.id == target_channel[3].channel_Id ||
+        msg.channel.id == target_channel[4].channel_Id) {
         client.channels.cache.get('863086136180342804').send('`' + msg.content + '`')
         client.channels.cache.get('863086136180342804').send('`' + msg.url + '`')
     }
@@ -36,6 +36,7 @@ client.on('messageCreate', msg => {
         cuteFunction(msg);
     }
 });
+
 async function baseFunction(msg) {
     if (msg.content == `${prefix}ping`) {
         getPing(msg);
