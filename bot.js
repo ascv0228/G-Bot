@@ -93,14 +93,12 @@ function cutImageUrl(url) {
 }
 
 function getAvatar(msg) {
-    msg.channel.send('`' + msg.mentions.users.first() + '`');
-    msg.channel.send('`' + msg.author + '`');
-    let userID = msg.mentions.users.first() || msg.author;
-    const avatarAuthor = new Discord.MessageEmbed()
-        .setColor('RANDOM')
-        .setAuthor(userID.username)
-        .setImage(userID.displayAvatarURL({ dynamic: true }));
-    msg.channel.send(avatarAuthor);
+    const user = message.mentions.users.first() || message.author;
+    const avatarEmbed = new Discord.RichEmbed()
+        .setColor(0x333333)
+        .setAuthor(user.username)
+        .setImage(user.avatarURL);
+    message.channel.send(avatarEmbed);
 }
 
 async function confirmReward(msg) {
