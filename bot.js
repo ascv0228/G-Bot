@@ -9,6 +9,8 @@ const hashDataJson = require('./hashData.json');
 const { send } = require('process');
 const base_command = require('./bot/base-command.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+/*client.commands = new Discord.Collections();
+const commands = fs.readdirSync("./Commands").filter(file => file.endsWith(".js"))*/
 
 process.on('uncaughtException', (err, origin) => {
     console.error(err.stack);
@@ -244,6 +246,9 @@ function getHashDataFromUrl(url) {
     });
 }
 
+function getPing(msg) {
+    msg.channel.send(`Ping is ${Date.now() - msg.createdTimestamp}ms. API Ping is ${Math.round(client.ws.ping)}ms`);
+}
 
 
 
