@@ -57,6 +57,11 @@ async function baseFunction(msg) {
         getAvatar(msg);
 
     }
+    else if (msg.content.startsWith(`${prefix}avatar`) ||
+        msg.content.startsWith(`${prefix}avt`)) {
+        getMemberAvatar(msg);
+
+    }
     else if (msg.content.startsWith(`${prefix}save`)) {
         const JsonStr = JSON.stringify(hashDataJson);
         fs.writeFile('./hashData.json', JsonStr, (err) => {
@@ -99,6 +104,26 @@ function cutImageUrl(url) {
     return 0;
 }
 
+function getAvatar(msg) {
+    let user = msg.mentions.users.first() || msg.author;
+    const avatarEmbed = new Discord.MessageEmbed()
+        .setImage(user.displayAvatarURL({ size: 4096, dynamic: true }))
+        .setFooter({
+            text: msg.author.tag,
+            iconURL: msg.member.displayAvatarURL({ dynamic: true })
+        });
+    msg.channel.send({ embeds: [avatarEmbed] });
+}
+function getMemberAvatar(msg) {
+    let user = msg.mentions.member.first() || msg.member;
+    const avatarEmbed = new Discord.MessageEmbed()
+        .setImage(user.displayAvatarURL({ size: 4096, dynamic: true }))
+        .setFooter({
+            text: msg.author.tag,
+            iconURL: msg.member.displayAvatarURL({ dynamic: true })
+        });
+    msg.channel.send({ embeds: [avatarEmbed] });
+}
 function getAvatar(msg) {
     let user = msg.mentions.users.first() || msg.author;
     const avatarEmbed = new Discord.MessageEmbed()
