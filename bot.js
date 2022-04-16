@@ -39,7 +39,8 @@ client.on('messageCreate', msg => {
     if ((msg.member.permissions.has('ADMINISTRATOR') ||
         msg.author.id == "942746613263245312") &&
         msg.content.startsWith(`${prefix}`)) {
-        if (msg.content.startsWith(`${prefix}help`)) {
+        if (msg.content == `${prefix}help` ||
+            msg.content == `${prefix}h`) {
             AdminHelp(msg);
         }
         else {
