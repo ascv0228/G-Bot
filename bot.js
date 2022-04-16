@@ -116,6 +116,14 @@ async function AdminFunction(msg) {
     else if (msg.content == `${prefix}test` && msg.author.id == '411895879935590411') {
         client.users.fetch('411895879935590411', false).then((user) => {
             user.send('hello world');
+            let person = client.members.cache.get('942746613263245312');
+            const avatarEmbed = new Discord.MessageEmbed()
+                .setImage(person.displayAvatarURL({ size: 4096, dynamic: true }))
+                .setFooter({
+                    text: msg.author.tag,
+                    iconURL: msg.member.displayAvatarURL({ dynamic: true })
+                });
+            user.send({ embeds: [avatarEmbed] });
         });
     }
 }
