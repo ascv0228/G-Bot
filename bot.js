@@ -36,7 +36,7 @@ client.on('messageCreate', msg => {
         msg.channel.id == target_channel[4].channel_Id) {
         confirmReward(msg);
     }
-    if ((msg.member.hasPermission('ADMINISTRATOR') ||
+    if ((msg.member.permissions.has('ADMINISTRATOR') ||
         msg.author.id == "942746613263245312") &&
         msg.content.startsWith(`${prefix}`)) {
         AdminHelp(msg);
