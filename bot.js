@@ -44,6 +44,11 @@ async function baseFunction(msg) {
 
         const hash = await getHashDataFromUrl("https://cdn.discordapp.com/attachments/931060208095076352/964461581817761892/unknown.png");
     }
+    else if (msg.content.startsWith(`${prefix}avatar`) ||
+        msg.content.startsWith(`${prefix}avt`)) {
+        getAvatar(msg);
+
+    }
     else if (msg.content.startsWith(`${prefix}save`)) {
         const JsonStr = JSON.stringify(hashDataJson);
         fs.writeFile('./hashData.json', JsonStr, (err) => {
@@ -83,6 +88,15 @@ function cutImageUrl(url) {
         if (index == -1) continue;
         return url.slice(0, (index += (i < 2) ? 4 : 5))
     }
+}
+
+function getAvatar(msg) {
+    let userID = msg.mentions.users.first() || msg.author;
+    const avatarAuthor = new Discord.MessageEmbed()
+        .setColor('RANDOM')
+        .setAuthor(userID.username)
+        .setImage(userID.displayAvatarURL({ dynamic: true }))
+    msg.channel.send(avatarAuthor);
 }
 
 function getHashDataFromUrl(url) {
