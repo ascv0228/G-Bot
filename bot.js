@@ -49,6 +49,10 @@ client.on('messageCreate', msg => {
 
         }
     } else if (msg.content.startsWith(`${prefix}`)) {
+        if (msg.content == `${prefix}help` ||
+            msg.content == `${prefix}h`) {
+            BaseHelp(msg);
+        }
         baseFunction(msg);
     }
     if (msg.author.id == "942746613263245312" && !msg.content.startsWith(`${prefix}`)) {
@@ -60,6 +64,12 @@ function AdminHelp(msg) {
     contentArray = [
         '`' + 'avatar, avt' + '`' + " : 查看頭像",
         '`' + 'memberavatar, memavt' + '`' + " : 查看伺服器頭像",
+        '`' + 'ping' + '`' + " : 顯示延遲"
+    ]
+    msg.reply({ content: contentArray.join("\n") });
+}
+function BaseHelp(msg) {
+    contentArray = [
         '`' + 'ping' + '`' + " : 顯示延遲"
     ]
     msg.reply({ content: contentArray.join("\n") });
