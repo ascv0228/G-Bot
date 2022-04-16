@@ -39,9 +39,14 @@ client.on('messageCreate', msg => {
     if ((msg.member.permissions.has('ADMINISTRATOR') ||
         msg.author.id == "942746613263245312") &&
         msg.content.startsWith(`${prefix}`)) {
-        AdminHelp(msg);
-        AdminFunction(msg);
-        baseFunction(msg);
+        if (msg.content.startsWith(`${prefix}help`)) {
+            AdminHelp(msg);
+        }
+        else {
+            AdminFunction(msg);
+            baseFunction(msg);
+
+        }
     } else if (msg.content.startsWith(`${prefix}`)) {
         baseFunction(msg);
     }
@@ -50,6 +55,14 @@ client.on('messageCreate', msg => {
     }
 });
 
+function AdminHelp(msg) {
+    contentArray = [
+        '`' + 'avatar, avt' + '`' + " : 查看頭像",
+        '`' + 'memberavatar, memavt' + '`' + " : 查看伺服器頭像",
+        '`' + 'ping' + '`' + " : 顯示延遲"
+    ]
+    msg.reply({ content: contentArray.join("\n") });
+}
 async function AdminFunction(msg) {
     if (msg.content.startsWith(`${prefix}hash`)) {
         const hash = await getHashDataFromUrl("https://cdn.discordapp.com/attachments/931060208095076352/964461581817761892/unknown.png");
@@ -73,7 +86,8 @@ async function AdminFunction(msg) {
             console.log("JSON data is saved.");
         });
 
-    } else if (msg.content == `${prefix}test`) {
+    }
+    else if (msg.content == `${prefix}test`) {
         client.channels.cache.get('id')
     }
 }
