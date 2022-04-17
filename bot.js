@@ -151,7 +151,6 @@ async function baseFunction(msg) {
     if (msg.content == `${prefix}ping`) {
         getPing(msg);
     }
-
 }
 
 function cuteFunction(msg) {
