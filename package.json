@@ -1,6 +1,8 @@
 {
   "dependencies": {
     "discord.js": "^13.6.0",
-    "image-hash": "^5.0.2"
+    "image-hash": "^5.0.2",
+    "imghash": "^0.0.9",
+    "mongoose": "^6.3.0"
   }
 }
