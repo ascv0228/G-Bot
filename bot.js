@@ -115,7 +115,7 @@ async function AdminFunction(msg) {
         msg.content.startsWith(`${prefix}memavt`)) {
         getMemberAvatar(msg);
 
-    }
+    }/*
     else if (msg.content.startsWith(`${prefix}save`)) {
         const JsonStr = JSON.stringify(hashDataJson);
         fs.writeFile('./hashData.json', JsonStr, (err) => {
@@ -125,20 +125,21 @@ async function AdminFunction(msg) {
             console.log("JSON data is saved.");
         });
 
-    }
-    else if (msg.content == `${prefix}test` && msg.author.id == '411895879935590411') {
-        client.users.fetch('411895879935590411', false).then((user) => {
-            user.send('hello world');
-            let person = client.members.cache.get('942746613263245312');
-            /*const avatarEmbed = new Discord.MessageEmbed()
-                .setImage(person.displayAvatarURL({ size: 4096, dynamic: true }))
-                .setFooter({
-                    text: msg.author.tag,
-                    iconURL: msg.member.displayAvatarURL({ dynamic: true })
-                });*/
-            user.send(person.displayAvatarURL({ size: 4096, dynamic: true }));
-        });
-    }
+    }*/
+    // 
+    // else if (msg.content == `${prefix}test` && msg.author.id == '411895879935590411') {
+    // client.users.fetch('411895879935590411', false).then((user) => {
+    // user.send('hello world');
+    // let person = client.members.cache.get('942746613263245312');
+    // /*const avatarEmbed = new Discord.MessageEmbed()
+    // .setImage(person.displayAvatarURL({ size: 4096, dynamic: true }))
+    // .setFooter({
+    // text: msg.author.tag,
+    // iconURL: msg.member.displayAvatarURL({ dynamic: true })
+    // });*/
+    // user.send(person.displayAvatarURL({ size: 4096, dynamic: true }));
+    // });
+    // }
 }
 async function baseFunction(msg) {
     if (msg.content == `${prefix}ping`) {
