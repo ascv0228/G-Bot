@@ -1,11 +1,12 @@
 const Discord = require('discord.js');
 const { Client, Intents } = require('discord.js');
 const { imageHash } = require('image-hash');
-const { token } = require('./config/token.json');
+const mongoose = require('mongoose');
+const { token, database } = require('./config/token.json');
 const { prefix } = require('./config/config.json');
 const fs = require('fs');
 const target_channel = require('./config/channelId.json');
-const hashDataJson = require('./hashData.json');
+// const hashDataJson = require('./hashData.json');
 const { send } = require('process');
 /*
 const { getVideoID } = require('ytdl-core');
@@ -25,7 +26,18 @@ process.on('unhandledRejection', (reason, promise) => {
 });
 
 client.on('ready', () => {
+    client.user.setActivity(`GG的大GG`, { type: "PLAYING" });
     console.log(`Logged in as ${client.user.tag}!`);
+    if (!database) return;
+    mongoose.connect(database, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    }).then(() => {
+        console.log("The client is now connected to the database!")
+    }).catch((err) => {
+        console.log(err)
+    });
+
 });
 
 client.on('messageCreate', msg => {
