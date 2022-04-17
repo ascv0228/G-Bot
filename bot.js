@@ -7,6 +7,10 @@ const fs = require('fs');
 const target_channel = require('./config/channelId.json');
 const hashDataJson = require('./hashData.json');
 const { send } = require('process');
+
+const { getVideoID } = require('ytdl-core');
+const ytdl = require('ytdl-core');
+const ytpl = require('ytpl');
 //const base_command = require('./bot/base-command.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 /*client.commands = new Discord.Collections();
@@ -160,10 +164,17 @@ function cuteFunction(msg) {
     if (msg.content.includes("午安")) {
         msg.reply("要記得吃午餐唷~");
     }
-    if (msg.content.includes("GG") ||
-        msg.content.includes("Gg") ||
-        msg.content.includes("gG") ||
-        msg.content.includes("gg") ||
+    if (msg.guild.id == '964526913861341254') {
+        if (msg.content.includes("GG") ||
+            msg.content.includes("Gg") ||
+            msg.content.includes("gG") ||
+            msg.content.includes("gg") ||
+            msg.content.includes("寶寶")) {
+            msg.reply("<@411895879935590411> 有寶貝在找你");
+        }
+        return;
+    }
+    if (msg.guild.id == '829673608791851038' &&
         msg.content.includes("寶寶")) {
         msg.reply("<@411895879935590411> 有寶貝在找你");
     }
