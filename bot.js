@@ -175,7 +175,7 @@ function cuteFunction(msg) {
     }
 }
 function MyFunction(msg) {
-    if (msg.content.includes("愛你") && msg.guild.id == '964526913861341254') {
+    if (msg.content.includes("愛你")) {
         msg.channel.send("寶貝，我只愛你");
     }
 }
