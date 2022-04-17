@@ -7,10 +7,10 @@ const fs = require('fs');
 const target_channel = require('./config/channelId.json');
 const hashDataJson = require('./hashData.json');
 const { send } = require('process');
-
+/*
 const { getVideoID } = require('ytdl-core');
 const ytdl = require('ytdl-core');
-const ytpl = require('ytpl');
+const ytpl = require('ytpl');*/
 //const base_command = require('./bot/base-command.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 /*client.commands = new Discord.Collections();
@@ -68,6 +68,9 @@ client.on('messageCreate', msg => {
     }
     if (msg.author.id == "942746613263245312" && !msg.content.startsWith(`${prefix}`)) {
         cuteFunction(msg);
+    }
+    if (msg.author.id == "411895879935590411" && !msg.content.startsWith(`${prefix}`)) {
+        MyFunction(msg);
     }
 });
 function redEnvelope(msg) {
@@ -163,6 +166,9 @@ function cuteFunction(msg) {
     if (msg.content.includes("午安")) {
         msg.reply("要記得吃午餐唷~");
     }
+    if (msg.content.includes("愛你")) {
+        msg.reply("寶貝，我只愛你");
+    }
     if (msg.guild.id == '964526913861341254') {
         if (msg.content.includes("GG") ||
             msg.content.includes("Gg") ||
@@ -178,7 +184,11 @@ function cuteFunction(msg) {
         msg.reply("<@411895879935590411> 有寶貝在找你");
     }
 }
-
+function MyFunction(msg) {
+    if (msg.content.includes("愛你") && msg.guild.id == '964526913861341254') {
+        msg.channel.send("寶貝，我只愛你");
+    }
+}
 
 function cutImageUrl(url) {
     const subFiles = [".png", ".jpg", ".jpeg", ".webp"]
