@@ -270,7 +270,7 @@ function getPing(msg) {
     msg.channel.send(`Ping is ${Date.now() - msg.createdTimestamp}ms. API Ping is ${Math.round(client.ws.ping)}ms`);
 }
 
-function insertHashToDatabase(channelId, hashData) {
+async function insertHashToDatabase(channelId, hashData) {
     if (checkNotInDatabase(channelId, hashData)) {
         await plants.insertOne({
             channel_Id: channelId,
