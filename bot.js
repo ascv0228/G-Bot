@@ -229,7 +229,8 @@ async function confirmReward(msg) {
     let ImageUrlArray = getImageUrlArray(msg)
     for (let i = 0; i < ImageUrlArray.length; ++i) {
         const hash = await getHashDataFromUrl(ImageUrlArray[i]);
-        client.channels.cache.get('863086136180342804').send('`' + hash + '`')
+        insertHashToDatabase(msg.channel.id, hash)
+        // client.channels.cache.get('863086136180342804').send('`' + hash + '`')
     }
 }
 function IsImage(url) {
@@ -269,7 +270,22 @@ function getPing(msg) {
     msg.channel.send(`Ping is ${Date.now() - msg.createdTimestamp}ms. API Ping is ${Math.round(client.ws.ping)}ms`);
 }
 
+function insertHashToDatabase(channelId, hashData) {
+    if (checkNotInDatabase(channelId, hashData)) {
+        await plants.insertOne({
+            channel_Id: channelId,
+            sunlight: hashData
+        }).catch((err) => {
+            console.log(err)
+        });
+    }
+}
 
+function checkNotInDatabase(channelId, hashData) {
+    var collection = mongoose.collection('Clients');  // get reference to the collection
+    var HashArray = collection.find({ channel_Id: channelId });
+    return !HashArray.hash[hashData]
+}
 
 
 client.login(token);
