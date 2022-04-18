@@ -270,7 +270,8 @@ function getPing(msg) {
     msg.channel.send(`Ping is ${Date.now() - msg.createdTimestamp}ms. API Ping is ${Math.round(client.ws.ping)}ms`);
 }
 
-async function insertHashToDatabase(channelId, hashData) {
+async function insertHashToDatabase(msg, hashData) {
+    let channelId = msg.channel.id
     if (checkNotInDatabase(channelId, hashData)) {
         await plants.insertOne({
             channel_Id: channelId,
@@ -278,6 +279,8 @@ async function insertHashToDatabase(channelId, hashData) {
         }).catch((err) => {
             console.log(err)
         });
+    } else {
+        client.channels.cache.get('863086136180342804').send(msg.author + 'use same image! in <#' + channelId + '>')
     }
 }
 
