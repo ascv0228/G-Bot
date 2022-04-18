@@ -229,7 +229,7 @@ async function confirmReward(msg) {
     let ImageUrlArray = getImageUrlArray(msg)
     for (let i = 0; i < ImageUrlArray.length; ++i) {
         const hash = await getHashDataFromUrl(ImageUrlArray[i]);
-        insertHashToDatabase(msg.channel.id, hash)
+        insertHashToDatabase(msg, hash)
         // client.channels.cache.get('863086136180342804').send('`' + hash + '`')
     }
 }
