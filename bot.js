@@ -24,7 +24,7 @@ process.on('uncaughtException', (err, origin) => {
 process.on('unhandledRejection', (reason, promise) => {
     console.error(reason);
 });
-
+var db;
 client.on('ready', () => {
     client.user.setActivity(`GG的大GG`, { type: "PLAYING" });
     console.log(`Logged in as ${client.user.tag}!`);
@@ -37,7 +37,8 @@ client.on('ready', () => {
     }).catch((err) => {
         console.log(err)
     });
-
+    mongoose.Promise = global.Promise;
+    db = mongoose.connection;
 });
 
 client.on('messageCreate', msg => {
@@ -77,13 +78,13 @@ client.on('messageCreate', msg => {
             BaseHelp(msg);
         }
         baseFunction(msg);
-    }
+    }/*
     if (msg.author.id == "942746613263245312" && !msg.content.startsWith(`${prefix}`)) {
         cuteFunction(msg);
     }
     if (msg.author.id == "411895879935590411" && !msg.content.startsWith(`${prefix}`)) {
         MyFunction(msg);
-    }
+    }*/
 });
 function redEnvelope(msg) {
     if (msg.content.startsWith(`x!envelope`)) {
@@ -285,7 +286,7 @@ async function insertHashToDatabase(msg, hashData) {
 }
 
 function checkNotInDatabase(channelId, hashData) {
-    var collection = mongoose.collection('Clients');  // get reference to the collection
+    var collection = db.collection('Clients');  // get reference to the collection
     var HashArray = collection.find({ channel_Id: channelId });
     return !HashArray.hash[hashData]
 }
