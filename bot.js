@@ -41,7 +41,7 @@ client.on('ready', () => {
     mongoose.Promise = global.Promise;
     db = mongoose.connection;
     collection = db.collection('Clients');
-    collection.drop()
+    dbInit();
 });
 
 client.on('messageCreate', msg => {
@@ -299,9 +299,18 @@ async function insertHashToDatabase(msg, hashData) {
 
 function checkNotInDatabase(channelId, hashData) {
     console.log("checkNotInDatabase", hashData)
+    if (!collection.find({ channelId: { "$exists": false } })) {
+        collection[channelId] = new Array();
+    }
     return !collection[channelId].includes(hashData)
 }
 
-
-
+function dbInit() {
+    collection.drop()
+    collection.insertOne({ '963831403001307167': new Array() });
+    collection.insertOne({ '867811395474423838': new Array() });
+    collection.insertOne({ '886269472158138429': new Array() });
+    collection.insertOne({ '948120050458574878': new Array() });
+    collection.insertOne({ '863086136180342804': new Array() });
+}
 client.login(token);
