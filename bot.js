@@ -25,6 +25,7 @@ process.on('unhandledRejection', (reason, promise) => {
     console.error(reason);
 });
 var db;
+var collection;
 client.on('ready', () => {
     client.user.setActivity(`GG的大GG`, { type: "PLAYING" });
     console.log(`Logged in as ${client.user.tag}!`);
@@ -39,6 +40,7 @@ client.on('ready', () => {
     });
     mongoose.Promise = global.Promise;
     db = mongoose.connection;
+    collection = db.collection('Clients');
 });
 
 client.on('messageCreate', msg => {
@@ -232,9 +234,12 @@ function getMemberAvatar(msg) {
 }
 async function confirmReward(msg) {
     let ImageUrlArray = getImageUrlArray(msg)
+    let count = ImageUrlArray.length;
     for (let i = 0; i < ImageUrlArray.length; ++i) {
         const hash = await getHashDataFromUrl(ImageUrlArray[i]);
-        insertHashToDatabase(msg, hash)
+        if (!insertHashToDatabase(msg, hash)) {
+            count -= 1;
+        }
         // client.channels.cache.get('863086136180342804').send('`' + hash + '`')
     }
 }
@@ -278,25 +283,16 @@ function getPing(msg) {
 async function insertHashToDatabase(msg, hashData) {
     let channelId = msg.channel.id
     if (checkNotInDatabase(channelId, hashData)) {
-        await plants.insertOne({
-            channel_Id: channelId,
-            sunlight: hashData
-        }).catch((err) => {
-            console.log(err)
-        });
-        console.log(hashData)
-    } else {
-        client.channels.cache.get('863086136180342804').send('<@' + msg.member + '>' + ' use same image! in <#' + channelId + '>')
+        collection[channelId].push[hashData];
+        return true;
     }
+    client.channels.cache.get('863086136180342804').send('<@' + msg.member + '>' + ' use same image! in <#' + channelId + '> , ' + msg.url);
+    return false;
 }
 
 function checkNotInDatabase(channelId, hashData) {
     console.log("checkNotInDatabase", hashData)
-    var collection = db.collection('Clients');  // get reference to the collection
-    var HashArray = collection.find({ channel_Id: channelId });
-    let flag = HashArray.hash == hashData
-    console.log(hashData, "  :  ", HashArray)
-    return !HashArray
+    return !collection[channelId].include(hashData)
 }
 
 
