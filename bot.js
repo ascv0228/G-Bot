@@ -302,13 +302,17 @@ function checkNotInDatabase(channelId, hashData) {
     if (channelId == '963831403001307167')
         flag = (collection.count({ '963831403001307167': { $eq: hashData } }) == 0)
     else if (channelId == '867811395474423838')
-        flag = (collection.count({ '963831403001307167': { $eq: hashData } }) == 0)
+        flag = (collection.count({ '867811395474423838': { $eq: hashData } }) == 0)
     else if (channelId == '886269472158138429')
-        flag = (collection.count({ '963831403001307167': { $eq: hashData } }) == 0)
+        flag = (collection.count({ '886269472158138429': { $eq: hashData } }) == 0)
     else if (channelId == '948120050458574878')
-        flag = (collection.count({ '963831403001307167': { $eq: hashData } }) == 0)
-    else if (channelId == '863086136180342804')
-        flag = (collection.count({ '963831403001307167': { $eq: hashData } }) == 0)
+        flag = (collection.count({ '948120050458574878': { $eq: hashData } }) == 0)
+    else if (channelId == '863086136180342804') {
+        flag = collection.count({ '863086136180342804': { $eq: hashData } })
+        console.log('num : ' + flag)
+        flag = (flag == 0)
+    }
+
 
     return flag
 }
