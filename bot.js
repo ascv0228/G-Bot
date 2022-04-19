@@ -308,8 +308,8 @@ async function checkNotInDatabase(channelId, hashData) {
     else if (channelId == '948120050458574878')
         flag = (collection.count({ '948120050458574878': { $eq: hashData } }) == 0)
     else if (channelId == '863086136180342804') {
-        let temp;
-        new Promise((resolve, reject) => {
+        let temp = await collection.find({ '863086136180342804': { $eq: hashData } }).toArray().length;
+        /*new Promise((resolve, reject) => {
             collection.find({ '863086136180342804': { $eq: hashData } }).toArray(function (err, result) {
                 if (err) throw err;
                 if (result == hashData)
@@ -319,7 +319,7 @@ async function checkNotInDatabase(channelId, hashData) {
         }).then(function (value) {
             console.log('value' + value)
             temp = (value == 0);
-        })
+        })*/
         flag = (temp == 0);
         console.log(temp)
         console.log(typeof temp)
