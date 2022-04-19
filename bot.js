@@ -321,8 +321,6 @@ async function checkNotInDatabase(channelId, hashData) {
             console.log('value' + value)
             temp = (value == 0);
         })*/
-        console.log(temp)
-        console.log(typeof temp)
         flag = (temp.length == 0);
     }
     console.log(flag)
