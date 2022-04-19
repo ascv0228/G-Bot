@@ -332,7 +332,7 @@ async function checkNotInDatabase(channelId, hashData) {
     console.log(temp[0].hash)
     console.log(temp[0].hash.includes(hashData))
     //flag = (temp[0].hash. == 0);
-    flag = temp[0].hash.includes(hashData)
+    flag = !temp[0].hash.includes(hashData)
     // db.getCollectionNames()
     return flag
 }
