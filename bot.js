@@ -329,7 +329,8 @@ async function checkNotInDatabase(channelId, hashData) {
 
     temp = await collection.find({ channelId: { $eq: channelId } }).toArray();
     console.log(temp)
-    flag = (temp.length == 0);
+    console.log(temp[0].hash)
+    //flag = (temp[0].hash. == 0);
     console.log(flag)
     console.log(hashData)
     // db.getCollectionNames()
