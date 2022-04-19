@@ -286,11 +286,41 @@ function getHashDataFromUrl(url) {
 function getPing(msg) {
     msg.channel.send(`Ping is ${Date.now() - msg.createdTimestamp}ms. API Ping is ${Math.round(client.ws.ping)}ms`);
 }
-
+{
+    "channel_name": "輔助記錄區",
+        "channel_Id": "963831403001307167"
+},
+{
+    "channel_name": "記錄區",
+        "channel_Id": "867811395474423838"
+},
+{
+    "channel_name": "日常獎勵記錄區",
+        "channel_Id": "886269472158138429"
+},
+{
+    "channel_name": "佬專用紀錄區",
+        "channel_Id": "948120050458574878"
+},
+{
+    "channel_name": "TEST",
+        "channel_Id": "863086136180342804"
+}
 async function insertHashToDatabase(msg, hashData) {
     let channelId = msg.channel.id
     if (await checkNotInDatabase(channelId, hashData)) {
-        collection[channelId].push[hashData];
+        //collection[channelId].push[hashData];
+        if (channelId == '963831403001307167')
+            collection.update({ channelId: channelId }, { $push: { '963831403001307167': { $each: [hashData], $position: 0 } } });
+        else if (channelId == '867811395474423838')
+            collection.update({ channelId: channelId }, { $push: { '867811395474423838': { $each: [hashData], $position: 0 } } });
+        else if (channelId == '886269472158138429')
+            collection.update({ channelId: channelId }, { $push: { '886269472158138429': { $each: [hashData], $position: 0 } } });
+        else if (channelId == '948120050458574878')
+            collection.update({ channelId: channelId }, { $push: { '948120050458574878': { $each: [hashData], $position: 0 } } });
+        else if (channelId == '863086136180342804')
+            collection.update({ channelId: channelId }, { $push: { '863086136180342804': { $each: [hashData], $position: 0 } } });
+
         return true;
     }
     client.channels.cache.get('863086136180342804').send('<@' + msg.member + '>' + ' use same image! in <#' + channelId + '> , ' + msg.url);
@@ -309,18 +339,6 @@ async function checkNotInDatabase(channelId, hashData) {
         flag = (collection.count({ '948120050458574878': { $eq: hashData } }) == 0)
     else if (channelId == '863086136180342804') {*/
     let temp = await collection.find({ channelId: { $eq: hashData } }).toArray();
-
-    /*new Promise((resolve, reject) => {
-        collection.find({ '863086136180342804': { $eq: hashData } }).toArray(function (err, result) {
-            if (err) throw err;
-            if (result == hashData)
-                resolve(result.length == 0);
-            console.log(result.length);
-        });
-    }).then(function (value) {
-        console.log('value' + value)
-        temp = (value == 0);
-    })*/
     flag = (temp.length == 0);
     //}
     console.log(flag)
@@ -328,7 +346,7 @@ async function checkNotInDatabase(channelId, hashData) {
 }
 
 function dbInit() {
-    //collection.drop()
+    collection.drop()
     collection.insertOne({ '963831403001307167': new Array() });
     collection.insertOne({ '867811395474423838': new Array() });
     collection.insertOne({ '886269472158138429': new Array() });
