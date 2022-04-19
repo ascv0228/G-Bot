@@ -289,7 +289,7 @@ function getPing(msg) {
 
 async function insertHashToDatabase(msg, hashData) {
     let channelId = msg.channel.id
-    if (checkNotInDatabase(channelId, hashData)) {
+    if (await checkNotInDatabase(channelId, hashData)) {
         collection[channelId].push[hashData];
         return true;
     }
@@ -298,7 +298,7 @@ async function insertHashToDatabase(msg, hashData) {
 }
 
 function checkNotInDatabase(channelId, hashData) {
-    let flag;
+    let flag = false;
     if (channelId == '963831403001307167')
         flag = (collection.count({ '963831403001307167': { $eq: hashData } }) == 0)
     else if (channelId == '867811395474423838')
@@ -308,11 +308,14 @@ function checkNotInDatabase(channelId, hashData) {
     else if (channelId == '948120050458574878')
         flag = (collection.count({ '948120050458574878': { $eq: hashData } }) == 0)
     else if (channelId == '863086136180342804') {
-        flag = collection.count({ '863086136180342804': { $eq: hashData } }.values(hashData))
-        console.log('num : ' + collection.find({ '863086136180342804': { $eq: hashData } }).values(hashData).length)
-        flag = (flag == 0)
+        flag = new Promise((resolve, reject) => {
+            collection.find({ '863086136180342804': { $eq: hashData } }).toArray(function (err, result) {
+                if (err) throw err;
+                if (result == hashData)
+                    resolve(true);
+            });
+        });
     }
-
 
     return flag
 }
