@@ -322,8 +322,8 @@ async function checkNotInDatabase(channelId, hashData) {
         console.log(temp)
         console.log(typeof temp)
         flag = (temp == 0)*/
-        console.log(typeof collection.find({ '948120050458574878': { $eq: hashData }.toArray() }))
-        temp = await collection.find({ '948120050458574878': { $eq: hashData } })./*toArray().*/size()
+        console.log(typeof await collection.find({ '948120050458574878': { $eq: hashData }.toArray() }))
+        temp = await collection.find({ '948120050458574878': { $eq: hashData } }).countDocuments()
         flag = (temp == 0);
         console.log(temp)
         console.log(typeof temp)
