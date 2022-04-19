@@ -298,11 +298,19 @@ async function insertHashToDatabase(msg, hashData) {
 }
 
 function checkNotInDatabase(channelId, hashData) {
-    console.log("checkNotInDatabase", hashData)
-    if (!collection.find({ channelId: { "$exists": false } })) {
-        collection[channelId] = new Array();
-    }
-    return !collection[channelId].includes(hashData)
+    let flag;
+    if (channelId == '963831403001307167')
+        flag = (collection.find({ '963831403001307167': { $eq: hashData } }).count() == 0)
+    else if (channelId == '867811395474423838')
+        flag = (collection.find({ '867811395474423838': { $eq: hashData } }).count() == 0)
+    else if (channelId == '886269472158138429')
+        flag = (collection.find({ '886269472158138429': { $eq: hashData } }).count() == 0)
+    else if (channelId == '948120050458574878')
+        flag = (collection.find({ '948120050458574878': { $eq: hashData } }).count() == 0)
+    else if (channelId == '863086136180342804')
+        flag = (collection.find({ '863086136180342804': { $eq: hashData } }).count() == 0)
+
+    return flag
 }
 
 function dbInit() {
