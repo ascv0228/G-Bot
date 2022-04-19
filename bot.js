@@ -297,7 +297,7 @@ async function insertHashToDatabase(msg, hashData) {
     return false;
 }
 
-function checkNotInDatabase(channelId, hashData) {
+async function checkNotInDatabase(channelId, hashData) {
     let flag = false;
     if (channelId == '963831403001307167')
         flag = (collection.count({ '963831403001307167': { $eq: hashData } }) == 0)
