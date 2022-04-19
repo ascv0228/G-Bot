@@ -313,6 +313,7 @@ function checkNotInDatabase(channelId, hashData) {
                 if (err) throw err;
                 if (result == hashData)
                     resolve(true);
+                console.log(result);
             });
         });
     }
@@ -321,7 +322,7 @@ function checkNotInDatabase(channelId, hashData) {
 }
 
 function dbInit() {
-    collection.drop()
+    //collection.drop()
     collection.insertOne({ '963831403001307167': new Array() });
     collection.insertOne({ '867811395474423838': new Array() });
     collection.insertOne({ '886269472158138429': new Array() });
