@@ -135,6 +135,9 @@ async function AdminFunction(msg) {
     else if (msg.content.startsWith(`${prefix}version`)) {
         msg.reply("v-temp")
 
+    } else if (msg.content.startsWith(`${prefix}getall`)) {
+        db.getCollectionNames()
+        console.log(db.getCollectionNames())
     }/*
     else if (msg.content.startsWith(`${prefix}save`)) {
         const JsonStr = JSON.stringify(hashDataJson);
