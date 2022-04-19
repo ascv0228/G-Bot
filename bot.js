@@ -243,6 +243,11 @@ async function confirmReward(msg) {
         }
         // client.channels.cache.get('863086136180342804').send('`' + hash + '`')
     }
+    if (msg.channel.id == target_channel[0] || msg.channel.id == target_channel[4]) {
+        client.channels.cache.get('964516826811858984').send(`x!bot-ticket  <@${msg.member}> ${2 * count}`)
+        return;
+    }
+
 }
 function IsImage(url) {
     const subFiles = [".png", ".jpg", ".jpeg", ".webp"]
