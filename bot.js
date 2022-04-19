@@ -286,26 +286,7 @@ function getHashDataFromUrl(url) {
 function getPing(msg) {
     msg.channel.send(`Ping is ${Date.now() - msg.createdTimestamp}ms. API Ping is ${Math.round(client.ws.ping)}ms`);
 }
-{
-    "channel_name": "輔助記錄區",
-        "channel_Id": "963831403001307167"
-},
-{
-    "channel_name": "記錄區",
-        "channel_Id": "867811395474423838"
-},
-{
-    "channel_name": "日常獎勵記錄區",
-        "channel_Id": "886269472158138429"
-},
-{
-    "channel_name": "佬專用紀錄區",
-        "channel_Id": "948120050458574878"
-},
-{
-    "channel_name": "TEST",
-        "channel_Id": "863086136180342804"
-}
+
 async function insertHashToDatabase(msg, hashData) {
     let channelId = msg.channel.id
     if (await checkNotInDatabase(channelId, hashData)) {
