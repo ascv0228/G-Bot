@@ -136,8 +136,8 @@ async function AdminFunction(msg) {
         msg.reply("v-temp")
 
     } else if (msg.content.startsWith(`${prefix}getall`)) {
-        db.getCollectionNames()
-        console.log(db.getCollectionNames())
+        // db.getCollectionNames()
+        // console.log(db.getCollectionNames())
     }/*
     else if (msg.content.startsWith(`${prefix}save`)) {
         const JsonStr = JSON.stringify(hashDataJson);
@@ -332,7 +332,7 @@ async function checkNotInDatabase(channelId, hashData) {
     flag = (temp.length == 0);
     console.log(flag)
     console.log(hashData)
-    db.getCollectionNames()
+    // db.getCollectionNames()
     return flag
 }
 
