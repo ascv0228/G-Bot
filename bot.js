@@ -310,7 +310,7 @@ async function checkNotInDatabase(channelId, hashData) {
     else if (channelId == '863086136180342804') {
         let temp;
         new Promise((resolve, reject) => {
-            await collection.find({ '863086136180342804': { $eq: hashData } }).toArray(function (err, result) {
+            collection.find({ '863086136180342804': { $eq: hashData } }).toArray(function (err, result) {
                 if (err) throw err;
                 if (result == hashData)
                     resolve(result.length == 0);
