@@ -41,7 +41,7 @@ client.on('ready', () => {
     mongoose.Promise = global.Promise;
     db = mongoose.connection;
     collection = db.collection('Clients');
-    dbInit();
+    //dbInit();
 });
 
 client.on('messageCreate', msg => {
@@ -188,8 +188,8 @@ async function confirmReward(msg) {
         }
         // client.channels.cache.get('863086136180342804').send('`' + hash + '`')
     }
-    if (msg.channel.id == target_channel[0] /*|| msg.channel.id == target_channel[4]*/) {
-        client.channels.cache.get('964516826811858984').send(`x!bot-ticket  <@${msg.member}> ${2 * count}`)
+    if (msg.channel.id == target_channel[0].channel_Id) {
+        client.channels.cache.get('964516826811858984').send(`x!bot-ticket  <@${msg.member}> ${2 * count}`);
         return;
     }
 
