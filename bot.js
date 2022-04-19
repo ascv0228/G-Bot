@@ -41,7 +41,7 @@ client.on('ready', () => {
     mongoose.Promise = global.Promise;
     db = mongoose.connection;
     collection = db.collection('Clients');
-    //dbInit();
+    dbInit();
 });
 
 client.on('messageCreate', msg => {
