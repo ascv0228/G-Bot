@@ -286,7 +286,7 @@ async function insertHashToDatabase(msg, hashData) {
         });
         console.log(hashData)
     } else {
-        client.channels.cache.get('863086136180342804').send('<@' + msg.author + '>' + ' use same image! in <#' + channelId + '>')
+        client.channels.cache.get('863086136180342804').send('<@' + msg.member + '>' + ' use same image! in <#' + channelId + '>')
     }
 }
 
