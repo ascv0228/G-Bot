@@ -59,8 +59,8 @@ client.on('messageCreate', msg => {
     if (msg.channel.id == target_channel[0].channel_Id ||
         msg.channel.id == target_channel[1].channel_Id ||
         msg.channel.id == target_channel[2].channel_Id ||
-        msg.channel.id == target_channel[3].channel_Id ||
-        msg.channel.id == target_channel[4].channel_Id) {
+        msg.channel.id == target_channel[3].channel_Id/* ||
+        msg.channel.id == target_channel[4].channel_Id*/) {
         confirmReward(msg);
     }
     if ((msg.member.permissions.has('ADMINISTRATOR') ||
@@ -138,72 +138,13 @@ async function AdminFunction(msg) {
     } else if (msg.content.startsWith(`${prefix}getall`)) {
         // db.getCollectionNames()
         // console.log(db.getCollectionNames())
-    }/*
-    else if (msg.content.startsWith(`${prefix}save`)) {
-        const JsonStr = JSON.stringify(hashDataJson);
-        fs.writeFile('./hashData.json', JsonStr, (err) => {
-            if (err) {
-                throw err;
-            }
-            console.log("JSON data is saved.");
-        });
-
-    }*/
-    // 
-    // else if (msg.content == `${prefix}test` && msg.author.id == '411895879935590411') {
-    // client.users.fetch('411895879935590411', false).then((user) => {
-    // user.send('hello world');
-    // let person = client.members.cache.get('942746613263245312');
-    // /*const avatarEmbed = new Discord.MessageEmbed()
-    // .setImage(person.displayAvatarURL({ size: 4096, dynamic: true }))
-    // .setFooter({
-    // text: msg.author.tag,
-    // iconURL: msg.member.displayAvatarURL({ dynamic: true })
-    // });*/
-    // user.send(person.displayAvatarURL({ size: 4096, dynamic: true }));
-    // });
-    // }
+    }
 }
 async function baseFunction(msg) {
     if (msg.content == `${prefix}ping`) {
         getPing(msg);
     }
 }
-/*
-function cuteFunction(msg) {
-    if (msg.content.includes("早安")) {
-        msg.reply("小可愛早安~~");
-    }
-    if (msg.content.includes("晚安")) {
-        msg.reply("晚安晚安早點休息~");
-    }
-    if (msg.content.includes("午安")) {
-        msg.reply("要記得吃午餐唷~");
-    }
-    if (msg.content.includes("愛你")) {
-        msg.reply("寶貝，我只愛你");
-    }
-    if (msg.guild.id == '964526913861341254') {
-        if (msg.content.includes("GG") ||
-            msg.content.includes("Gg") ||
-            msg.content.includes("gG") ||
-            msg.content.includes("gg") ||
-            msg.content.includes("寶寶")) {
-            msg.reply("<@411895879935590411> 有寶貝在找你");
-        }
-        return;
-    }
-    if (msg.guild.id == '829673608791851038' &&
-        msg.content.includes("寶寶")) {
-        msg.reply("<@411895879935590411> 有寶貝在找你");
-    }
-}*/
-/*
-function MyFunction(msg) {
-    if (msg.content.includes("愛你")) {
-        msg.channel.send("寶貝，我只愛你");
-    }
-}*/
 
 function cutImageUrl(url) {
     const subFiles = [".png", ".jpg", ".jpeg", ".webp"]
@@ -247,7 +188,7 @@ async function confirmReward(msg) {
         }
         // client.channels.cache.get('863086136180342804').send('`' + hash + '`')
     }
-    if (msg.channel.id == target_channel[0] || msg.channel.id == target_channel[4]) {
+    if (msg.channel.id == target_channel[0] /*|| msg.channel.id == target_channel[4]*/) {
         client.channels.cache.get('964516826811858984').send(`x!bot-ticket  <@${msg.member}> ${2 * count}`)
         return;
     }
@@ -293,57 +234,24 @@ function getPing(msg) {
 async function insertHashToDatabase(msg, hashData) {
     let channelId = msg.channel.id
     if (await checkNotInDatabase(channelId, hashData)) {
-        //collection[channelId].push[hashData];
-        // if (channelId == '963831403001307167')
-        // collection.updateOne({ channelId: '963831403001307167' }, { $push: { '963831403001307167': { $each: [hashData], $position: 0 } } });
-        // else if (channelId == '867811395474423838')
-        // collection.updateOne({ channelId: '867811395474423838' }, { $push: { '867811395474423838': { $each: [hashData], $position: 0 } } });
-        // else if (channelId == '886269472158138429')
-        // collection.updateOne({ channelId: '886269472158138429' }, { $push: { '886269472158138429': { $each: [hashData], $position: 0 } } });
-        // else if (channelId == '948120050458574878')
-        // collection.updateOne({ channelId: '948120050458574878' }, { $push: { '948120050458574878': { $each: [hashData], $position: 0 } } });
-        // else if (channelId == '863086136180342804')
-        // collection.updateOne({ channelId: '863086136180342804' }, { $push: { '863086136180342804': { $each: [hashData], $position: 0 } } });
-
         collection.updateOne({ channelId: channelId }, { $push: { hash: { $each: [hashData], $position: 0 } } });
 
         return true;
     }
-    client.channels.cache.get('863086136180342804').send('<@' + msg.member + '>' + ' use same image! in <#' + channelId + '> , ' + msg.url);
+    client.channels.cache.get('964516826811858984').send('<@' + msg.member + '>' + ' use same image! in <#' + channelId + '> , ' + msg.url);
     return false;
 }
 
 async function checkNotInDatabase(channelId, hashData) {
     let flag = false;
     let temp;
-    // if (channelId == '963831403001307167') //{ qty: { $gt: 4 } }
-    // temp = await collection.find({ '863086136180342804': { $eq: hashData } }).toArray();
-    // else if (channelId == '867811395474423838')
-    // temp = await collection.find({ '863086136180342804': { $eq: hashData } }).toArray();
-    // else if (channelId == '886269472158138429')
-    // temp = await collection.find({ '863086136180342804': { $eq: hashData } }).toArray();
-    // else if (channelId == '948120050458574878')
-    // temp = await collection.find({ '863086136180342804': { $eq: hashData } }).toArray();
-    // else if (channelId == '863086136180342804')
-    // temp = await collection.find({ '863086136180342804': { $eq: hashData } }).toArray();
-
     temp = await collection.find({ channelId: { $eq: channelId } }).toArray();
-    console.log(temp)
-    console.log(temp[0].hash)
-    console.log(temp[0].hash.includes(hashData))
-    //flag = (temp[0].hash. == 0);
     flag = !temp[0].hash.includes(hashData)
-    // db.getCollectionNames()
     return flag
 }
 
 function dbInit() {
     collection.drop()
-    // collection.insertOne({ '963831403001307167': new Array() });
-    // collection.insertOne({ '867811395474423838': new Array() });
-    // collection.insertOne({ '886269472158138429': new Array() });
-    // collection.insertOne({ '948120050458574878': new Array() });
-    // collection.insertOne({ '863086136180342804': new Array() });
     collection.insertOne({ channelId: '963831403001307167', hash: new Array() });
     collection.insertOne({ channelId: '867811395474423838', hash: new Array() });
     collection.insertOne({ channelId: '886269472158138429', hash: new Array() });
