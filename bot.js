@@ -310,18 +310,19 @@ async function insertHashToDatabase(msg, hashData) {
 
 async function checkNotInDatabase(channelId, hashData) {
     let flag = false;
-    /*if (channelId == '963831403001307167')
-        flag = (collection.count({ '963831403001307167': { $eq: hashData } }) == 0)
+    let temp;
+    if (channelId == '963831403001307167')
+        temp = await collection.find({ '863086136180342804': { $eq: hashData } }).toArray();
     else if (channelId == '867811395474423838')
-        flag = (collection.count({ '867811395474423838': { $eq: hashData } }) == 0)
+        temp = await collection.find({ '863086136180342804': { $eq: hashData } }).toArray();
     else if (channelId == '886269472158138429')
-        flag = (collection.count({ '886269472158138429': { $eq: hashData } }) == 0)
+        temp = await collection.find({ '863086136180342804': { $eq: hashData } }).toArray();
     else if (channelId == '948120050458574878')
-        flag = (collection.count({ '948120050458574878': { $eq: hashData } }) == 0)
-    else if (channelId == '863086136180342804') {*/
-    let temp = await collection.find({ channelId: { $eq: hashData } }).toArray();
+        temp = await collection.find({ '863086136180342804': { $eq: hashData } }).toArray();
+    else if (channelId == '863086136180342804')
+        temp = await collection.find({ '863086136180342804': { $eq: hashData } }).toArray();
+
     flag = (temp.length == 0);
-    //}
     console.log(flag)
     return flag
 }
