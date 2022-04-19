@@ -41,7 +41,7 @@ client.on('ready', () => {
     mongoose.Promise = global.Promise;
     db = mongoose.connection;
     collection = db.collection('Clients');
-    dbInit();
+
 });
 
 client.on('messageCreate', msg => {
@@ -81,13 +81,7 @@ client.on('messageCreate', msg => {
             BaseHelp(msg);
         }
         baseFunction(msg);
-    }/*
-    if (msg.author.id == "942746613263245312" && !msg.content.startsWith(`${prefix}`)) {
-        cuteFunction(msg);
     }
-    if (msg.author.id == "411895879935590411" && !msg.content.startsWith(`${prefix}`)) {
-        MyFunction(msg);
-    }*/
 });
 function redEnvelope(msg) {
     if (msg.content.startsWith(`x!envelope`)) {
@@ -135,9 +129,8 @@ async function AdminFunction(msg) {
     else if (msg.content.startsWith(`${prefix}version`)) {
         msg.reply("v-temp")
 
-    } else if (msg.content.startsWith(`${prefix}getall`)) {
-        // db.getCollectionNames()
-        // console.log(db.getCollectionNames())
+    } else if (msg.content.startsWith(`${prefix}dbInit confirm`)) {
+        dbInit();
     }
 }
 async function baseFunction(msg) {
