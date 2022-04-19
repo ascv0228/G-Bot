@@ -128,6 +128,10 @@ async function AdminFunction(msg) {
         msg.content.startsWith(`${prefix}memavt`)) {
         getMemberAvatar(msg);
 
+    }
+    else if (msg.content.startsWith(`${prefix}version`)) {
+        msg.reply("v-temp")
+
     }/*
     else if (msg.content.startsWith(`${prefix}save`)) {
         const JsonStr = JSON.stringify(hashDataJson);
