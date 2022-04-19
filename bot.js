@@ -317,7 +317,7 @@ function checkNotInDatabase(channelId, hashData) {
             });
         }) == 0)
     }
-
+    console.log(flag)
     return flag
 }
 
