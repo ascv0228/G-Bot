@@ -287,8 +287,9 @@ async function insertHashToDatabase(msg, hashData) {
 
 function checkNotInDatabase(channelId, hashData) {
     var collection = db.collection('Clients');  // get reference to the collection
-    var HashArray = collection.find({ channel_Id: channelId });
-    return !HashArray.hash[hashData]
+    var HashArray = collection.find({ channel_Id: channelId, hash: hashData });
+    console.log(hashData, "  :  ", HashArray)
+    return !HashArray
 }
 
 
