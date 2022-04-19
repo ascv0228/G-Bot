@@ -309,7 +309,7 @@ function checkNotInDatabase(channelId, hashData) {
         flag = (collection.count({ '948120050458574878': { $eq: hashData } }) == 0)
     else if (channelId == '863086136180342804') {
         flag = collection.count({ '863086136180342804': { $eq: hashData } })
-        console.log('num : ' + flag)
+        console.log('num : ' + collection.find({ '863086136180342804': { $eq: hashData } }))
         flag = (flag == 0)
     }
 
