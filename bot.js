@@ -286,14 +286,15 @@ async function insertHashToDatabase(msg, hashData) {
         });
         console.log(hashData)
     } else {
-        client.channels.cache.get('863086136180342804').send(msg.author + 'use same image! in <#' + channelId + '>')
+        client.channels.cache.get('863086136180342804').send('<@' + msg.author + '>' + ' use same image! in <#' + channelId + '>')
     }
 }
 
 function checkNotInDatabase(channelId, hashData) {
     console.log("checkNotInDatabase", hashData)
     var collection = db.collection('Clients');  // get reference to the collection
-    var HashArray = collection.find({ channel_Id: channelId, hash: hashData });
+    var HashArray = collection.find({ channel_Id: channelId });
+    let flag = HashArray.hash == hashData
     console.log(hashData, "  :  ", HashArray)
     return !HashArray
 }
