@@ -166,7 +166,7 @@ async function baseFunction(msg) {
         getPing(msg);
     }
 }
-
+/*
 function cuteFunction(msg) {
     if (msg.content.includes("早安")) {
         msg.reply("小可愛早安~~");
@@ -194,12 +194,13 @@ function cuteFunction(msg) {
         msg.content.includes("寶寶")) {
         msg.reply("<@411895879935590411> 有寶貝在找你");
     }
-}
+}*/
+/*
 function MyFunction(msg) {
     if (msg.content.includes("愛你")) {
         msg.channel.send("寶貝，我只愛你");
     }
-}
+}*/
 
 function cutImageUrl(url) {
     const subFiles = [".png", ".jpg", ".jpeg", ".webp"]
@@ -298,7 +299,7 @@ async function insertHashToDatabase(msg, hashData) {
 
 function checkNotInDatabase(channelId, hashData) {
     console.log("checkNotInDatabase", hashData)
-    return !collection[channelId].include(hashData)
+    return !collection[channelId].includes(hashData)
 }
 
 
