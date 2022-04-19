@@ -294,16 +294,18 @@ async function insertHashToDatabase(msg, hashData) {
     let channelId = msg.channel.id
     if (await checkNotInDatabase(channelId, hashData)) {
         //collection[channelId].push[hashData];
-        if (channelId == '963831403001307167')
-            collection.updateOne({ channelId: '963831403001307167' }, { $push: { '963831403001307167': { $each: [hashData], $position: 0 } } });
-        else if (channelId == '867811395474423838')
-            collection.updateOne({ channelId: '867811395474423838' }, { $push: { '867811395474423838': { $each: [hashData], $position: 0 } } });
-        else if (channelId == '886269472158138429')
-            collection.updateOne({ channelId: '886269472158138429' }, { $push: { '886269472158138429': { $each: [hashData], $position: 0 } } });
-        else if (channelId == '948120050458574878')
-            collection.updateOne({ channelId: '948120050458574878' }, { $push: { '948120050458574878': { $each: [hashData], $position: 0 } } });
-        else if (channelId == '863086136180342804')
-            collection.updateOne({ channelId: '863086136180342804' }, { $push: { '863086136180342804': { $each: [hashData], $position: 0 } } });
+        // if (channelId == '963831403001307167')
+        // collection.updateOne({ channelId: '963831403001307167' }, { $push: { '963831403001307167': { $each: [hashData], $position: 0 } } });
+        // else if (channelId == '867811395474423838')
+        // collection.updateOne({ channelId: '867811395474423838' }, { $push: { '867811395474423838': { $each: [hashData], $position: 0 } } });
+        // else if (channelId == '886269472158138429')
+        // collection.updateOne({ channelId: '886269472158138429' }, { $push: { '886269472158138429': { $each: [hashData], $position: 0 } } });
+        // else if (channelId == '948120050458574878')
+        // collection.updateOne({ channelId: '948120050458574878' }, { $push: { '948120050458574878': { $each: [hashData], $position: 0 } } });
+        // else if (channelId == '863086136180342804')
+        // collection.updateOne({ channelId: '863086136180342804' }, { $push: { '863086136180342804': { $each: [hashData], $position: 0 } } });
+
+        collection.updateOne({ channelId: channelId }, { $push: { hash: { $each: [hashData], $position: 0 } } });
 
         return true;
     }
@@ -314,31 +316,37 @@ async function insertHashToDatabase(msg, hashData) {
 async function checkNotInDatabase(channelId, hashData) {
     let flag = false;
     let temp;
-    if (channelId == '963831403001307167')
-        temp = await collection.find({ '863086136180342804': { $eq: hashData } }).toArray();
-    else if (channelId == '867811395474423838')
-        temp = await collection.find({ '863086136180342804': { $eq: hashData } }).toArray();
-    else if (channelId == '886269472158138429')
-        temp = await collection.find({ '863086136180342804': { $eq: hashData } }).toArray();
-    else if (channelId == '948120050458574878')
-        temp = await collection.find({ '863086136180342804': { $eq: hashData } }).toArray();
-    else if (channelId == '863086136180342804')
-        temp = await collection.find({ '863086136180342804': { $eq: hashData } }).toArray();
+    // if (channelId == '963831403001307167') //{ qty: { $gt: 4 } }
+    // temp = await collection.find({ '863086136180342804': { $eq: hashData } }).toArray();
+    // else if (channelId == '867811395474423838')
+    // temp = await collection.find({ '863086136180342804': { $eq: hashData } }).toArray();
+    // else if (channelId == '886269472158138429')
+    // temp = await collection.find({ '863086136180342804': { $eq: hashData } }).toArray();
+    // else if (channelId == '948120050458574878')
+    // temp = await collection.find({ '863086136180342804': { $eq: hashData } }).toArray();
+    // else if (channelId == '863086136180342804')
+    // temp = await collection.find({ '863086136180342804': { $eq: hashData } }).toArray();
 
+    temp = await collection.find({ channelId: { $eq: channelId } }).toArray();
+    console.log(temp)
     flag = (temp.length == 0);
     console.log(flag)
     console.log(hashData)
-    console.log(temp)
     db.getCollectionNames()
     return flag
 }
 
 function dbInit() {
     collection.drop()
-    collection.insertOne({ '963831403001307167': new Array() });
-    collection.insertOne({ '867811395474423838': new Array() });
-    collection.insertOne({ '886269472158138429': new Array() });
-    collection.insertOne({ '948120050458574878': new Array() });
-    collection.insertOne({ '863086136180342804': new Array() });
+    // collection.insertOne({ '963831403001307167': new Array() });
+    // collection.insertOne({ '867811395474423838': new Array() });
+    // collection.insertOne({ '886269472158138429': new Array() });
+    // collection.insertOne({ '948120050458574878': new Array() });
+    // collection.insertOne({ '863086136180342804': new Array() });
+    collection.insertOne({ channelId: '963831403001307167', hash: new Array() });
+    collection.insertOne({ channelId: '867811395474423838', hash: new Array() });
+    collection.insertOne({ channelId: '886269472158138429', hash: new Array() });
+    collection.insertOne({ channelId: '948120050458574878', hash: new Array() });
+    collection.insertOne({ channelId: '863086136180342804', hash: new Array() });
 }
 client.login(token);
