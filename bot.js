@@ -189,7 +189,7 @@ async function confirmReward(msg) {
         // client.channels.cache.get('863086136180342804').send('`' + hash + '`')
     }
     if (msg.channel.id == target_channel[0].channel_Id) {
-        client.channels.cache.get('964516826811858984').send(`x!bot-ticket  <@${msg.member}> ${2 * count}`);
+        client.channels.cache.get('964516826811858984').send(`x!bot-ticket  ${msg.member} ${2 * count}`);
         return;
     }
 
