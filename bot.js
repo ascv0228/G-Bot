@@ -292,15 +292,15 @@ async function insertHashToDatabase(msg, hashData) {
     if (await checkNotInDatabase(channelId, hashData)) {
         //collection[channelId].push[hashData];
         if (channelId == '963831403001307167')
-            collection.updateOne({ channelId: channelId }, { $push: { '963831403001307167': { $each: [hashData], $position: 0 } } });
+            collection.updateOne({ channelId: '963831403001307167' }, { $push: { '963831403001307167': { $each: [hashData], $position: 0 } } });
         else if (channelId == '867811395474423838')
-            collection.updateOne({ channelId: channelId }, { $push: { '867811395474423838': { $each: [hashData], $position: 0 } } });
+            collection.updateOne({ channelId: '867811395474423838' }, { $push: { '867811395474423838': { $each: [hashData], $position: 0 } } });
         else if (channelId == '886269472158138429')
-            collection.updateOne({ channelId: channelId }, { $push: { '886269472158138429': { $each: [hashData], $position: 0 } } });
+            collection.updateOne({ channelId: '886269472158138429' }, { $push: { '886269472158138429': { $each: [hashData], $position: 0 } } });
         else if (channelId == '948120050458574878')
-            collection.updateOne({ channelId: channelId }, { $push: { '948120050458574878': { $each: [hashData], $position: 0 } } });
+            collection.updateOne({ channelId: '948120050458574878' }, { $push: { '948120050458574878': { $each: [hashData], $position: 0 } } });
         else if (channelId == '863086136180342804')
-            collection.updateOne({ channelId: channelId }, { $push: { '863086136180342804': { $each: [hashData], $position: 0 } } });
+            collection.updateOne({ channelId: '863086136180342804' }, { $push: { '863086136180342804': { $each: [hashData], $position: 0 } } });
 
         return true;
     }
@@ -326,6 +326,7 @@ async function checkNotInDatabase(channelId, hashData) {
     console.log(flag)
     console.log(hashData)
     console.log(temp)
+    db.getCollectionNames()
     return flag
 }
 
