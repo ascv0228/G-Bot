@@ -277,10 +277,10 @@ function getHashDataFromUrl(url) {
                 throw error;
             }
             resolve(data);
+        }).catch((err) => {
+            console.error()
+            reject('error');
         });
-    }).catch((err) => {
-        console.log(err)
-        resolve('error');
     });
 }
 
