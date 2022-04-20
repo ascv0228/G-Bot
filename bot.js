@@ -159,7 +159,7 @@ async function AdminFunction(msg) {
 
     }
     else if (msg.content.startsWith(`${prefix}version`)) {
-        msg.reply("ZZ 是巨佬")
+        msg.reply("ZZ 是巨佬, 大GG")
 
     } else if (msg.content.startsWith(`${prefix}dbInit confirm`) && msg.author.id == '411895879935590411') {
         msg.reply('DataBase已清空!')
