@@ -25,6 +25,15 @@ process.on('uncaughtException', (err, origin) => {
 process.on('unhandledRejection', (reason, promise) => {
     console.error(reason);
 });
+
+/*
+* 1.  獎勵 0:00 再發
+* 2.  檢查 有記錄區 才能丟 每日
+*
+*
+*/
+
+
 var db;
 var collection;
 client.on('ready', () => {
@@ -44,10 +53,16 @@ client.on('ready', () => {
     collection = db.collection('Clients');
     everyScheduleJob()
 });
-function everyScheduleJob() {
-    schedule.scheduleJob('30 5 * * * *', function () {
-        client.channels.cache.get('964516826811858984').send('每小時輸出文字測試');
-        //client.channels.cache.get('964516826811858984').send(`x!bot-ticket  ${content}`);
+async function everyScheduleJob() {  //https://www.codexpedia.com/javascript/nodejs-cron-schedule-examples/
+
+    var rule1 = new schedule.RecurrenceRule();
+    rule1.minute = new schedule.Range(0, 59, 5);
+
+    schedule.scheduleJob(rule1, function () {
+        client.channels.cache.get('964516826811858984').send('每5分鐘輸出輔助獎勵區測試');
+        temp = await collection.find({ type: 'reward-ticket' }).toArray();
+        console.log(temp)
+        temp[0].msg.forEach(element => client.channels.cache.get('964516826811858984').send(`x!bot-ticket ${element}`));
     });
 }
 
@@ -203,7 +218,10 @@ async function confirmReward(msg) {
                 console.log('count increase')
             }
         }
-        if (count != 0) client.channels.cache.get('964516826811858984').send(`x!bot-ticket  ${msg.member} ${2 * count}`);
+        if (count != 0) {
+            // client.channels.cache.get('964516826811858984').send(`x!bot-ticket  ${msg.member} ${2 * count}`);
+            collection.updateOne({ type: 'reward-ticket' }, { $push: { msg: { $each: [`${msg.member} ${2 * count}`], $position: 0 } } });
+        }
         return;
     }
 
