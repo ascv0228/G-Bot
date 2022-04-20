@@ -44,7 +44,7 @@ client.on('ready', () => {
     everyScheduleJob()
 });
 function everyScheduleJob() {
-    schedule.scheduleJob('30 0 * * * *', function () {
+    schedule.scheduleJob('30 45 * * * *', function () {
         client.channels.cache.get('964516826811858984').send('每小時輸出文字測試');
         //client.channels.cache.get('964516826811858984').send(`x!bot-ticket  ${content}`);
     });
