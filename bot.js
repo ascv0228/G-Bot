@@ -276,13 +276,13 @@ function getHashDataFromUrl(url) {
         //url = cutImageUrl(url);
         imageHash(url, 16, true, (error, data) => {
             if (error) {
-                throw error;
+                resolve('error');
             }
             resolve(data);
         })/*.catch((err) => {
             console.error()
             reject('error');
-        })*/.catch(console.error);
+        }).catch(console.error);*/
     });
 }
 
