@@ -62,7 +62,8 @@ async function everyScheduleJob() {  //https://www.codexpedia.com/javascript/nod
         client.channels.cache.get('964516826811858984').send('每5分鐘輸出輔助獎勵區測試');
         temp = await collection.find({ type: 'reward-ticket' }).toArray();
         console.log(temp)
-        temp[0].msg.forEach(element => client.channels.cache.get('964516826811858984').send(`x!bot-ticket ${element}`));
+        await temp[0].msg.forEach(element => client.channels.cache.get('964516826811858984').send(`x!bot-ticket ${element}`));
+        collection.insertOne({ type: 'reward-ticket', msg: new Array() });
     });
 }
 
