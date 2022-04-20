@@ -55,11 +55,12 @@ client.on('ready', () => {
 });
 async function everyScheduleJob() {  //https://www.codexpedia.com/javascript/nodejs-cron-schedule-examples/
 
-    var rule1 = new schedule.RecurrenceRule();
-    rule1.minute = new schedule.Range(0, 59, 5);
+    // var rule1 = new schedule.RecurrenceRule();
+    // rule1.minute = new schedule.Range(0, 59, 5);
 
-    schedule.scheduleJob(rule1, async function () {
-        client.channels.cache.get('964516826811858984').send('每5分鐘輸出輔助獎勵區測試');
+    schedule.scheduleJob('10 0 0 * * *', async function () {
+
+        client.channels.cache.get('964516826811858984').send('輔助獎勵區測試');
         temp = await collection.find({ type: 'reward-ticket' }).toArray();
         console.log(temp)
         for (let i of temp[0].msg) {
@@ -166,6 +167,10 @@ async function AdminFunction(msg) {
         let temp = await collection.find({}).toArray();
         console.log(temp)
         msg.reply('Finish!')
+    } else if (msg.content.startsWith(`${prefix}getday`)) {
+        var d = new Date();
+        d.setDate(d.getDate() - 1);
+        msg.channel.send(d.toDateString())
     }
 }
 
