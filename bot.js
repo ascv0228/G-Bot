@@ -191,15 +191,14 @@ function getMemberAvatar(msg) {
 async function confirmReward(msg) {
     let ImageUrlArray = getImageUrlArray(msg)
     if (msg.channel.id == target_channel[0].channel_Id) {
-        let count = (ImageUrlArray.length > 5) ? 5 : ImageUrlArray.length;
-        console.log('count: ' + count)
-        for (let i = 0; i < count; ++i) {
+        let count = 0
+        for (let i = 0; i < ImageUrlArray.length; ++i) {
             const hash = await getHashDataFromUrl(ImageUrlArray[i]);
-            let flag = !await insertHashToDatabase(msg, hash)
+            let flag = await insertHashToDatabase(msg, hash)
             console.log('flag3:' + flag)
             if (flag) {
-                count--;
-                console.log('count decrease')
+                count++;
+                console.log('count increase')
             }
         }
         if (count != 0) client.channels.cache.get('964516826811858984').send(`x!bot-ticket  ${msg.member} ${2 * count}`);
