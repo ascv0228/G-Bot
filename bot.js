@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const { Client, Intents } = require('discord.js');
 const { imageHash } = require('image-hash');
 const mongoose = require('mongoose');
+const schedule = require('node-schedule');
 const { token, database } = require('./config/token.json');
 const { prefix } = require('./config/config.json');
 const fs = require('fs');
@@ -44,7 +45,7 @@ client.on('ready', () => {
     everyScheduleJob()
 });
 function everyScheduleJob() {
-    schedule.scheduleJob('30 45 * * * *', function () {
+    schedule.scheduleJob('30 5 * * * *', function () {
         client.channels.cache.get('964516826811858984').send('每小時輸出文字測試');
         //client.channels.cache.get('964516826811858984').send(`x!bot-ticket  ${content}`);
     });
