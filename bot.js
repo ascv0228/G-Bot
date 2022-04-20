@@ -41,8 +41,13 @@ client.on('ready', () => {
     mongoose.Promise = global.Promise;
     db = mongoose.connection;
     collection = db.collection('Clients');
-
 });
+function everyScheduleJob() {
+    schedule.scheduleJob('30 0 * * * *', function () {
+        client.channels.cache.get('964516826811858984').send('每小時輸出文字測試');
+        //client.channels.cache.get('964516826811858984').send(`x!bot-ticket  ${content}`);
+    });
+}
 
 client.on('messageCreate', msg => {
     try {
@@ -83,6 +88,7 @@ client.on('messageCreate', msg => {
         baseFunction(msg);
     }
 });
+
 function redEnvelope(msg) {
     if (msg.content.startsWith(`x!envelope`)) {
         client.channels.cache.get('964699991601995787').send(msg.url);
@@ -95,6 +101,7 @@ function redEnvelope(msg) {
     client.channels.cache.get('964699991601995787').send(msg.content.split(' ').splice(3, 3, '').join(' '));
 
 }
+
 function AdminHelp(msg) {
     contentArray = [
         '`' + 'avatar, avt' + '`' + " : 查看頭像",
@@ -103,12 +110,14 @@ function AdminHelp(msg) {
     ]
     msg.reply({ content: contentArray.join("\n") });
 }
+
 function BaseHelp(msg) {
     contentArray = [
         '`' + 'ping' + '`' + " : 顯示延遲"
     ]
     msg.reply({ content: contentArray.join("\n") });
 }
+
 async function AdminFunction(msg) {
     if (msg.content.startsWith(`${prefix}hash`)) {
         const url = msg.content.split(' ').splice(1).join(' ');
@@ -132,8 +141,13 @@ async function AdminFunction(msg) {
     } else if (msg.content.startsWith(`${prefix}dbInit confirm`) && msg.author.id == '411895879935590411') {
         msg.reply('DataBase已清空!')
         dbInit();
+    } else if (msg.content.startsWith(`${prefix}getall`) && msg.author.id == '411895879935590411') {
+        let temp = await collection.find({}).toArray();
+        console.log(temp)
+        msg.reply('Finish!')
     }
 }
+
 async function baseFunction(msg) {
     if (msg.content == `${prefix}ping`) {
         getPing(msg);
@@ -162,6 +176,7 @@ function getAvatar(msg) {
         });
     msg.channel.send({ embeds: [avatarEmbed] });
 }
+
 function getMemberAvatar(msg) {
     let user = msg.mentions.members.first() || msg.member;
     const avatarEmbed = new Discord.MessageEmbed()
@@ -172,6 +187,7 @@ function getMemberAvatar(msg) {
         });
     msg.channel.send({ embeds: [avatarEmbed] });
 }
+
 async function confirmReward(msg) {
     let ImageUrlArray = getImageUrlArray(msg)
     if (msg.channel.id == target_channel[0].channel_Id) {
@@ -182,11 +198,12 @@ async function confirmReward(msg) {
                 count -= 1;
             }
         }
-        client.channels.cache.get('964516826811858984').send(`x!bot-ticket  ${msg.member} ${2 * count}`);
+        if (count != 0) client.channels.cache.get('964516826811858984').send(`x!bot-ticket  ${msg.member} ${2 * count}`);
         return;
     }
 
 }
+
 function IsImage(url) {
     const subFiles = [".png", ".jpg", ".jpeg", ".webp"]
 
@@ -197,6 +214,7 @@ function IsImage(url) {
     }
     return false;
 }
+
 function getImageUrlArray(msg) {
     let ImageUrlArray = new Array();
     msg.attachments.forEach(attachment => {
@@ -214,20 +232,20 @@ function getHashDataFromUrl(url) {
         //url = cutImageUrl(url);
         imageHash(url, 16, true, (error, data) => {
             if (error) throw error;
-            //hashDataJson.push({ "url": url, "hash": data });
             resolve(data);
         });
     });
 }
 
-function getPing(msg) {
-    msg.channel.send(`Ping is ${Date.now() - msg.createdTimestamp}ms. API Ping is ${Math.round(client.ws.ping)}ms`);
+async function getPing(msg) {
+    const resMsg = await msg.channel.send({ content: 'Ping...' });
+    await resMsg.edit({ content: `Ping: ${resMsg.createdTimestamp - msg.createdTimestamp}ms | Websocket: ${client.ws.ping}ms` });
 }
 
 async function insertHashToDatabase(msg, hashData) {
     let channelId = msg.channel.id
     if (await checkNotInDatabase(channelId, hashData)) {
-        collection.updateOne({ channelId: channelId }, { $push: { hash: { $each: [hashData], $position: 0 } } });
+        collection.updateOne({ type: 'hashData', channelId: channelId }, { $push: { hash: { $each: [hashData], $position: 0 } } });
         return true;
     }
     client.channels.cache.get('964516826811858984').send('<@' + msg.member + '>' + ' use same image! in <#' + channelId + '> , ' + msg.url);
@@ -237,17 +255,24 @@ async function insertHashToDatabase(msg, hashData) {
 async function checkNotInDatabase(channelId, hashData) {
     let flag = false;
     let temp;
-    temp = await collection.find({ channelId: { $eq: channelId } }).toArray();
+    temp = await collection.find({ type: 'hashData', channelId: channelId }).toArray();
+    console.log(temp)
     flag = !temp[0].hash.includes(hashData)
     return flag
 }
 
 function dbInit() {
     collection.drop()
-    collection.insertOne({ channelId: '963831403001307167', hash: new Array() });
-    collection.insertOne({ channelId: '867811395474423838', hash: new Array() });
-    collection.insertOne({ channelId: '886269472158138429', hash: new Array() });
-    collection.insertOne({ channelId: '948120050458574878', hash: new Array() });
-    collection.insertOne({ channelId: '863086136180342804', hash: new Array() });
+    collection.insertOne({ type: 'hashData', channelId: '963831403001307167', hash: new Array() });
+    collection.insertOne({ type: 'hashData', channelId: '867811395474423838', hash: new Array() });
+    collection.insertOne({ type: 'hashData', channelId: '886269472158138429', hash: new Array() });
+    collection.insertOne({ type: 'hashData', channelId: '948120050458574878', hash: new Array() });
+    collection.insertOne({ type: 'hashData', channelId: '863086136180342804', hash: new Array() });
+    collection.insertOne({ type: 'reward-ticket', msg: new Array() });
+    collection.insertOne({ type: 'check-msg', channelId: '963831403001307167', hash: new Array() });
+    collection.insertOne({ type: 'check-msg', channelId: '867811395474423838', hash: new Array() });
+    collection.insertOne({ type: 'check-msg', channelId: '886269472158138429', hash: new Array() });
+    collection.insertOne({ type: 'check-msg', channelId: '948120050458574878', hash: new Array() });
+    collection.insertOne({ type: 'check-msg', channelId: '863086136180342804', hash: new Array() });
 }
 client.login(token);

@@ -3,6 +3,7 @@
     "discord.js": "^13.6.0",
     "image-hash": "^5.0.2",
     "imghash": "^0.0.9",
-    "mongoose": "^6.3.0"
+    "mongoose": "^6.3.0",
+    "node-schedule": "^2.1.0"
   }
 }
