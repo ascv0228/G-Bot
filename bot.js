@@ -279,6 +279,7 @@ function getHashDataFromUrl(url) {
             resolve(data);
         });
     }).catch((err) => {
+        console.log(err)
         resolve('error');
     });
 }
