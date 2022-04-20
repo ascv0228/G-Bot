@@ -3,7 +3,7 @@ name: Automatically Deploy
 on:
   push:
     branches:
-    - master
+    - main
 
 jobs:
   heroku_1:
@@ -11,22 +11,10 @@ jobs:
     steps:
       - uses: actions/checkout@master
         with:
-          ref: master
+          ref: main
           fetch-depth: 0
       - uses: ZeroKen5969/git-https-push-action@master
         name: heroku_1
         with:
           remoteUrl: '${{ secrets.HEROKU_1 }}'
-          skipHooks: false
-  heroku_2:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@master
-        with:
-          ref: master
-          fetch-depth: 0
-      - uses: ZeroKen5969/git-https-push-action@master
-        name: heroku_2
-        with:
-          remoteUrl: '${{ secrets.HEROKU_2 }}'
           skipHooks: false
