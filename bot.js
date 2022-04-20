@@ -58,9 +58,10 @@ async function everyScheduleJob() {  //https://www.codexpedia.com/javascript/nod
     // var rule1 = new schedule.RecurrenceRule();
     // rule1.minute = new schedule.Range(0, 59, 5);
 
-    schedule.scheduleJob('10 0 0 * * *', async function () {
+    schedule.scheduleJob('10 48 11 * * *', async function () {
 
-        client.channels.cache.get('964516826811858984').send('輔助獎勵區測試');
+        var d = new Date();
+        client.channels.cache.get('964516826811858984').send(`==========${d.getMonth() + 1}/${d.getDate()} 輔助獎勵區==========`);
         temp = await collection.find({ type: 'reward-ticket' }).toArray();
         console.log(temp)
         for (let i of temp[0].msg) {
@@ -170,7 +171,7 @@ async function AdminFunction(msg) {
     } else if (msg.content.startsWith(`${prefix}getday`)) {
         var d = new Date();
         d.setDate(d.getDate() - 1);
-        msg.channel.send(`${d.getHours()}、${d}`)
+        //msg.channel.send(`${d.getHours()}、${d}`)
     }
 }
 
