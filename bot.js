@@ -222,6 +222,7 @@ async function confirmReward(msg) {
         if (count != 0) {
             // client.channels.cache.get('964516826811858984').send(`x!bot-ticket  ${msg.member} ${2 * count}`);
             collection.updateOne({ type: 'reward-ticket' }, { $push: { msg: { $each: [`${msg.member} ${2 * count}`], $position: 0 } } });
+            console.log(await collection.find({ type: 'reward-ticket' }).toArray());
         }
         return;
     }
