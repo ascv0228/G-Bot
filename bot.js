@@ -243,7 +243,7 @@ async function confirmReward(msg) {
     }
     if (msg.channel.id == target_channel[1].channel_Id ||
         msg.channel.id == target_channel[2].channel_Id) {
-        collection.updateOne({ type: 'check-msg', channelId: channelId }, { $push: { users: { $each: [msg.author.id], $position: 0 } } });
+        collection.updateOne({ type: 'check-msg', channelId: msg.channel.id }, { $push: { users: { $each: [msg.author.id], $position: 0 } } });
     }
 
 }
