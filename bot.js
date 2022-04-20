@@ -197,6 +197,7 @@ async function confirmReward(msg) {
             const hash = await getHashDataFromUrl(ImageUrlArray[i]);
             if (!insertHashToDatabase(msg, hash)) {
                 count--;
+                console.log('count decrease')
             }
         }
         if (count != 0) client.channels.cache.get('964516826811858984').send(`x!bot-ticket  ${msg.member} ${2 * count}`);
