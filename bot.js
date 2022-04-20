@@ -192,10 +192,11 @@ async function confirmReward(msg) {
     let ImageUrlArray = getImageUrlArray(msg)
     if (msg.channel.id == target_channel[0].channel_Id) {
         let count = (ImageUrlArray.length > 5) ? 5 : ImageUrlArray.length;
-        for (let i = 0; i < ImageUrlArray.length; ++i) {
+        console.log('count: ' + count)
+        for (let i = 0; i < count; ++i) {
             const hash = await getHashDataFromUrl(ImageUrlArray[i]);
             if (!insertHashToDatabase(msg, hash)) {
-                count -= 1;
+                count--;
             }
         }
         if (count != 0) client.channels.cache.get('964516826811858984').send(`x!bot-ticket  ${msg.member} ${2 * count}`);
@@ -244,7 +245,8 @@ async function getPing(msg) {
 
 async function insertHashToDatabase(msg, hashData) {
     let channelId = msg.channel.id
-    if (await checkNotInDatabase(channelId, hashData)) {
+    let flag = await checkNotInDatabase(channelId, hashData)
+    if (flag) {
         collection.updateOne({ type: 'hashData', channelId: channelId }, { $push: { hash: { $each: [hashData], $position: 0 } } });
         return true;
     }
