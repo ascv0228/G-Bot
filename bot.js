@@ -195,7 +195,7 @@ async function confirmReward(msg) {
         console.log('count: ' + count)
         for (let i = 0; i < count; ++i) {
             const hash = await getHashDataFromUrl(ImageUrlArray[i]);
-            if (!insertHashToDatabase(msg, hash)) {
+            if (!await insertHashToDatabase(msg, hash)) {
                 count--;
                 console.log('count decrease')
             }
