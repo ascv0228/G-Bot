@@ -261,6 +261,7 @@ async function checkNotInDatabase(channelId, hashData) {
     temp = await collection.find({ type: 'hashData', channelId: channelId }).toArray();
     console.log(temp)
     flag = !temp[0].hash.includes(hashData)
+    console.log('flag: ' + flag)
     return flag
 }
 
