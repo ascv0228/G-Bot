@@ -58,7 +58,7 @@ async function everyScheduleJob() {  //https://www.codexpedia.com/javascript/nod
     // var rule1 = new schedule.RecurrenceRule();
     // rule1.minute = new schedule.Range(0, 59, 5);
 
-    schedule.scheduleJob('10 48 11 * * *', async function () {
+    schedule.scheduleJob('10 0 16 * * *', async function () {
 
         var d = new Date();
         client.channels.cache.get('964516826811858984').send(`==========${d.getMonth() + 1}/${d.getDate()} 輔助獎勵區==========`);
@@ -67,7 +67,7 @@ async function everyScheduleJob() {  //https://www.codexpedia.com/javascript/nod
         for (let i of temp[0].msg) {
             client.channels.cache.get('964516826811858984').send(`x!bot-ticket ${i}`)
         }
-        collection.remove({ type: 'reward-ticket' })
+        await collection.remove({ type: 'reward-ticket' })
         collection.insertOne({ type: 'reward-ticket', msg: new Array() });
     });
 }
@@ -221,6 +221,11 @@ async function confirmReward(msg) {
         let count = 0
         for (let i = 0; i < ImageUrlArray.length; ++i) {
             const hash = await getHashDataFromUrl(ImageUrlArray[i]);
+            if (hash == '0') continue;
+            if (hash == 'error') {
+                count++;
+                continue;
+            }
             let flag = await insertHashToDatabase(msg, hash)
             console.log('flag3:' + flag)
             if (flag) {
@@ -234,6 +239,9 @@ async function confirmReward(msg) {
             console.log(await collection.find({ type: 'reward-ticket' }).toArray());
         }
         return;
+    }
+    if (msg.channel.id == target_channel[1].channel_Id) {
+        collection.updateOne({ type: 'check-msg', channelId: channelId }, { $push: { users: { $each: [msg.], $position: 0 } } });
     }
 
 }
@@ -261,13 +269,17 @@ function getImageUrlArray(msg) {
 }
 
 function getHashDataFromUrl(url) {
-    if (!IsImage(url)) return 0;
+    if (!IsImage(url)) return '0';
     return new Promise((resolve, reject) => {
         //url = cutImageUrl(url);
         imageHash(url, 16, true, (error, data) => {
-            if (error) throw error;
+            if (error) {
+                throw error;
+            }
             resolve(data);
         });
+    }).catch((err) => {
+        resolve('error');
     });
 }
 
@@ -307,10 +319,10 @@ function dbInit() {
     collection.insertOne({ type: 'hashData', channelId: '948120050458574878', hash: new Array() });
     collection.insertOne({ type: 'hashData', channelId: '863086136180342804', hash: new Array() });
     collection.insertOne({ type: 'reward-ticket', msg: new Array() });
-    collection.insertOne({ type: 'check-msg', channelId: '963831403001307167', hash: new Array() });
-    collection.insertOne({ type: 'check-msg', channelId: '867811395474423838', hash: new Array() });
-    collection.insertOne({ type: 'check-msg', channelId: '886269472158138429', hash: new Array() });
-    collection.insertOne({ type: 'check-msg', channelId: '948120050458574878', hash: new Array() });
-    collection.insertOne({ type: 'check-msg', channelId: '863086136180342804', hash: new Array() });
+    collection.insertOne({ type: 'check-msg', channelId: '963831403001307167', users: new Array() });
+    collection.insertOne({ type: 'check-msg', channelId: '867811395474423838', users: new Array() });
+    collection.insertOne({ type: 'check-msg', channelId: '886269472158138429', users: new Array() });
+    collection.insertOne({ type: 'check-msg', channelId: '948120050458574878', users: new Array() });
+    collection.insertOne({ type: 'check-msg', channelId: '863086136180342804', users: new Array() });
 }
 client.login(token);
