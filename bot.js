@@ -170,7 +170,7 @@ async function AdminFunction(msg) {
     } else if (msg.content.startsWith(`${prefix}getday`)) {
         var d = new Date();
         d.setDate(d.getDate() - 1);
-        msg.channel.send(d)
+        msg.channel.send(d.getHours())
     }
 }
 
