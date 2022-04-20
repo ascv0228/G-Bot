@@ -53,6 +53,7 @@ client.on('ready', () => {
     collection = db.collection('Clients');
     everyScheduleJob()
 });
+
 async function everyScheduleJob() {  //https://www.codexpedia.com/javascript/nodejs-cron-schedule-examples/
 
     // var rule1 = new schedule.RecurrenceRule();
@@ -63,7 +64,6 @@ async function everyScheduleJob() {  //https://www.codexpedia.com/javascript/nod
         var d = new Date();
         client.channels.cache.get('964516826811858984').send(`==========${d.getMonth() + 1}/${d.getDate()} 輔助獎勵區==========`);
         temp = await collection.find({ type: 'reward-ticket' }).toArray();
-        console.log(temp)
         for (let i of temp[0].msg) {
             client.channels.cache.get('964516826811858984').send(`x!bot-ticket ${i}`)
         }
@@ -221,23 +221,19 @@ async function confirmReward(msg) {
         let count = 0
         for (let i = 0; i < ImageUrlArray.length; ++i) {
             const hash = await getHashDataFromUrl(ImageUrlArray[i]);
-            console.log('hash:' + hash)
             if (hash == '0') continue;
             if (hash == 'error') {
                 count++;
                 continue;
             }
             let flag = await insertHashToDatabase(msg, hash)
-            console.log('flag3:' + flag)
             if (flag) {
                 count++;
-                console.log('count increase')
             }
         }
         if (count != 0) {
             // client.channels.cache.get('964516826811858984').send(`x!bot-ticket  ${msg.member} ${2 * count}`);
             collection.updateOne({ type: 'reward-ticket' }, { $push: { msg: { $each: [`${msg.member} ${2 * count}`], $position: 0 } } });
-            console.log(await collection.find({ type: 'reward-ticket' }).toArray());
         }
         return;
     }
@@ -279,10 +275,7 @@ function getHashDataFromUrl(url) {
                 resolve('error');
             }
             resolve(data);
-        })/*.catch((err) => {
-            console.error()
-            reject('error');
-        }).catch(console.error);*/
+        })
     });
 }
 
@@ -294,7 +287,6 @@ async function getPing(msg) {
 async function insertHashToDatabase(msg, hashData) {
     let channelId = msg.channel.id
     let flag = await checkNotInDatabase(channelId, hashData)
-    console.log('flag2: ' + flag)
     if (flag) {
         collection.updateOne({ type: 'hashData', channelId: channelId }, { $push: { hash: { $each: [hashData], $position: 0 } } });
         return flag;
@@ -308,9 +300,7 @@ async function checkNotInDatabase(channelId, hashData) {
     let flag = false;
     let temp;
     temp = await collection.find({ type: 'hashData', channelId: channelId }).toArray();
-    console.log(temp)
     flag = !temp[0].hash.includes(hashData)
-    console.log('flag: ' + flag)
     return flag
 }
 
