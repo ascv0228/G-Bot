@@ -221,6 +221,7 @@ async function confirmReward(msg) {
         let count = 0
         for (let i = 0; i < ImageUrlArray.length; ++i) {
             const hash = await getHashDataFromUrl(ImageUrlArray[i]);
+            console.log('hash:' + hash)
             if (hash == '0') continue;
             if (hash == 'error') {
                 count++;
@@ -240,8 +241,9 @@ async function confirmReward(msg) {
         }
         return;
     }
-    if (msg.channel.id == target_channel[1].channel_Id) {
-        collection.updateOne({ type: 'check-msg', channelId: channelId }, { $push: { users: { $each: [msg.], $position: 0 } } });
+    if (msg.channel.id == target_channel[1].channel_Id ||
+        msg.channel.id == target_channel[2].channel_Id) {
+        collection.updateOne({ type: 'check-msg', channelId: channelId }, { $push: { users: { $each: [msg.author.id], $position: 0 } } });
     }
 
 }
