@@ -342,10 +342,6 @@ function getHashDataFromUrl(url) {
     });
 }
 
-async function getPing(msg) {
-    const resMsg = await msg.channel.send({ content: 'Ping...' });
-    await resMsg.edit({ content: `Ping: ${resMsg.createdTimestamp - msg.createdTimestamp}ms | Websocket: ${client.ws.ping}ms` });
-}
 
 async function insertHashToDatabase(msg, hashData) {
     let channelId = msg.channel.id
