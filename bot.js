@@ -216,17 +216,6 @@ function cutImageUrl(url) {
     return 0;
 }
 
-function getAvatar(msg) {
-    let user = msg.mentions.users.first() || msg.author;
-    const avatarEmbed = new Discord.MessageEmbed()
-        .setImage(user.displayAvatarURL({ size: 4096, dynamic: true }))
-        .setFooter({
-            text: msg.author.tag,
-            iconURL: msg.member.displayAvatarURL({ dynamic: true })
-        });
-    msg.channel.send({ embeds: [avatarEmbed] });
-}
-
 
 async function confirmReward(msg) {
     let ImageUrlArray = getImageUrlArray(msg)
