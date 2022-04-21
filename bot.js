@@ -130,12 +130,19 @@ client.on('messageCreate', msg => {
     } catch (err) {
         return;
     }
-    /*
+
     if (msg.content.startsWith(`x!envelope`) ||
         msg.content.startsWith(`x!pasred`)) {
-        //redEnvelope(msg)
-    }*/
-
+        redEnvelope(msg)
+        return;
+    }
+    if (msg.channel.id == target_channel[0].channel_Id ||
+        msg.channel.id == target_channel[1].channel_Id ||
+        msg.channel.id == target_channel[2].channel_Id ||
+        msg.channel.id == target_channel[3].channel_Id) {
+        confirmReward(msg);
+        return;
+    }
     const [cmd, ...args] = msg.content.slice(prefix.length).trimEnd().split(/\s+/);
 
     const exec = client.commands.get(cmd);
@@ -153,7 +160,7 @@ client.on('messageCreate', msg => {
             //confirmReward(msg);
         }*/
 });
-/*
+
 function redEnvelope(msg) {
     if (msg.content.startsWith(`x!envelope`)) {
         client.channels.cache.get('964699991601995787').send(msg.url);
@@ -173,20 +180,6 @@ async function AdminFunction(msg) {
         if (!url.startsWith("http")) return;
         const hash = await getHashDataFromUrl();
         msg.channel.send('`' + hash + '`');
-    }
-    else if (msg.content.startsWith(`${prefix}avatar`) ||
-        msg.content.startsWith(`${prefix}avt`)) {
-        getAvatar(msg);
-
-    }
-    else if (msg.content.startsWith(`${prefix}memberavatar`) ||
-        msg.content.startsWith(`${prefix}memavt`)) {
-        getMemberAvatar(msg);
-
-    }
-    else if (msg.content.startsWith(`${prefix}version`)) {
-        msg.reply("ZZ 是巨佬, 大GG")
-
     } else if (msg.content.startsWith(`${prefix}dbInit confirm`) && msg.author.id == '411895879935590411') {
         msg.reply('DataBase已清空!')
         dbInit();
@@ -312,5 +305,5 @@ function dbInit() {
     collection.insertOne({ type: 'check-msg', channelId: '886269472158138429', users: new Array() });
     collection.insertOne({ type: 'check-msg', channelId: '948120050458574878', users: new Array() });
     collection.insertOne({ type: 'check-msg', channelId: '863086136180342804', users: new Array() });
-}*/
+}
 client.login(token);
