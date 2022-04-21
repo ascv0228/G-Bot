@@ -6,6 +6,7 @@ const schedule = require('node-schedule');
 const { token, database } = require('./config/token.json');
 const { prefix } = require('./config/config.json');
 const fs = require('fs');
+const path = require("path")
 const target_channel = require('./config/channelId.json');
 // const hashDataJson = require('./hashData.json');
 const { send } = require('process');
@@ -72,7 +73,7 @@ function readDirAll(dir, fileHandler, dirHandler) {
                 dirHandler(res);
             }
 
-            return this.readDirAll(res, fileHandler, dirHandler);
+            return readDirAll(res, fileHandler, dirHandler);
         } else {
             if (fileHandler) {
                 fileHandler(res);
