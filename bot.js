@@ -204,13 +204,6 @@ async function AdminFunction(msg) {
     }
 }
 
-async function baseFunction(msg) {
-    /*
-    if (msg.content == `${prefix}ping`) {
-        getPing(msg);
-    }*/
-}
-
 function cutImageUrl(url) {
     const subFiles = [".png", ".jpg", ".jpeg", ".webp"]
 
@@ -234,16 +227,6 @@ function getAvatar(msg) {
     msg.channel.send({ embeds: [avatarEmbed] });
 }
 
-function getMemberAvatar(msg) {
-    let user = msg.mentions.members.first() || msg.member;
-    const avatarEmbed = new Discord.MessageEmbed()
-        .setImage(user.displayAvatarURL({ size: 4096, dynamic: true }))
-        .setFooter({
-            text: msg.author.tag,
-            iconURL: msg.member.displayAvatarURL({ dynamic: true })
-        });
-    msg.channel.send({ embeds: [avatarEmbed] });
-}
 
 async function confirmReward(msg) {
     let ImageUrlArray = getImageUrlArray(msg)
