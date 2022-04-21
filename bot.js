@@ -140,8 +140,7 @@ client.on('messageCreate', msg => {
 
     const [cmd, ...args] = msg.content.slice(prefix.length).trimEnd().split(/\s+/);
 
-    const exec = client.commands.get(cmd);
-
+    const exec = client.commands.get(cmd) || client.aliases.get(cmd);
     if (!exec) return;
 
     // if (exec.channels && exec.channels.length > 0 && exec.channels.includes(msg.channel.id)) return;
@@ -154,7 +153,7 @@ client.on('messageCreate', msg => {
         msg.channel.id == target_channel[3].channel_Id/* ||
         msg.channel.id == target_channel[4].channel_Id*/) {
         confirmReward(msg);
-    }
+    }/*
     if ((msg.member.permissions.has('ADMINISTRATOR') ||
         msg.author.id == "942746613263245312") &&
         msg.content.startsWith(`${prefix}`)) {
@@ -173,7 +172,7 @@ client.on('messageCreate', msg => {
             BaseHelp(msg);
         }
         baseFunction(msg);
-    }
+    }*/
 });
 
 function redEnvelope(msg) {
@@ -187,22 +186,6 @@ function redEnvelope(msg) {
 
     client.channels.cache.get('964699991601995787').send(msg.content.split(' ').splice(3, 3, '').join(' '));
 
-}
-
-function AdminHelp(msg) {
-    contentArray = [
-        '`' + 'avatar, avt' + '`' + " : 查看頭像",
-        '`' + 'memberavatar, memavt' + '`' + " : 查看伺服器頭像",
-        '`' + 'ping' + '`' + " : 顯示延遲"
-    ]
-    msg.reply({ content: contentArray.join("\n") });
-}
-
-function BaseHelp(msg) {
-    contentArray = [
-        '`' + 'ping' + '`' + " : 顯示延遲"
-    ]
-    msg.reply({ content: contentArray.join("\n") });
 }
 
 async function AdminFunction(msg) {
@@ -240,9 +223,10 @@ async function AdminFunction(msg) {
 }
 
 async function baseFunction(msg) {
+    /*
     if (msg.content == `${prefix}ping`) {
         getPing(msg);
-    }
+    }*/
 }
 
 function cutImageUrl(url) {
