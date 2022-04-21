@@ -16,8 +16,6 @@ const ytdl = require('ytdl-core');
 const ytpl = require('ytpl');*/
 //const base_command = require('./bot/base-command.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
-/*client.commands = new Discord.Collections();
-const commands = fs.readdirSync("./Commands").filter(file => file.endsWith(".js"))*/
 
 
 process.on('uncaughtException', (err, origin) => {
@@ -88,7 +86,7 @@ function readDirAll(dir, fileHandler, dirHandler) {
 
 var db;
 var collection;
-client.on('ready', () => {
+client.on('ready', () => {/*
     client.user.setActivity(`GG的大GG`, { type: "PLAYING" });
     console.log(`Logged in as ${client.user.tag}!`);
     if (!database) return;
@@ -103,7 +101,7 @@ client.on('ready', () => {
     mongoose.Promise = global.Promise;
     db = mongoose.connection;
     collection = db.collection('Clients');
-    everyScheduleJob()
+    everyScheduleJob()*/
     client.loadCommands()
 });
 
