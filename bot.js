@@ -17,6 +17,9 @@ const ytpl = require('ytpl');*/
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 /*client.commands = new Discord.Collections();
 const commands = fs.readdirSync("./Commands").filter(file => file.endsWith(".js"))*/
+const getping = require('./commands/ping.js')
+
+
 
 process.on('uncaughtException', (err, origin) => {
     console.error(err.stack);
@@ -29,9 +32,56 @@ process.on('unhandledRejection', (reason, promise) => {
 /*
 * 1.  獎勵 0:00 再發
 * 2.  檢查 有記錄區 才能丟 每日
-*
-*
+* 3.  分批清空資料庫指令
+* 4.  img-hash bug
 */
+client.commands = new Discord.Collection();
+/*
+function loadCommands(this) {
+    const dirPath = `./commands`;
+
+    return readDirAll(dirPath, (file) => {
+        if (file.match(/(\.js|\.ts)$/)) {
+            const command = require(file);
+            if (command.aliases) {
+                command.aliases.forEach(alias => {
+                    this.aliases.set(alias, command);
+                });
+            }
+
+            if (command.name) {
+                if (command.listens && command.listens.length > 0) {
+                    this.listens.set(command.name, command);
+                } else {
+                    this.commands.set(command.name, command);
+                }
+            }
+        }
+    });
+}
+
+
+function readDirAll(dir, fileHandler, dirHandler){
+    const dirents = fs.readdirSync(dir, { withFileTypes: true });
+
+    return Promise.all(dirents.map((dirent) => {
+        const res = path.resolve(dir, dirent.name);
+
+        if (dirent.isDirectory()) {
+            if (dirHandler) {
+                dirHandler(res);
+            }
+
+            return this.readDirAll(res, fileHandler, dirHandler);
+        } else {
+            if (fileHandler) {
+                fileHandler(res);
+            }
+
+            return res;
+        }
+    }));
+}*/
 
 
 var db;
@@ -278,11 +328,11 @@ function getHashDataFromUrl(url) {
         })
     });
 }
-
+/*
 async function getPing(msg) {
     const resMsg = await msg.channel.send({ content: 'Ping...' });
     await resMsg.edit({ content: `Ping: ${resMsg.createdTimestamp - msg.createdTimestamp}ms | Websocket: ${client.ws.ping}ms` });
-}
+}*/
 
 async function insertHashToDatabase(msg, hashData) {
     let channelId = msg.channel.id
