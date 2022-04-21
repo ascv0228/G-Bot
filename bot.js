@@ -34,6 +34,7 @@ process.on('unhandledRejection', (reason, promise) => {
 * 2.  檢查 有記錄區 才能丟 每日
 * 3.  分批清空資料庫指令
 * 4.  img-hash bug
+* 5.  分檔
 */
 client.commands = new Discord.Collection();
 /*
@@ -328,11 +329,11 @@ function getHashDataFromUrl(url) {
         })
     });
 }
-/*
+
 async function getPing(msg) {
     const resMsg = await msg.channel.send({ content: 'Ping...' });
     await resMsg.edit({ content: `Ping: ${resMsg.createdTimestamp - msg.createdTimestamp}ms | Websocket: ${client.ws.ping}ms` });
-}*/
+}
 
 async function insertHashToDatabase(msg, hashData) {
     let channelId = msg.channel.id

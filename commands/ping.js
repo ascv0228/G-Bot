@@ -21,3 +21,5 @@ async function getPing(msg) {
     const resMsg = await msg.channel.send({ content: 'Ping...' });
     await resMsg.edit({ content: `Ping: ${resMsg.createdTimestamp - msg.createdTimestamp}ms | Websocket: ${client.ws.ping}ms` });
 }
+
+module.exports = getPing;
