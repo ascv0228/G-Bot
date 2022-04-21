@@ -140,7 +140,8 @@ client.on('messageCreate', msg => {
 
     const [cmd, ...args] = msg.content.slice(prefix.length).trimEnd().split(/\s+/);
 
-    const exec = client.commands.get(cmd) || client.aliases.get(cmd);
+    const exec = client.commands.get(cmd);
+
     if (!exec) return;
 
     // if (exec.channels && exec.channels.length > 0 && exec.channels.includes(msg.channel.id)) return;
@@ -153,26 +154,7 @@ client.on('messageCreate', msg => {
         msg.channel.id == target_channel[3].channel_Id/* ||
         msg.channel.id == target_channel[4].channel_Id*/) {
         confirmReward(msg);
-    }/*
-    if ((msg.member.permissions.has('ADMINISTRATOR') ||
-        msg.author.id == "942746613263245312") &&
-        msg.content.startsWith(`${prefix}`)) {
-        if (msg.content == `${prefix}help` ||
-            msg.content == `${prefix}h`) {
-            AdminHelp(msg);
-        }
-        else {
-            AdminFunction(msg);
-            baseFunction(msg);
-
-        }
-    } else if (msg.content.startsWith(`${prefix}`)) {
-        if (msg.content == `${prefix}help` ||
-            msg.content == `${prefix}h`) {
-            BaseHelp(msg);
-        }
-        baseFunction(msg);
-    }*/
+    }
 });
 
 function redEnvelope(msg) {
