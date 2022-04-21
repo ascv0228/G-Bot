@@ -103,7 +103,7 @@ client.on('ready', () => {
     everyScheduleJob()
     client.loadCommands();
 });
-/*
+
 async function everyScheduleJob() {  //https://www.codexpedia.com/javascript/nodejs-cron-schedule-examples/
 
     // var rule1 = new schedule.RecurrenceRule();
@@ -120,7 +120,7 @@ async function everyScheduleJob() {  //https://www.codexpedia.com/javascript/nod
         await collection.remove({ type: 'reward-ticket' })
         collection.insertOne({ type: 'reward-ticket', msg: new Array() });
     });
-}*/
+}
 
 client.on('messageCreate', msg => {
     try {
