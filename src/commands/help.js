@@ -5,7 +5,7 @@ module.exports = {
     aliases: ["h"],
     // channels: ["xxxx", "xxxxx"],
 
-    async execute(client, msg, args) {
+    async execute(client, msg, args) {/*
         if (!msg.content.startsWith(`${prefix}`)) return;
         contentArray = (msg.member.permissions.has('ADMINISTRATOR')) ?
             [
@@ -17,6 +17,6 @@ module.exports = {
                 '`' + 'memberavatar, memavt' + '`' + " : 查看伺服器頭像",
                 '`' + 'ping' + '`' + " : 顯示延遲"
             ]
-        msg.reply({ content: contentArray.join("\n") });
+        msg.reply({ content: contentArray.join("\n") });*/
     }
 };
