@@ -1,3 +1,5 @@
+const { prefix } = require('../../config/config.json');
+
 module.exports = {
     name: "ping",
     // channels: ["xxxx", "xxxxx"],
