@@ -1,12 +1,12 @@
 const { prefix } = require('../../config/config.json');
 
 module.exports = {
-    name: "avatar",
-    //aliases: ["avt"],
+    name: "memberavatar",
+    //aliases: ["memavt"],
 
     execute(client, msg, args) {
         if (!msg.content.startsWith(`${prefix}`)) return;
-        let user = msg.mentions.users.first() || msg.author;
+        let user = msg.mentions.members.first() || msg.member;
         const avatarEmbed = new Discord.MessageEmbed()
             .setImage(user.displayAvatarURL({ size: 4096, dynamic: true }))
             .setFooter({
@@ -14,7 +14,6 @@ module.exports = {
                 iconURL: msg.member.displayAvatarURL({ dynamic: true })
             });
         msg.channel.send({ embeds: [avatarEmbed] });
-
         return;
     }
 };
