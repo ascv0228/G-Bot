@@ -17,8 +17,6 @@ const ytpl = require('ytpl');*/
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 /*client.commands = new Discord.Collections();
 const commands = fs.readdirSync("./Commands").filter(file => file.endsWith(".js"))*/
-const getping = require('./commands/ping.js')
-
 
 
 process.on('uncaughtException', (err, origin) => {
@@ -37,8 +35,8 @@ process.on('unhandledRejection', (reason, promise) => {
 * 5.  分檔
 */
 client.commands = new Discord.Collection();
-/*
-function loadCommands(this) {
+
+function loadCommands() {
     const dirPath = `./commands`;
 
     return readDirAll(dirPath, (file) => {
@@ -61,8 +59,9 @@ function loadCommands(this) {
     });
 }
 
+client.loadCommands = loadCommands;
 
-function readDirAll(dir, fileHandler, dirHandler){
+function readDirAll(dir, fileHandler, dirHandler) {
     const dirents = fs.readdirSync(dir, { withFileTypes: true });
 
     return Promise.all(dirents.map((dirent) => {
@@ -82,7 +81,7 @@ function readDirAll(dir, fileHandler, dirHandler){
             return res;
         }
     }));
-}*/
+}
 
 
 var db;
@@ -103,6 +102,7 @@ client.on('ready', () => {
     db = mongoose.connection;
     collection = db.collection('Clients');
     everyScheduleJob()
+    client.loadCommands()
 });
 
 async function everyScheduleJob() {  //https://www.codexpedia.com/javascript/nodejs-cron-schedule-examples/
@@ -135,6 +135,17 @@ client.on('messageCreate', msg => {
         msg.content.startsWith(`x!pasred`)) {
         redEnvelope(msg)
     }
+
+    const [cmd, ...args] = msg.content.slice(prefix.length).trimEnd().split(/\s+/);
+
+    const exec = client.commands.get(cmd);
+
+    if (!exec) return;
+
+    // if (exec.channels && exec.channels.length > 0 && exec.channels.includes(msg.channel.id)) return;
+
+    exec.execute(client, msg, args);
+
     if (msg.channel.id == target_channel[0].channel_Id ||
         msg.channel.id == target_channel[1].channel_Id ||
         msg.channel.id == target_channel[2].channel_Id ||
