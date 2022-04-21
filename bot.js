@@ -135,7 +135,7 @@ client.on('messageCreate', msg => {
     }
     if (msg.content.startsWith(`x!envelope`) ||
         msg.content.startsWith(`x!pasred`)) {
-        redEnvelope(msg)
+        //redEnvelope(msg)
     }
 
     const [cmd, ...args] = msg.content.slice(prefix.length).trimEnd().split(/\s+/);
@@ -153,10 +153,10 @@ client.on('messageCreate', msg => {
         msg.channel.id == target_channel[2].channel_Id ||
         msg.channel.id == target_channel[3].channel_Id/* ||
         msg.channel.id == target_channel[4].channel_Id*/) {
-        confirmReward(msg);
+        //confirmReward(msg);
     }
 });
-
+/*
 function redEnvelope(msg) {
     if (msg.content.startsWith(`x!envelope`)) {
         client.channels.cache.get('964699991601995787').send(msg.url);
@@ -315,5 +315,5 @@ function dbInit() {
     collection.insertOne({ type: 'check-msg', channelId: '886269472158138429', users: new Array() });
     collection.insertOne({ type: 'check-msg', channelId: '948120050458574878', users: new Array() });
     collection.insertOne({ type: 'check-msg', channelId: '863086136180342804', users: new Array() });
-}
+}*/
 client.login(token);
