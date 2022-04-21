@@ -5,7 +5,7 @@ module.exports = {
     aliases: ["h"],
     // channels: ["xxxx", "xxxxx"],
 
-    async execute(client, msg, args) {/*
+    execute(client, msg, args) {/*
         if (!msg.content.startsWith(`${prefix}`)) return;
         contentArray = (msg.member.permissions.has('ADMINISTRATOR')) ?
             [
