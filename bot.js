@@ -83,8 +83,9 @@ function readDirAll(dir, fileHandler, dirHandler) {
 }
 
 
-var db;
-var collection;
+mongoose.Promise = global.Promise;
+let db = mongoose.connection;;
+let collection = db.collection('Clients');;
 client.on('ready', () => {
     client.user.setActivity(`GG的大GG`, { type: "PLAYING" });
     console.log(`Logged in as ${client.user.tag}!`);
@@ -97,9 +98,6 @@ client.on('ready', () => {
     }).catch((err) => {
         console.log(err)
     });
-    mongoose.Promise = global.Promise;
-    db = mongoose.connection;
-    collection = db.collection('Clients');
     everyScheduleJob()
     client.loadCommands();
 });
