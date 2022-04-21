@@ -1,5 +1,5 @@
 const { prefix } = require('../../config/config.json');
-const mongoose = require('mongoose');
+//const mongoose = require('mongoose');
 /*
 mongoose.connect(database, {
     useNewUrlParser: true,
@@ -22,6 +22,7 @@ module.exports = {
         if (!msg.author.id == '411895879935590411') return;
         let temp = await collection.find({}).toArray();
         console.log(temp)
-        msg.reply('Finish!')*/
+        msg.reply('Finish!');*/
+        return;
     }
 };

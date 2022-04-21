@@ -102,9 +102,9 @@ client.on('ready', () => {/*
     db = mongoose.connection;
     collection = db.collection('Clients');
     everyScheduleJob()*/
-    client.loadCommands()
+    client.loadCommands();
 });
-
+/*
 async function everyScheduleJob() {  //https://www.codexpedia.com/javascript/nodejs-cron-schedule-examples/
 
     // var rule1 = new schedule.RecurrenceRule();
@@ -121,7 +121,7 @@ async function everyScheduleJob() {  //https://www.codexpedia.com/javascript/nod
         await collection.remove({ type: 'reward-ticket' })
         collection.insertOne({ type: 'reward-ticket', msg: new Array() });
     });
-}
+}*/
 
 client.on('messageCreate', msg => {
     try {
@@ -131,10 +131,11 @@ client.on('messageCreate', msg => {
     } catch (err) {
         return;
     }
+    /*
     if (msg.content.startsWith(`x!envelope`) ||
         msg.content.startsWith(`x!pasred`)) {
         //redEnvelope(msg)
-    }
+    }*/
 
     const [cmd, ...args] = msg.content.slice(prefix.length).trimEnd().split(/\s+/);
 
@@ -145,14 +146,13 @@ client.on('messageCreate', msg => {
     // if (exec.channels && exec.channels.length > 0 && exec.channels.includes(msg.channel.id)) return;
 
     exec.execute(client, msg, args);
-
-    if (msg.channel.id == target_channel[0].channel_Id ||
-        msg.channel.id == target_channel[1].channel_Id ||
-        msg.channel.id == target_channel[2].channel_Id ||
-        msg.channel.id == target_channel[3].channel_Id/* ||
-        msg.channel.id == target_channel[4].channel_Id*/) {
-        //confirmReward(msg);
-    }
+    /*
+        if (msg.channel.id == target_channel[0].channel_Id ||
+            msg.channel.id == target_channel[1].channel_Id ||
+            msg.channel.id == target_channel[2].channel_Id ||
+            msg.channel.id == target_channel[3].channel_Id) {
+            //confirmReward(msg);
+        }*/
 });
 /*
 function redEnvelope(msg) {

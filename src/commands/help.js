@@ -18,5 +18,6 @@ module.exports = {
                 '`' + 'ping' + '`' + " : 顯示延遲"
             ]
         msg.reply({ content: contentArray.join("\n") });*/
+        return;
     }
 };

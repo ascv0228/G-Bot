@@ -14,5 +14,6 @@ module.exports = {
                 iconURL: msg.member.displayAvatarURL({ dynamic: true })
             });
         msg.channel.send({ embeds: [avatarEmbed] });*/
+        return;
     }
 };
