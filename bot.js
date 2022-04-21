@@ -8,7 +8,6 @@ const { prefix } = require('./config/config.json');
 const fs = require('fs');
 const path = require("path")
 const target_channel = require('./config/channelId.json');
-// const hashDataJson = require('./hashData.json');
 const { send } = require('process');
 /*
 const { getVideoID } = require('ytdl-core');
