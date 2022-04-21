@@ -38,7 +38,8 @@ process.on('unhandledRejection', (reason, promise) => {
 client.commands = new Discord.Collection();
 
 function loadCommands() {
-    const dirPath = `./commands`;
+    // const dirPath = `./commands`;
+    const dirPath = `./src/commands`;
 
     return readDirAll(dirPath, (file) => {
         if (file.match(/(\.js|\.ts)$/)) {
