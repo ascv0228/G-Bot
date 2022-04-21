@@ -85,8 +85,8 @@ function readDirAll(dir, fileHandler, dirHandler) {
 
 var db;
 var collection;
-client.on('ready', () => {/*
-    client.user.setActivity(`GG的大GG`, { type: "PLAYING" });
+client.on('ready', () => {
+    client.user.setActivity(`GG的大GG`, { type: "PLAYING" });/*
     console.log(`Logged in as ${client.user.tag}!`);
     if (!database) return;
     mongoose.connect(database, {
