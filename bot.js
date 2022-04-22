@@ -56,15 +56,15 @@ function loadCommands() {
 
 client.loadCommands = loadCommands;
 
-function readDirAll(dirs, fileHandler, dirHandler) {
-    let dirents = fs.readdirSync(dirs[0], { withFileTypes: true });
+function readDirAll(dir, fileHandler, dirHandler) {
+    let dirents = fs.readdirSync(dir, { withFileTypes: true });
     /*
     for (let i = 1; i < dirs.length; ++i) {
         dirents.concat(fs.readdirSync(dirs[i], { withFileTypes: true }));
     }*/
 
     return Promise.all(dirents.map((dirent) => {
-        const res = path.resolve(dirs[0], dirent.name);
+        const res = path.resolve(dir, dirent.name);
 
         if (dirent.isDirectory()) {
             if (dirHandler) {
