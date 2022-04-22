@@ -251,15 +251,24 @@ function getHashDataFromUrl(url) {
 
 async function insertHashToDatabase(msg, hashData) {
     let channelId = msg.channel.id
+    let guildId = msg.guild.id
     let flag = await checkNotInDatabase(channelId, hashData)
     if (flag == undefined) {
-        client.Mdbcollection.updateOne({ type: 'hashData', channelId: channelId }, { "$set": { [`hash.${hashData}`]: msg.url } });
+        client.Mdbcollection.updateOne({ type: 'hashData', channelId: channelId }, { "$set": { [`hash.${hashData}`]: urlEncode(msg.url) } });
         return flag;
     } else {
         client.channels.cache.get('964516826811858984').send('<@' + msg.member + '>' + ' use same image! in <#' + channelId + '> , ' + msg.url + '\n'
-            + 'origin url in: ' + flag);
+            + 'origin url in: ' + decodeUrl(flag, guildId, channelId));
         return (flag != undefined);
     }
+}
+
+function urlEncode(url) {
+    return url.substring(85 - 18, 85);
+}
+
+function decodeUrl(encodeUrl, guildID, channelID) {
+    return 'https://discord.com/channels/' + `${guildID}` + `/${channelID}/` + encodeUrl;
 }
 
 async function checkNotInDatabase(channelId, hashData) {
