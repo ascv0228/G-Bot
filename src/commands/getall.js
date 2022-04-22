@@ -9,6 +9,7 @@ module.exports = {
         let temp = await client.Mdbcollection.find({}).toArray();
         console.log(temp)
         msg.reply('Finish!');
+        console.log(args)
         return;
     }
 };
