@@ -2,7 +2,7 @@ const { prefix } = require('../../config/config.json');
 
 module.exports = {
     name: "avatar",
-    //aliases: ["avt"],
+    aliases: ["avt"],
 
     execute(client, msg, args) {
         if (!msg.content.startsWith(`${prefix}`)) return;
