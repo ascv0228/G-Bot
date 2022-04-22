@@ -16,7 +16,6 @@ const ytpl = require('ytpl');*/
 //const base_command = require('./bot/base-command.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
-
 process.on('uncaughtException', (err, origin) => {
     console.error(err.stack);
 });
@@ -36,7 +35,7 @@ client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection()
 function loadCommands() {
     // const dirPath = `./commands`;
-    const dirPath = `./src/commands`;
+    const dirPath = [`./src/commands`, `./src/music`];
 
     return readDirAll(dirPath, (file) => {
         if (file.match(/(\.js|\.ts)$/)) {
@@ -60,8 +59,11 @@ function loadCommands() {
 
 client.loadCommands = loadCommands;
 
-function readDirAll(dir, fileHandler, dirHandler) {
-    const dirents = fs.readdirSync(dir, { withFileTypes: true });
+function readDirAll(dirs, fileHandler, dirHandler) {
+    let dirents = fs.readdirSync(dirs[0], { withFileTypes: true });
+    for (let i = 1; i < dirs.length; ++i) {
+        dirents.concat(fs.readdirSync(dirs[i], { withFileTypes: true }));
+    }
 
     return Promise.all(dirents.map((dirent) => {
         const res = path.resolve(dir, dirent.name);
