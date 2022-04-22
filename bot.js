@@ -33,7 +33,7 @@ process.on('unhandledRejection', (reason, promise) => {
 * 5.  分檔
 */
 client.commands = new Discord.Collection();
-
+client.aliases = new Discord.Collection()
 function loadCommands() {
     // const dirPath = `./commands`;
     const dirPath = `./src/commands`;
@@ -128,12 +128,12 @@ client.on('messageCreate', msg => {
     } catch (err) {
         return;
     }
-
-    if (msg.content.startsWith(`x!envelope`) ||
-        msg.content.startsWith(`x!pasred`)) {
-        redEnvelope(msg)
-        return;
-    }
+    /*
+        if (msg.content.startsWith(`x!envelope`) ||
+            msg.content.startsWith(`x!pasred`)) {
+            redEnvelope(msg)
+            return;
+        }*/
     if (msg.channel.id == target_channel[0].channel_Id ||
         msg.channel.id == target_channel[1].channel_Id ||
         msg.channel.id == target_channel[2].channel_Id ||
