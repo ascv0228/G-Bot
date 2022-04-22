@@ -10,12 +10,13 @@ module.exports = {
     aliases: ["np"],
 
     async execute(client, msg, args) {
+        if (!msg.content.startsWith(`${prefix}`)) return;
         guildID = msg.guild.id;
-        if (dispatcher !== undefined && client.musicDict.get(guildID).length > 0) {
+        if (client.dispatcher !== undefined && client.musicDict.get(guildID).length > 0) {
             const info = await ytdl.getInfo(client.musicDict.get(guildID)[0]);
             const title = info.videoDetails.title;
             const songLength = info.videoDetails.lengthSeconds;
-            const nowSongLength = Math.floor(dispatcher.streamTime / 1000);
+            const nowSongLength = Math.floor(client.dispatcher.streamTime / 1000);
             const npembed = new Discord.MessageEmbed()
                 .setColor('RANDOM')
                 .setTitle('Now Play Music')

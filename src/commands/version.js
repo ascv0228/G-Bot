@@ -5,6 +5,9 @@ module.exports = {
 
     execute(client, msg, args) {
         if (!msg.content.startsWith(`${prefix}`)) return;
-        return msg.reply("分檔中...");
+        let temp = ["分檔中...",
+            "play、playnext重複"]
+        msg.reply({ content: temp.join("\n") });
+        return
     }
 };

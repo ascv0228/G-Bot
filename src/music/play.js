@@ -124,8 +124,8 @@ async function playMusic2(client, msg, args, connection) {
             highWaterMark: 26214400 //25ms
         })
 
-        dispatcher = connection.play(stream, streamOptions);
-        dispatcher.on("finish", finish => {
+        client.dispatcher = connection.play(stream, streamOptions);
+        client.dispatcher.on("finish", finish => {
             if (client.musicDict.get(guildID).length > 0) client.musicDict.get(guildID).shift();
             playMusic2(connection, guildID, channelID);
         })

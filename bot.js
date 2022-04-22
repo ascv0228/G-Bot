@@ -30,9 +30,9 @@ process.on('unhandledRejection', (reason, promise) => {
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.musicDict = new Map();
-function loadCommands() {
+function loadCommands(dirPath) {
     // const dirPath = `./commands`;
-    const dirPath = [`./src/commands`, `./src/music`];
+    //const dirPath = [`./src/commands`, `./src/music`];
 
     return readDirAll(dirPath, (file) => {
         if (file.match(/(\.js|\.ts)$/)) {
@@ -82,7 +82,10 @@ function readDirAll(dirs, fileHandler, dirHandler) {
     }));
 }
 
-
+/*const lines = message.content.trim().split("\n");
+for (let i = 0; i < lines.length; ++i) {
+    ......
+}*/
 
 
 
@@ -92,7 +95,11 @@ client.on('ready', () => {
 
     loadMongodb();
     everyScheduleJob();
-    client.loadCommands();
+
+    client.dispatcher;
+    const dirPath = [`./src/commands`, `./src/music`];
+    client.loadCommands(dirPath[0]);
+    client.loadCommands(dirPath[1]);
 });
 
 async function loadMongodb() {
