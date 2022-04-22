@@ -253,7 +253,7 @@ async function insertHashToDatabase(msg, hashData) {
     let channelId = msg.channel.id
     let flag = await checkNotInDatabase(channelId, hashData)
     if (flag == undefined) {
-        client.Mdbcollection.updateOne({ type: 'hashData', channelId: channelId }, { $push: { hash: { $each: { [hashData]: msg.url }, $position: 0 } } });
+        client.Mdbcollection.updateOne({ type: 'hashData', channelId: channelId }, { $push: { hash: { [hashData]: msg.url } } });
         return flag;
     } else {
         client.channels.cache.get('964516826811858984').send('<@' + msg.member + '>' + ' use same image! in <#' + channelId + '> , ' + msg.url + '\n'
