@@ -145,17 +145,10 @@ client.on('messageCreate', msg => {
 
     const exec = client.commands.get(cmd) || client.aliases.get(cmd);
 
-    if (!exec) {
-        msg.reply("被return 了");
-        return;
-    }
+    if (!exec) return;
+
     exec.execute(client, msg, args);
 
-    /*
-        const exec2 = client.aliases.get(cmd);
-    
-        if (!exec2) return;
-        exec2.execute(client, msg, args);*/
 
     // if (exec.channels && exec.channels.length > 0 && exec.channels.includes(msg.channel.id)) return;
 
