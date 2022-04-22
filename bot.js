@@ -146,10 +146,16 @@ client.on('messageCreate', msg => {
     const exec = client.commands.get(cmd);
 
     if (!exec) return;
+    exec.execute(client, msg, args);
+
+
+    const exec2 = client.aliases.get(cmd);
+
+    if (!exec2) return;
+    exec2.execute(client, msg, args);
 
     // if (exec.channels && exec.channels.length > 0 && exec.channels.includes(msg.channel.id)) return;
 
-    exec.execute(client, msg, args);
     /*
         if (msg.channel.id == target_channel[0].channel_Id ||
             msg.channel.id == target_channel[1].channel_Id ||
