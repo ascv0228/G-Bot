@@ -2,7 +2,7 @@ const { prefix } = require('../../config/config.json');
 
 module.exports = {
     name: "help",
-    // aliases: ["h"],
+    aliases: ["h"],
     // channels: ["xxxx", "xxxxx"],
 
     execute(client, msg, args) {
