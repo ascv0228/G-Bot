@@ -6,11 +6,12 @@ const { prefix } = require('../../config/config.json');
 
 module.exports = {
     name: "play",
-    aliases: ["h"],
+    aliases: ["p"],
 
 
     async execute(client, msg, args) {
         if (!msg.content.startsWith(`${prefix}`)) return;
+        msg.reply("這是play")
         let guildID = msg.guild.id;
         const urlED = args[0];
         if (urlED.substring(0, 4) !== 'http') return msg.reply('The link is not working.1');
