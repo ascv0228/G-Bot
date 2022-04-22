@@ -1,4 +1,5 @@
 const { prefix } = require('../../config/config.json');
+const Discord = require('discord.js');
 
 module.exports = {
     name: "memberavatar",
