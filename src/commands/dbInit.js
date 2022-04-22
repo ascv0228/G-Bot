@@ -54,6 +54,9 @@ async function dbInitReward(client, args) {
 }
 
 async function dbInitCheckMsg(client, args) {
-    await client.Mdbcollection.remove({ type: 'reward-ticket' })
-    client.Mdbcollection.insertOne({ type: 'reward-ticket', msg: new Array() });
+    await client.Mdbcollection.remove({ type: 'check-msg' })
+    client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '963831403001307167', users: new Array() });
+    client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '867811395474423838', users: new Array() });
+    client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '886269472158138429', users: new Array() });
+    client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '948120050458574878', users: new Array() });
 }

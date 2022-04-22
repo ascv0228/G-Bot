@@ -166,13 +166,6 @@ async function AdminFunction(msg) {
         if (!url.startsWith("http")) return;
         const hash = await getHashDataFromUrl();
         msg.channel.send('`' + hash + '`');
-    } else if (msg.content.startsWith(`${prefix}dbInit confirm`) && msg.author.id == '411895879935590411') {
-        msg.reply('DataBase已清空!')
-        dbInit();
-    } else if (msg.content.startsWith(`${prefix}getall`) && msg.author.id == '411895879935590411') {
-        let temp = await collection.find({}).toArray();
-        console.log(temp)
-        msg.reply('Finish!')
     } else if (msg.content.startsWith(`${prefix}getday`)) {
         var d = new Date();
         d.setDate(d.getDate() - 1);
@@ -195,20 +188,20 @@ function cutImageUrl(url) {
 
 async function confirmReward(msg) {
     let ImageUrlArray = getImageUrlArray(msg)
-    if (msg.channel.id == target_channel[0].channel_Id) {
-        let count = 0
-        for (let i = 0; i < ImageUrlArray.length; ++i) {
-            const hash = await getHashDataFromUrl(ImageUrlArray[i]);
-            if (hash == '0') continue;
-            if (hash == 'error') {
-                count++;
-                continue;
-            }
-            let flag = await insertHashToDatabase(msg, hash)
-            if (flag) {
-                count++;
-            }
+    let count = 0
+    for (let i = 0; i < ImageUrlArray.length; ++i) {
+        const hash = await getHashDataFromUrl(ImageUrlArray[i]);
+        if (hash == '0') continue;
+        if (hash == 'error') {
+            count++;
+            continue;
         }
+        let flag = await insertHashToDatabase(msg, hash)
+        if (flag) {
+            count++;
+        }
+    }
+    if (msg.channel.id == target_channel[0].channel_Id) {
         if (count != 0) {
             // client.channels.cache.get('964516826811858984').send(`x!bot-ticket  ${msg.member} ${2 * count}`);
             client.Mdbcollection.updateOne({ type: 'reward-ticket' }, { $push: { msg: { $each: [`${msg.member} ${2 * count}`], $position: 0 } } });
@@ -278,16 +271,4 @@ async function checkNotInDatabase(channelId, hashData) {
     return flag
 }
 
-function dbInit() {
-    client.Mdbcollection.drop()
-    client.Mdbcollection.insertOne({ type: 'hashData', channelId: '963831403001307167', hash: new Array() });
-    client.Mdbcollection.insertOne({ type: 'hashData', channelId: '867811395474423838', hash: new Array() });
-    client.Mdbcollection.insertOne({ type: 'hashData', channelId: '886269472158138429', hash: new Array() });
-    client.Mdbcollection.insertOne({ type: 'hashData', channelId: '948120050458574878', hash: new Array() });
-    client.Mdbcollection.insertOne({ type: 'reward-ticket', msg: new Array() });
-    client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '963831403001307167', users: new Array() });
-    client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '867811395474423838', users: new Array() });
-    client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '886269472158138429', users: new Array() });
-    client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '948120050458574878', users: new Array() });
-}
 client.login(token);
