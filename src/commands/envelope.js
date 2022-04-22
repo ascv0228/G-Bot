@@ -2,11 +2,11 @@ const { prefix } = require('../../config/config.json');
 
 module.exports = {
     name: "envelope",
-    // aliases: ["pasred"],
+    aliases: ["pasred"],
 
     execute(client, msg, args) {
         if (!msg.content.startsWith(`x!`)) return;
-        client.channels.cache.get('964699991601995787').send("紅包尚未修正完");
+        //client.channels.cache.get('964699991601995787').send("紅包尚未修正完");
         if (msg.content.startsWith(`x!envelope`)) {
             client.channels.cache.get('964699991601995787').send(msg.url);
             client.channels.cache.get('964699991601995787').send("無口令");
