@@ -129,7 +129,7 @@ async function everyScheduleJob() {  //https://www.codexpedia.com/javascript/nod
         for (let i of temp[0].msg) {
             client.channels.cache.get('964516826811858984').send(`x!bot-ticket ${i}`)
         }
-        await client.Mdbcollection.remove({ type: 'reward-ticket' })
+        await client.Mdbcollection.deleteMany({ type: 'reward-ticket' })
         client.Mdbcollection.insertOne({ type: 'reward-ticket', msg: new Array() });
     });
 }

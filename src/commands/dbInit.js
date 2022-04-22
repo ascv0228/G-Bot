@@ -29,7 +29,7 @@ module.exports = {
             msg.reply('Reward 清空');
         }
         if (args.includes('check-msg'))
-            getCheckMsg(args)
+            dbInitCheckMsg(client, args);
         return msg.reply('Finish!');
     }
 };
@@ -48,12 +48,12 @@ async function dbInitAll(client) {
 }
 
 async function dbInitReward(client, args) {
-    await client.Mdbcollection.remove({ type: 'reward-ticket' })
+    await client.Mdbcollection.deleteMany({ type: 'reward-ticket' })
     client.Mdbcollection.insertOne({ type: 'reward-ticket', msg: new Array() });
 }
 
 async function dbInitCheckMsg(client, args) {
-    await client.Mdbcollection.remove({ type: 'check-msg' })
+    await client.Mdbcollection.deleteMany({ type: 'check-msg' })
     client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '963831403001307167', users: new Array() });
     client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '867811395474423838', users: new Array() });
     client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '886269472158138429', users: new Array() });
