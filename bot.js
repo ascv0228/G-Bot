@@ -30,8 +30,8 @@ process.on('unhandledRejection', (reason, promise) => {
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.musicDict = new Map();
-function loadCommands(dirPath) {
-    // const dirPath = `./commands`;
+function loadCommands() {
+    const dirPath = `./src/commands`;
     //const dirPath = [`./src/commands`, `./src/music`];
 
     return readDirAll(dirPath, (file) => {
@@ -96,10 +96,9 @@ client.on('ready', () => {
     loadMongodb();
     everyScheduleJob();
 
-    client.dispatcher;
-    const dirPath = [`./src/commands`, `./src/music`];
-    client.loadCommands(dirPath[0]);
-    client.loadCommands(dirPath[1]);
+    //const dirPath = [`./src/commands`, `./src/music`];
+    client.loadCommands();
+    client.loadCommands();
 });
 
 async function loadMongodb() {
@@ -201,6 +200,7 @@ async function confirmReward(msg) {
     }
     if (msg.channel.id == target_channel[0].channel_Id) {
         if (count != 0) {
+            count = (count > 5) ? 5 : count;
             // client.channels.cache.get('964516826811858984').send(`x!bot-ticket  ${msg.member} ${2 * count}`);
             client.Mdbcollection.updateOne({ type: 'reward-ticket' }, { $push: { msg: { $each: [`${msg.member} ${2 * count}`], $position: 0 } } });
         }
@@ -252,21 +252,19 @@ function getHashDataFromUrl(url) {
 async function insertHashToDatabase(msg, hashData) {
     let channelId = msg.channel.id
     let flag = await checkNotInDatabase(channelId, hashData)
-    if (flag) {
-        client.Mdbcollection.updateOne({ type: 'hashData', channelId: channelId }, { $push: { hash: { $each: [hashData], $position: 0 } } });
+    if (flag == undefined) {
+        client.Mdbcollection.updateOne({ type: 'hashData', channelId: channelId }, { $push: { hash: { $each: [{ [hashData]: url }], $position: 0 } } });
         return flag;
     } else {
-        client.channels.cache.get('964516826811858984').send('<@' + msg.member + '>' + ' use same image! in <#' + channelId + '> , ' + msg.url);
-        return flag;
+        client.channels.cache.get('964516826811858984').send('<@' + msg.member + '>' + ' use same image! in <#' + channelId + '> , ' + msg.url + '\n'
+            + 'origin url in: ' + flag);
+        return (flag != undefined);
     }
 }
 
 async function checkNotInDatabase(channelId, hashData) {
-    let flag = false;
-    let temp;
     temp = await client.Mdbcollection.find({ type: 'hashData', channelId: channelId }).toArray();
-    flag = !temp[0].hash.includes(hashData)
-    return flag
+    return temp[0].hash[hashData]
 }
 
 client.login(token);
