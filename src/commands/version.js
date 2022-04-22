@@ -5,7 +5,6 @@ module.exports = {
 
     execute(client, msg, args) {
         if (!msg.content.startsWith(`${prefix}`)) return;
-        msg.reply("ZZ 我的aliases不能用， getall有BUG")
-        return;
+        return msg.reply("分檔中...");
     }
 };

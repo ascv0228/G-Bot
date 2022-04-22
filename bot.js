@@ -9,11 +9,7 @@ const fs = require('fs');
 const path = require("path")
 const target_channel = require('./config/channelId.json');
 const { send } = require('process');
-/*
-const { getVideoID } = require('ytdl-core');
-const ytdl = require('ytdl-core');
-const ytpl = require('ytpl');*/
-//const base_command = require('./bot/base-command.js');
+
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
 process.on('uncaughtException', (err, origin) => {
@@ -161,12 +157,7 @@ client.on('messageCreate', msg => {
 
 
 async function AdminFunction(msg) {
-    if (msg.content.startsWith(`${prefix}hash`)) {
-        const url = msg.content.split(' ').splice(1).join(' ');
-        if (!url.startsWith("http")) return;
-        const hash = await getHashDataFromUrl();
-        msg.channel.send('`' + hash + '`');
-    } else if (msg.content.startsWith(`${prefix}getday`)) {
+    if (msg.content.startsWith(`${prefix}getday`)) {
         var d = new Date();
         d.setDate(d.getDate() - 1);
         //msg.channel.send(`${d.getHours()}、${d}`)

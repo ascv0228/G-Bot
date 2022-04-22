@@ -12,8 +12,8 @@ module.exports = {
             getReward(client, args);
         if (args.includes('check-msg'))
             getCheckMsg(client, args)
-        msg.reply('Finish!');
-        return;
+
+        return msg.reply('Finish!');
     }
 };
 

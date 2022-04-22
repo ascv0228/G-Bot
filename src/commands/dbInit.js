@@ -30,8 +30,7 @@ module.exports = {
         }
         if (args.includes('check-msg'))
             getCheckMsg(args)
-        msg.reply('Finish!');
-        return;
+        return msg.reply('Finish!');
     }
 };
 
