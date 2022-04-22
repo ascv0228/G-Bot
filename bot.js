@@ -143,7 +143,7 @@ client.on('messageCreate', msg => {
     }
     const [cmd, ...args] = msg.content.slice(prefix.length).trimEnd().split(/\s+/);
 
-    const exec = client.commands.get(cmd);
+    const exec = client.commands.get(cmd) || client.aliases.get(cmd);
 
     if (!exec) {
         msg.reply("被return 了");
@@ -151,11 +151,11 @@ client.on('messageCreate', msg => {
     }
     exec.execute(client, msg, args);
 
-
-    const exec2 = client.aliases.get(cmd);
-
-    if (!exec2) return;
-    exec2.execute(client, msg, args);
+    /*
+        const exec2 = client.aliases.get(cmd);
+    
+        if (!exec2) return;
+        exec2.execute(client, msg, args);*/
 
     // if (exec.channels && exec.channels.length > 0 && exec.channels.includes(msg.channel.id)) return;
 
