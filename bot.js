@@ -87,13 +87,21 @@ function readDirAll(dirs, fileHandler, dirHandler) {
 }
 
 
-mongoose.Promise = global.Promise;
-let db = mongoose.connection;;
-let collection = db.collection('Clients');;
+
+
+
 client.on('ready', () => {
     client.user.setActivity(`GG的大GG`, { type: "PLAYING" });
     console.log(`Logged in as ${client.user.tag}!`);
+
+    loadMongodb();
+    everyScheduleJob();
+    client.loadCommands();
+});
+
+async function loadMongodb() {
     if (!database) return;
+    mongoose.Promise = global.Promise;
     mongoose.connect(database, {
         useNewUrlParser: true,
         useUnifiedTopology: true
@@ -102,9 +110,9 @@ client.on('ready', () => {
     }).catch((err) => {
         console.log(err)
     });
-    everyScheduleJob()
-    client.loadCommands();
-});
+    let db = mongoose.connection;;
+    client.Mdbcollection = db.collection('Clients');
+}
 
 async function everyScheduleJob() {  //https://www.codexpedia.com/javascript/nodejs-cron-schedule-examples/
 
@@ -115,12 +123,12 @@ async function everyScheduleJob() {  //https://www.codexpedia.com/javascript/nod
 
         var d = new Date();
         client.channels.cache.get('964516826811858984').send(`==========${d.getMonth() + 1}/${d.getDate()} 輔助獎勵區==========`);
-        temp = await collection.find({ type: 'reward-ticket' }).toArray();
+        temp = await client.Mdbcollection.find({ type: 'reward-ticket' }).toArray();
         for (let i of temp[0].msg) {
             client.channels.cache.get('964516826811858984').send(`x!bot-ticket ${i}`)
         }
-        await collection.remove({ type: 'reward-ticket' })
-        collection.insertOne({ type: 'reward-ticket', msg: new Array() });
+        await client.Mdbcollection.remove({ type: 'reward-ticket' })
+        client.Mdbcollection.insertOne({ type: 'reward-ticket', msg: new Array() });
     });
 }
 
@@ -132,12 +140,7 @@ client.on('messageCreate', msg => {
     } catch (err) {
         return;
     }
-    /*
-        if (msg.content.startsWith(`x!envelope`) ||
-            msg.content.startsWith(`x!pasred`)) {
-            redEnvelope(msg)
-            return;
-        }*/
+
     if (msg.channel.id == target_channel[0].channel_Id ||
         msg.channel.id == target_channel[1].channel_Id ||
         msg.channel.id == target_channel[2].channel_Id ||
@@ -154,29 +157,8 @@ client.on('messageCreate', msg => {
     exec.execute(client, msg, args);
 
 
-    // if (exec.channels && exec.channels.length > 0 && exec.channels.includes(msg.channel.id)) return;
-
-    /*
-        if (msg.channel.id == target_channel[0].channel_Id ||
-            msg.channel.id == target_channel[1].channel_Id ||
-            msg.channel.id == target_channel[2].channel_Id ||
-            msg.channel.id == target_channel[3].channel_Id) {
-            //confirmReward(msg);
-        }*/
 });
 
-function redEnvelope(msg) {
-    if (msg.content.startsWith(`x!envelope`)) {
-        client.channels.cache.get('964699991601995787').send(msg.url);
-        client.channels.cache.get('964699991601995787').send("無口令");
-        return;
-    }
-    client.channels.cache.get('964699991601995787').send(msg.url);
-    client.channels.cache.get('964699991601995787').send("口令:");
-
-    client.channels.cache.get('964699991601995787').send(msg.content.split(' ').splice(3, 3, '').join(' '));
-
-}
 
 async function AdminFunction(msg) {
     if (msg.content.startsWith(`${prefix}hash`)) {
@@ -229,13 +211,13 @@ async function confirmReward(msg) {
         }
         if (count != 0) {
             // client.channels.cache.get('964516826811858984').send(`x!bot-ticket  ${msg.member} ${2 * count}`);
-            collection.updateOne({ type: 'reward-ticket' }, { $push: { msg: { $each: [`${msg.member} ${2 * count}`], $position: 0 } } });
+            client.Mdbcollection.updateOne({ type: 'reward-ticket' }, { $push: { msg: { $each: [`${msg.member} ${2 * count}`], $position: 0 } } });
         }
         return;
     }
     if (msg.channel.id == target_channel[1].channel_Id ||
         msg.channel.id == target_channel[2].channel_Id) {
-        collection.updateOne({ type: 'check-msg', channelId: msg.channel.id }, { $push: { users: { $each: [msg.author.id], $position: 0 } } });
+        client.Mdbcollection.updateOne({ type: 'check-msg', channelId: msg.channel.id }, { $push: { users: { $each: [msg.author.id], $position: 0 } } });
     }
 
 }
@@ -280,7 +262,7 @@ async function insertHashToDatabase(msg, hashData) {
     let channelId = msg.channel.id
     let flag = await checkNotInDatabase(channelId, hashData)
     if (flag) {
-        collection.updateOne({ type: 'hashData', channelId: channelId }, { $push: { hash: { $each: [hashData], $position: 0 } } });
+        client.Mdbcollection.updateOne({ type: 'hashData', channelId: channelId }, { $push: { hash: { $each: [hashData], $position: 0 } } });
         return flag;
     } else {
         client.channels.cache.get('964516826811858984').send('<@' + msg.member + '>' + ' use same image! in <#' + channelId + '> , ' + msg.url);
@@ -291,23 +273,21 @@ async function insertHashToDatabase(msg, hashData) {
 async function checkNotInDatabase(channelId, hashData) {
     let flag = false;
     let temp;
-    temp = await collection.find({ type: 'hashData', channelId: channelId }).toArray();
+    temp = await client.Mdbcollection.find({ type: 'hashData', channelId: channelId }).toArray();
     flag = !temp[0].hash.includes(hashData)
     return flag
 }
 
 function dbInit() {
-    collection.drop()
-    collection.insertOne({ type: 'hashData', channelId: '963831403001307167', hash: new Array() });
-    collection.insertOne({ type: 'hashData', channelId: '867811395474423838', hash: new Array() });
-    collection.insertOne({ type: 'hashData', channelId: '886269472158138429', hash: new Array() });
-    collection.insertOne({ type: 'hashData', channelId: '948120050458574878', hash: new Array() });
-    collection.insertOne({ type: 'hashData', channelId: '863086136180342804', hash: new Array() });
-    collection.insertOne({ type: 'reward-ticket', msg: new Array() });
-    collection.insertOne({ type: 'check-msg', channelId: '963831403001307167', users: new Array() });
-    collection.insertOne({ type: 'check-msg', channelId: '867811395474423838', users: new Array() });
-    collection.insertOne({ type: 'check-msg', channelId: '886269472158138429', users: new Array() });
-    collection.insertOne({ type: 'check-msg', channelId: '948120050458574878', users: new Array() });
-    collection.insertOne({ type: 'check-msg', channelId: '863086136180342804', users: new Array() });
+    client.Mdbcollection.drop()
+    client.Mdbcollection.insertOne({ type: 'hashData', channelId: '963831403001307167', hash: new Array() });
+    client.Mdbcollection.insertOne({ type: 'hashData', channelId: '867811395474423838', hash: new Array() });
+    client.Mdbcollection.insertOne({ type: 'hashData', channelId: '886269472158138429', hash: new Array() });
+    client.Mdbcollection.insertOne({ type: 'hashData', channelId: '948120050458574878', hash: new Array() });
+    client.Mdbcollection.insertOne({ type: 'reward-ticket', msg: new Array() });
+    client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '963831403001307167', users: new Array() });
+    client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '867811395474423838', users: new Array() });
+    client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '886269472158138429', users: new Array() });
+    client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '948120050458574878', users: new Array() });
 }
 client.login(token);
