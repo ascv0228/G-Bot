@@ -14,6 +14,7 @@ module.exports = {
                 '`' + 'confirm' + '`' + " : 確認"
             ]
             msg.reply({ content: temp.join("\n") });
+            return;
         }
         if (!msg.content.endswith('confirm')) {
             msg.reply('No confirm!\nNothing happened');
@@ -34,7 +35,7 @@ module.exports = {
     }
 };
 
-function dbInitAll(client) {
+async function dbInitAll(client) {
     client.Mdbcollection.drop()
     client.Mdbcollection.insertOne({ type: 'hashData', channelId: '963831403001307167', hash: new Array() });
     client.Mdbcollection.insertOne({ type: 'hashData', channelId: '867811395474423838', hash: new Array() });
@@ -47,12 +48,12 @@ function dbInitAll(client) {
     client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '948120050458574878', users: new Array() });
 }
 
-function dbInitReward(client, args) {
+async function dbInitReward(client, args) {
     await client.Mdbcollection.remove({ type: 'reward-ticket' })
     client.Mdbcollection.insertOne({ type: 'reward-ticket', msg: new Array() });
 }
 
-function dbInitCheckMsg(client, args) {
+async function dbInitCheckMsg(client, args) {
     await client.Mdbcollection.remove({ type: 'reward-ticket' })
     client.Mdbcollection.insertOne({ type: 'reward-ticket', msg: new Array() });
 }

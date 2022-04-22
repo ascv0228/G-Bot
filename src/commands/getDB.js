@@ -18,17 +18,17 @@ module.exports = {
 };
 
 
-function getAll(client) {
+async function getAll(client) {
     let temp = await client.Mdbcollection.find({}).toArray();
     console.log(temp)
 }
 
-function getReward(client, args) {
+async function getReward(client, args) {
     let temp = await client.Mdbcollection.find({ type: 'reward-ticket' }).toArray();
     console.log(temp)
 }
 
-function getCheckMsg(client, args) {
+async function getCheckMsg(client, args) {
     let temp = await client.Mdbcollection.find({ type: 'check-msg' }).toArray();
     console.log(temp)
 }
