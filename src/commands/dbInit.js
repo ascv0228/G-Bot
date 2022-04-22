@@ -16,7 +16,7 @@ module.exports = {
             msg.reply({ content: temp.join("\n") });
             return;
         }
-        if (!msg.content.endswith('confirm')) {
+        if (!msg.content.includes('confirm')) {
             msg.reply('No confirm!\nNothing happened');
             return;
         }
