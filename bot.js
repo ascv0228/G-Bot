@@ -32,7 +32,8 @@ process.on('unhandledRejection', (reason, promise) => {
 * 5.  分檔
 */
 client.commands = new Discord.Collection();
-client.aliases = new Discord.Collection()
+client.aliases = new Discord.Collection();
+client.musicDict = new Map();
 function loadCommands() {
     // const dirPath = `./commands`;
     const dirPath = [`./src/commands`, `./src/music`];
@@ -61,12 +62,13 @@ client.loadCommands = loadCommands;
 
 function readDirAll(dirs, fileHandler, dirHandler) {
     let dirents = fs.readdirSync(dirs[0], { withFileTypes: true });
+    /*
     for (let i = 1; i < dirs.length; ++i) {
         dirents.concat(fs.readdirSync(dirs[i], { withFileTypes: true }));
-    }
+    }*/
 
     return Promise.all(dirents.map((dirent) => {
-        const res = path.resolve(dir, dirent.name);
+        const res = path.resolve(dirs[0], dirent.name);
 
         if (dirent.isDirectory()) {
             if (dirHandler) {
