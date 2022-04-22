@@ -145,7 +145,10 @@ client.on('messageCreate', msg => {
 
     const exec = client.commands.get(cmd);
 
-    if (!exec) return;
+    if (!exec) {
+        msg.reply("被return 了");
+        return;
+    }
     exec.execute(client, msg, args);
 
 
