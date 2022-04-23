@@ -225,14 +225,10 @@ async function confirmReward(msg) {
             originCount = (originCount == undefined) ? 0 : originCount / 2
 
             count = (count + originCount > 5) ? 5 : count + originCount;
-            // client.channels.cache.get('964516826811858984').send(`x!bot-ticket  ${msg.member} ${2 * count}`);{ "$set": { [`hash.${hashData}`]: urlEncode(msg.url) } }
             client.Mdbcollection.updateOne({ type: 'reward-ticket' }, { "$set": { [`msg.${msg.member.id}`]: `${2 * count}` } });
         }
         return;
     }
-    console.log(msg.channel.id == target_channel[2].channel_Id)
-    console.log(await checkMsgNotInChannel(msg.channel.id, msg.author.id))
-    console.log(count)
     if (msg.channel.id == target_channel[2].channel_Id && await checkMsgNotInChannel(msg.channel.id, msg.author.id) && count != 0) {
 
         // return msg.reply('今日尚未於 <#867811395474423838> 發文');
@@ -293,11 +289,11 @@ async function insertHashToDatabase(msg, hashData) {
     let flag = await checkNotInDatabase(channelId, hashData)
     if (flag == undefined) {
         client.Mdbcollection.updateOne({ type: 'hashData', channelId: channelId }, { "$set": { [`hash.${hashData}`]: urlEncode(msg.url) } });
-        return flag;
+        return true;
     } else {
         client.channels.cache.get('964516826811858984').send('<@' + msg.member + '>' + ' use same image! in <#' + channelId + '> , ' + msg.url + '\n'
             + 'origin url in: ' + decodeUrl(flag, guildId, channelId));
-        return (flag != undefined);
+        return false;
     }
 }
 
