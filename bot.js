@@ -167,7 +167,7 @@ client.on('messageCreate', msg => {
     }
 
     if (msg.member.roles.cache.has('863405200562454548') && msg.author.id == '411895879935590411') {
-        return msg.channel.send('GG')
+        return console.log('GG')
     }
     const lines = msg.content.trim().split("\n");
     for (let i = 0; i < lines.length; ++i) {
