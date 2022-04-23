@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { token, database } = require('./config/token.json');
+const { token, database } = require('../../config/token.json');
 
 module.exports.dbInitAll = async function (client) {
     dbInitAll(client);
