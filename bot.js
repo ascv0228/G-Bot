@@ -230,6 +230,9 @@ async function confirmReward(msg) {
         }
         return;
     }
+    console.log(msg.channel.id == target_channel[2].channel_Id)
+    console.log(checkMsgNotInChannel(msg.channel.id, msg.author.id))
+    console.log(count)
     if (msg.channel.id == target_channel[2].channel_Id && checkMsgNotInChannel(msg.channel.id, msg.author.id) && count != 0) {
 
         // return msg.reply('今日尚未於 <#867811395474423838> 發文');
