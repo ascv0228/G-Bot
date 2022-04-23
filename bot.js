@@ -9,7 +9,7 @@ const fs = require('fs');
 const path = require("path")
 const target_channel = require('./config/channelId.json');
 const { send } = require('process');
-const dbUtil = require('./tools/db-util.js')
+const dbUtil = require('./src/tools/db-util.js');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
