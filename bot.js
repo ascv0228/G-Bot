@@ -122,20 +122,21 @@ async function everyScheduleJob() {  //https://www.codexpedia.com/javascript/nod
     // rule1.minute = new schedule.Range(0, 59, 5);
 
     schedule.scheduleJob('10 0 16 * * *', async function () {
+        giveReward(client);
 
-        var d = new Date();
-        client.channels.cache.get('964516826811858984').send(`==========${d.getMonth() + 1}/${d.getDate()} 輔助獎勵區==========`);
-        temp = await client.Mdbcollection.find({ type: 'reward-ticket' }).toArray();
-        for (let i of temp[0].msg) {
-            client.channels.cache.get('964516826811858984').send(`x!bot-ticket ${i}`)
-        }
-        await client.Mdbcollection.deleteMany({ type: 'reward-ticket' })
-        client.Mdbcollection.insertOne({ type: 'reward-ticket', msg: new Map() });
     });
 }
 
 async function giveReward(client) {
-    temp = await client.Mdbcollection.find({ type: 'reward-ticket' }).toArray();
+    var d = new Date();
+    client.channels.cache.get('964516826811858984').send(`==========${d.getMonth() + 1}/${d.getDate()} 輔助獎勵區==========`);
+    let temp = await client.Mdbcollection.find({ type: 'reward-ticket' }).toArray();
+    await temp[0].msg.forEach((value, key) => {
+        client.channels.cache.get('964516826811858984').send(`x!bot-ticket <@${key}> ${value}`)
+    });
+
+    dbInitReward(client, null);
+    dbInitCheckMsg(client, null);
 }
 
 async function dbInitReward(client, args) {
@@ -230,7 +231,8 @@ async function confirmReward(msg) {
         return;
     }
     if (msg.channel.id == target_channel[2].channel_Id && checkMsgNotInChannel(msg.channel.id, msg.author.id)) {
-        return msg.reply('今日尚未於 <#867811395474423838> 發文');
+        // return msg.reply('今日尚未於 <#867811395474423838> 發文');
+        client.channels.cache.get('964516826811858984').send('<@' + msg.member + '>今日尚未於 <#867811395474423838> 發文');
     }
     client.Mdbcollection.updateOne({ type: 'check-msg', channelId: msg.channel.id }, { $push: { users: { $each: [msg.author.id], $position: 0 } } });
 

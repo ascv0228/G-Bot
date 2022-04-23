@@ -1,11 +1,13 @@
 const { prefix } = require('../../config/config.json');
+const Discord = require('discord.js');
 
 module.exports = {
     name: "getDB",
 
     async execute(client, msg, args) {
         if (!msg.content.startsWith(`${prefix}`)) return;
-        if (!msg.author.id == '411895879935590411') return;
+        if (!['411895879935590411', '702385586941722654', '342604295520124939',
+            '830469275528986695', '765629373084074064'].includes(msg.author.id)) return;
         if (args.includes('all'))
             getAll(client);
         if (args.includes('reward'))
@@ -18,19 +20,25 @@ module.exports = {
 };
 
 
-async function getAll(client) {
+async function getAll(client, msg, args) {
     let temp = await client.Mdbcollection.find({}).toArray();
-    console.log(temp)
+    jsonString = JSON.stringify({ ...temp }, null, 4);
+    const attachment = new Discord.MessageAttachment(Buffer.from(jsonString, 'utf-8'), 'log.json');
+    msg.author.send({ files: [attachment] })
 }
 
-async function getReward(client, args) {
+async function getReward(client, msg, args) {
     let temp = await client.Mdbcollection.find({ type: 'reward-ticket' }).toArray();
-    console.log(temp)
+    jsonString = JSON.stringify({ ...temp }, null, 4);
+    const attachment = new Discord.MessageAttachment(Buffer.from(jsonString, 'utf-8'), 'log.json');
+    msg.author.send({ files: [attachment] })
 }
 
-async function getCheckMsg(client, args) {
+async function getCheckMsg(client, msg, args) {
     let temp = await client.Mdbcollection.find({ type: 'check-msg' }).toArray();
-    console.log(temp)
+    jsonString = JSON.stringify({ ...temp }, null, 4);
+    const attachment = new Discord.MessageAttachment(Buffer.from(jsonString, 'utf-8'), 'log.json');
+    msg.author.send({ files: [attachment] })
 }
 /*[
   'a',    'b',
