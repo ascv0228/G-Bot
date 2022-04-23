@@ -4,10 +4,6 @@ module.exports.IsImage = function (url) {
     IsImage(url);
 };
 
-module.exports.checkMsgNotInChannel = async function (client, msg) {
-    checkMsgNotInChannel(client, msg);
-};
-
 module.exports.getNotDupeCount = async function (client, ImageUrlArray) {
     getNotDupeCount(client, ImageUrlArray);
 };
