@@ -1,4 +1,4 @@
-const dbUtil = require('./tools/db-util.js');
+const dbUtil = require('../tools/db-util.js');
 
 module.exports = {
     name: "dbInit",
