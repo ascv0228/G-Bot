@@ -2,10 +2,11 @@ const Discord = require('discord.js');
 const { Client, Intents } = require('discord.js');
 const { token, database } = require('./config/token.json');
 const { prefix } = require('./config/config.json');
+const fs = require('fs');
+const path = require("path")
 const { send } = require('process');
 const dbUtil = require('./src/tools/db-util.js');
 const rewardUtil = require('./src/tools/reward-util.js');
-const tools = require('./src/tools/tools.js');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
@@ -28,8 +29,59 @@ process.on('unhandledRejection', (reason, promise) => {
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.musicDict = new Map();
+function loadCommands() {
+    const dirPath = `./src/commands`;
+    //const dirPath = [`./src/commands`, `./src/music`];
 
-client.loadCommands = tools.loadCommands;
+    return readDirAll(dirPath, (file) => {
+        if (file.match(/(\.js|\.ts)$/)) {
+            const command = require(file);
+            if (command.aliases) {
+                command.aliases.forEach(alias => {
+                    this.aliases.set(alias, command);
+                });
+            }
+
+            if (command.name) {
+                if (command.listens && command.listens.length > 0) {
+                    this.listens.set(command.name, command);
+                } else {
+                    this.commands.set(command.name, command);
+                }
+            }
+        }
+    });
+}
+
+client.loadCommands = loadCommands;
+
+function readDirAll(dir, fileHandler, dirHandler) {
+    let dirents = fs.readdirSync(dir, { withFileTypes: true });
+    /*
+    for (let i = 1; i < dirs.length; ++i) {
+        dirents.concat(fs.readdirSync(dirs[i], { withFileTypes: true }));
+    }*/
+
+    return Promise.all(dirents.map((dirent) => {
+        const res = path.resolve(dir, dirent.name);
+
+        if (dirent.isDirectory()) {
+            if (dirHandler) {
+                dirHandler(res);
+            }
+
+            return readDirAll(res, fileHandler, dirHandler);
+        } else {
+            if (fileHandler) {
+                fileHandler(res);
+            }
+
+            return res;
+        }
+    }));
+}
+
+
 
 client.on('ready', () => {
     client.user.setActivity(`GG的大GG`, { type: "PLAYING" });
@@ -42,6 +94,7 @@ client.on('ready', () => {
     client.loadCommands();
     //client.loadCommands();
 });
+
 
 client.on('messageCreate', msg => {
     try {
@@ -68,6 +121,7 @@ client.on('messageCreate', msg => {
 
 
 });
+
 
 async function AdminFunction(msg) {
     if (msg.content.startsWith(`${prefix}getday`)) {
