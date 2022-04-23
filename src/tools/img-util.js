@@ -42,9 +42,9 @@ async function getNotDupeCount(client, ImageUrlArray) {
 }
 
 
-function getImageUrlArray(msg) {
+async function getImageUrlArray(msg) {
     let ImageUrlArray = new Array();
-    msg.attachments.forEach(attachment => {
+    await msg.attachments.forEach(attachment => {
         const ImageUrl = attachment.proxyURL;
         if (IsImage(ImageUrl)) {
             ImageUrlArray.push(ImageUrl)
@@ -52,7 +52,7 @@ function getImageUrlArray(msg) {
     });
     console.log(ImageUrlArray);
     if (ImageUrlArray == undefined || ImageUrlArray.length == 0)
-        return;
+        console.log('ImageUrlArray: undefined');
     return ImageUrlArray;
 }
 
