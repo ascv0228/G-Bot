@@ -9,6 +9,7 @@ const fs = require('fs');
 const path = require("path")
 const target_channel = require('./config/channelId.json');
 const { send } = require('process');
+const dbUtil = require('./tools/db-util.js')
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
@@ -130,10 +131,10 @@ async function giveReward(client) {
         client.channels.cache.get('964516826811858984').send(`x!bot-ticket <@${key}> ${value}`)
     });
 
-    dbInitReward(client, null);
-    dbInitCheckMsg(client, null);
+    dbUtil.dbInitReward(client, null);
+    dbUtil.dbInitCheckMsg(client, null);
 }
-
+/*
 async function dbInitReward(client, args) {
     await client.Mdbcollection.deleteMany({ type: 'reward-ticket' })
     client.Mdbcollection.insertOne({ type: 'reward-ticket', msg: new Map() });
@@ -146,7 +147,7 @@ async function dbInitCheckMsg(client, args) {
     client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '886269472158138429', users: new Array() });
     client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '948120050458574878', users: new Array() });
 }
-
+*/
 
 
 client.on('messageCreate', msg => {

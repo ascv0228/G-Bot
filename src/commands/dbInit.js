@@ -1,3 +1,5 @@
+const dbUtil = require('./tools/db-util.js');
+
 module.exports = {
     name: "dbInit",
 
@@ -19,41 +21,15 @@ module.exports = {
             return;
         }
         if (args.includes('all')) {
-            dbInitAll(client);
+            dbUtil.dbInitAll(client);
             msg.reply('All 清空');
         }
         if (args.includes('reward')) {
-            dbInitReward(client, args);
+            dbUtil.dbInitReward(client, args);
             msg.reply('Reward 清空');
         }
         if (args.includes('check-msg'))
-            dbInitCheckMsg(client, args);
+            dbUtil.dbInitCheckMsg(client, args);
         return msg.reply('Finish!');
     }
 };
-
-async function dbInitAll(client) {
-    client.Mdbcollection.drop()
-    client.Mdbcollection.insertOne({ type: 'hashData', channelId: '963831403001307167', hash: new Map() });
-    client.Mdbcollection.insertOne({ type: 'hashData', channelId: '867811395474423838', hash: new Map() });
-    client.Mdbcollection.insertOne({ type: 'hashData', channelId: '886269472158138429', hash: new Map() });
-    client.Mdbcollection.insertOne({ type: 'hashData', channelId: '948120050458574878', hash: new Map() });
-    client.Mdbcollection.insertOne({ type: 'reward-ticket', msg: new Map() });
-    client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '963831403001307167', users: new Array() });
-    client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '867811395474423838', users: new Array() });
-    client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '886269472158138429', users: new Array() });
-    client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '948120050458574878', users: new Array() });
-}
-
-async function dbInitReward(client, args) {
-    await client.Mdbcollection.deleteMany({ type: 'reward-ticket' })
-    client.Mdbcollection.insertOne({ type: 'reward-ticket', msg: new Map() });
-}
-
-async function dbInitCheckMsg(client, args) {
-    await client.Mdbcollection.deleteMany({ type: 'check-msg' })
-    client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '963831403001307167', users: new Array() });
-    client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '867811395474423838', users: new Array() });
-    client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '886269472158138429', users: new Array() });
-    client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '948120050458574878', users: new Array() });
-}
