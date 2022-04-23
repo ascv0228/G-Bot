@@ -200,9 +200,12 @@ async function confirmReward(msg) {
     }
     if (msg.channel.id == target_channel[0].channel_Id) {
         if (count != 0) {
-            count = (count > 5) ? 5 : count;
-            // client.channels.cache.get('964516826811858984').send(`x!bot-ticket  ${msg.member} ${2 * count}`);
-            client.Mdbcollection.updateOne({ type: 'reward-ticket' }, { $push: { msg: { $each: [`${msg.member} ${2 * count}`], $position: 0 } } });
+            let temp = await client.Mdbcollection.find({ type: 'reward-ticket' }).toArray();
+            let originCount = temp[0].msg[msg.member.id]
+
+            count = (count + originCount > 5) ? 5 : count + originCount;
+            // client.channels.cache.get('964516826811858984').send(`x!bot-ticket  ${msg.member} ${2 * count}`);{ "$set": { [`hash.${hashData}`]: urlEncode(msg.url) } }
+            client.Mdbcollection.updateOne({ type: 'reward-ticket' }, { "$set": { [`msg.${msg.member.id}`]: 2 * count } });
         }
         return;
     }
