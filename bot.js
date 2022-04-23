@@ -88,7 +88,7 @@ client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
 
     dbUtil.loadMongodb(client);
-    rewardUtil.everyScheduleJob();
+    rewardUtil.everyScheduleJob(client);
 
     //const dirPath = [`./src/commands`, `./src/music`];
     client.loadCommands();
@@ -105,7 +105,7 @@ client.on('messageCreate', msg => {
         return;
     }
 
-    rewardUtil.confirmReward(msg);
+    rewardUtil.confirmReward(client, msg);
     /*
         if (msg.member.roles.cache.has('863405200562454548') && msg.author.id == '411895879935590411') {
             console.log('GG')
