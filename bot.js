@@ -130,9 +130,28 @@ async function everyScheduleJob() {  //https://www.codexpedia.com/javascript/nod
             client.channels.cache.get('964516826811858984').send(`x!bot-ticket ${i}`)
         }
         await client.Mdbcollection.deleteMany({ type: 'reward-ticket' })
-        client.Mdbcollection.insertOne({ type: 'reward-ticket', msg: new Array() });
+        client.Mdbcollection.insertOne({ type: 'reward-ticket', msg: new Map() });
     });
 }
+
+async function giveReward(client) {
+    temp = await client.Mdbcollection.find({ type: 'reward-ticket' }).toArray();
+}
+
+async function dbInitReward(client, args) {
+    await client.Mdbcollection.deleteMany({ type: 'reward-ticket' })
+    client.Mdbcollection.insertOne({ type: 'reward-ticket', msg: new Map() });
+}
+
+async function dbInitCheckMsg(client, args) {
+    await client.Mdbcollection.deleteMany({ type: 'check-msg' })
+    client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '963831403001307167', users: new Array() });
+    client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '867811395474423838', users: new Array() });
+    client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '886269472158138429', users: new Array() });
+    client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '948120050458574878', users: new Array() });
+}
+
+
 
 client.on('messageCreate', msg => {
     try {
@@ -201,19 +220,26 @@ async function confirmReward(msg) {
     if (msg.channel.id == target_channel[0].channel_Id) {
         if (count != 0) {
             let temp = await client.Mdbcollection.find({ type: 'reward-ticket' }).toArray();
-            let originCount = temp[0].msg[msg.member.id] / 2
+            let originCount = temp[0].msg[msg.member.id]
+            originCount = (originCount == undefined) ? 0 : originCount / 2
 
             count = (count + originCount > 5) ? 5 : count + originCount;
             // client.channels.cache.get('964516826811858984').send(`x!bot-ticket  ${msg.member} ${2 * count}`);{ "$set": { [`hash.${hashData}`]: urlEncode(msg.url) } }
-            client.Mdbcollection.updateOne({ type: 'reward-ticket' }, { "$set": { [`msg.${msg.member.id}`]: 2 * count } });
+            client.Mdbcollection.updateOne({ type: 'reward-ticket' }, { "$set": { [`msg.${msg.member.id}`]: `${2 * count}` } });
         }
         return;
     }
-    if (msg.channel.id == target_channel[1].channel_Id ||
-        msg.channel.id == target_channel[2].channel_Id) {
-        client.Mdbcollection.updateOne({ type: 'check-msg', channelId: msg.channel.id }, { $push: { users: { $each: [msg.author.id], $position: 0 } } });
+    if (msg.channel.id == target_channel[2].channel_Id && checkMsgNotInChannel(msg.channel.id, msg.author.id)) {
+        return msg.reply('今日尚未於 <#867811395474423838> 發文');
     }
+    client.Mdbcollection.updateOne({ type: 'check-msg', channelId: msg.channel.id }, { $push: { users: { $each: [msg.author.id], $position: 0 } } });
 
+}
+
+
+async function checkMsgNotInChannel(channel_id, author_id) {
+    let temp = await client.Mdbcollection.find({ type: 'check-msg', channelId: channel_id }).toArray()
+    return !temp.includes(author_id);
 }
 
 function IsImage(url) {

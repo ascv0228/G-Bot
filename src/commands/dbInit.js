@@ -40,7 +40,7 @@ async function dbInitAll(client) {
     client.Mdbcollection.insertOne({ type: 'hashData', channelId: '867811395474423838', hash: new Map() });
     client.Mdbcollection.insertOne({ type: 'hashData', channelId: '886269472158138429', hash: new Map() });
     client.Mdbcollection.insertOne({ type: 'hashData', channelId: '948120050458574878', hash: new Map() });
-    client.Mdbcollection.insertOne({ type: 'reward-ticket', msg: new Array() });
+    client.Mdbcollection.insertOne({ type: 'reward-ticket', msg: new Map() });
     client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '963831403001307167', users: new Array() });
     client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '867811395474423838', users: new Array() });
     client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '886269472158138429', users: new Array() });
@@ -49,7 +49,7 @@ async function dbInitAll(client) {
 
 async function dbInitReward(client, args) {
     await client.Mdbcollection.deleteMany({ type: 'reward-ticket' })
-    client.Mdbcollection.insertOne({ type: 'reward-ticket', msg: new Array() });
+    client.Mdbcollection.insertOne({ type: 'reward-ticket', msg: new Map() });
 }
 
 async function dbInitCheckMsg(client, args) {
