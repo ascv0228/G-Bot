@@ -170,7 +170,7 @@ client.on('messageCreate', msg => {
     const lines = msg.content.trim().split("\n");
     for (let i = 0; i < lines.length; ++i) {
         if (!msg.content.startsWith(`${prefix}`)) return;
-        const [cmd, ...args] = i.slice(prefix.length).trimEnd().split(/\s+/);
+        const [cmd, ...args] = lines[i].slice(prefix.length).trimEnd().split(/\s+/);
         const exec = client.commands.get(cmd) || client.aliases.get(cmd);
         if (!exec) continue;
         exec.execute(client, msg, args);
