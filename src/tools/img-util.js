@@ -47,7 +47,7 @@ async function getImageUrlArray(msg) {
     await msg.attachments.forEach(attachment => {
         const ImageUrl = attachment.proxyURL;
         if (IsImage(ImageUrl)) {
-            ImageUrlArray.push(ImageUrl)
+            ImageUrlArray.push(ImageUrl);
         }
     });
     console.log(ImageUrlArray);

@@ -20,7 +20,7 @@ module.exports.everyScheduleJob = async function (client) {
 
 async function confirmReward(client, msg) {
 
-    let ImageUrlArray = await imgUtil.getImageUrlArray(msg)
+    let ImageUrlArray = imgUtil.getImageUrlArray(msg)
     console.log(ImageUrlArray);
     if (ImageUrlArray == undefined || ImageUrlArray.length == 0)
         return;
