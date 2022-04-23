@@ -1,10 +1,7 @@
-const { prefix } = require('../../config/config.json');
-
 module.exports = {
     name: "dbInit",
 
     async execute(client, msg, args) {
-        if (!msg.content.startsWith(`${prefix}`)) return;
         if (!msg.author.id == '411895879935590411') return;
         if (args.length == 0 || args.includes('-h')) {
             temp = [
@@ -17,7 +14,7 @@ module.exports = {
             msg.reply({ content: temp.join("\n") });
             return;
         }
-        if (!msg.content.includes('confirm')) {
+        if (!args[args.length - 1] == 'confirm') {
             msg.reply('No confirm!\nNothing happened');
             return;
         }

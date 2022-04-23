@@ -82,11 +82,6 @@ function readDirAll(dir, fileHandler, dirHandler) {
     }));
 }
 
-/*const lines = message.content.trim().split("\n");
-for (let i = 0; i < lines.length; ++i) {
-    ......
-}*/
-
 
 
 client.on('ready', () => {
@@ -170,13 +165,16 @@ client.on('messageCreate', msg => {
         confirmReward(msg);
         return;
     }
-    const [cmd, ...args] = msg.content.slice(prefix.length).trimEnd().split(/\s+/);
 
-    const exec = client.commands.get(cmd) || client.aliases.get(cmd);
 
-    if (!exec) return;
-
-    exec.execute(client, msg, args);
+    const lines = message.content.trim().split("\n");
+    for (let i = 0; i < lines.length; ++i) {
+        if (!msg.content.startsWith(`${prefix}`)) return;
+        const [cmd, ...args] = i.slice(prefix.length).trimEnd().split(/\s+/);
+        const exec = client.commands.get(cmd) || client.aliases.get(cmd);
+        if (!exec) continue;
+        exec.execute(client, msg, args);
+    }
 
 
 });

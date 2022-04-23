@@ -3,10 +3,9 @@ const Discord = require('discord.js');
 
 module.exports = {
     name: "memberavatar",
-    //aliases: ["memavt"],
+    aliases: ["memavt"],
 
     execute(client, msg, args) {
-        if (!msg.content.startsWith(`${prefix}`)) return;
         let user = msg.mentions.members.first() || msg.member;
         const avatarEmbed = new Discord.MessageEmbed()
             .setImage(user.displayAvatarURL({ size: 4096, dynamic: true }))

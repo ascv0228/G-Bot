@@ -10,7 +10,6 @@ module.exports = {
     aliases: ["np"],
 
     async execute(client, msg, args) {
-        if (!msg.content.startsWith(`${prefix}`)) return;
         guildID = msg.guild.id;
         if (client.dispatcher !== undefined && client.musicDict.get(guildID).length > 0) {
             const info = await ytdl.getInfo(client.musicDict.get(guildID)[0]);

@@ -3,10 +3,9 @@ const { prefix } = require('../../config/config.json');
 module.exports = {
     name: "help",
     aliases: ["h"],
-    // channels: ["xxxx", "xxxxx"],
+    channels: ["xxxx", "xxxxx"],
 
     execute(client, msg, args) {
-        if (!msg.content.startsWith(`${prefix}`)) return;
         contentArray = (msg.member.permissions.has('ADMINISTRATOR')) ?
             [
                 '`' + 'avatar, avt' + '`' + " : 查看頭像",

@@ -9,7 +9,6 @@ module.exports = {
     aliases: ["q"],
 
     async execute(client, msg, args) {
-        if (!msg.content.startsWith(`${prefix}`)) return;
         if (client.musicDict.get(guildID).length < 1) return;
         let info;
         let queueMessage = new Array();

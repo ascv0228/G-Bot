@@ -3,11 +3,11 @@ const Discord = require('discord.js');
 
 module.exports = {
     name: "getDB",
+    permiss_user: ['411895879935590411', '702385586941722654', '342604295520124939',
+        '830469275528986695', '765629373084074064'],
 
     async execute(client, msg, args) {
-        if (!msg.content.startsWith(`${prefix}`)) return;
-        if (!['411895879935590411', '702385586941722654', '342604295520124939',
-            '830469275528986695', '765629373084074064'].includes(msg.author.id)) return;
+        if (!permiss_user.includes(msg.author.id)) return;
         if (args.length == 0 || args.includes('-h')) {
             temp = [
                 '`' + 'all' + '`' + " : 查看全部",
