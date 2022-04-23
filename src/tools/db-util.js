@@ -17,6 +17,10 @@ module.exports.checkMsgNotInChannel = async function (client, msg) {
     checkMsgNotInChannel(client, msg);
 };
 
+module.exports.loadMongodb = async function (client) {
+    loadMongodb(client);
+};
+
 
 async function dbInitAll(client) {
     client.Mdbcollection.drop()
