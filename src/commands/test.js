@@ -9,8 +9,8 @@ module.exports = {
         if (!msg.content.startsWith(`${prefix}`)) return;
         if (!msg.author.id == '411895879935590411') return;
         let temp = await client.Mdbcollection.find({}).toArray();
-        jsonString = JSON.parse({ ...temp })
-        const attachment = new Discord.MessageAttachment(Buffer.from(jsonString, 'utf-8'), 'log.json');
+        jsonString = JSON.stringify({ ...temp })
+        const attachment = new Discord.MessageAttachment(Buffer.from(temp, 'utf-8'), 'log.json');
         msg.author.send({ files: [attachment] })
         console.log(args)
         return msg.reply('Finish!');
