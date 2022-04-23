@@ -230,11 +230,11 @@ async function confirmReward(msg) {
         }
         return;
     }
-    if (msg.channel.id == target_channel[2].channel_Id && checkMsgNotInChannel(msg.channel.id, msg.author.id)) {
-        if (!msg.member.permissions.has('ADMINISTRATOR') && !msg.member.roles.cache.has('863405200562454548')) {
-            // return msg.reply('今日尚未於 <#867811395474423838> 發文');
-            client.channels.cache.get('964516826811858984').send('<@' + msg.member + '>今日尚未於 <#867811395474423838> 發文');
-        }
+    if (msg.channel.id == target_channel[2].channel_Id && checkMsgNotInChannel(msg.channel.id, msg.author.id && count != 0)) {
+
+        // return msg.reply('今日尚未於 <#867811395474423838> 發文');
+        client.channels.cache.get('964516826811858984').send('<@' + msg.member + '>今日尚未於 <#867811395474423838> 發文');
+
     }
     client.Mdbcollection.updateOne({ type: 'check-msg', channelId: msg.channel.id }, { $push: { users: { $each: [msg.author.id], $position: 0 } } });
 
