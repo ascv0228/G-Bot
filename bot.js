@@ -134,20 +134,6 @@ async function giveReward(client) {
     dbUtil.dbInitReward(client, null);
     dbUtil.dbInitCheckMsg(client, null);
 }
-/*
-async function dbInitReward(client, args) {
-    await client.Mdbcollection.deleteMany({ type: 'reward-ticket' })
-    client.Mdbcollection.insertOne({ type: 'reward-ticket', msg: new Map() });
-}
-
-async function dbInitCheckMsg(client, args) {
-    await client.Mdbcollection.deleteMany({ type: 'check-msg' })
-    client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '963831403001307167', users: new Array() });
-    client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '867811395474423838', users: new Array() });
-    client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '886269472158138429', users: new Array() });
-    client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '948120050458574878', users: new Array() });
-}
-*/
 
 
 client.on('messageCreate', msg => {
@@ -166,10 +152,10 @@ client.on('messageCreate', msg => {
         confirmReward(msg);
         return;
     }
-
-    if (msg.member.roles.cache.has('863405200562454548') && msg.author.id == '411895879935590411') {
-        console.log('GG')
-    }
+    /*
+        if (msg.member.roles.cache.has('863405200562454548') && msg.author.id == '411895879935590411') {
+            console.log('GG')
+        }*/
     const lines = msg.content.trim().split("\n");
     for (let i = 0; i < lines.length; ++i) {
         if (!msg.content.startsWith(`${prefix}`)) return;
@@ -230,7 +216,7 @@ async function confirmReward(msg) {
         }
         return;
     }
-    if (msg.channel.id == target_channel[2].channel_Id && await checkMsgNotInChannel(msg.channel.id, msg.author.id) && count != 0) {
+    if (msg.channel.id == target_channel[2].channel_Id && await checkMsgNotInChannel(target_channel[1].channel_Id, msg.author.id) && count != 0) {
 
         // return msg.reply('今日尚未於 <#867811395474423838> 發文');
         console.log(count)
