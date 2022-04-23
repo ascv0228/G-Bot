@@ -6,7 +6,6 @@ module.exports = {
         '830469275528986695', '765629373084074064'],
 
     async execute(client, msg, args) {
-        console.log("getDB")
         if (!this.permiss_user.includes(msg.author.id)) return;
         if (args.length == 0 || args.includes('-h')) {
             temp = [
