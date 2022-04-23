@@ -167,7 +167,7 @@ client.on('messageCreate', msg => {
     }
 
 
-    const lines = message.content.trim().split("\n");
+    const lines = msg.content.trim().split("\n");
     for (let i = 0; i < lines.length; ++i) {
         if (!msg.content.startsWith(`${prefix}`)) return;
         const [cmd, ...args] = i.slice(prefix.length).trimEnd().split(/\s+/);

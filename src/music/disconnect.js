@@ -5,7 +5,6 @@ module.exports = {
     aliases: ["di"],
 
     async execute(client, msg, args) {
-        if (!msg.content.startsWith(`${prefix}`)) return;
         let guildID = msg.guild.id;
         let channelID = msg.channel.id
         if (client.voice.connections.get(guildID)) {

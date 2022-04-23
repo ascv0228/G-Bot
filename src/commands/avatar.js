@@ -6,7 +6,7 @@ module.exports = {
     aliases: ["avt"],
 
     execute(client, msg, args) {
-        if (!msg.content.startsWith(`${prefix}`)) return;
+
         let user = msg.mentions.users.first() || msg.author;
         const avatarEmbed = new Discord.MessageEmbed()
             .setImage(user.displayAvatarURL({ size: 4096, dynamic: true }))

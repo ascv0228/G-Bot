@@ -10,7 +10,6 @@ module.exports = {
     aliases: ["np"],
 
     async execute(client, msg, args) {
-        if (!msg.content.startsWith(`${prefix}`)) return;
         const guildID = msg.guild.id;
         const urlED = args[0];
         let currentIndex = client.musicDict.get(guildID).length, randomIndex;

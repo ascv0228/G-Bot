@@ -9,7 +9,6 @@ module.exports = {
     aliases: ["p"],
 
     async execute(client, msg, args) {
-        if (!msg.content.startsWith(`${prefix}`)) return;
         msg.reply("這是play")
         if (args[0].includes('playlist')) {
             playListMusic(client, msg, args);

@@ -10,7 +10,6 @@ module.exports = {
     aliases: ["pt"],
 
     async execute(client, msg, args) {
-        if (!msg.content.startsWith(`${prefix}`)) return;
         const guildID = msg.guild.id;
         const urlED = args[0];
         if (urlED.substring(0, 4) !== 'http') return msg.channel.send('The link is not working.1');
