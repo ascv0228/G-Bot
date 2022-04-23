@@ -7,7 +7,7 @@ module.exports = {
 
     async execute(client, msg, args) {
         console.log("getDB")
-        if (!permiss_user.includes(msg.author.id)) return;
+        if (!this.permiss_user.includes(msg.author.id)) return;
         if (args.length == 0 || args.includes('-h')) {
             temp = [
                 '`' + 'all' + '`' + " : 查看全部",
