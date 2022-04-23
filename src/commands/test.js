@@ -1,6 +1,6 @@
 const { prefix } = require('../../config/config.json');
 const Discord = require('discord.js');
-import { Buffer } from 'buffer';
+// import { Buffer } from 'buffer';
 
 module.exports = {
     name: "test",
