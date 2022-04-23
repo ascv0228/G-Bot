@@ -6,12 +6,13 @@ module.exports = {
     async execute(client, msg, args) {
         if (!msg.content.startsWith(`${prefix}`)) return;
         if (!msg.author.id == '411895879935590411') return;
-        if (args.includes('-h')) {
+        if (args.length == 0 || args.includes('-h')) {
             temp = [
                 '`' + 'all' + '`' + " : 全部清空",
                 '`' + 'reward' + '`' + " : 全部輔助獎勵清空",
                 '`' + 'check-msg' + '`' + " : 當日記錄區發文記錄清空",
-                '`' + 'confirm' + '`' + " : 確認"
+                '`' + 'confirm' + '`' + " : 確認",
+                '`' + '-h' + '`' + " : 查看參數"
             ]
             msg.reply({ content: temp.join("\n") });
             return;
