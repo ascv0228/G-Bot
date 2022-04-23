@@ -87,7 +87,7 @@ client.on('ready', () => {
     client.user.setActivity(`GG的大GG`, { type: "PLAYING" });
     console.log(`Logged in as ${client.user.tag}!`);
 
-    dbUtil.loadMongodb();
+    dbUtil.loadMongodb(client);
     rewardUtil.everyScheduleJob();
 
     //const dirPath = [`./src/commands`, `./src/music`];
