@@ -50,6 +50,9 @@ function getImageUrlArray(msg) {
             ImageUrlArray.push(ImageUrl)
         }
     });
+    console.log(ImageUrlArray);
+    if (ImageUrlArray == undefined || ImageUrlArray.length == 0)
+        return;
     return ImageUrlArray;
 }
 

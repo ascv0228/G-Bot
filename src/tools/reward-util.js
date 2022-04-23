@@ -21,6 +21,9 @@ module.exports.everyScheduleJob = async function (client) {
 async function confirmReward(client, msg) {
 
     let ImageUrlArray = imgUtil.getImageUrlArray(msg)
+    console.log(ImageUrlArray);
+    if (ImageUrlArray == undefined || ImageUrlArray.length == 0)
+        return;
     let count = await imgUtil.getNotDupeCount(client, ImageUrlArray);
     console.log(`count: ${count}`);
     if (count == 0) return;
