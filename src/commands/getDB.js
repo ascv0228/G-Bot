@@ -18,11 +18,11 @@ module.exports = {
             return msg.reply({ content: temp.join("\n") });
         }
         if (args.includes('all'))
-            getAll(client);
+            getAll(client, msg, args);
         if (args.includes('reward'))
-            getReward(client, args);
+            getReward(client, msg, args);
         if (args.includes('check-msg'))
-            getCheckMsg(client, args)
+            getCheckMsg(client, msg, args)
 
         return msg.reply('Finish!');
     }
@@ -33,19 +33,19 @@ async function getAll(client, msg, args) {
     let temp = await client.Mdbcollection.find({}).toArray();
     jsonString = JSON.stringify({ ...temp }, null, 4);
     const attachment = new Discord.MessageAttachment(Buffer.from(jsonString, 'utf-8'), 'log.json');
-    msg.author.send({ files: [attachment] })
+    msg.author.send({ files: [attachment] });
 }
 
 async function getReward(client, msg, args) {
     let temp = await client.Mdbcollection.find({ type: 'reward-ticket' }).toArray();
     jsonString = JSON.stringify({ ...temp }, null, 4);
     const attachment = new Discord.MessageAttachment(Buffer.from(jsonString, 'utf-8'), 'log.json');
-    msg.author.send({ files: [attachment] })
+    msg.author.send({ files: [attachment] });
 }
 
 async function getCheckMsg(client, msg, args) {
     let temp = await client.Mdbcollection.find({ type: 'check-msg' }).toArray();
     jsonString = JSON.stringify({ ...temp }, null, 4);
     const attachment = new Discord.MessageAttachment(Buffer.from(jsonString, 'utf-8'), 'log.json');
-    msg.author.send({ files: [attachment] })
+    msg.author.send({ files: [attachment] });
 }
