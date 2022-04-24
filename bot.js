@@ -55,7 +55,7 @@ function loadCommands() {
     });
 }
 
-client.loadCommands = tools.loadCommands;
+client.loadCommands = loadCommands;
 
 // function readDirAll(dir, fileHandler, dirHandler) {
 //     let dirents = fs.readdirSync(dir, { withFileTypes: true });
