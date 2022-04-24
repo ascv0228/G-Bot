@@ -17,7 +17,7 @@ module.exports = {
         //message.guild.members.cache.get('id')
         // const user = await msg.guild.members.fetch('411895879935590411');
         let id = '411895879935590411'
-        let user = fetchUser(id)
+        let user = await fetchUser(id)
         msg.reply(`${user}`);
         msg.reply(`${user.username}`);
     }
