@@ -17,6 +17,8 @@ async function getRewardText(client, msg, args) {
     //const fetchUser = async id => client.users.fetch(id);
     var d = new Date();
     let output = [`==========${d.getMonth() + 1}/${d.getDate()} 輔助獎勵區==========\n`];
+    const m = new Map(Object.entries(temp[0].msg))
+
     /*
     Object.keys(user_ids).forEach(async function (key) {
         console.log(key)
@@ -25,14 +27,22 @@ async function getRewardText(client, msg, args) {
         console.log(userTag);
         output.push(`x!ticket ${userTag} ${user_ids[key]}`);
     });*/
+    /*
     for (key in Object.keys(temp[0].msg)) {
         let user = await getUser(client, key);
         console.log(user);
         let userTag = `@${user.username}#${user.discriminator}`;
         console.log(userTag);
         output.push(`x!ticket ${userTag} ${temp[0].msg[key]}`);
-    }
-    await getOutput(client, temp[0].msg);
+    }*/
+
+    m.forEach((value, key) => {
+        let user = await getUser(client, key);
+        console.log(user);
+        let userTag = `@${user.username}#${user.discriminator}`;
+        console.log(userTag);
+        output.push(`x!ticket ${userTag} ${temp[0].msg[key]}`);
+    });
     console.log(output);
     const attachment = new Discord.MessageAttachment(Buffer.from(output.join('\n')), `${d.getMonth() + 1}-${d.getDate()}.txt`);
     client.channels.cache.get('964516826811858984').send({ files: [attachment] });
@@ -41,7 +51,7 @@ const waitFor = (ms) => new Promise(r => setTimeout(r, ms))
 async function getUser(client, id) {
 
     return new Promise(async (resolve, reject) => {
-        let user = await client.users.fetch(id);
+        let user = await client.users.cache.get(id);
 
         resolve(user)
     });
