@@ -24,16 +24,16 @@ process.on('unhandledRejection', (reason, promise) => {
 * 2.  檢查 有記錄區 才能丟 每日  > BUG
 * 3.  分批清空資料庫指令 > half OK
 * 4.  img-hash bug  > maybe no bug
-* 5.  分檔
+* 5.  分檔  > OK
 */
 
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.musicDict = new Map();
 
-function loadCommands() {
-    const dirPath = `./src/commands`;
-    //const dirPath = [`./src/commands`, `./src/music`];
+function loadCommands(dirPath) {
+    // const dirPath = `./src/commands`;
+    // const dirPath = [`./src/commands`, `./src/music`];
 
     return tools.readDirAll(dirPath, (file) => {
         if (file.match(/(\.js|\.ts)$/)) {
@@ -57,34 +57,6 @@ function loadCommands() {
 
 client.loadCommands = loadCommands;
 
-// function readDirAll(dir, fileHandler, dirHandler) {
-//     let dirents = fs.readdirSync(dir, { withFileTypes: true });
-//     /*
-//     for (let i = 1; i < dirs.length; ++i) {
-//         dirents.concat(fs.readdirSync(dirs[i], { withFileTypes: true }));
-//     }*/
-
-//     return Promise.all(dirents.map((dirent) => {
-//         const res = path.resolve(dir, dirent.name);
-
-//         if (dirent.isDirectory()) {
-//             if (dirHandler) {
-//                 dirHandler(res);
-//             }
-
-//             return readDirAll(res, fileHandler, dirHandler);
-//         } else {
-//             if (fileHandler) {
-//                 fileHandler(res);
-//             }
-
-//             return res;
-//         }
-//     }));
-// }
-
-
-
 client.on('ready', () => {
     client.user.setActivity(`GG的大GG`, { type: "PLAYING" });
     console.log(`Logged in as ${client.user.tag}!`);
@@ -92,8 +64,8 @@ client.on('ready', () => {
     dbUtil.loadMongodb(client);
     rewardUtil.everyScheduleJob(client);
 
-    //const dirPath = [`./src/commands`, `./src/music`];
-    client.loadCommands();
+    const dirPath = [`./src/commands`, `./src/music`];
+    client.loadCommands(dirPath[0]);
     //client.loadCommands();
 });
 
