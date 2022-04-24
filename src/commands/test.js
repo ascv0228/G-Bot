@@ -20,8 +20,8 @@ module.exports = {
         const fetchUser = async id => client.users.fetch(id)
         let user = await fetchUser(id)
         msg.reply(`${user}`);
-        msg.reply(`${user.username}`);
-        msg.reply(`${user.tag}`);
+        msg.reply('`' + `${user.username}` + '`');
+        msg.reply('`' + `${user.tag}` + '`');
     }
 };
 
