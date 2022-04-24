@@ -14,17 +14,21 @@ module.exports = {
 
 async function getRewardText(client, msg, args) {
     let temp = await client.Mdbcollection.find({ type: 'reward-ticket' }).toArray();
-    const fetchUser = async id => client.users.fetch(id);
-    var d = new Date();
-    let output = [`==========${d.getMonth() + 1}/${d.getDate()} 輔助獎勵區==========\n`];
+    //const fetchUser = async id => client.users.fetch(id);
+    //var d = new Date();
+    let output = await getOutput(temp[0].msg);
 
+
+    /*
     Object.keys(temp[0].msg).forEach(async function (key) {
         console.log(key)
         let user = await client.users.fetch(key);
         let userTag = `@${user.username}#${user.discriminator}`
         console.log(userTag);
         output.push(`x!ticket ${userTag} ${temp[0].msg[key]}`);
-    });/*
+    });*/
+
+    /*
     await temp[0].msg.forEach((value, key) => {
         let user = fetchUser(key);
         output.push(`x!ticket ${user.tag} ${value}`);
@@ -33,6 +37,31 @@ async function getRewardText(client, msg, args) {
     console.log(output);
     const attachment = new Discord.MessageAttachment(Buffer.from(output.join('\n')), `${d.getMonth() + 1}-${d.getDate()}.txt`);
     client.channels.cache.get('964516826811858984').send({ files: [attachment] });
+}
+
+function getOutput(user_ids) {
+    return new Promise((resolve, reject) => {
+
+        var d = new Date();
+        let output = [`==========${d.getMonth() + 1}/${d.getDate()} 輔助獎勵區==========\n`];
+
+        Object.keys(user_ids).forEach(async function (key) {
+            console.log(key)
+            let user = await client.users.fetch(key);
+            let userTag = `@${user.username}#${user.discriminator}`
+            console.log(userTag);
+            output.push(`x!ticket ${userTag} ${user_ids[key]}`);
+        });
+
+        resolve(output)
+        // //url = cutImageUrl(url);
+        // imageHash(url, 16, true, (error, data) => {
+        //     if (error) {
+        //         resolve('error');
+        //     }
+        //     resolve(data);
+        // })
+    });
 }
 
 /*
