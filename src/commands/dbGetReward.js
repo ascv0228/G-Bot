@@ -30,7 +30,7 @@ async function getRewardText(client, msg, args) {
         console.log(user);
         let userTag = `@${user.username}#${user.discriminator}`;
         console.log(userTag);
-        output.push(`x!ticket ${userTag} ${user_ids[key]}`);
+        output.push(`x!ticket ${userTag} ${temp[0].msg[key]}`);
     }
     await getOutput(client, temp[0].msg);
     console.log(output);
@@ -43,6 +43,6 @@ async function getUser(client, id) {
     return new Promise(async (resolve, reject) => {
         let user = await client.users.cache.get(id);
 
-        resolve(output)
+        resolve(user)
     });
 }
