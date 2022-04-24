@@ -64,6 +64,31 @@ function getHashDataFromUrl(url) {
     });
 }
 
+/*
+!function () {
+    var xhr = new XMLHttpRequest();
+    // 也可以使用POST方式，根据接口，测试的图片是百度搜索首页的logo（2019-11-28 17:35）
+    xhr.open('GET', 'http://127.0.0.1:8080/bd_logo1.png', true);
+    // 返回类型blob
+    xhr.onload = function () {
+        if (this.status === 200) {
+            // 获得二进制
+            var blob = this.response;
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var spark = new SparkMD5.ArrayBuffer()
+                spark.append(e.target.result)
+                console.log("md5:", spark.end())
+            }
+            //转换成FileReader对象
+            reader.readAsArrayBuffer(blob);
+        }
+    }
+    xhr.send();
+}();
+*/
+
+
 
 async function insertHashToDatabase(client, msg, hashData) {
     let channelId = msg.channel.id

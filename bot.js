@@ -90,6 +90,7 @@ client.on('messageCreate', msg => {
         const [cmd, ...args] = lines[i].slice(prefix.length).trimEnd().split(/\s+/);
         const exec = client.commands.get(cmd) || client.aliases.get(cmd);
         if (!exec) continue;
+        // if(exec.channel && exec.channel.includes)
         exec.execute(client, msg, args);
     }
 
