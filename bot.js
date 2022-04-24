@@ -27,13 +27,15 @@ process.on('unhandledRejection', (reason, promise) => {
 * 5.  分檔
 */
 
+client.commands = new Discord.Collection();
+client.aliases = new Discord.Collection();
 client.musicDict = new Map();
-/*
+
 function loadCommands() {
     const dirPath = `./src/commands`;
     //const dirPath = [`./src/commands`, `./src/music`];
 
-    return readDirAll(dirPath, (file) => {
+    return tools.readDirAll(dirPath, (file) => {
         if (file.match(/(\.js|\.ts)$/)) {
             const command = require(file);
             if (command.aliases) {
@@ -51,7 +53,7 @@ function loadCommands() {
             }
         }
     });
-}*/
+}
 
 client.loadCommands = tools.loadCommands;
 
