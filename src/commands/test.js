@@ -14,7 +14,7 @@ module.exports = {
         // msg.reply(`${typeof msg.member.permissions}`)
         // msg.reply(`${getHashDataFromUrl(args[0])}`)
         //message.guild.members.cache.get('id')
-        const user = msg.guild.users.cache.get('411895879935590411');
+        const user = await msg.guild.members.fetch('411895879935590411');
         msg.reply(`${user.name}`);
     }
 };
