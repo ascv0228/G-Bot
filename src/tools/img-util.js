@@ -4,12 +4,16 @@ module.exports.IsImage = function (url) {
     IsImage(url);
 };
 
+module.exports.getNotDupeCountFromMsg = async function (client, msg) {
+    return getNotDupeCountFromMsg(client, msg);
+};
+
 module.exports.getNotDupeCount = async function (client, ImageUrlArray) {
-    getNotDupeCount(client, ImageUrlArray);
+    return getNotDupeCount(client, ImageUrlArray);
 };
 
 module.exports.getImageUrlArray = function (msg) {
-    getImageUrlArray(msg);
+    return getImageUrlArray(msg);
 };
 
 
@@ -41,6 +45,13 @@ async function getNotDupeCount(client, ImageUrlArray) {
     return count;
 }
 
+async function getNotDupeCountFromMsg(client, msg) {
+    let ImageUrlArray = await getImageUrlArray(msg);
+    if (ImageUrlArray == undefined || ImageUrlArray.length == 0)
+        return 0;
+    let count = await getNotDupeCount(client, ImageUrlArray);
+    return count;
+}
 
 async function getImageUrlArray(msg) {
     let ImageUrlArray = new Array();

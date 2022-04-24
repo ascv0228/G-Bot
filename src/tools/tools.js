@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require("path");
 
 module.exports.loadCommands = async function () {
-    loadCommands();
+    return loadCommands();
 };
 
 function loadCommands() {
