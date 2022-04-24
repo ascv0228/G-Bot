@@ -17,6 +17,7 @@ module.exports = {
         //message.guild.members.cache.get('id')
         // const user = await msg.guild.members.fetch('411895879935590411');
         let id = '411895879935590411'
+        const fetchUser = async id => client.users.fetch(id)
         let user = await fetchUser(id)
         msg.reply(`${user}`);
         msg.reply(`${user.username}`);
@@ -24,7 +25,6 @@ module.exports = {
 };
 
 
-const fetchUser = async id => client.users.fetch(id)
 
 //const fetch = require('node-fetch')
 
