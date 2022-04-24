@@ -3,7 +3,7 @@ const { prefix } = require('../../config/config.json');
 module.exports = {
     name: "help",
     aliases: ["h"],
-    channels: ["xxxx", "xxxxx"],
+    // permissions: ['ADMINISTRATOR'],
 
     execute(client, msg, args) {
         contentArray = (msg.member.permissions.has('ADMINISTRATOR')) ?
