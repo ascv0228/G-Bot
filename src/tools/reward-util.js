@@ -20,7 +20,7 @@ module.exports.everyScheduleJob = async function (client) {
 
 async function confirmReward(client, msg) {
     let count = await imgUtil.getNotDupeCountFromMsg(client, msg);
-    //console.log(`count: ${count}`);
+    console.log(`count: ${count}`);
     if (count == 0) return;
 
     client.Mdbcollection.updateOne({ type: 'check-msg', channelId: msg.channel.id }, { $push: { users: { $each: [msg.author.id], $position: 0 } } });
@@ -31,9 +31,7 @@ async function confirmReward(client, msg) {
         let originCount = temp[0].msg[msg.member.id]
         originCount = (originCount == undefined || originCount == NaN) ? 0 : originCount / 2
 
-        console.log(`originCount: ${originCount}`)
         count = (count + originCount > 5) ? 5 : count + originCount;
-        console.log(`count: ${count}`)
         client.Mdbcollection.updateOne({ type: 'reward-ticket' }, { "$set": { [`msg.${msg.member.id}`]: `${2 * count}` } });
     }
     if (msg.channel.id == channelList[2] && await dbUtil.checkMsgNotInChannel(channelList[1], msg.author.id)) {
