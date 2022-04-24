@@ -38,7 +38,7 @@ async function getOutput(client, user_ids) {
             output.push(`x!ticket ${userTag} ${user_ids[key]}`);
         });*/
         for (key in Object.keys(user_ids)) {
-            let user = await client.users.fetch(key);
+            let user = await client.users.cache.get(key);
             let userTag = `@${user.username}#${user.discriminator}`;
             console.log(userTag);
             output.push(`x!ticket ${userTag} ${user_ids[key]}`);
