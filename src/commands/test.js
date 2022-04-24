@@ -1,4 +1,5 @@
 const { prefix } = require('../../config/config.json');
+const { token } = require('../../config/token.json');
 const Discord = require('discord.js');
 
 var XMLHttpRequest = require('xhr2');
@@ -14,10 +15,28 @@ module.exports = {
         // msg.reply(`${typeof msg.member.permissions}`)
         // msg.reply(`${getHashDataFromUrl(args[0])}`)
         //message.guild.members.cache.get('id')
-        const user = await msg.guild.members.fetch('411895879935590411');
-        msg.reply(`${user.name}`);
+        // const user = await msg.guild.members.fetch('411895879935590411');
+        let user = fetchUser('411895879935590411')
+        msg.reply(`${user}`);
+        msg.reply(`${user.username}`);
     }
 };
+
+
+const fetch = require('node-fetch')
+
+// You might want to store this in an environment variable or something
+
+const fetchUser = async id => {
+    const response = await fetch(`https://discord.com/api/v9/users/${id}`, {
+        headers: {
+            Authorization: `Bot ${token}`
+        }
+    })
+    if (!response.ok) throw new Error(`Error status code: ${response.status}`)
+    return JSON.parse(await response.json())
+}
+
 
 /*
 function getHashDataFromUrl(url) {
