@@ -20,7 +20,7 @@ async function getRewardText(client, msg, args) {
 
     Object.keys(temp[0].msg).forEach(function (key) {
         console.log(key)
-        let user = client.users.cache.get(key);
+        let user = await client.users.cache.get(key);
         console.log(user);
         console.log(user.tag);
         output.push(`x!ticket ${user} ${temp[0].msg[key]}`);
