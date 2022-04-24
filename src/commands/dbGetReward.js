@@ -41,7 +41,7 @@ const waitFor = (ms) => new Promise(r => setTimeout(r, ms))
 async function getUser(client, id) {
 
     return new Promise(async (resolve, reject) => {
-        let user = await client.users.cache.get(id);
+        let user = await client.users.fetch(id);
 
         resolve(user)
     });
