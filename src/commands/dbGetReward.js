@@ -16,7 +16,7 @@ async function getRewardText(client, msg, args) {
     let temp = await client.Mdbcollection.find({ type: 'reward-ticket' }).toArray();
     //const fetchUser = async id => client.users.fetch(id);
     //var d = new Date();
-    let output = await getOutput(temp[0].msg);
+    let output = await getOutput(client, temp[0].msg);
 
 
     /*
@@ -39,7 +39,7 @@ async function getRewardText(client, msg, args) {
     client.channels.cache.get('964516826811858984').send({ files: [attachment] });
 }
 
-function getOutput(user_ids) {
+function getOutput(client, user_ids) {
     return new Promise((resolve, reject) => {
 
         var d = new Date();
