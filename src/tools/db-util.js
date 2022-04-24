@@ -10,29 +10,6 @@ module.exports = {
     loadMongodb: loadMongodb
 }
 
-
-/*
-module.exports.dbInitAll = async function (client) {
-    dbInitAll(client);
-};
-
-module.exports.dbInitReward = async function (client, args) {
-    dbInitReward(client, args);
-};
-
-module.exports.dbInitCheckMsg = async function (client, args) {
-    dbInitCheckMsg(client, args);
-};
-
-module.exports.checkMsgNotInChannel = async function (client, msg) {
-    return checkMsgNotInChannel(client, msg);
-};
-
-module.exports.loadMongodb = async function (client) {
-    loadMongodb(client);
-};*/
-
-
 async function dbInitAll(client) {
     client.Mdbcollection.drop()
     client.Mdbcollection.insertOne({ type: 'hashData', channelId: '963831403001307167', hash: new Map() });

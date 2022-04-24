@@ -1,12 +1,6 @@
 const { imageHash } = require('image-hash');
 
-module.exports.getNotDupeCountFromMsg = async function (client, msg) {
-    let ImageUrlArray = await getImageUrlArray(msg);
-    if (ImageUrlArray == undefined || ImageUrlArray.length == 0)
-        return 0;
-    let count = await getNotDupeCount(client, msg, ImageUrlArray);
-    return count;
-};
+module.exports = { getNotDupeCountFromMsg: getNotDupeCountFromMsg };
 
 const img_subFiles = [".png", ".jpg", ".jpeg", ".webp"]
 function IsImage(url) {
@@ -16,6 +10,14 @@ function IsImage(url) {
         return true
     }
     return false;
+}
+
+async function getNotDupeCountFromMsg(client, msg) {
+    let ImageUrlArray = await getImageUrlArray(msg);
+    if (ImageUrlArray == undefined || ImageUrlArray.length == 0)
+        return 0;
+    let count = await getNotDupeCount(client, msg, ImageUrlArray);
+    return count;
 }
 
 async function getNotDupeCount(client, msg, ImageUrlArray) {
