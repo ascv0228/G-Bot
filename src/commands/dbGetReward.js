@@ -20,9 +20,10 @@ async function getRewardText(client, msg, args) {
 
     Object.keys(temp[0].msg).forEach(async function (key) {
         console.log(key)
-        let user = await client.users.cache.get(key);
-        console.log(await user.tag);
-        output.push(`x!ticket ${await user.tag} ${temp[0].msg[key]}`);
+        let user = await bot.users.cache.get(key);
+        let userTag = `@${user.username}#${user.discriminator}`
+        console.log(userTag);
+        output.push(`x!ticket ${userTag} ${temp[0].msg[key]}`);
     });/*
     await temp[0].msg.forEach((value, key) => {
         let user = fetchUser(key);
