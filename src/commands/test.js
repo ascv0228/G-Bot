@@ -21,6 +21,7 @@ module.exports = {
         let user = await fetchUser(id)
         msg.reply(`${user}`);
         msg.reply(`${user.username}`);
+        msg.reply(`${user.tag}`);
     }
 };
 
