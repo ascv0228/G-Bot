@@ -12,11 +12,13 @@ module.exports = {
         if (!msg.author.id == '411895879935590411') return;
         // msg.reply(`${msg.member.permissions}`)
         // msg.reply(`${typeof msg.member.permissions}`)
-        msg.reply(`${getHashDataFromUrl(args[0])}`)
+        // msg.reply(`${getHashDataFromUrl(args[0])}`)
+        const user = client.users.cache.get('411895879935590411');
+        msg.reply(`${user.name}`);
     }
 };
 
-
+/*
 function getHashDataFromUrl(url) {
     let xhr = new XMLHttpRequest();
     xhr.open('GET', url, true);
@@ -37,4 +39,4 @@ function getHashDataFromUrl(url) {
     }
     xhr.send();
 
-}
+}*/
