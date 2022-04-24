@@ -34,10 +34,13 @@ async function confirmReward(client, msg) {
 
     if (msg.channel.id == channelList[0]) {
         let temp = await client.Mdbcollection.find({ type: 'reward-ticket' }).toArray();
+        console.log(temp)
         let originCount = temp[0].msg[msg.member.id]
-        originCount = (originCount == undefined) ? 0 : originCount / 2
+        originCount = (originCount == undefined || originCount == NaN) ? 0 : originCount / 2
 
+        console.log(`originCount: ${originCount}`)
         count = (count + originCount > 5) ? 5 : count + originCount;
+        console.log(`count: ${count}`)
         client.Mdbcollection.updateOne({ type: 'reward-ticket' }, { "$set": { [`msg.${msg.member.id}`]: `${2 * count}` } });
     }
     if (msg.channel.id == channelList[2] && await dbUtil.checkMsgNotInChannel(channelList[1], msg.author.id) && count != 0) {

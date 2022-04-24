@@ -65,7 +65,7 @@ async function getImageUrlArray(msg) {
             ImageUrlArray.push(ImageUrl);
         }
     });
-    console.log(ImageUrlArray);
+    //console.log(ImageUrlArray);
     if (ImageUrlArray == undefined || ImageUrlArray.length == 0)
         console.log('ImageUrlArray: undefined');
     return ImageUrlArray;
