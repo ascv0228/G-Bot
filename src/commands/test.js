@@ -2,6 +2,7 @@ const { prefix } = require('../../config/config.json');
 const Discord = require('discord.js');
 
 var XMLHttpRequest = require('xhr2');
+var FileReader = require('filereader');
 // import { Buffer } from 'buffer';
 
 module.exports = {
