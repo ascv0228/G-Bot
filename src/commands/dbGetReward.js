@@ -13,7 +13,7 @@ module.exports = {
 
 
 async function getRewardText(client, msg, args) {
-    let temp = await client.Mdbcollection.find({}).toArray();
+    let temp = await client.Mdbcollection.find({ type: 'reward-ticket' }).toArray();
     const fetchUser = async id => client.users.fetch(id);
     var d = new Date();
     let output = [`==========${d.getMonth() + 1}/${d.getDate()} 輔助獎勵區==========\n`];
