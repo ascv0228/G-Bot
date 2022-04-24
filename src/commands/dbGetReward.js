@@ -22,21 +22,28 @@ async function getRewardText(client, msg, args) {
     const attachment = new Discord.MessageAttachment(Buffer.from(output.join('\n')), `${d.getMonth() + 1}-${d.getDate()}.txt`);
     client.channels.cache.get('964516826811858984').send({ files: [attachment] });
 }
-
+const waitFor = (ms) => new Promise(r => setTimeout(r, ms))
 function getOutput(client, user_ids) {
-    const waitFor = (ms) => new Promise(r => setTimeout(r, ms))
+
     return new Promise((resolve, reject) => {
 
         var d = new Date();
         let output = [`==========${d.getMonth() + 1}/${d.getDate()} 輔助獎勵區==========\n`];
-
+        /*
         Object.keys(user_ids).forEach(async function (key) {
             console.log(key)
             let user = await client.users.fetch(key);
             let userTag = `@${user.username}#${user.discriminator}`
             console.log(userTag);
             output.push(`x!ticket ${userTag} ${user_ids[key]}`);
-        });
+        });*/
+        for (key in Object.keys(user_ids)) {
+            let user = await client.users.fetch(key);
+            let userTag = `@${user.username}#${user.discriminator}`;
+            console.log(userTag);
+            output.push(`x!ticket ${userTag} ${user_ids[key]}`);
+        }
+
         await waitFor(200)
         resolve(output)
     });
