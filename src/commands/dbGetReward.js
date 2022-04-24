@@ -30,6 +30,7 @@ async function getRewardText(client, msg, args) {
         output.push(`x!ticket ${user.tag} ${value}`);
     });*/
 
+    console.log(output);
     const attachment = new Discord.MessageAttachment(Buffer.from(output.join('\n')), `${d.getMonth() + 1}-${d.getDate()}.txt`);
     client.channels.cache.get('964516826811858984').send({ files: [attachment] });
 }
