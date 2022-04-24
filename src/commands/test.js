@@ -16,17 +16,20 @@ module.exports = {
         // msg.reply(`${getHashDataFromUrl(args[0])}`)
         //message.guild.members.cache.get('id')
         // const user = await msg.guild.members.fetch('411895879935590411');
-        let user = fetchUser('411895879935590411')
+        let id = '411895879935590411'
+        let user = fetchUser(id)
         msg.reply(`${user}`);
         msg.reply(`${user.username}`);
     }
 };
 
 
-const fetch = require('node-fetch')
+const fetchUser = async id => client.users.fetch(id)
+
+//const fetch = require('node-fetch')
 
 // You might want to store this in an environment variable or something
-
+/*
 const fetchUser = async id => {
     const response = await fetch(`https://discord.com/api/v9/users/${id}`, {
         headers: {
@@ -36,7 +39,7 @@ const fetchUser = async id => {
     if (!response.ok) throw new Error(`Error status code: ${response.status}`)
     return JSON.parse(await response.json())
 }
-
+*/
 
 /*
 function getHashDataFromUrl(url) {
