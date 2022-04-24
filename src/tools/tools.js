@@ -1,7 +1,11 @@
 const fs = require('fs');
 const path = require("path");
+const Discord = require('discord.js');
 
-module.exports.loadCommands = async function () {
+
+module.exports.loadCommands = async function (this) {
+    this.commands = new Discord.Collection();
+    this.aliases = new Discord.Collection();
     return loadCommands();
 };
 

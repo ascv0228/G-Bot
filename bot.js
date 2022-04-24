@@ -27,8 +27,6 @@ process.on('unhandledRejection', (reason, promise) => {
 * 5.  分檔
 */
 
-client.commands = new Discord.Collection();
-client.aliases = new Discord.Collection();
 client.musicDict = new Map();
 /*
 function loadCommands() {
