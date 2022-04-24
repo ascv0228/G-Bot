@@ -11,7 +11,6 @@ module.exports = {
     }
 };
 
-let user = await fetchUser(id)
 
 async function getRewardText(client, msg, args) {
     let temp = await client.Mdbcollection.find({}).toArray();
