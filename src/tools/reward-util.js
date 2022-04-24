@@ -26,7 +26,7 @@ async function confirmReward(client, msg) {
         if (ImageUrlArray == undefined || ImageUrlArray.length == 0)
             return;
         let count = await imgUtil.getNotDupeCount(client, ImageUrlArray);*/
-    let count = imgUtil.getNotDupeCountFromMsg(client, msg);
+    let count = await imgUtil.getNotDupeCountFromMsg(client, msg);
     console.log(`count: ${count}`);
     if (count == 0) return;
 

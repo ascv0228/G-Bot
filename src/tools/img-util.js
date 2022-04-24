@@ -11,14 +11,14 @@ module.exports.getNotDupeCountFromMsg = async function (client, msg) {
     let count = await getNotDupeCount(client, msg, ImageUrlArray);
     return count;
 };
-
+/*
 module.exports.getNotDupeCount = async function (client, msg, ImageUrlArray) {
     return getNotDupeCount(client, msg, ImageUrlArray);
 };
 
 module.exports.getImageUrlArray = function (msg) {
     return getImageUrlArray(msg);
-};
+};*/
 
 
 
@@ -48,14 +48,14 @@ async function getNotDupeCount(client, msg, ImageUrlArray) {
     }
     return count;
 }
-
+/*
 async function getNotDupeCountFromMsg(client, msg) {
     let ImageUrlArray = await getImageUrlArray(msg);
     if (ImageUrlArray == undefined || ImageUrlArray.length == 0)
         return 0;
     let count = await getNotDupeCount(client, ImageUrlArray);
     return count;
-}
+}*/
 
 async function getImageUrlArray(msg) {
     let ImageUrlArray = new Array();
