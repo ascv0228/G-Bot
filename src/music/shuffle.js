@@ -31,7 +31,3 @@ module.exports = {
 
     }
 };
-
-async function musicListShuffle(channelID, guildID2) {
-
-}

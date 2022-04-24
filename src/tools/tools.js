@@ -2,10 +2,12 @@ const fs = require('fs');
 const path = require("path");
 const Discord = require('discord.js');
 
-
+/*
 module.exports.readDirAll = async function (dir, fileHandler, dirHandler) {
     return readDirAll(dir, fileHandler, dirHandler);
-};
+};*/
+module.exports = { readDirAll, readDirAll };
+
 
 function loadCommands() {
     const dirPath = `./src/commands`;
