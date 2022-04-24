@@ -25,7 +25,7 @@ async function getRewardText(client, msg, args) {
         console.log(userTag);
         output.push(`x!ticket ${userTag} ${user_ids[key]}`);
     });*/
-    for (key in Object.keys(user_ids)) {
+    for (key in Object.keys(temp[0].msg)) {
         let user = getUser(client, id);
         console.log(user);
         let userTag = `@${user.username}#${user.discriminator}`;
