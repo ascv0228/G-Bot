@@ -1,6 +1,17 @@
 const mongoose = require('mongoose');
 const { token, database } = require('../../config/token.json');
 
+
+module.exports = {
+    dbInitAll: dbInitAll,
+    dbInitReward: dbInitReward,
+    dbInitCheckMsg: dbInitCheckMsg,
+    checkMsgNotInChannel: checkMsgNotInChannel,
+    loadMongodb: loadMongodb
+}
+
+
+/*
 module.exports.dbInitAll = async function (client) {
     dbInitAll(client);
 };
@@ -19,7 +30,7 @@ module.exports.checkMsgNotInChannel = async function (client, msg) {
 
 module.exports.loadMongodb = async function (client) {
     loadMongodb(client);
-};
+};*/
 
 
 async function dbInitAll(client) {
@@ -50,6 +61,7 @@ async function dbInitCheckMsg(client, args) {
 
 async function checkMsgNotInChannel(client, msg) {
     let temp = await client.Mdbcollection.find({ type: 'check-msg', channelId: msg.channel.id }).toArray()
+    console.log(temp)
     return !temp[0].includes(msg.author.id);
 }
 
