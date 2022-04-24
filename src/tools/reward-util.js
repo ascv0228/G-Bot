@@ -21,7 +21,7 @@ module.exports.everyScheduleJob = async function (client) {
 async function confirmReward(client, msg) {
     let count = await imgUtil.getNotDupeCountFromMsg(client, msg);
     console.log(`count: ${count}`);
-    if (count == 0) return;
+    if (count == 0 || count == NaN) return;
 
     client.Mdbcollection.updateOne({ type: 'check-msg', channelId: msg.channel.id }, { $push: { users: { $each: [msg.author.id], $position: 0 } } });
 
@@ -34,7 +34,7 @@ async function confirmReward(client, msg) {
         count = (count + originCount > 5) ? 5 : count + originCount;
         client.Mdbcollection.updateOne({ type: 'reward-ticket' }, { "$set": { [`msg.${msg.member.id}`]: `${2 * count}` } });
     }
-    if (msg.channel.id == channelList[2] && await dbUtil.checkMsgNotInChannel(channelList[1], msg.author.id)) {
+    if (msg.channel.id == channelList[2] && await dbUtil.checkMsgNotInChannel(client, channelList[1], msg)) {
 
         // return msg.reply('今日尚未於 <#867811395474423838> 發文');
         client.channels.cache.get('964516826811858984').send('<@' + msg.member + '>今日尚未於 <#867811395474423838> 發文');
