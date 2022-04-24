@@ -5,11 +5,15 @@ module.exports.IsImage = function (url) {
 };
 
 module.exports.getNotDupeCountFromMsg = async function (client, msg) {
-    return getNotDupeCountFromMsg(client, msg);
+    let ImageUrlArray = await getImageUrlArray(msg);
+    if (ImageUrlArray == undefined || ImageUrlArray.length == 0)
+        return 0;
+    let count = await getNotDupeCount(client, msg, ImageUrlArray);
+    return count;
 };
 
-module.exports.getNotDupeCount = async function (client, ImageUrlArray) {
-    return getNotDupeCount(client, ImageUrlArray);
+module.exports.getNotDupeCount = async function (client, msg, ImageUrlArray) {
+    return getNotDupeCount(client, msg, ImageUrlArray);
 };
 
 module.exports.getImageUrlArray = function (msg) {
@@ -28,7 +32,7 @@ function IsImage(url) {
     return false;
 }
 
-async function getNotDupeCount(client, ImageUrlArray) {
+async function getNotDupeCount(client, msg, ImageUrlArray) {
     let count = 0
     for (let i = 0; i < ImageUrlArray.length; ++i) {
         const hash = await getHashDataFromUrl(ImageUrlArray[i]);

@@ -19,13 +19,14 @@ module.exports.everyScheduleJob = async function (client) {
 };
 
 async function confirmReward(client, msg) {
-
-    let ImageUrlArray = await imgUtil.getImageUrlArray(msg)
-    console.log('confirmReward:');
-    console.log(ImageUrlArray);  //undefined 
-    if (ImageUrlArray == undefined || ImageUrlArray.length == 0)
-        return;
-    let count = await imgUtil.getNotDupeCount(client, ImageUrlArray);
+    /*
+        let ImageUrlArray = await imgUtil.getImageUrlArray(msg)
+        console.log('confirmReward:');
+        console.log(ImageUrlArray);  //undefined 
+        if (ImageUrlArray == undefined || ImageUrlArray.length == 0)
+            return;
+        let count = await imgUtil.getNotDupeCount(client, ImageUrlArray);*/
+    let count = imgUtil.getNotDupeCountFromMsg(client, msg);
     console.log(`count: ${count}`);
     if (count == 0) return;
 
