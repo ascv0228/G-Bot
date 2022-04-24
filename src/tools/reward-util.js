@@ -47,12 +47,7 @@ async function giveReward(client) {
     var d = new Date();
     client.channels.cache.get('964516826811858984').send(`==========${d.getMonth() + 1}/${d.getDate()} 輔助獎勵區==========`);
     let temp = await client.Mdbcollection.find({ type: 'reward-ticket' }).toArray();
-    console.log('temp')
-    console.log(temp)
-    console.log('temp[0]')
-    console.log(temp[0])
-    console.log('temp[0].msg')
-    console.log(temp[0].msg)
+
     new Map(temp[0].msg).forEach((value, key) => {
         client.channels.cache.get('964516826811858984').send(`x!bot-ticket <@${key}> ${value}`);
     });

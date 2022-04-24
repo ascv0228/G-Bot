@@ -16,8 +16,14 @@ async function getRewardText(client, msg, args) {
     let temp = await client.Mdbcollection.find({}).toArray();
     const fetchUser = async id => client.users.fetch(id);
     var d = new Date();
-    let output = [`==========${d.getMonth() + 1}/${d.getDate()} 輔助獎勵區==========\n`]
-    await temp[0].msg.forEach((value, key) => {
+    let output = [`==========${d.getMonth() + 1}/${d.getDate()} 輔助獎勵區==========\n`];
+    console.log('temp')
+    console.log(temp)
+    console.log('temp[0]')
+    console.log(temp[0])
+    console.log('temp[0].msg')
+    console.log(temp[0].msg)
+    new Map(temp[0].msg).forEach((value, key) => {
         let user = fetchUser(key);
         output.push(`x!ticket ${user.tag} ${value}`);
     });
