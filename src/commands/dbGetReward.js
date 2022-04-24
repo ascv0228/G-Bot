@@ -15,7 +15,7 @@ module.exports = {
 async function getRewardText(client, msg, args) {
     let temp = await client.Mdbcollection.find({ type: 'reward-ticket' }).toArray();
     //const fetchUser = async id => client.users.fetch(id);
-    //var d = new Date();
+    var d = new Date();
     let output = await getOutput(client, temp[0].msg);
 
 
