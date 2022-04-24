@@ -23,9 +23,9 @@ async function getRewardText(client, msg, args) {
     client.channels.cache.get('964516826811858984').send({ files: [attachment] });
 }
 const waitFor = (ms) => new Promise(r => setTimeout(r, ms))
-function getOutput(client, user_ids) {
+async function getOutput(client, user_ids) {
 
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
 
         var d = new Date();
         let output = [`==========${d.getMonth() + 1}/${d.getDate()} 輔助獎勵區==========\n`];
