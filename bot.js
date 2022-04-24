@@ -7,6 +7,7 @@ const path = require("path")
 const { send } = require('process');
 const dbUtil = require('./src/tools/db-util.js');
 const rewardUtil = require('./src/tools/reward-util.js');
+const tools = require('./src/tools/tools.js');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
@@ -29,6 +30,7 @@ process.on('unhandledRejection', (reason, promise) => {
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.musicDict = new Map();
+/*
 function loadCommands() {
     const dirPath = `./src/commands`;
     //const dirPath = [`./src/commands`, `./src/music`];
@@ -51,35 +53,35 @@ function loadCommands() {
             }
         }
     });
-}
+}*/
 
-client.loadCommands = loadCommands;
+client.loadCommands = tools.loadCommands;
 
-function readDirAll(dir, fileHandler, dirHandler) {
-    let dirents = fs.readdirSync(dir, { withFileTypes: true });
-    /*
-    for (let i = 1; i < dirs.length; ++i) {
-        dirents.concat(fs.readdirSync(dirs[i], { withFileTypes: true }));
-    }*/
+// function readDirAll(dir, fileHandler, dirHandler) {
+//     let dirents = fs.readdirSync(dir, { withFileTypes: true });
+//     /*
+//     for (let i = 1; i < dirs.length; ++i) {
+//         dirents.concat(fs.readdirSync(dirs[i], { withFileTypes: true }));
+//     }*/
 
-    return Promise.all(dirents.map((dirent) => {
-        const res = path.resolve(dir, dirent.name);
+//     return Promise.all(dirents.map((dirent) => {
+//         const res = path.resolve(dir, dirent.name);
 
-        if (dirent.isDirectory()) {
-            if (dirHandler) {
-                dirHandler(res);
-            }
+//         if (dirent.isDirectory()) {
+//             if (dirHandler) {
+//                 dirHandler(res);
+//             }
 
-            return readDirAll(res, fileHandler, dirHandler);
-        } else {
-            if (fileHandler) {
-                fileHandler(res);
-            }
+//             return readDirAll(res, fileHandler, dirHandler);
+//         } else {
+//             if (fileHandler) {
+//                 fileHandler(res);
+//             }
 
-            return res;
-        }
-    }));
-}
+//             return res;
+//         }
+//     }));
+// }
 
 
 
