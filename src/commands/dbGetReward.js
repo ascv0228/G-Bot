@@ -19,9 +19,10 @@ async function getRewardText(client, msg, args) {
     let output = [`==========${d.getMonth() + 1}/${d.getDate()} 輔助獎勵區==========\n`];
 
     Object.keys(temp[0].msg).forEach(function (key) {
-        let user = client.users.cache.get(key);
-        let a = user.tag
-        output.push(`x!ticket ${a} ${temp[0].msg[key]}`);
+        let user = client.users.cache.get(key).tag;
+        /*console.log(user);
+        console.log(user.tag);*/
+        output.push(`x!ticket ${user} ${temp[0].msg[key]}`);
     });/*
     await temp[0].msg.forEach((value, key) => {
         let user = fetchUser(key);
