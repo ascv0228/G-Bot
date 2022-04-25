@@ -15,8 +15,10 @@ module.exports = {
 async function getRewardText(client, msg, args) {
     let temp = await client.Mdbcollection.find({ type: 'reward-ticket' }).toArray();
     //const fetchUser = async id => client.users.fetch(id);
-    var d = new Date();
-    let output = [`==========${d.getMonth() + 1}/${d.getDate()} 輔助獎勵區==========\n`];
+    var nowDate = new Date().getTime();
+    nowDate += (8 * 60 * 60 * 1000);
+    var date = new Date(nowDate)
+    let output = [`==========${date.getMonth() + 1}/${date.getDate()} 輔助獎勵區==========\n`];
     const m = new Map(Object.entries(temp[0].msg))
 
     /*
