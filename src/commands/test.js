@@ -1,6 +1,7 @@
 const { prefix } = require('../../config/config.json');
 const { token } = require('../../config/token.json');
 const Discord = require('discord.js');
+const moment = require('moment-timezone');
 
 var XMLHttpRequest = require('xhr2');
 var FileReader = require('filereader');
@@ -16,12 +17,17 @@ module.exports = {
         // msg.reply(`${getHashDataFromUrl(args[0])}`)
         //message.guild.members.cache.get('id')
         // const user = await msg.guild.members.fetch('411895879935590411');
-        let id = '411895879935590411'
-        const fetchUser = async id => client.users.fetch(id)
-        let user = await fetchUser(id)
-        msg.reply(`${user}`);
-        msg.reply('`' + `${user.username}` + '`');
-        msg.reply('`' + `${user.tag}` + '`');
+        // let id = '411895879935590411'
+        // const fetchUser = async id => client.users.fetch(id)
+        // let user = await fetchUser(id)
+        // msg.reply(`${user}`);
+        // msg.reply('`' + `${user.username}` + '`');
+        // msg.reply('`' + `${user.tag}` + '`');
+
+        var nowDate = new Date();
+        console.log(moment(nowDate).tz('Asia/Taipei').format("YYYY/MM/DD HH:mm"));
+
+        msg.reply(moment(nowDate).tz('Asia/Taipei').format("YYYY/MM/DD HH:mm"))
     }
 };
 
