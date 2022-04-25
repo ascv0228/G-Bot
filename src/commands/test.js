@@ -23,6 +23,7 @@ module.exports = {
         // msg.reply('`' + `${user.username}` + '`');
         // msg.reply('`' + `${user.tag}` + '`');
 
+
         var nowDate = new Date().getTime();
         nowDate += (8 * 60 * 60 * 1000);
         var date = new Date(nowDate)
