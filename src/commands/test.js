@@ -1,7 +1,6 @@
 const { prefix } = require('../../config/config.json');
 const { token } = require('../../config/token.json');
 const Discord = require('discord.js');
-const moment = require('moment-timezone');
 
 var XMLHttpRequest = require('xhr2');
 var FileReader = require('filereader');
@@ -24,10 +23,11 @@ module.exports = {
         // msg.reply('`' + `${user.username}` + '`');
         // msg.reply('`' + `${user.tag}` + '`');
 
-        var nowDate = new Date();
-        console.log(moment(nowDate).tz('Asia/Taipei').format("YYYY/MM/DD HH:mm"));
-
-        msg.reply(moment(nowDate).tz('Asia/Taipei').format("YYYY/MM/DD HH:mm"))
+        var nowDate = new Date().getTime();
+        nowDate += (8 * 60 * 60 * 1000);
+        var date = new Date(nowDate)
+        console.log(date.toUTCString());
+        msg.reply(`${data.getMonth() + 1}-${data.getData()}`);
     }
 };
 
