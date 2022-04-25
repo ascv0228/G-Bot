@@ -40,7 +40,7 @@ async function getRewardText(client, msg, args) {
         //let user = await getUser(client, key);
         //console.log(user);
         //let userTag = `@${user.username}#${user.discriminator}`;
-        let userTag = `<@${m[key]}>`;
+        let userTag = `<@${key}>`;
         //console.log(userTag);
         output.push(`x!ticket ${userTag} ${value}`);
     });
