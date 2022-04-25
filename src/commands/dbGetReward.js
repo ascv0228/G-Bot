@@ -17,7 +17,7 @@ async function getRewardText(client, msg, args) {
     //const fetchUser = async id => client.users.fetch(id);
     var d = new Date();
     let output = [`==========${d.getMonth() + 1}/${d.getDate()} 輔助獎勵區==========\n`];
-    //const m = new Map(Object.entries(temp[0].msg))
+    const m = new Map(Object.entries(temp[0].msg))
 
     /*
     Object.keys(user_ids).forEach(async function (key) {
@@ -36,13 +36,13 @@ async function getRewardText(client, msg, args) {
         output.push(`x!ticket ${userTag} ${temp[0].msg[key]}`);
     }*/
 
-    for (key in Object.keys(temp[0].msg)) {
-        let user = await getUser(client, key);
+    m.forEach((value, key) => {
+        //let user = await getUser(client, key);
         //console.log(user);
         //let userTag = `@${user.username}#${user.discriminator}`;
-        let userTag = `<@${key}>`;
+        let userTag = `<@${m[key]}>`;
         //console.log(userTag);
-        output.push(`x!ticket ${userTag} ${temp[0].msg[key]}`);
+        output.push(`x!ticket ${userTag} ${value}`);
     };
 
     console.log(output);
