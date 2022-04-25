@@ -43,7 +43,7 @@ async function getRewardText(client, msg, args) {
         let userTag = `<@${key}>`;
         //console.log(userTag);
         output.push(`x!ticket ${userTag} ${temp[0].msg[key]}`);
-    });
+    };
 
     console.log(output);
     const attachment = new Discord.MessageAttachment(Buffer.from(output.join('\n')), `${d.getMonth() + 1}-${d.getDate()}.txt`);
