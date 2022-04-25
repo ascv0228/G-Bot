@@ -27,7 +27,7 @@ module.exports = {
         nowDate += (8 * 60 * 60 * 1000);
         var date = new Date(nowDate)
         console.log(date.toUTCString());
-        msg.reply(`${data.getMonth() + 1}-${data.getData()}`);
+        msg.reply(`${date.getMonth() + 1}-${date.getData()}`);
     }
 };
 
