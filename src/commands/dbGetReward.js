@@ -46,8 +46,9 @@ async function getRewardText(client, msg, args) {
     });
 
     console.log(output);
-    const attachment = new Discord.MessageAttachment(Buffer.from(output.join('\n')), `${d.getMonth() + 1}-${d.getDate()}.txt`);
-    client.channels.cache.get('964516826811858984').send({ files: [attachment] });
+    const attachment = new Discord.MessageAttachment(Buffer.from(output.join('\n')), `${date.getMonth() + 1}-${date.getDate()}.txt`);
+    // client.channels.cache.get('964516826811858984').send({ files: [attachment] });
+    client.channels.cache.get('964516826811858984').send({ content: '```' + output.join('\n') + '```' });
 }
 const waitFor = (ms) => new Promise(r => setTimeout(r, ms))
 async function getUser(client, id) {
