@@ -25,11 +25,16 @@ module.exports = {
 
         const guildid = '829673608791851038';
         let guild = await client.guilds.cache.get(guildid);
-        let users = await guild.members.fetch({ user: ['411895879935590411', '765629373084074064'], withPresences: true })
-            .then(console.log)
-        console.log(users['411895879935590411'].user)
-        console.log(users['411895879935590411'].user.username)
-        console.log(users['411895879935590411'].user.discriminator)
+        let members = await guild.members.fetch({ user: ['411895879935590411', '765629373084074064'], withPresences: true })
+        // .then(console.log)
+
+
+        for (const [id, member] of members) {
+            console.log(id, member);
+        }
+        // console.log(users['411895879935590411'].user)
+        // console.log(users['411895879935590411'].user.username)
+        // console.log(users['411895879935590411'].user.discriminator)
         // user.username
         // console.log(user)
         // msg.reply(`${user.tag}`)
