@@ -30,7 +30,7 @@ module.exports = {
 
 
         for (const [id, member] of members) {
-            console.log(id, member);
+            console.log(member.user);
         }
         // console.log(users['411895879935590411'].user)
         // console.log(users['411895879935590411'].user.username)
