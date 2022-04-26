@@ -72,6 +72,7 @@ async function getRecordText(client, guild, args) {
         // output.push(`x!award ${userTag}`);
     }
     for (let user_id in user_ids) {
+        console.log(user_id);
         output.push(`x!award ${order_userTag.get(user_id)}`);
     }
     console.log(output);
