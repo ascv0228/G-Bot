@@ -30,9 +30,8 @@ module.exports = {
 
 
         for (const [id, member] of members) {
-            // console.log(member.user);
-            msg.reply(`${member.user.username}`)
-            msg.reply(`${member.user.discriminator}`)
+            let userTag = `@${member.user.username}#${member.user.discriminator}`
+            msg.reply(`${userTag}`)
         }
         // console.log(users['411895879935590411'].user)
         // console.log(users['411895879935590411'].user.username)
