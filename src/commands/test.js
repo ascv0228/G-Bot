@@ -37,7 +37,7 @@ module.exports = {
             ++i;
             // msg.reply(`${userTag}`)
         }
-        const attachment = new Discord.MessageAttachment(Buffer.from(output.join('\n')), `${date.getMonth() + 1}-${date.getDate()}.txt`);
+        const attachment = new Discord.MessageAttachment(Buffer.from(output.join('\n')), `test.txt`);
         client.channels.cache.get(sendChannel).send({ files: [attachment] });
         //let user = await getUser(client, key);
         //console.log(user);
