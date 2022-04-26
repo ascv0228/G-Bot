@@ -63,16 +63,17 @@ async function getRecordText(client, guild, args) {
     let output = [`==========${date.getMonth() + 1}/${date.getDate()} ${args[0]}==========\n`];
 
     let members = await guild.members.fetch({ user: user_ids, withPresences: true })
+    let order_userTag = new Map()
 
     // // console.log(members)
-    // for (const [id, member] of members) {
-    //     let userTag = `@${member.user.username}#${member.user.discriminator}`;
-    //     output.push(`x!award ${userTag}`);
-    // }
-    for (let i in user_ids) {
-        console.log(members.get(i))
+    for (const [id, member] of members) {
+        let userTag = `@${member.user.username}#${member.user.discriminator}`;
+        order_userTag[id] = userTag;
+        // output.push(`x!award ${userTag}`);
     }
-
+    for (let user_id in user_ids) {
+        output.push(`x!award ${order_userTag[id]}`);
+    }
     console.log(output);
     const attachment = new Discord.MessageAttachment(Buffer.from(output.join('\n')), `${date.getMonth() + 1}-${date.getDate()}.txt`);
     client.channels.cache.get(sendChannel).send({ files: [attachment] });
