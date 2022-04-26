@@ -14,25 +14,37 @@ module.exports = {
         // msg.reply(`${msg.member.permissions}`)
         // msg.reply(`${typeof msg.member.permissions}`)
         // msg.reply(`${getHashDataFromUrl(args[0])}`)
-        //message.guild.members.cache.get('id')
-        // const user = await msg.guild.members.fetch('411895879935590411');
-        // let id = '411895879935590411'
-        // const fetchUser = async id => client.users.fetch(id)
-        // let user = await fetchUser(id)
-        // msg.reply(`${user}`);
-        // msg.reply('`' + `${user.username}` + '`');
-        // msg.reply('`' + `${user.tag}` + '`');
-
         const guildid = '829673608791851038';
         let guild = await client.guilds.cache.get(guildid);
-        let members = await guild.members.fetch({ user: ['411895879935590411', '765629373084074064'], withPresences: true })
+        let temp = await client.Mdbcollection.find({ type: 'reward-ticket' }).toArray();
+        const m = new Map(Object.entries(temp[0].msg))
+        user_ids = new Array();
+        tickets = new Array()
+
+        m.forEach((value, key) => {
+            user_ids.push(key);
+            tickets.push(value);
+        });
+
+        let members = await guild.members.fetch({ user: user_ids, withPresences: true })
         // .then(console.log)
 
-
+        let output = new Array();
+        let i = 0;
         for (const [id, member] of members) {
-            let userTag = `@${member.user.username}#${member.user.discriminator}`
-            msg.reply(`${userTag}`)
+            let userTag = `@${member.user.username}#${member.user.discriminator}`;
+            output.push(`x!ticket ${userTag} ${tickets[i]}`);
+            ++i;
+            // msg.reply(`${userTag}`)
         }
+        const attachment = new Discord.MessageAttachment(Buffer.from(output.join('\n')), `${date.getMonth() + 1}-${date.getDate()}.txt`);
+        client.channels.cache.get(sendChannel).send({ files: [attachment] });
+        //let user = await getUser(client, key);
+        //console.log(user);
+        //let userTag = `@${user.username}#${user.discriminator}`;
+        // let userTag = `<@${key}>`;
+        //console.log(userTag);
+        // output.push(`x!ticket ${userTag} ${value}`);
         // console.log(users['411895879935590411'].user)
         // console.log(users['411895879935590411'].user.username)
         // console.log(users['411895879935590411'].user.discriminator)

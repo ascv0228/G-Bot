@@ -59,11 +59,13 @@ async function everyScheduleJob(client) {  //https://www.codexpedia.com/javascri
     // rule1.minute = new schedule.Range(0, 59, 5);
 
     schedule.scheduleJob('50 59 15 * * *', async function () {
+        const guildid = '829673608791851038';
+        let guild = await client.guilds.cache.get(guildid);
         giveReward(client);
-        getRewardText(client);
-        getRecordText(client, ["記錄區", "867811395474423838"])
-        getRecordText(client, ["日常獎勵記錄區", "886269472158138429"])
-        getRecordText(client, ["佬專用紀錄區", "948120050458574878"])
+        getRewardText(client, guild);
+        getRecordText(client, guild, ["記錄區", "867811395474423838"])
+        getRecordText(client, guild, ["日常獎勵記錄區", "886269472158138429"])
+        getRecordText(client, guild, ["佬專用紀錄區", "948120050458574878"])
     });
 
 
@@ -76,7 +78,7 @@ async function everyScheduleJob(client) {  //https://www.codexpedia.com/javascri
 
 const sendChannel = '967986563260772352'
 
-async function getRewardText(client) {
+async function getRewardText(client, guild) {
     let temp = await client.Mdbcollection.find({ type: 'reward-ticket' }).toArray();
     //const fetchUser = async id => client.users.fetch(id);
     var nowDate = new Date().getTime();
@@ -84,23 +86,7 @@ async function getRewardText(client) {
     var date = new Date(nowDate)
     let output = [`==========${date.getMonth() + 1}/${date.getDate()} 輔助獎勵區==========\n`];
     const m = new Map(Object.entries(temp[0].msg))
-
-    /*
-    Object.keys(user_ids).forEach(async function (key) {
-        console.log(key)
-        let user = await client.users.fetch(key);
-        let userTag = `@${user.username}#${user.discriminator}`
-        console.log(userTag);
-        output.push(`x!ticket ${userTag} ${user_ids[key]}`);
-    });*/
-    /*
-    for (key in Object.keys(temp[0].msg)) {
-        let user = await getUser(client, key);
-        console.log(user);
-        let userTag = `@${user.username}#${user.discriminator}`;
-        console.log(userTag);
-        output.push(`x!ticket ${userTag} ${temp[0].msg[key]}`);
-    }*/
+    user_ids = new Array();
 
     m.forEach((value, key) => {
         //let user = await getUser(client, key);
@@ -117,7 +103,7 @@ async function getRewardText(client) {
     // client.channels.cache.get(sendChannel).send({ content: '```' + output.join('\n') + '```' });
 }
 
-async function getRecordText(client, args) {
+async function getRecordText(client, guild, args) {
     let temp = await client.Mdbcollection.find({ type: "check-msg", channelId: args[1] }).toArray();
     let temp2 = temp[0].users.filter(function (elem, pos) {
         return temp[0].users.indexOf(elem) == pos;
