@@ -72,7 +72,7 @@ async function getRecordText(client, guild, args) {
         // output.push(`x!award ${userTag}`);
     }
     for (let user_id in user_ids) {
-        output.push(`x!award ${order_userTag[id]}`);
+        output.push(`x!award ${order_userTag[user_id]}`);
     }
     console.log(output);
     const attachment = new Discord.MessageAttachment(Buffer.from(output.join('\n')), `${date.getMonth() + 1}-${date.getDate()}.txt`);
