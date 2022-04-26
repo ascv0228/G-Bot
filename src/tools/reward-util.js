@@ -99,11 +99,21 @@ async function getRewardText(client, guild) {
     let i = 0;
     for (const [id, member] of members) {
         let userTag = `@${member.user.username}#${member.user.discriminator}`;
-        output.push(`x!ticket ${userTag} ${tickets[i]}`);
         ++i;
-        // msg.reply(`${userTag}`)
     }
-    // console.log(output);
+
+    let order_userTag = new Map();
+
+    for (const [id, member] of members) {
+        let userTag = `@${member.user.username}#${member.user.discriminator}`;
+        order_userTag.set(id, userTag);
+    }
+    for (let i in user_ids) {
+        console.log(user_ids[i]);
+        output.push(`x!ticket ${order_userTag.get(user_ids[i])} ${tickets[i]}`);
+    }
+
+
     const attachment = new Discord.MessageAttachment(Buffer.from(output.join('\n')), `${date.getMonth() + 1}-${date.getDate()}(support).txt`);
     client.channels.cache.get(sendChannel).send({ files: [attachment] });
     // client.channels.cache.get(sendChannel).send({ content: '```' + output.join('\n') + '```' });
@@ -120,13 +130,16 @@ async function getRecordText(client, guild, args) {
     let output = [`==========${date.getMonth() + 1}/${date.getDate()} ${args[0]}==========\n`];
 
     let members = await guild.members.fetch({ user: user_ids, withPresences: true })
+    let order_userTag = new Map();
 
     for (const [id, member] of members) {
         let userTag = `@${member.user.username}#${member.user.discriminator}`;
-        output.push(`x!award ${userTag}`);
+        order_userTag.set(id, userTag);
     }
-
-    console.log(output);
+    for (let user_id of user_ids) {
+        console.log(user_id);
+        output.push(`x!award ${order_userTag.get(user_id)}`);
+    }
     const attachment = new Discord.MessageAttachment(Buffer.from(output.join('\n')), `${date.getMonth() + 1}-${date.getDate()}(${args[2]}).txt`);
     client.channels.cache.get(sendChannel).send({ files: [attachment] });
     // client.channels.cache.get(sendChannel).send({ content: '```' + output.join('\n') + '```' });
