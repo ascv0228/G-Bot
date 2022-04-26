@@ -86,18 +86,24 @@ async function getRewardText(client, guild) {
     var date = new Date(nowDate)
     let output = [`==========${date.getMonth() + 1}/${date.getDate()} 輔助獎勵區==========\n`];
     const m = new Map(Object.entries(temp[0].msg))
-    user_ids = new Array();
+    let user_ids = new Array();
+    let tickets = new Array();
 
     m.forEach((value, key) => {
-        //let user = await getUser(client, key);
-        //console.log(user);
-        //let userTag = `@${user.username}#${user.discriminator}`;
-        let userTag = `<@${key}>`;
-        //console.log(userTag);
-        output.push(`x!ticket ${userTag} ${value}`);
+        user_ids.push(key);
+        tickets.push(value);
     });
 
-    console.log(output);
+    let members = await guild.members.fetch({ user: user_ids, withPresences: true })
+
+    let i = 0;
+    for (const [id, member] of members) {
+        let userTag = `@${member.user.username}#${member.user.discriminator}`;
+        output.push(`x!ticket ${userTag} ${tickets[i]}`);
+        ++i;
+        // msg.reply(`${userTag}`)
+    }
+    // console.log(output);
     const attachment = new Discord.MessageAttachment(Buffer.from(output.join('\n')), `${date.getMonth() + 1}-${date.getDate()}.txt`);
     client.channels.cache.get(sendChannel).send({ files: [attachment] });
     // client.channels.cache.get(sendChannel).send({ content: '```' + output.join('\n') + '```' });
@@ -105,7 +111,7 @@ async function getRewardText(client, guild) {
 
 async function getRecordText(client, guild, args) {
     let temp = await client.Mdbcollection.find({ type: "check-msg", channelId: args[1] }).toArray();
-    let temp2 = temp[0].users.filter(function (elem, pos) {
+    let user_ids = temp[0].users.filter(function (elem, pos) {
         return temp[0].users.indexOf(elem) == pos;
     })
     var nowDate = new Date().getTime();
@@ -113,10 +119,13 @@ async function getRecordText(client, guild, args) {
     var date = new Date(nowDate)
     let output = [`==========${date.getMonth() + 1}/${date.getDate()} ${args[0]}==========\n`];
 
-    await temp2.forEach(function getOutput(elem) {
-        let userTag = `<@${elem}>`;
-        output.push(`x!give ${userTag}`);
-    });
+    let members = await guild.members.fetch({ user: user_ids, withPresences: true })
+
+    for (const [id, member] of members) {
+        let userTag = `@${member.user.username}#${member.user.discriminator}`;
+        output.push(`x!award ${userTag}`);
+        // msg.reply(`${userTag}`)
+    }
 
     console.log(output);
     const attachment = new Discord.MessageAttachment(Buffer.from(output.join('\n')), `${date.getMonth() + 1}-${date.getDate()}.txt`);
