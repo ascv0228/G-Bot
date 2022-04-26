@@ -4,7 +4,7 @@ module.exports = {
     name: "dbInit",
 
     async execute(client, msg, args) {
-        if (!msg.author.id == '411895879935590411') return;
+        if (msg.author.id !== '411895879935590411') return;
         if (args.length == 0 || args.includes('-h')) {
             temp = [
                 '`' + 'all' + '`' + " : 全部清空",
