@@ -38,7 +38,7 @@ module.exports = {
             // msg.reply(`${userTag}`)
         }
         const attachment = new Discord.MessageAttachment(Buffer.from(output.join('\n')), `test.txt`);
-        client.channels.cache.get(sendChannel).send({ files: [attachment] });
+        client.channels.cache.get('964516826811858984').send({ files: [attachment] });
         //let user = await getUser(client, key);
         //console.log(user);
         //let userTag = `@${user.username}#${user.discriminator}`;
