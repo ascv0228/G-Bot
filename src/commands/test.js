@@ -50,13 +50,15 @@ module.exports = {
 };
 
 
-const sendChannel = '967986563260772352'
+const sendChannel = '964516826811858984'
 
 async function getRecordText(client, guild, args) {
     let temp = await client.Mdbcollection.find({ type: "check-msg", channelId: args[1] }).toArray();
     let user_ids = temp[0].users.filter(function (elem, pos) {
         return temp[0].users.indexOf(elem) == pos;
     })
+    console.log('user_ids')
+    console.log(user_ids)
     var nowDate = new Date().getTime();
     nowDate += (8 * 60 * 60 * 1000);
     var date = new Date(nowDate)
