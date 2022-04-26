@@ -23,12 +23,13 @@ module.exports = {
         // msg.reply('`' + `${user.username}` + '`');
         // msg.reply('`' + `${user.tag}` + '`');
 
+        const guildid = '829673608791851038';
+        let members = client.guilds.cache.get(guildid).members;
+        let user = members.cache.get('411895879935590411')
+        msg.reply(`${user.tag}`)
+        msg.reply(`${user.author}`)
+        msg.reply(`${user.username}`)
 
-        var nowDate = new Date().getTime();
-        nowDate += (8 * 60 * 60 * 1000);
-        var date = new Date(nowDate)
-        console.log(date.toUTCString());
-        msg.reply(`${date.getMonth() + 1}-${date.getDate()}`);
     }
 };
 
