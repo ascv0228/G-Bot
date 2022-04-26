@@ -57,8 +57,6 @@ async function getRecordText(client, guild, args) {
     let user_ids = temp[0].users.filter(function (elem, pos) {
         return temp[0].users.indexOf(elem) == pos;
     })
-    console.log('user_ids')
-    console.log(user_ids)
     var nowDate = new Date().getTime();
     nowDate += (8 * 60 * 60 * 1000);
     var date = new Date(nowDate)
@@ -66,6 +64,7 @@ async function getRecordText(client, guild, args) {
 
     let members = await guild.members.fetch({ user: user_ids, withPresences: true })
 
+    console.log(members)
     for (const [id, member] of members) {
         let userTag = `@${member.user.username}#${member.user.discriminator}`;
         output.push(`x!award ${userTag}`);
