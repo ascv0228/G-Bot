@@ -68,7 +68,7 @@ async function getRecordText(client, guild, args) {
     // // console.log(members)
     for (const [id, member] of members) {
         let userTag = `@${member.user.username}#${member.user.discriminator}`;
-        order_userTag[id].set(userTag);
+        order_userTag.set(id, userTag);
         // output.push(`x!award ${userTag}`);
     }
     for (let user_id in user_ids) {
