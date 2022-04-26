@@ -43,7 +43,7 @@ module.exports = {
 
         const guildid = '829673608791851038';
         let guild = await client.guilds.cache.get(guildid);
-        getRecordText(client, guild, ["記錄區", "867811395474423838"])
+        getRecordText(client, guild, ["記錄區", "867811395474423838", "test"])
 
 
     }
@@ -64,11 +64,13 @@ async function getRecordText(client, guild, args) {
 
     let members = await guild.members.fetch({ user: user_ids, withPresences: true })
 
-    console.log(members)
-    for (const [id, member] of members) {
-        let userTag = `@${member.user.username}#${member.user.discriminator}`;
-        output.push(`x!award ${userTag}`);
-        // msg.reply(`${userTag}`)
+    // // console.log(members)
+    // for (const [id, member] of members) {
+    //     let userTag = `@${member.user.username}#${member.user.discriminator}`;
+    //     output.push(`x!award ${userTag}`);
+    // }
+    for (let i in user_ids) {
+        console.log(members[i])
     }
 
     console.log(output);

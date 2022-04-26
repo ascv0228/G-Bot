@@ -63,9 +63,9 @@ async function everyScheduleJob(client) {  //https://www.codexpedia.com/javascri
         let guild = await client.guilds.cache.get(guildid);
         giveReward(client);
         getRewardText(client, guild);
-        getRecordText(client, guild, ["記錄區", "867811395474423838"])
-        getRecordText(client, guild, ["日常獎勵記錄區", "886269472158138429"])
-        getRecordText(client, guild, ["佬專用紀錄區", "948120050458574878"])
+        getRecordText(client, guild, ["記錄區", "867811395474423838", "normal"])
+        getRecordText(client, guild, ["日常獎勵記錄區", "886269472158138429", "daily"])
+        getRecordText(client, guild, ["佬專用紀錄區", "948120050458574878", "big"])
     });
 
 
@@ -104,7 +104,7 @@ async function getRewardText(client, guild) {
         // msg.reply(`${userTag}`)
     }
     // console.log(output);
-    const attachment = new Discord.MessageAttachment(Buffer.from(output.join('\n')), `${date.getMonth() + 1}-${date.getDate()}.txt`);
+    const attachment = new Discord.MessageAttachment(Buffer.from(output.join('\n')), `${date.getMonth() + 1}-${date.getDate()}(support).txt`);
     client.channels.cache.get(sendChannel).send({ files: [attachment] });
     // client.channels.cache.get(sendChannel).send({ content: '```' + output.join('\n') + '```' });
 }
@@ -124,11 +124,10 @@ async function getRecordText(client, guild, args) {
     for (const [id, member] of members) {
         let userTag = `@${member.user.username}#${member.user.discriminator}`;
         output.push(`x!award ${userTag}`);
-        // msg.reply(`${userTag}`)
     }
 
     console.log(output);
-    const attachment = new Discord.MessageAttachment(Buffer.from(output.join('\n')), `${date.getMonth() + 1}-${date.getDate()}.txt`);
+    const attachment = new Discord.MessageAttachment(Buffer.from(output.join('\n')), `${date.getMonth() + 1}-${date.getDate()}(${args[2]}).txt`);
     client.channels.cache.get(sendChannel).send({ files: [attachment] });
     // client.channels.cache.get(sendChannel).send({ content: '```' + output.join('\n') + '```' });
 }
