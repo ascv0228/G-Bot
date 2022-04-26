@@ -24,8 +24,10 @@ module.exports = {
         // msg.reply('`' + `${user.tag}` + '`');
 
         const guildid = '829673608791851038';
-        let members = client.guilds.cache.get(guildid).members;
-        let user = members.cache.get('411895879935590411')
+        let guild = await client.guilds.cache.get(guildid);
+        guild.members.fetch({ user: ['411895879935590411', '765629373084074064'], withPresences: true })
+            .then(console.log)
+        console.log(user)
         msg.reply(`${user.tag}`)
         msg.reply(`${user.author}`)
         msg.reply(`${user.username}`)
