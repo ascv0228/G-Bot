@@ -7,7 +7,7 @@ module.exports = {
     execute(client, msg) {
         let flag = msg.member.roles.cache.has('938748850112430091')
         if (flag)
-            msg.reply({ content: '<@&948118013293494303>' });
+            msg.reply({ content: '<@&948118013293494303>' + `${msg.member} 找你` });
         return;
     }
 };
