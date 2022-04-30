@@ -9,6 +9,7 @@ const dbUtil = require('./src/tools/db-util.js');
 const rewardUtil = require('./src/tools/reward-util.js');
 const tools = require('./src/tools/tools.js');
 const big = require('./src/noPrefix/big.js');
+const small = require('./src/noPrefix/small.js');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
@@ -89,7 +90,7 @@ client.on('messageCreate', msg => {
         big.execute(client, msg);
     }
     if (msg.content.includes('@小萌新') || msg.content.includes('<@&938748850112430091>')) {
-        big.execute(client, msg);
+        small.execute(client, msg);
     }
     const lines = msg.content.trim().split("\n");
     for (let i = 0; i < lines.length; ++i) {
