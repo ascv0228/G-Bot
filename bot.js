@@ -85,7 +85,10 @@ client.on('messageCreate', msg => {
         if (msg.member.roles.cache.has('863405200562454548') && msg.author.id == '411895879935590411') {
             console.log('GG')
         }*/
-    if (msg.content.includes('@佬')) {
+    if (msg.content.includes('@佬') || msg.content.includes('<@&948118013293494303>')) {
+        big.execute(client, msg);
+    }
+    if (msg.content.includes('@小萌新') || msg.content.includes('<@&938748850112430091>')) {
         big.execute(client, msg);
     }
     const lines = msg.content.trim().split("\n");
