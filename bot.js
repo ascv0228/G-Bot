@@ -8,6 +8,7 @@ const { send } = require('process');
 const dbUtil = require('./src/tools/db-util.js');
 const rewardUtil = require('./src/tools/reward-util.js');
 const tools = require('./src/tools/tools.js');
+const big = require('./src/noPrefix/big.js');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
@@ -84,6 +85,9 @@ client.on('messageCreate', msg => {
         if (msg.member.roles.cache.has('863405200562454548') && msg.author.id == '411895879935590411') {
             console.log('GG')
         }*/
+    if (msg.content.includes('@佬')) {
+        big.execute(client, msg, args);
+    }
     const lines = msg.content.trim().split("\n");
     for (let i = 0; i < lines.length; ++i) {
         if (!msg.content.startsWith(`${prefix}`)) return;

@@ -26,7 +26,6 @@ async function confirmReward(client, msg) {
 
     if (msg.channel.id == channelList[0]) {
         let temp = await client.Mdbcollection.find({ type: 'reward-ticket' }).toArray();
-        console.log(temp)
         let originCount = temp[0].msg[msg.member.id]
         originCount = (originCount == undefined || originCount == NaN) ? 0 : originCount / 2
 
@@ -113,7 +112,7 @@ async function getRewardText(client, guild) {
         order_userTag.set(id, userTag);
     }
     for (let i in user_ids) {
-        console.log(user_ids[i]);
+        // console.log(user_ids[i]);
         output.push(`x!ticket ${order_userTag.get(user_ids[i])} ${tickets[i]}`);
     }
 
@@ -141,7 +140,7 @@ async function getRecordText(client, guild, args) {
         order_userTag.set(id, userTag);
     }
     for (let user_id of user_ids) {
-        console.log(user_id);
+        // console.log(user_id);
         output.push(`x!award ${order_userTag.get(user_id)}`);
     }
     const attachment = new Discord.MessageAttachment(Buffer.from(output.join('\n')), `${date.getMonth() + 1}-${date.getDate()}(${args[2]}).txt`);

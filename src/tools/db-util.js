@@ -38,7 +38,6 @@ async function dbInitCheckMsg(client, args) {
 
 async function checkMsgNotInChannel(client, target_channel, msg) {
     let temp = await client.Mdbcollection.find({ type: 'check-msg', channelId: target_channel }).toArray()
-    console.log(temp)
     return !temp[0].users.includes(msg.author.id);
 }
 
