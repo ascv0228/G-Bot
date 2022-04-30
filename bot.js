@@ -86,7 +86,7 @@ client.on('messageCreate', msg => {
             console.log('GG')
         }*/
     if (msg.content.includes('@佬')) {
-        big.execute(client, msg, args);
+        big.execute(client, msg);
     }
     const lines = msg.content.trim().split("\n");
     for (let i = 0; i < lines.length; ++i) {
