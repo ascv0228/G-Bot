@@ -12,7 +12,7 @@ module.exports = {
         if (!this.channels.includes(msg.channel.id) &&
             !msg.member.permissions.has(this.permissions[0]))
             return msg.reply({ content: '頻道錯誤' });
-        return msg.reply({ content: '<@&948118013293494303>' + `${msg.member} 找你` });
+        return msg.reply({ content: '<@&948118013293494303>, ' + `${msg.member} 找你` });
 
     }
 };
