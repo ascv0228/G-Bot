@@ -12,8 +12,8 @@ module.exports = {
         // let guild = await client.guilds.cache.get(this.guildid);
         // let members = await msg.guild.members.filter(m => m.roles.cache.has(args[0]))
         // let members = await msg.guild.roles.cache.get(args[0]).members.map(m => m.user.id);
-        const Role = message.guild.roles.cache.find(role => role.name == args[0]);
-        const members = message.guild.members.cache.filter(member => member.roles.cache.find(role => role == Role)).map(member => member.user.tag);
+        const Role = msg.guild.roles.cache.find(role => role.name == args[0]);
+        const members = msg.guild.members.cache.filter(member => member.roles.cache.find(role => role == Role)).map(member => member.user.tag);
 
         let output = new Array();
         for (const [id, member] of members) {
