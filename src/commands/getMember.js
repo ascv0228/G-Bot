@@ -4,11 +4,12 @@ const Discord = require('discord.js');
 module.exports = {
     name: "getMember",
     aliases: ["gm"],
+    guildid: '829673608791851038',
 
     async execute(client, msg, args) {
         if (!msg.member.permissions.has('ADMINISTRATOR'))
             return;
-        let guild = await client.guilds.cache.get(guildid);
+        let guild = await client.guilds.cache.get(this.guildid);
         let members = await guild.members.filter(m => m.roles.cache.has(args[0]))
         let output = new Array();
         for (const [id, member] of members) {
