@@ -5,7 +5,7 @@ module.exports = {
     name: "getMember",
     aliases: ["gm"],
 
-    execute(client, msg, args) {
+    async execute(client, msg, args) {
         if (!msg.member.permissions.has('ADMINISTRATOR'))
             return;
         let guild = await client.guilds.cache.get(guildid);
