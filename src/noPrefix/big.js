@@ -1,3 +1,4 @@
+let d = new Date().getTime();
 
 
 module.exports = {
@@ -8,10 +9,12 @@ module.exports = {
 
     execute(client, msg) {
         let flag = msg.member.roles.cache.has('938748850112430091')
-        if (!flag) return;
-        if (!this.channels.includes(msg.channel.id) &&
-            !msg.member.permissions.has(this.permissions[0]))
+        if (!flag || msg.member.permissions.has(this.permissions[0])) return;
+        if (!this.channels.includes(msg.channel.id))
             return msg.reply({ content: '頻道錯誤' });
+        let d2 = new Date().getTime();
+        if ((d2 - d1) < 300000) return msg.reply({ content: '冷卻中' });
+
         return msg.reply({ content: '<@&948118013293494303>, ' + `${msg.member} 找你` });
 
     }

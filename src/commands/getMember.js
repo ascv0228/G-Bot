@@ -1,6 +1,6 @@
 
 const Discord = require('discord.js');
-
+/*
 module.exports = {
     name: "getMember",
     aliases: ["gm"],
@@ -26,4 +26,4 @@ module.exports = {
 
         return;
     }
-};
+};*/
