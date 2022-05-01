@@ -14,7 +14,7 @@ module.exports = {
         // let members = await msg.guild.roles.cache.get(args[0]).members.map(m => m.user.id);
         const Role = msg.guild.roles.cache.find(role => role.name == args[0]);
         const members = msg.guild.members.cache.filter(member => member.roles.cache.find(role => role == Role)).map(member => member.user.tag);
-
+        console.log(members)
         let output = new Array();
         for (const [id, member] of members) {
             let userTag = `${args[1]} @${member} ${args[2]}`;
