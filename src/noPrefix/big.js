@@ -1,4 +1,4 @@
-let d = new Date().getTime();
+let d1 = new Date().getTime();
 
 
 module.exports = {
@@ -14,7 +14,7 @@ module.exports = {
             return msg.reply({ content: '頻道錯誤' });
         let d2 = new Date().getTime();
         if ((d2 - d1) < 300000) return msg.reply({ content: '冷卻中' });
-
+        d1 = d2;
         return msg.reply({ content: '<@&948118013293494303>, ' + `${msg.member} 找你` });
 
     }
