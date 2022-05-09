@@ -11,39 +11,10 @@ module.exports = {
 
     async execute(client, msg, args) {
         if (msg.author.id !== '411895879935590411') return;
-        // msg.reply(`${msg.member.permissions}`)
-        // msg.reply(`${typeof msg.member.permissions}`)
-        // msg.reply(`${getHashDataFromUrl(args[0])}`)
-        // const guildid = '829673608791851038';
-        // let guild = await client.guilds.cache.get(guildid);
-        // let temp = await client.Mdbcollection.find({ type: 'reward-ticket' }).toArray();
-        // const m = new Map(Object.entries(temp[0].msg))
-        // user_ids = new Array();
-        // tickets = new Array()
 
-        // m.forEach((value, key) => {
-        //     user_ids.push(key);
-        //     tickets.push(value);
-        // });
-
-        // let members = await guild.members.fetch({ user: user_ids, withPresences: true })
-        // // .then(console.log)
-
-        // let output = new Array();
-        // let i = 0;
-        // for (const [id, member] of members) {
-        //     let userTag = `@${member.user.username}#${member.user.discriminator}`;
-        //     output.push(`x!ticket ${userTag} ${tickets[i]}`);
-        //     ++i;
-        //     // msg.reply(`${userTag}`)
-        // }
-        // const attachment = new Discord.MessageAttachment(Buffer.from(output.join('\n')), `test.txt`);
-        // client.channels.cache.get('964516826811858984').send({ files: [attachment] });
-
-
-        const guildid = '829673608791851038';
-        let guild = await client.guilds.cache.get(guildid);
-        getRecordText(client, guild, ["記錄區", "867811395474423838", "test"])
+        var d = new Date();
+        d.setDate(d.getDate() - 1);
+        msg.channel.send(`${d.getHours()}、${d}`)
 
 
     }
