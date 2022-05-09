@@ -2,7 +2,7 @@ const { imageHash } = require('image-hash');
 
 module.exports = { getNotDupeCountFromMsg: getNotDupeCountFromMsg };
 
-const img_subFiles = [".png", ".jpg", ".jpeg", ".webp"]
+const img_subFiles = [".png", ".jpg", ".jpeg", ".webp", ".PNG", ".JPG", ".JPEG", ".WEBP"]
 function IsImage(url) {
     for (let i = 0; i < img_subFiles.length; ++i) {
         let index = url.indexOf(img_subFiles[i], 40);

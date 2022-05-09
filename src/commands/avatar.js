@@ -1,12 +1,12 @@
 const Discord = require('discord.js');
+const dcUtil = require('../tools/dc-util.js');
 
 module.exports = {
     name: "avatar",
     aliases: ["avt"],
 
     execute(client, msg, args) {
-
-        let user = msg.mentions.users.first() || msg.author;
+        let user = dcUtil.getUserByTag(msg.guild, args[0]) || msg.author;
         const avatarEmbed = new Discord.MessageEmbed()
             .setImage(user.displayAvatarURL({ size: 4096, dynamic: true }))
             .setFooter({
