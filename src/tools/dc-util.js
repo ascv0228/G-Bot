@@ -17,7 +17,6 @@ function pickUserId(str) {
 async function getUserByTag(guild, str) {
     let UserID = pickUserId(str);
     if (!UserID) return;
-    console.log(UserID);
     let member = await getMemberByID(guild, UserID);
     return member.user
 }
@@ -32,12 +31,10 @@ async function getUserByID(guild, UserID) {
 async function getMemberByTag(guild, str) {
     let MemberID = pickUserId(str);
     if (!MemberID) return;
-    console.log(MemberID);
     let member = await getMemberByID(guild, MemberID);
     return member
 }
 async function getMemberByID(guild, MemberID) {
     const member = await guild.members.fetch(MemberID).catch(console.error);
-    console.log(member);
     return member;
 }

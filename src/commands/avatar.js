@@ -6,9 +6,7 @@ module.exports = {
     aliases: ["avt"],
 
     async execute(client, msg, args) {
-        let user = await dcUtil.getUserByTag(msg.guild, args[0])
-        user = user || msg.author;
-        console.log(user)
+        let user = await dcUtil.getUserByTag(msg.guild, args[0]) || msg.author;
         const avatarEmbed = new Discord.MessageEmbed()
             .setImage(user.displayAvatarURL({ size: 4096, dynamic: true }))
             .setFooter({

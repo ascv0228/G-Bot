@@ -6,9 +6,7 @@ module.exports = {
     aliases: ["memavt"],
 
     async execute(client, msg, args) {
-        let user = await dcUtil.getMemberByTag(msg.guild, args[0])
-        user = user || msg.member;
-        console.log(user)
+        let user = await dcUtil.getMemberByTag(msg.guild, args[0]) || msg.member;
         const avatarEmbed = new Discord.MessageEmbed()
             .setImage(user.displayAvatarURL({ size: 4096, dynamic: true }))
             .setFooter({
