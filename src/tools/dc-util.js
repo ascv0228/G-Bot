@@ -17,17 +17,18 @@ function pickUserId(str) {
 async function getUserByTag(guild, str) {
     let UserID = pickUserId(str);
     if (!UserID) return;
-    return getUserByID(guild, UserID);
+    return getMemberByID(guild, UserID).user;
 }
 
 async function getUserByID(guild, UserID) {
-    const user = await guild.users.fetch(UserID).catch(console.error);
-    console.log(user);
-    return user;
+    //const user = await guild.users.fetch(UserID).catch(console.error);
+    //console.log(user);
+    return getMemberByID(guild, MemberID).user;
 }
 
 async function getMemberByTag(guild, str) {
     let MemberID = pickUserId(str);
+    if (!MemberID) return;
     return getMemberByID(guild, MemberID);
 }
 async function getMemberByID(guild, MemberID) {
