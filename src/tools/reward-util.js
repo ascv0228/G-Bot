@@ -34,7 +34,7 @@ async function confirmReward(client, msg) {
     }
     if (msg.channel.id == channelList[2] && await dbUtil.checkMsgNotInChannel(client, channelList[1], msg)) {
 
-        msg.reply(' <#867811395474423838> 有4000的紀錄才能來這邊貼發文');
+        msg.reply(' 提醒 : <#867811395474423838> 有4000的紀錄才能來這邊貼發文');
         client.channels.cache.get('964516826811858984').send('<@' + msg.member + '>今日尚未於 <#867811395474423838> 發文');
 
     }
