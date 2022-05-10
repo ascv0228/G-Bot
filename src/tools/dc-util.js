@@ -32,7 +32,7 @@ async function getUserByID(guild, UserID) {
 async function getMemberByTag(guild, str) {
     let MemberID = pickUserId(str);
     if (!MemberID) return;
-    console.log(UserID);
+    console.log(MemberID);
     let member = await getMemberByID(guild, MemberID);
     return member
 }
