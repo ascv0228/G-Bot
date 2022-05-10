@@ -5,7 +5,7 @@ module.exports = {
     name: "avatar",
     aliases: ["avt"],
 
-    execute(client, msg, args) {
+    async execute(client, msg, args) {
         let user = await dcUtil.getUserByTag(msg.guild, args[0])
         user = user || msg.author;
         console.log(user)
