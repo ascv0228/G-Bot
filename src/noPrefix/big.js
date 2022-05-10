@@ -15,8 +15,8 @@ module.exports = {
         let d2 = new Date();
         if ((d2.getTime() - d1) < 300000)
             return msg.reply({ content: '冷卻中' });
-        if (d2.getHours() < 2 || d2.getHours() > 15)
-            return msg.reply({ content: '冷卻中' });
+        if (d2.getHours() < 2 || d2.getHours() > 14)
+            return msg.reply({ content: '23:00 ~ 10:00 請勿打擾' });
         d1 = d2.getTime();
         return msg.reply({ content: '<@&948118013293494303>, ' + `${msg.member} 找你` });
 
