@@ -12,9 +12,12 @@ module.exports = {
     async execute(client, msg, args) {
         if (msg.author.id !== '411895879935590411') return;
 
-        var d = new Date();
-        d.setDate(d.getDate() - 1);
-        msg.channel.send(`${d.getHours()}、${d}`)
+
+        let d2 = new Date();
+        if (d2.getHours() < 2 || d2.getHours() > 14)
+            return msg.reply({ content: '23:00 ~ 10:00 請勿打擾' });
+
+        msg.channel.send(`${d2.getHours()}、${d2}`)
 
 
     }

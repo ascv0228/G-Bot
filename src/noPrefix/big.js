@@ -12,9 +12,12 @@ module.exports = {
         if (!flag || msg.member.permissions.has(this.permissions[0])) return;
         if (!this.channels.includes(msg.channel.id))
             return msg.reply({ content: '頻道錯誤' });
-        let d2 = new Date().getTime();
-        if ((d2 - d1) < 300000) return msg.reply({ content: '冷卻中' });
-        d1 = d2;
+        let d2 = new Date();
+        if ((d2.getTime() - d1) < 300000)
+            return msg.reply({ content: '冷卻中' });
+        if (d2.getHours() < 2 || d2.getHours() > 15)
+            return msg.reply({ content: '冷卻中' });
+        d1 = d2.getTime();
         return msg.reply({ content: '<@&948118013293494303>, ' + `${msg.member} 找你` });
 
     }
