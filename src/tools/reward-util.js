@@ -78,7 +78,6 @@ async function everyScheduleJob(client) {  //https://www.codexpedia.com/javascri
     });
 }
 
-
 const sendChannel = '967986563260772352'
 
 async function getRewardText(client, guild) {
