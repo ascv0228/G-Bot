@@ -10,6 +10,7 @@ const rewardUtil = require('./src/tools/reward-util.js');
 const tools = require('./src/tools/tools.js');
 const big = require('./src/noPrefix/big.js');
 const small = require('./src/noPrefix/small.js');
+const bluebuff = require('./src/noPrefix/bluebuff.js');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
@@ -91,6 +92,9 @@ client.on('messageCreate', msg => {
     }
     if (msg.content.includes('@小萌新') || msg.content.includes('<@&938748850112430091>')) {
         small.execute(client, msg);
+    }
+    if (msg.content.includes('@偷抓對面藍buff') || msg.content.includes('<@&931946175827959819>')) {
+        bluebuff.execute(client, msg);
     }
     const lines = msg.content.trim().split("\n");
     for (let i = 0; i < lines.length; ++i) {
