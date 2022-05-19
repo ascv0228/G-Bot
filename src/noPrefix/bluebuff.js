@@ -4,7 +4,7 @@
 module.exports = {
     name: "@偷抓對面藍buff",
     roles: ['931946175827959819'],
-    channels: ['832610209377288222', '867811248560144444', '948118924120166410'],
+    channels: ['956874346108964864'],
     permissions: ['ADMINISTRATOR'],
 
     execute(client, msg) {
