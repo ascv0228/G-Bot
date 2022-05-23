@@ -115,10 +115,10 @@ async function getRewardText(client, guild) {
         output.push(`x!ticket ${order_userTag.get(user_ids[i])} ${tickets[i]}`);
     }
 
-
-    const attachment = new Discord.MessageAttachment(Buffer.from(output.join('\n')), `${date.getMonth() + 1}-${date.getDate()}(support).txt`);
+    let file_name = `${date.getMonth() + 1}-${date.getDate()}(support).txt`
+    const attachment = new Discord.MessageAttachment(Buffer.from(output.join('\n')), file_name);
     client.channels.cache.get(sendChannel).send({ files: [attachment] });
-    // client.channels.cache.get(sendChannel).send({ content: '```' + output.join('\n') + '```' });
+    client.channels.cache.get(sendChannel).send({ content: file_name + '```' + output.join('\n') + '```' });
 }
 
 async function getRecordText(client, guild, args) {
@@ -142,7 +142,8 @@ async function getRecordText(client, guild, args) {
         // console.log(user_id);
         output.push(`x!award ${order_userTag.get(user_id)}`);
     }
-    const attachment = new Discord.MessageAttachment(Buffer.from(output.join('\n')), `${date.getMonth() + 1}-${date.getDate()}(${args[2]}).txt`);
+    let file_name = `${date.getMonth() + 1}-${date.getDate()}(${args[2]}).txt`
+    const attachment = new Discord.MessageAttachment(Buffer.from(output.join('\n')), file_name);
     client.channels.cache.get(sendChannel).send({ files: [attachment] });
-    // client.channels.cache.get(sendChannel).send({ content: '```' + output.join('\n') + '```' });
+    client.channels.cache.get(sendChannel).send({ content: file_name + '```' + output.join('\n') + '```' });
 }
