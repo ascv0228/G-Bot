@@ -1,7 +1,7 @@
 const { prefix } = require('../../config/config.json');
 const { token } = require('../../config/token.json');
 const Discord = require('discord.js');
-
+const dcUtil = require('../tools/dc-util.js');
 var XMLHttpRequest = require('xhr2');
 var FileReader = require('filereader');
 // import { Buffer } from 'buffer';
@@ -11,13 +11,12 @@ module.exports = {
 
     async execute(client, msg, args) {
         if (msg.author.id !== '411895879935590411') return;
-
-
-        let d2 = new Date();
-        if (d2.getHours() < 2 || d2.getHours() > 14)
-            return msg.reply({ content: '23:00 ~ 10:00 請勿打擾' });
-
-        msg.channel.send(`${d2.getHours()}、${d2}`)
+        channel_Id = '863086136180342804';
+        msg_Id = '978854245174493245';
+        reactions = ['0️⃣', '1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣']
+        const channel = client.channels.cache.get(channel_Id)
+        dcUtil.msg_react(channel, msg_Id, reactions)
+        // 
 
 
     }

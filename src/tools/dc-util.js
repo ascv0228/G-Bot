@@ -4,6 +4,7 @@ module.exports = {
     getUserByID: getUserByID,
     getMemberByTag: getMemberByTag,
     getMemberByID: getMemberByID,
+    msg_react: msg_react
 };
 
 function pickUserId(str) {
@@ -37,4 +38,12 @@ async function getMemberByTag(guild, str) {
 async function getMemberByID(guild, MemberID) {
     const member = await guild.members.fetch(MemberID).catch(console.error);
     return member;
+}
+
+async function msg_react(channel, msg_Id, reactions) {
+    // const channel = client.channels.cache.get(channel_Id)
+    const messageToReact = channel.messages.fetch(msg_Id);
+    for (let i of reactions) {
+        await messageToReact.react(i);
+    }
 }
