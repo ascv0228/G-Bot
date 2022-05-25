@@ -97,10 +97,10 @@ client.on('messageCreate', msg => {
     }
     if (msg.content.includes('@小萌新') || msg.content.includes('<@&938748850112430091>')) {
         small.execute(client, msg);
-    }
+    }/*
     if (msg.content.includes('@傳說') || msg.content.includes('@偷抓對面藍buff') || msg.content.includes('<@&931946175827959819>')) {
         bluebuff.execute(client, msg);
-    }
+    }*/
     const lines = msg.content.trim().split("\n");
     for (let i = 0; i < lines.length; ++i) {
         if (!msg.content.startsWith(`${prefix}`)) return;
