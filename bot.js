@@ -148,7 +148,10 @@ client.on('messageReactionRemove', (reaction, user) => {
     if (reaction.message.id != '978854245174493245') return;
     const member = reaction.message.guild.members.cache.get(user.id);
     if (!(reaction.emoji.name in client.memberRoles)) return;
-    member.roles.remove(client.memberRoles[reaction.message.id])
+    let flag = member.roles.has(client.memberRoles[reaction.message.id]);
+    if (flag) {
+        member.roles.remove(client.memberRoles[reaction.message.id]);
+    }
 });
 // 863086136180342804
 client.login(token);
