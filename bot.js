@@ -137,22 +137,19 @@ client.memberRoles = {
 9️⃣
 🔟*/
 client.on('messageReactionAdd', (reaction, user) => {
-    if (reaction.message.id != '978854245174493245') return;
+    if (reaction.message.id != '978852872177471518') return;
     const member = reaction.message.guild.members.cache.get(user.id);
-    // client.channels.cache.get('863086136180342804').send({ content: '`' + `${reaction.emoji.name}` + '`' });
+    if (member.user.bot) return;
     if (!(reaction.emoji.name in client.memberRoles)) return;
-    // client.channels.cache.get('863086136180342804').send({ content:
     member.roles.add(client.memberRoles[reaction.emoji.name])
 });
-// 978854245174493245
+
 client.on('messageReactionRemove', (reaction, user) => {
-    if (reaction.message.id != '978854245174493245') return;
+    if (reaction.message.id != '978852872177471518') return;
     const member = reaction.message.guild.members.cache.get(user.id);
+    if (member.user.bot) return;
     if (!(reaction.emoji.name in client.memberRoles)) return;
-    // let flag = member.roles.has(client.memberRoles[reaction.message.id]);
-    // if (flag) {
     member.roles.remove(client.memberRoles[reaction.emoji.name]);
-    // }
 });
-// 863086136180342804
+
 client.login(token);
