@@ -105,17 +105,37 @@ client.on('messageCreate', msg => {
         // if(exec.channel && exec.channel.includes)
         exec.execute(client, msg, args);
     }
-
-
 });
 
-
-async function AdminFunction(msg) {
-    if (msg.content.startsWith(`${prefix}getday`)) {
-        var d = new Date();
-        d.setDate(d.getDate() - 1);
-        //msg.channel.send(`${d.getHours()}、${d}`)
-    }
+client.memberRoles = {
+    '978841912859557888': "978841314546315284", //元氣騎士
+    '978848399602368512': "931946175827959819", //藍BUFF
+    '978848407714168872': "938768045646700594", //日麻
+    '978842912773275688': "968413297491738635", //打瓦
+    '978842918141964369': "973560687567720488", //PUBG
+    '977362245510115388': "977361812343369768", //APEX m
+    '978848908165926952': "967797624621109248", //LOL
+    // : "867718549723152404", //失去理智
+    '978848404920733706': "960013742777704490", //人偶
+    '978848402299318292': "853647561024864266" //決勝
 }
 
+client.on('messageReactionAdd', (reaction, user) => {
+    if (reaction.message.id != '978854245174493245') return;
+    const member = reaction.message.guild.members.cache.get(user.id);
+    client.channels.cache.get(sendChannel).send({ content: reaction.emoji.name });
+    // const emoji = '✅'
+    // if (reaction.emoji.name != emoji) return;
+    // member.roles.add(client.memberRoles[reaction.message.id])
+});
+// 978854245174493245
+client.on('messageReactionRemove', (reaction, user) => {
+    if (reaction.message.id != '978854245174493245') return;
+    const member = reaction.message.guild.members.cache.get(user.id);
+    // const emoji = '✅'
+    client.channels.cache.get(sendChannel).send({ content: reaction.emoji.name });
+    // if (reaction.emoji.name != emoji) return;
+    // member.roles.remove(client.memberRoles[reaction.message.id])
+});
+// 863086136180342804
 client.login(token);
