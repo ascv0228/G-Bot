@@ -12,7 +12,12 @@ const big = require('./src/noPrefix/big.js');
 const small = require('./src/noPrefix/small.js');
 const bluebuff = require('./src/noPrefix/bluebuff.js');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const client = new Client(
+    {
+        intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS],
+        partials: ['MESSAGE', 'CHANNEL', 'REACTION'],
+    });
+
 
 process.on('uncaughtException', (err, origin) => {
     console.error(err.stack);
@@ -122,8 +127,9 @@ client.memberRoles = {
 
 client.on('messageReactionAdd', (reaction, user) => {
     if (reaction.message.id != '978854245174493245') return;
-    const member = reaction.message.guild.members.cache.get(user.id);
-    client.channels.cache.get('863086136180342804').send({ content: reaction.emoji.name });
+    // const member = reaction.message.guild.members.cache.get(user.id);
+    client.channels.cache.get('863086136180342804').send({ content: '有' })
+    client.channels.cache.get('863086136180342804').send({ content: `${reaction.emoji.name}` });
     // const emoji = '✅'
     // if (reaction.emoji.name != emoji) return;
     // member.roles.add(client.memberRoles[reaction.message.id])
