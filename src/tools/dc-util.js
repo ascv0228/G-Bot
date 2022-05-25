@@ -42,7 +42,7 @@ async function getMemberByID(guild, MemberID) {
 
 async function msg_react(channel, msg_Id, reactions) {
     // const channel = client.channels.cache.get(channel_Id)
-    const messageToReact = channel.messages.fetch(msg_Id);
+    const messageToReact = await channel.messages.fetch(msg_Id);
     for (let i of reactions) {
         await messageToReact.react(i);
     }
