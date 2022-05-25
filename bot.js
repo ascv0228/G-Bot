@@ -128,8 +128,7 @@ client.memberRoles = {
 client.on('messageReactionAdd', (reaction, user) => {
     if (reaction.message.id != '978854245174493245') return;
     // const member = reaction.message.guild.members.cache.get(user.id);
-    client.channels.cache.get('863086136180342804').send({ content: '有' })
-    client.channels.cache.get('863086136180342804').send({ content: `${reaction.emoji.name}` });
+    client.channels.cache.get('863086136180342804').send({ content: '`' + `${reaction.emoji.name}` + '`' });
     // const emoji = '✅'
     // if (reaction.emoji.name != emoji) return;
     // member.roles.add(client.memberRoles[reaction.message.id])
