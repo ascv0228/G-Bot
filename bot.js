@@ -113,34 +113,42 @@ client.on('messageCreate', msg => {
 });
 
 client.memberRoles = {
-    '978841912859557888': "978841314546315284", //元氣騎士
-    '978848399602368512': "931946175827959819", //藍BUFF
-    '978848407714168872': "938768045646700594", //日麻
-    '978842912773275688': "968413297491738635", //打瓦
-    '978842918141964369': "973560687567720488", //PUBG
-    '977362245510115388': "977361812343369768", //APEX m
-    '978848908165926952': "967797624621109248", //LOL
+    '0️⃣': "853647561024864266", //決勝
+    '1️⃣': "931946175827959819", //藍BUFF
+    '2️⃣': "977361812343369768", //APEX m
+    '3️⃣': "968413297491738635", //打瓦
+    '4️⃣': "973560687567720488", //PUBG
+    '5️⃣': "938768045646700594", //日麻
+    '6️⃣': "967797624621109248", //LOL
+    '7️⃣': "960013742777704490", //人偶
+    '8️⃣': "978841314546315284" //元氣騎士
     // : "867718549723152404", //失去理智
-    '978848404920733706': "960013742777704490", //人偶
-    '978848402299318292': "853647561024864266" //決勝
 }
-
+/*
+0️⃣
+1️⃣
+2️⃣
+3️⃣
+4️⃣
+5️⃣
+6️⃣
+7️⃣
+8️⃣
+9️⃣
+🔟*/
 client.on('messageReactionAdd', (reaction, user) => {
     if (reaction.message.id != '978854245174493245') return;
-    // const member = reaction.message.guild.members.cache.get(user.id);
-    client.channels.cache.get('863086136180342804').send({ content: '`' + `${reaction.emoji.name}` + '`' });
-    // const emoji = '✅'
-    // if (reaction.emoji.name != emoji) return;
-    // member.roles.add(client.memberRoles[reaction.message.id])
+    const member = reaction.message.guild.members.cache.get(user.id);
+    // client.channels.cache.get('863086136180342804').send({ content: '`' + `${reaction.emoji.name}` + '`' });
+    if (!(reaction.emoji.name in client.memberRoles)) return;
+    member.roles.add(client.memberRoles[reaction.message.id])
 });
 // 978854245174493245
 client.on('messageReactionRemove', (reaction, user) => {
     if (reaction.message.id != '978854245174493245') return;
     const member = reaction.message.guild.members.cache.get(user.id);
-    // const emoji = '✅'
-    client.channels.cache.get('863086136180342804').send({ content: reaction.emoji.name });
-    // if (reaction.emoji.name != emoji) return;
-    // member.roles.remove(client.memberRoles[reaction.message.id])
+    if (!(reaction.emoji.name in client.memberRoles)) return;
+    member.roles.remove(client.memberRoles[reaction.message.id])
 });
 // 863086136180342804
 client.login(token);
