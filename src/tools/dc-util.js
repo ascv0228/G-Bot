@@ -47,3 +47,21 @@ async function msg_react(channel, msg_Id, reactions) {
         await messageToReact.react(i);
     }
 }
+
+/* change channel roles Permission*/
+
+async function changeChannelPermission(guild, channel_Id, role_id, changePermissions) {
+    /*changePermissions = { 'SEND_MESSAGES': false }*/
+    let channel = await client.channels.cache.get(channel_Id);
+    let changedRole = guild.roles.get(role_id);
+
+    // find specific role - enter name of a role you create here
+    // let testRole = roles.cache.find(r => r.id === 'role_id_here');
+
+    // overwrites 'SEND_MESSAGES' role, only on this specific channel
+    channel.overwritePermissions(
+        changedRole,
+        changePermissions
+    ).then(console.log);
+    // handle responses / errors
+}

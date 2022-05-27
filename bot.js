@@ -88,10 +88,6 @@ client.on('messageCreate', msg => {
     }
 
     rewardUtil.confirmReward(client, msg);
-    /*
-        if (msg.member.roles.cache.has('863405200562454548') && msg.author.id == '411895879935590411') {
-            console.log('GG')
-        }*/
     if (msg.content.includes('@佬') || msg.content.includes('<@&948118013293494303>')) {
         big.execute(client, msg);
     }
