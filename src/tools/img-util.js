@@ -5,13 +5,14 @@ module.exports = {
     getImageUrlArray: getImageUrlArray
 };
 
-const img_subFiles = [".png", ".jpg", ".jpeg", ".webp", ".PNG", ".JPG", ".JPEG", ".WEBP"]
-function IsImage(url) {
-    for (let i of img_subFiles) {
-        if (url.endsWith[i])
-            return true
+async function getImageUrlArray(msg) {
+    let ImageUrlArray = new Array();
+    for (const [_, att] of msg.attachments) {
+        if (att.url.endsWith('.gif') || att.url.endsWith('.GIF'))
+            continue;
+        ImageUrlArray.push(att.url);
     }
-    return false;
+    return ImageUrlArray;
 }
 
 async function getNotDupeCountFromMsg(client, msg) {
@@ -38,44 +39,37 @@ async function getNotDupeCount(client, msg, ImageUrlArray) {
     }
     return count;
 }
-/*
-async function getImageUrlArray(msg) {
-    let ImageUrlArray = new Array();
-    await msg.attachments.forEach(attachment => {
-        const ImageUrl = attachment.proxyURL;
-        if (IsImage(ImageUrl)) {
-            ImageUrlArray.push(ImageUrl);
-        }
-    });
-    //console.log(ImageUrlArray);
-    // if (ImageUrlArray == undefined || ImageUrlArray.length == 0)
-    //     console.log(`ImageUrlArray: ${ImageUrlArray}`);
-    return ImageUrlArray;
-}*/
-async function getImageUrlArray(msg) {
-    let ImageUrlArray = new Array();
-    for (const [_, att] of msg.attachments) {
-        if (att.url.endsWith('.gif') || att.url.endsWith('.GIF'))
-            continue;
-        ImageUrlArray.push(att.url);
-    }
-    return ImageUrlArray;
-}
 
-function getHashDataFromUrl(url) {
-    return new Promise((resolve, reject) => {
-        //url = cutImageUrl(url);
-        imageHash(url, 16, true, (error, data) => {
-            if (error) {
-                resolve('error');
-            }
-            resolve(data);
-        })
+
+var request = require('request').defaults({ encoding: null });
+const crypto = require('crypto');
+const sha256 = x => crypto.createHash('sha256').update(x).digest('base64');
+
+const zlib = require('zlib');
+async function getBase64FromImageUrl(url) {
+    return new Promise(function (resolve, reject) {
+        const gzip = zlib.createGzip();
+
+        const data = [];
+
+        request.get(url)
+            .pipe(gzip)
+            .on('data', (d) => {
+                data.push(d);
+            })
+            .on('error', (e) => {
+                reject(e);
+            })
+            .on('end', () => {
+                resolve(Buffer.concat(data).toString("base64"));
+            });
     });
 }
 
-
-
+async function getHashDataFromUrl(url) {
+    let base64 = await getBase64FromImageUrl(url);
+    return sha256(base64);
+}
 
 async function insertHashToDatabase(client, msg, hashData) {
     let channelId = msg.channel.id

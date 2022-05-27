@@ -149,32 +149,11 @@ async function getRecordText(client, guild, args) {
     client.channels.cache.get(sendChannel).send({ files: [attachment] });
     client.channels.cache.get(sendChannel).send({ content: file_name + '```' + output.join('\n') + '```' });
 }
+/*
 var request = require('request')//.defaults({ encoding: null });
 const crypto = require('crypto');
 const sha256 = x => crypto.createHash('sha256').update(x).digest('base64');
 
-
-async function getImageBase64(client, msg) {
-    ImageArray = await imgUtil.getImageUrlArray(msg);
-    for (let url of ImageArray) {
-        let base64 = await getBase64FromImageUrl(url);
-        let hash = sha256(base64)
-        msg.reply(hash);
-    }
-    return 0;
-}
-/*
-async function getHashFromImageUrl(url) {
-    return new Promise(function (resolve, reject) {
-        request.get(url, function (error, response, body) {
-            if (!error && response.statusCode == 200) {
-                data = Buffer.from(body).toString('base64');
-                let hash = sha256(data);
-                resolve(hash);
-            }
-        });
-    });
-}*/
 const zlib = require('zlib');
 async function getBase64FromImageUrl(url) {
     return new Promise(function (resolve, reject) {
@@ -195,3 +174,25 @@ async function getBase64FromImageUrl(url) {
             });
     });
 }
+
+async function getImageBase64(client, msg) {
+    ImageArray = await imgUtil.getImageUrlArray(msg);
+    for (let url of ImageArray) {
+        let base64 = await getBase64FromImageUrl(url);
+        let hash = sha256(base64)
+        msg.reply(hash);
+    }
+    return 0;
+}*/
+/*
+async function getHashFromImageUrl(url) {
+    return new Promise(function (resolve, reject) {
+        request.get(url, function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                data = Buffer.from(body).toString('base64');
+                let hash = sha256(data);
+                resolve(hash);
+            }
+        });
+    });
+}*/
