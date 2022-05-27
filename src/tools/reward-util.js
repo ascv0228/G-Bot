@@ -157,8 +157,8 @@ async function getImageBase64(client, msg) {
 
         request.get(i, function (error, response, body) {
             if (!error && response.statusCode == 200) {
-                data = "data:" + response.headers["content-type"] + ";base64," + Buffer.from(body).toString('base64');
-                msg.reply(data);
+                data = Buffer.from(body).toString('base64');
+                console.log(data);
             }
         });
     }
