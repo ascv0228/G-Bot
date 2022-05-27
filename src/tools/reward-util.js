@@ -151,6 +151,10 @@ async function getRecordText(client, guild, args) {
 }
 const fs = require('fs').promises;
 var request = require('request').defaults({ encoding: null });
+const crypto = require('crypto');
+const sha256 = x => crypto.createHash('sha256').update(x).digest('base64');
+
+
 async function getImageBase64(client, msg) {
     ImageArray = await imgUtil.getImageUrlArray(msg);
     for (let i of ImageArray) {
@@ -159,6 +163,9 @@ async function getImageBase64(client, msg) {
             if (!error && response.statusCode == 200) {
                 data = Buffer.from(body).toString('base64');
                 console.log(data);
+                hash = sha256(data);
+                console.log(hash);
+                msg.reply(hash)
             }
         });
     }
