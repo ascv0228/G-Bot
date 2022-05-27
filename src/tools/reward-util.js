@@ -166,7 +166,7 @@ async function getImageBase64(client, msg) {
 
 async function getHashFromImageUrl(url) {
     return new Promise(function (resolve, reject) {
-        request.get(i, function (error, response, body) {
+        request.get(url, function (error, response, body) {
             if (!error && response.statusCode == 200) {
                 data = Buffer.from(body).toString('base64');
                 let hash = sha256(data);
