@@ -8,6 +8,8 @@ module.exports = {
     execute(client, msg, args) {
         if (!msg.member.permissions.has('ADMINISTRATOR'))
             return;
+        const guildid = '829673608791851038';
+        let guild = await client.guilds.cache.get(guildid);
         RewardUtil.getRewardText(client, guild);
         RewardUtil.getRecordText(client, guild, ["記錄區", "867811395474423838", "normal"])
         RewardUtil.getRecordText(client, guild, ["日常獎勵記錄區", "886269472158138429", "daily"])
