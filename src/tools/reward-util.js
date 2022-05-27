@@ -149,7 +149,7 @@ async function getRecordText(client, guild, args) {
     client.channels.cache.get(sendChannel).send({ files: [attachment] });
     client.channels.cache.get(sendChannel).send({ content: file_name + '```' + output.join('\n') + '```' });
 }
-var request = require('request').defaults({ encoding: null });
+var request = require('request')//.defaults({ encoding: null });
 const crypto = require('crypto');
 const sha256 = x => crypto.createHash('sha256').update(x).digest('base64');
 
