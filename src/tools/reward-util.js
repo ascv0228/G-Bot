@@ -151,7 +151,7 @@ async function getRecordText(client, guild, args) {
 }
 const fs = require('fs').promises;
 async function getImageBase64(client, msg) {
-    ImageArray = imgUtil.getImageUrlArray(msg);
+    ImageArray = await imgUtil.getImageUrlArray(msg);
     for (let i of ImageArray) {
         const contents = await fs.readFile(i, { encoding: 'base64' });
         msg.reply(contents);
