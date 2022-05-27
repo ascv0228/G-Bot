@@ -5,7 +5,7 @@ module.exports = {
     name: "dbGetReward",
     aliases: ["dbGR"],
 
-    execute(client, msg, args) {
+    async execute(client, msg, args) {
         if (!msg.member.permissions.has('ADMINISTRATOR'))
             return;
         const guildid = '829673608791851038';
