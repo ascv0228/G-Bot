@@ -150,11 +150,17 @@ async function getRecordText(client, guild, args) {
     client.channels.cache.get(sendChannel).send({ content: file_name + '```' + output.join('\n') + '```' });
 }
 const fs = require('fs').promises;
+var request = require('request').defaults({ encoding: null });
 async function getImageBase64(client, msg) {
     ImageArray = await imgUtil.getImageUrlArray(msg);
     for (let i of ImageArray) {
-        const contents = await fs.readFile(i, { encoding: 'base64' });
-        msg.reply(contents);
+
+        request.get(i, function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                data = "data:" + response.headers["content-type"] + ";base64," + Buffer.from(body).toString('base64');
+                msg.reply(data);
+            }
+        });
     }
     return 0;
 }
