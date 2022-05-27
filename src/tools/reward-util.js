@@ -159,15 +159,20 @@ async function getImageBase64(client, msg) {
     ImageArray = await imgUtil.getImageUrlArray(msg);
     for (let i of ImageArray) {
 
+        let hash = getHashFromImageUrl(url);
+        msg.reply(hash);
+    }
+    return 0;
+}
+
+async function getHashFromImageUrl(url) {
+    return new Promise(function (resolve, reject) {
         request.get(i, function (error, response, body) {
             if (!error && response.statusCode == 200) {
                 data = Buffer.from(body).toString('base64');
-                console.log(data);
-                hash = sha256(data);
-                console.log(hash);
-                msg.reply(hash)
+                let hash = sha256(data);
+                resolve(hash);
             }
         });
-    }
-    return 0;
+    });
 }
