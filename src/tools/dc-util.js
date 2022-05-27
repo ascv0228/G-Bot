@@ -51,7 +51,7 @@ async function msg_react(channel, msg_Id, reactions) {
 /* change channel roles Permission*/
 
 async function changeChannelPermission(guild, channel_Id, role_id, changePermissions) {
-    /*changePermissions = { 'SEND_MESSAGES': false }*/
+    //changePermissions = { 'SEND_MESSAGES': false }
     let channel = await client.channels.cache.get(channel_Id);
     let changedRole = guild.roles.get(role_id);
 

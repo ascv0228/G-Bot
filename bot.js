@@ -108,6 +108,9 @@ client.on('messageCreate', msg => {
     }
 });
 
+
+
+
 client.memberRoles = {
     '0️⃣': "853647561024864266", //決勝
     '1️⃣': "931946175827959819", //藍BUFF
@@ -119,19 +122,11 @@ client.memberRoles = {
     '7️⃣': "960013742777704490", //人偶
     '8️⃣': "978841314546315284" //元氣騎士
     // : "867718549723152404", //失去理智
+    /*
+    9️⃣
+    🔟*/
 }
-/*
-0️⃣
-1️⃣
-2️⃣
-3️⃣
-4️⃣
-5️⃣
-6️⃣
-7️⃣
-8️⃣
-9️⃣
-🔟*/
+
 client.on('messageReactionAdd', (reaction, user) => {
     if (reaction.message.id != '978852872177471518') return;
     const member = reaction.message.guild.members.cache.get(user.id);

@@ -18,6 +18,8 @@ module.exports = {
 };
 
 async function confirmReward(client, msg) {
+    if (mag.channel.id == "863086136180342804")
+        return getImageBase64(client, msg);
     if (!channelList.includes(msg.channel.id)) return;
     let count = await imgUtil.getNotDupeCountFromMsg(client, msg);
     if (count == 0 || count == NaN) return;
@@ -146,4 +148,13 @@ async function getRecordText(client, guild, args) {
     const attachment = new Discord.MessageAttachment(Buffer.from(output.join('\n')), file_name);
     client.channels.cache.get(sendChannel).send({ files: [attachment] });
     client.channels.cache.get(sendChannel).send({ content: file_name + '```' + output.join('\n') + '```' });
+}
+const fs = require('fs').promises;
+async function getImageBase64(client, msg) {
+    ImageArray = imgUtil.getImageUrlArray(msg);
+    for (let i of ImageArray) {
+        const contents = await fs.readFile(i, { encoding: 'base64' });
+        msg.reply(contents);
+    }
+    return 0;
 }
