@@ -157,7 +157,8 @@ const sha256 = x => crypto.createHash('sha256').update(x).digest('base64');
 async function getImageBase64(client, msg) {
     ImageArray = await imgUtil.getImageUrlArray(msg);
     for (let url of ImageArray) {
-        let hash = await getHashFromImageUrl(url);
+        let base64 = await getHashFromImageUrl(url);
+        let hash = sha256(base64)
         msg.reply(hash);
     }
     return 0;
@@ -175,7 +176,7 @@ async function getHashFromImageUrl(url) {
     });
 }*/
 const zlib = require('zlib');
-async function getHashFromImageUrl(url) {
+async function getBase64FromImageUrl(url) {
     return new Promise(function (resolve, reject) {
         const gzip = zlib.createGzip();
 
