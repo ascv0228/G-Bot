@@ -18,8 +18,8 @@ module.exports = {
 };
 
 async function confirmReward(client, msg) {
-    if (msg.channel.id == "863086136180342804")
-        return getImageBase64(client, msg);
+    // if (msg.channel.id == "863086136180342804")
+    //     return imgUtil.getImageBase64(client, msg);
     if (!channelList.includes(msg.channel.id)) return;
     let count = await imgUtil.getNotDupeCountFromMsg(client, msg);
     if (count == 0 || count == NaN) return;
