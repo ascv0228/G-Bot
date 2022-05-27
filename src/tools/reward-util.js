@@ -157,8 +157,7 @@ const sha256 = x => crypto.createHash('sha256').update(x).digest('base64');
 
 async function getImageBase64(client, msg) {
     ImageArray = await imgUtil.getImageUrlArray(msg);
-    for (let i of ImageArray) {
-
+    for (let url of ImageArray) {
         let hash = getHashFromImageUrl(url);
         msg.reply(hash);
     }
