@@ -7,10 +7,9 @@ module.exports = {
 
 const img_subFiles = [".png", ".jpg", ".jpeg", ".webp", ".PNG", ".JPG", ".JPEG", ".WEBP"]
 function IsImage(url) {
-    for (let i = 0; i < img_subFiles.length; ++i) {
-        let index = url.indexOf(img_subFiles[i], 40);
-        if (index == -1) continue;
-        return true
+    for (let i of img_subFiles) {
+        if (url.endsWith[i])
+            return true
     }
     return false;
 }
@@ -27,8 +26,8 @@ async function getNotDupeCount(client, msg, ImageUrlArray) {
     let count = 0
     for (let i = 0; i < ImageUrlArray.length; ++i) {
         const hash = await getHashDataFromUrl(ImageUrlArray[i]);
-        if (hash == '0') continue;
         if (hash == 'error') {
+            console.log(ImageUrlArray[i] + "has error.")
             count++;
             continue;
         }
@@ -39,7 +38,7 @@ async function getNotDupeCount(client, msg, ImageUrlArray) {
     }
     return count;
 }
-
+/*
 async function getImageUrlArray(msg) {
     let ImageUrlArray = new Array();
     await msg.attachments.forEach(attachment => {
@@ -52,10 +51,18 @@ async function getImageUrlArray(msg) {
     // if (ImageUrlArray == undefined || ImageUrlArray.length == 0)
     //     console.log(`ImageUrlArray: ${ImageUrlArray}`);
     return ImageUrlArray;
+}*/
+async function getImageUrlArray(msg) {
+    let ImageUrlArray = new Array();
+    for (const [_, att] of msg.attachments) {
+        if (att.url.endsWith('.gif') || att.url.endsWith('.GIF'))
+            continue;
+        ImageUrlArray.push(att.url);
+    }
+    return ImageUrlArray;
 }
 
 function getHashDataFromUrl(url) {
-    if (!IsImage(url)) return '0';
     return new Promise((resolve, reject) => {
         //url = cutImageUrl(url);
         imageHash(url, 16, true, (error, data) => {
@@ -67,29 +74,6 @@ function getHashDataFromUrl(url) {
     });
 }
 
-/*
-!function () {
-    var xhr = new XMLHttpRequest();
-    // 也可以使用POST方式，根据接口，测试的图片是百度搜索首页的logo（2019-11-28 17:35）
-    xhr.open('GET', 'http://127.0.0.1:8080/bd_logo1.png', true);
-    // 返回类型blob
-    xhr.onload = function () {
-        if (this.status === 200) {
-            // 获得二进制
-            var blob = this.response;
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                var spark = new SparkMD5.ArrayBuffer()
-                spark.append(e.target.result)
-                console.log("md5:", spark.end())
-            }
-            //转换成FileReader对象
-            reader.readAsArrayBuffer(blob);
-        }
-    }
-    xhr.send();
-}();
-*/
 
 
 
