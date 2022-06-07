@@ -36,6 +36,7 @@ module.exports = {
                 msg_.react(`✅`)
                 let id = msg_.id;
                 client.command_member_role.set(id, roleid);
+                console.log(client.command_member_role)
                 setTimeout(() => {
                     msg.channel.messages.fetch(id).then(msg => msg.delete());
                     client.command_member_role.delete(id);
