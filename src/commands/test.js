@@ -33,6 +33,9 @@ module.exports = {
                     .then(() => msg_.react('❌'));
                 let id = msg_.id;
                 msg.channel.send({ content: `${id}` })
+                setTimeout(() => {
+                    msg.channel.fetchMessage(id).then(msg => msg.delete());
+                }, "5000")
             });
 
 
