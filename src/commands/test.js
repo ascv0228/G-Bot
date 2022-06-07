@@ -32,7 +32,9 @@ module.exports = {
                 msg_.react(`✔`)
                     .then(() => msg_.react('❌'));
 
-            })/*
+            }).then((msg_) => {
+                setTimeout(() => msg_.delete(), 5000)
+            });/*
             .then(msg_ => {
                 setTimeout(() => msg_.delete(), 5000)
             });*/
