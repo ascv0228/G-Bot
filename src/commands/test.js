@@ -31,7 +31,6 @@ module.exports = {
         // let roleid = dcUtil.createRole(msg.guild, "活動參與者").id;
         let role = await createRole(msg.guild, "活動參與者");
         let roleid = role.id;
-        msg.channel.send({ content: "roleid: " + roleid })
         msg.channel.send({ embeds: [repVoteEmbed], content: "活動進行中，點選下方貼圖" })
             .then((msg_) => {
                 msg_.react(`✅`)
