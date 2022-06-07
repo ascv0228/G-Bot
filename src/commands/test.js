@@ -46,15 +46,12 @@ module.exports = {
 };
 
 async function createRole(guild, name) {
-    guild.roles.create({
+    return await guild.roles.create({
         data: {
             name: 'rank1',
             color: '992d22'
         }
-    }).then(role => {
-        let roleId = role.id;
-        return roleId
-    });
+    })
 }
 /*let repUser = message.mentions.members.first();
 if (!repUser) {
