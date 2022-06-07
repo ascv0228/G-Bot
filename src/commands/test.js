@@ -27,7 +27,7 @@ module.exports = {
             text: `Vote by: ${msg.author.tag}, started on : ${msg.createdAt}`
         });
         msg.delete()
-        this_msg = msg.channel.send({ embeds: [repVoteEmbed], content: "00" })
+        this_msg = await msg.channel.send({ embeds: [repVoteEmbed], content: "00" })
             .then((msg_) => {
                 msg_.react(`✔`)
                     .then(() => msg_.react('❌'));
