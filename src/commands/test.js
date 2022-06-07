@@ -37,7 +37,7 @@ module.exports = {
                 setTimeout(() => {
                     msg.channel.messages.fetch(id).then(msg => msg.delete());
                     msg.channel.send({ embeds: [repVoteEmbed.setDescription(args.slice(1).join("\n") + "\n結束")], content: "活動結束" })
-                }, "5000")
+                }, `${parseInt(args[0]) * 60 * 1000}`)
             });
 
 
