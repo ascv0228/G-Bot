@@ -134,12 +134,10 @@ client.on('messageReactionAdd', (reaction, user) => {
         member.roles.add(client.memberRoles[reaction.emoji.name])
     }
     if (client.command_member_role.has(reaction.message.id)) {
-        reaction.message.channel.send({ content: "有點react" });
         const member = reaction.message.guild.members.cache.get(user.id);
         if (member.user.bot) return;
         if (reaction.emoji.name != '✅') return;
         member.roles.add(client.command_member_role[reaction.message.id]);
-        reaction.message.channel.send({ content: "有給身分組" });
     }
 });
 
