@@ -26,16 +26,22 @@ module.exports = {
         repVoteEmbed.setFooter({
             text: `Vote by: ${msg.author.tag}, started on : ${msg.createdAt}`
         });
-        this_msg = msg.channel.send({ embeds: [repVoteEmbed] }).then((msg_) => {
-            msg_.react(`✔`).then(() => msg_.react('❌'));
-        });
-        msg.channel.send({ content: `${typeof msg}` });
-        msg.channel.send({ content: `${typeof this_msg}` });
-        setTimeout(() => {
-            this_msg.delete();
-            msg.channel.send({ content: "msg delete" });
-        }, 5000);
+        this_msg = msg.channel.send({ embeds: [repVoteEmbed] })
+            .then((msg_) => {
+                msg_.react(`✔`)
+                    .then(() => msg_.react('❌'))
+                    .then(msg_ => {
+                        msg.delete()
+                        setTimeout(() => msg_.delete(), 5000)
+                    });
+            });
 
     }
 };
 
+message.reply("text")
+    .then(msg => {
+        message.delete()
+        setTimeout(() => msg.delete(), 5000)
+    })
+    .catch()
