@@ -26,7 +26,7 @@ module.exports = {
         repVoteEmbed.setFooter({
             text: `Vote by: ${msg.author.tag}, started on : ${msg.createdAt}`
         });
-        this_msg = msg.channel.send({ embeds: [repVoteEmbed] })
+        this_msg = msg.channel.send({ embeds: [repVoteEmbed], content: "00" })
             .then((msg_) => {
                 msg_.react(`✔`)
                     .then(() => msg_.react('❌'));
@@ -35,7 +35,7 @@ module.exports = {
             })
             .then(msg_ => {
                 setTimeout(() => msg_.delete(), 5000)
-            });;
+            });
 
     }
 };
