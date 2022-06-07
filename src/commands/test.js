@@ -23,8 +23,10 @@ module.exports = {
         }*/
         const repVoteEmbed = new Discord.MessageEmbed();
         repVoteEmbed.setTitle('Vote for Representative Members :crown:');
-        repVoteEmbed.setFooter(`Vote by: ${msg.author.tag}, started on : ${msg.createdAt}`);
-        this_msg = await msg.channel.send({ embeds: [repVoteEmbed] }).then((msg_) => {
+        repVoteEmbed.setFooter({
+            text: `Vote by: ${msg.author.tag}, started on : ${msg.createdAt}`
+        });
+        this_msg = msg.channel.send({ embeds: [repVoteEmbed] }).then((msg_) => {
             msg_.react(`✔`).then(() => msg_.react('❌'));
         });
         setTimeout(() => {
