@@ -133,6 +133,12 @@ client.on('messageReactionAdd', (reaction, user) => {
         if (!(reaction.emoji.name in client.memberRoles)) return;
         member.roles.add(client.memberRoles[reaction.emoji.name])
     }
+    if (client.command_member_role.has(reaction.message.id)) {
+        const member = reaction.message.guild.members.cache.get(user.id);
+        if (member.user.bot) return;
+        if (reaction.emoji.name != '✅') return;
+        member.roles.add(client.command_member_role[reaction.message.id]);
+    }
 });
 
 client.on('messageReactionRemove', (reaction, user) => {
@@ -141,6 +147,12 @@ client.on('messageReactionRemove', (reaction, user) => {
         if (member.user.bot) return;
         if (!(reaction.emoji.name in client.memberRoles)) return;
         member.roles.remove(client.memberRoles[reaction.emoji.name]);
+    }
+    if (client.command_member_role.has(reaction.message.id)) {
+        const member = reaction.message.guild.members.cache.get(user.id);
+        if (member.user.bot) return;
+        if (reaction.emoji.name != '✅') return;
+        member.roles.remove(client.command_member_role[reaction.message.id]);
     }
 });
 

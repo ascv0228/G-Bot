@@ -18,30 +18,28 @@ module.exports = {
         let d1 = new Date().getTime();
         d1 += (8 * 60 * 60 * 1000);
         var date2 = new Date(d1 + (parseInt(args[0]) * 60 * 1000))
-
+        let timeStr = date2.toString().split(' GMT')[0]
 
         const repVoteEmbed = new Discord.MessageEmbed();
         repVoteEmbed.setTitle(`${msg.author.tag} 發起新活動`)
-            .setDescription(args.slice(1).join("\n") + `\n\n限時${args[0]}分鐘\n於${date2.toString().split(' GMT')[0]}結束`)
+            .setDescription(args.slice(1).join("\n") + `\n\n限時${args[0]}分鐘\n於${timeStr}結束`)
             .setFooter({
                 text: msg.author.tag,
                 iconURL: msg.member.displayAvatarURL({ dynamic: true })
             });
         msg.delete()
-        this_msg = await msg.channel.send({ embeds: [repVoteEmbed], content: "00" })
+        let roleid = dcUtil.createRole(guild, "活動參與者").id;
+        msg.channel.send({ embeds: [repVoteEmbed], content: "活動進行中，點選下方貼圖" })
             .then((msg_) => {
-                msg_.react(`✔`)
-                    .then(() => msg_.react('❌'));
+                msg_.react(`✅`)
                 let id = msg_.id;
-                msg.channel.send({ content: `${id}` })
+                client.command_member_role.set(id, roleid);
                 setTimeout(() => {
                     msg.channel.messages.fetch(id).then(msg => msg.delete());
-                    msg.channel.send({ embeds: [repVoteEmbed.setDescription(args.slice(1).join("\n") + "\n結束")], content: "活動結束" })
+                    client.command_member_role.delete(id);
+                    msg.channel.send({ embeds: [repVoteEmbed.setDescription(args.slice(1).join("\n") + `\n活動已於${timeStr}結束"`)], content: "活動結束" })
                 }, `${parseInt(args[0]) * 60 * 1000}`)
             });
-
-
-
     }
 };
 

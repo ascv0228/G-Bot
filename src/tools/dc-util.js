@@ -6,7 +6,8 @@ module.exports = {
     getMemberByTag: getMemberByTag,
     getMemberByID: getMemberByID,
     getRoleByID: getRoleByID,
-    msg_react: msg_react
+    msg_react: msg_react,
+    createRole: createRole
 };
 
 function pickUserId(str) {
@@ -86,4 +87,14 @@ async function changeChannelPermission(guild, channel_Id, role_id, changePermiss
         changePermissions
     ).then(console.log);
     // handle responses / errors
+}
+
+async function createRole(guild, name) {
+    let role = await guild.roles.create({
+        data: {
+            name: name,
+            color: 'BLUE',
+        }
+    })
+    return role
 }
