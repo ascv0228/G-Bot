@@ -35,6 +35,7 @@ module.exports = {
                 let id = msg_.id;
                 client.command_member_role.set(id, roleid);
                 setTimeout(() => {
+                    msg.channel.send({ content: `${parseInt(args[0]) * 60 * 1000}` })
                     msg.channel.messages.fetch(id).then(msg => msg.delete());
                     client.command_member_role.delete(id);
                     msg.channel.send({ embeds: [repVoteEmbed.setDescription(args.slice(1).join("\n") + `\n活動已於${timeStr}結束"`)], content: "活動結束" })
