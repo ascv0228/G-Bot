@@ -137,7 +137,7 @@ client.on('messageReactionAdd', (reaction, user) => {
         const member = reaction.message.guild.members.cache.get(user.id);
         if (member.user.bot) return;
         if (reaction.emoji.name != '✅') return;
-        member.roles.add(client.command_member_role[reaction.message.id]);
+        member.roles.add(client.command_member_role.get(reaction.message.id));
     }
 });
 
