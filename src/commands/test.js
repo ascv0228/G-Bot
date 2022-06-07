@@ -17,9 +17,8 @@ module.exports = {
         }
         let d1 = new Date().getTime();
         d1 += (8 * 60 * 60 * 1000);
-        var date = new Date(d1)
-        var date2 = new Data(d1 + (parseInt(args[0]) * 60 * 1000))
-        let output = [`==========${date.getMonth() + 1}/${date.getDate()} 輔助獎勵區==========\n`];
+        var date2 = new Date(d1 + (parseInt(args[0]) * 60 * 1000))
+
 
         const repVoteEmbed = new Discord.MessageEmbed();
         repVoteEmbed.setTitle(`${msg.author.tag} 發起新活動`)
