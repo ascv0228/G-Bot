@@ -31,11 +31,10 @@ module.exports = {
                 msg_.react(`✔`)
                     .then(() => msg_.react('❌'));
 
-                msg.delete()
-            })
+            }).delete({ timeout: "2000" })/*
             .then(msg_ => {
                 setTimeout(() => msg_.delete(), 5000)
-            });
+            });*/
 
     }
 };
