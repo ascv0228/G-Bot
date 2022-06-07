@@ -121,26 +121,27 @@ client.memberRoles = {
     '6️⃣': "967797624621109248", //LOL
     '7️⃣': "960013742777704490", //人偶
     '8️⃣': "978841314546315284" //元氣騎士
-    // : "867718549723152404", //失去理智
     /*
     9️⃣
     🔟*/
 }
 
 client.on('messageReactionAdd', (reaction, user) => {
-    if (reaction.message.id != '978852872177471518') return;
-    const member = reaction.message.guild.members.cache.get(user.id);
-    if (member.user.bot) return;
-    if (!(reaction.emoji.name in client.memberRoles)) return;
-    member.roles.add(client.memberRoles[reaction.emoji.name])
+    if (reaction.message.id == '978852872177471518') {
+        const member = reaction.message.guild.members.cache.get(user.id);
+        if (member.user.bot) return;
+        if (!(reaction.emoji.name in client.memberRoles)) return;
+        member.roles.add(client.memberRoles[reaction.emoji.name])
+    }
 });
 
 client.on('messageReactionRemove', (reaction, user) => {
-    if (reaction.message.id != '978852872177471518') return;
-    const member = reaction.message.guild.members.cache.get(user.id);
-    if (member.user.bot) return;
-    if (!(reaction.emoji.name in client.memberRoles)) return;
-    member.roles.remove(client.memberRoles[reaction.emoji.name]);
+    if (reaction.message.id != '978852872177471518') {
+        const member = reaction.message.guild.members.cache.get(user.id);
+        if (member.user.bot) return;
+        if (!(reaction.emoji.name in client.memberRoles)) return;
+        member.roles.remove(client.memberRoles[reaction.emoji.name]);
+    }
 });
 
 client.login(token);

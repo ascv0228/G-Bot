@@ -20,3 +20,12 @@ module.exports = {
         return;
     }
 };
+
+function AdminHelp() {
+    let L = [
+        '`' + 'avatar, avt' + '`' + " : 查看頭像",
+        '`' + 'memberavatar, memavt' + '`' + " : 查看伺服器頭像",
+        '`' + 'ping' + '`' + " : 顯示延遲"
+    ]
+    return
+}

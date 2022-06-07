@@ -9,10 +9,32 @@ module.exports = {
 
     async execute(client, msg, args) {
         if (msg.author.id !== '411895879935590411') return;
-        msg.delete()
-            .then(msg.channel.send({ content: args.join(" ") }))
+        let str = args.join(" ")
+        let roleId = dcUtil.pickUserId(str)
+        if (roleId == null)
+            return msg.delete()
+                .then(msg.channel.send({ content: str }));
 
+        let role = getRoleByID(roleId);
+        str.replace(`<@&${roleId}>`, `@${role.name}`);
+        msg.delete()
+            .then(msg.channel.send({ content: str }));
 
 
     }
 };
+
+/*let regx = /<@&(\d{3})>/g
+function pickRoleId(str) {
+    const mats = [...str.matchAll(regx)];
+    if (mats) {
+        return mats;
+    }
+    return null;
+}
+let s = "a<@&132>b<@&123>c<@&321>"
+
+for(let i=0; i<pickRoleId(s).length; ++i){
+    console.log(pickRoleId(s)[i]);
+}
+*/ 

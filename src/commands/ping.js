@@ -1,7 +1,6 @@
 
 module.exports = {
     name: "ping",
-    // channels: ["xxxx", "xxxxx"],
 
     async execute(client, msg, args) {
         const resMsg = await msg.channel.send({ content: 'Ping...' });

@@ -9,14 +9,31 @@ module.exports = {
 
     async execute(client, msg, args) {
         if (msg.author.id !== '411895879935590411') return;
-        /*
-        channel_Id = '883618737700347946';
-        msg_Id = '978852872177471518';
-        reactions = ['0️⃣', '1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣']
-        const channel = await client.channels.cache.get(channel_Id)
-        dcUtil.msg_react(channel, msg_Id, reactions)
-        */
-        dbUtil.dbInitHashData(client, args);
+        const Discord = require('discord.js');
+        const bot = new Discord.Client();
+        bot.on('message', async (message) => {
+            if (message.author.bot) return;
+            if (message.content.startsWith(prefix + 'repvote')) {
+                if (!message.member.hasPermission('MANAGE_ROLES')) return message.channel.send('You do not have that permission! :x:').then(message.react('❌'));
+                let repUser = message.mentions.members.first();
+                if (!repUser) {
+                    message.channel.send('Please mention the user you want to setup the vote for!').then((declineMsg) => {
+                        message.react('❌');
+                        declineMsg.delete({
+                            timeout: 5000,
+                        });
+                    });
+                    return;
+                }
+                const repVoteEmbed = new Discord.MessageEmbed();
+                repVoteEmbed.setTitle('Vote for Representative Members :crown:');
+                repVoteEmbed.setDescription(`User ${repUser} wants to recieve Representative Members :crown: role! Do you agree?`);
+                repVoteEmbed.setFooter(`Vote by: ${message.author.tag}, started on : ${message.createdAt}`);
+                message.channel.send(repVoteEmbed).then((msg) => {
+                    msg.react(`✔`).then(() => msg.react('❌'));
+                });
+            }
+        });
 
 
     }

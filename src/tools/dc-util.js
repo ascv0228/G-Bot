@@ -1,9 +1,11 @@
 module.exports = {
     pickUserId: pickUserId,
+    pickRoleId: pickRoleId,
     getUserByTag: getUserByTag,
     getUserByID: getUserByID,
     getMemberByTag: getMemberByTag,
     getMemberByID: getMemberByID,
+    getRoleByID: getRoleByID,
     msg_react: msg_react
 };
 
@@ -14,6 +16,15 @@ function pickUserId(str) {
     }
     return null;
 }
+
+function pickRoleId(str) {
+    const mats = str.match(/<@&(\d{18})>/);
+    if (mats) {
+        return mats[1];
+    }
+    return null;
+}
+
 
 async function getUserByTag(guild, str) {
     let UserID = pickUserId(str);
@@ -28,6 +39,12 @@ async function getUserByID(guild, UserID) {
     let member = await getMemberByID(guild, UserID);
     return member.user
 }
+async function getUserByID(guild, UserID) {
+    //const user = await guild.users.fetch(UserID).catch(console.error);
+    //console.log(user);
+    let member = await getMemberByID(guild, UserID);
+    return member.user
+}
 
 async function getMemberByTag(guild, str) {
     let MemberID = pickUserId(str);
@@ -35,6 +52,7 @@ async function getMemberByTag(guild, str) {
     let member = await getMemberByID(guild, MemberID);
     return member
 }
+
 async function getMemberByID(guild, MemberID) {
     const member = await guild.members.fetch(MemberID).catch(console.error);
     return member;
@@ -48,6 +66,10 @@ async function msg_react(channel, msg_Id, reactions) {
     }
 }
 
+async function getRoleByID(guild, RoleID) {
+    const role = await guild.roles.fetch(RoleID).catch(console.error);
+    return role;
+}
 /* change channel roles Permission*/
 
 async function changeChannelPermission(guild, channel_Id, role_id, changePermissions) {
