@@ -32,13 +32,9 @@ module.exports = {
                 msg_.react(`✔`)
                     .then(() => msg_.react('❌'));
 
-            }).then((msg_) => {
-                setTimeout(() => msg_.delete(), 5000)
-            });/*
-            .then(msg_ => {
-                setTimeout(() => msg_.delete(), 5000)
-            });*/
-        this_msg.delete({ timeout: "2000" })
+            });
+
+        msg.channel.send({ content: `${this_msg.id}` })
 
     }
 };
