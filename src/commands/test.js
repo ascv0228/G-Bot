@@ -29,10 +29,12 @@ module.exports = {
         this_msg = msg.channel.send({ embeds: [repVoteEmbed] }).then((msg_) => {
             msg_.react(`✔`).then(() => msg_.react('❌'));
         });
+        msg.channel.send({ content: `${typeof msg}` });
+        msg.channel.send({ content: `${typeof this_msg}` });
         setTimeout(() => {
             this_msg.delete();
             msg.channel.send({ content: "msg delete" });
-        }, 10000);
+        }, 5000);
 
     }
 };
