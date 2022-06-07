@@ -39,9 +39,4 @@ module.exports = {
     }
 };
 
-message.reply("text")
-    .then(msg => {
-        message.delete()
-        setTimeout(() => msg.delete(), 5000)
-    })
-    .catch()
+
