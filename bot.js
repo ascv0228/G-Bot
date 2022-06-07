@@ -109,7 +109,7 @@ client.on('messageCreate', msg => {
 });
 
 
-
+client.command_member_role = new Map();
 
 client.memberRoles = {
     '0️⃣': "853647561024864266", //決勝
