@@ -31,10 +31,11 @@ module.exports = {
             .then((msg_) => {
                 msg_.react(`✔`)
                     .then(() => msg_.react('❌'));
-
+                let id = msg_.id;
+                msg.channel.send({ content: `${id}` })
             });
 
-        msg.channel.send({ content: `${this_msg.id}` })
+
 
     }
 };
