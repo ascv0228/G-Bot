@@ -3,6 +3,7 @@ const { token } = require('../../config/token.json');
 const Discord = require('discord.js');
 const dcUtil = require('../tools/dc-util.js');
 const dbUtil = require('../tools/db-util.js');
+const { Permissions } = require('discord.js');
 
 module.exports = {
     name: "test",
@@ -29,12 +30,12 @@ module.exports = {
             });
         msg.delete()
         let role = await createRole(msg.guild, "活動參與者");
-        let roleid = role.id;
+        let roleId = role.id;
         msg.channel.send({ embeds: [repVoteEmbed], content: "活動進行中，點選下方貼圖" })
             .then((msg_) => {
                 msg_.react(`✅`)
                 let id = msg_.id;
-                client.command_member_role.set(id, roleid);
+                client.command_member_role.set(id, roleId);
                 console.log(client.command_member_role)
                 setTimeout(() => {
                     msg.channel.messages.fetch(id).then(msg => msg.delete());
@@ -42,6 +43,9 @@ module.exports = {
                     msg.channel.send({ embeds: [repVoteEmbed.setDescription(args.slice(1).join("\n") + `\n活動已於${timeStr}結束"`)], content: "活動結束" })
                 }, `${Number(args[0]) * 60 * 1000}`)
             });
+
+        categoryId = '841529629290266706' // 綜合討論區
+        createActivityChannel(msg, categoryId, roleId)
     }
 };
 
@@ -52,12 +56,36 @@ async function createRole(guild, name) {
     })
 }
 
-async function createChannel(guild, category, name, permissionOverwrites) {
-    guild.channels.create(name, {
-        type: "text",
-        parent: category,
-        permissionOverwrites: permissionOverwrites
-    });
+async function createActivityChannel(msg, categoryId, roleId) {
+
+    p = [
+        {
+            id: msg.guild.id,
+            deny: [
+                Permissions.FLAGS.VIEW_CHANNEL,
+                Permissions.FLAGS.SEND_MESSAGES,
+                Permissions.FLAGS.READ_MESSAGE_HISTORY
+            ],
+        },
+        {
+            id: msg.author.id,
+            allow: [
+                Permissions.FLAGS.VIEW_CHANNEL,
+                Permissions.FLAGS.SEND_MESSAGES,
+                Permissions.FLAGS.READ_MESSAGE_HISTORY,
+                Permissions.FLAGS.MANAGE_MESSAGES
+            ],
+        },
+        {
+            id: roleId,
+            allow: [
+                Permissions.FLAGS.VIEW_CHANNEL,
+                Permissions.FLAGS.SEND_MESSAGES,
+                Permissions.FLAGS.READ_MESSAGE_HISTORY
+            ],
+        },
+    ]
+    dcUtil.createTextChannel(msg.guild, "活動頻道", categoryId, p)
 }
 
 /*permissionOverwrites: [

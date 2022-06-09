@@ -25,15 +25,7 @@ module.exports = {
                 allow: [Permissions.FLAGS.VIEW_CHANNEL],
             },
         ]
-        createChannel(msg.guild, categoryId, "test", p)
+        dcUtil.createTextChannel(msg.guild, "test", categoryId, p)
     }
 };
 
-
-async function createChannel(guild, categoryId, name, permissionOverwrites) {
-    guild.channels.create(name, {
-        type: 'GUILD_TEXT',
-        parent: categoryId,
-        permissionOverwrites: permissionOverwrites
-    });
-}

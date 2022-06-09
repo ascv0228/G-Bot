@@ -7,7 +7,9 @@ module.exports = {
     getMemberByID: getMemberByID,
     getRoleByID: getRoleByID,
     msg_react: msg_react,
-    createRole: createRole
+    createRole: createRole,
+    createTextChannel: createTextChannel,
+    createVoiceChannel: createVoiceChannel
 };
 
 function pickUserId(str) {
@@ -97,4 +99,20 @@ async function createRole(guild, name) {
         }
     })
     return role
+}
+
+async function createTextChannel(guild, name, categoryId, permissionOverwrites) {
+    guild.channels.create(name, {
+        type: 'GUILD_TEXT',
+        parent: categoryId,
+        permissionOverwrites: permissionOverwrites
+    });
+}
+
+async function createVoiceChannel(guild, name, categoryId, permissionOverwrites) {
+    guild.channels.create(name, {
+        type: 'GUILD_Voice',
+        parent: categoryId,
+        permissionOverwrites: permissionOverwrites
+    });
 }
