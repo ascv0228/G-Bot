@@ -39,6 +39,7 @@ async function everydayScheduleJob_ActivityCommand(client) {
     let msg_channel_id = '869585329072537680';
     let channel = await client.channels.fetch(msg_channel_id)
     for (let [key, value] of client.command_member_role_time) {
+        console.log(key + value)
         ScheduleJob_ActivityCommand(client, channel, key, value)
     }
 }
