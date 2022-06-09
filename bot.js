@@ -153,10 +153,12 @@ client.on('messageReactionRemove', (reaction, user) => {
         member.roles.remove(client.memberRoles[reaction.emoji.name]);
     }
     if (client.command_member_role.has(reaction.message.id)) {
+        console.log("11111")
         const member = reaction.message.guild.members.cache.get(user.id);
         if (member.user.bot) return;
+        console.log("22222")
         if (reaction.emoji.name != '✅') return;
-        console.log("我正在移除ㄟ")
+        console.log("33333")
         member.roles.remove(client.command_member_role.get(reaction.message.id));
     }
 });

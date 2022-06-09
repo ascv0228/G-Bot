@@ -56,7 +56,7 @@ async function ScheduleJob_ActivityCommand(client, channel, msg_id, time) {
         });
         client.command_member_role.delete(msg_id);
         client.command_member_role_time.delete(msg_id);
-        client.Mdbcollection.update({ type: 'ActivityCommand' }, { $unset: { [`msg.${msg_id}`]: 1 } })
+        client.Mdbcollection.updateOne({ type: 'ActivityCommand' }, { $unset: { [`msg.${msg_id}`]: 1 } })
     });
 }
 
