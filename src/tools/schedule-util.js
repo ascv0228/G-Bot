@@ -35,14 +35,16 @@ async function everydayScheduleJob(client) {  //https://www.codexpedia.com/javas
 }
 
 async function everydayScheduleJob_ActivityCommand(client) {
-    console.log('讀取後才進來')
-    setCommand_member_role(client);
     let msg_channel_id = '869585329072537680';
     let channel = await client.channels.fetch(msg_channel_id)
-    for (let [key, value] of client.command_member_role_time) {
-        console.log(key + value)
-        ScheduleJob_ActivityCommand(client, channel, key, value)
-    }
+    console.log('讀取後才進來')
+    setCommand_member_role(client)
+        .then(() => {
+            for (let [key, value] of client.command_member_role_time) {
+                console.log(key + value)
+                ScheduleJob_ActivityCommand(client, channel, key, value)
+            }
+        });
 }
 
 async function ScheduleJob_ActivityCommand(client, channel, msg_id, time) {

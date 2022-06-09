@@ -39,6 +39,8 @@ process.on('unhandledRejection', (reason, promise) => {
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.musicDict = new Map();
+client.command_member_role = new Map();
+client.command_member_role_time = new Map();
 
 function loadCommands(dirPath) {
     // const dirPath = `./src/commands`;
