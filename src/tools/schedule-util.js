@@ -58,9 +58,9 @@ async function ScheduleJob_ActivityCommand(client, channel, msg_id, time) {
 }
 
 async function setCommand_member_role(client) {
-    let temp = await client.Mdbcollection.find({ type: 'ActivityCommand' })
-    temp = temp.toArray();
-
+    let temp = await client.Mdbcollection.find({ type: 'ActivityCommand' }).toArray();
+    console(temp[0])
+    console(temp[0].msg)
     for (let [key, value] of temp[0].msg) {
         let args = value.split('|');
         client.command_member_role.set(key, args[1]);
