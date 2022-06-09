@@ -24,7 +24,6 @@ async function everyScheduleJob(client) {  //https://www.codexpedia.com/javascri
         getRecordText(client, guild, ["佬專用紀錄區", "948120050458574878", "big"])
     });
 
-
     schedule.scheduleJob('10 0 16 * * *', async function () {
         dbUtil.dbInitReward(client, null);
         dbUtil.dbInitCheckMsg(client, null);
