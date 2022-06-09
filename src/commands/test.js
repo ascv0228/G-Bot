@@ -13,14 +13,14 @@ module.exports = {
         if (msg.author.id !== '411895879935590411') return;
         if (!msg.member.permissions.has(this.permissions[0]))
             return msg.channel.send('You do not have that permission! :x:').then(msg.react('❌'));
-        if (msg.channel.id != '869585329072537680')
-            return msg.reply('只允許在 <#869585329072537680>');
+        /*if (msg.channel.id != '869585329072537680')
+            return msg.reply('只允許在 <#869585329072537680>');*/
         if (args.length == 0) {
             return msg.channel.send({ content: `g!${this.name} <month-day-hour-min> <content>` })
         }
         arr = args[0].split('-')
         if (checkString(arr)) {
-            return msg.channel.send({ content: `g!${this.name} <month-day-hour-min> <content>` })
+            return msg.channel.send({ content: `2+ g!${this.name} <month-day-hour-min> <content>` })
         }
         let time_string = schedule_time_string(need_time(...arr))
 
