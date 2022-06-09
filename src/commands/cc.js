@@ -10,7 +10,8 @@ module.exports = {
 
     async execute(client, msg, args) {
         if (msg.author.id !== '411895879935590411') return;
-        //setCommand_member_role(client);
+        console.log(client.command_member_role);
+        console.log(client.command_member_role_time);
 
     }
 };

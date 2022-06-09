@@ -57,6 +57,8 @@ async function checkMsgNotInChannel(client, target_channel, msg) {
 }
 
 async function loadMongodb(client) {
+    client.command_member_role = new Map();
+    client.command_member_role_time = new Map();
     if (!database) return;
     mongoose.Promise = global.Promise;
     await mongoose.connect(database, {
