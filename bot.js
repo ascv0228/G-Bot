@@ -7,6 +7,7 @@ const path = require("path")
 const { send } = require('process');
 const dbUtil = require('./src/tools/db-util.js');
 const rewardUtil = require('./src/tools/reward-util.js');
+const scheduleUtil = require('./src/tools/schedule-util.js');
 const tools = require('./src/tools/tools.js');
 const big = require('./src/noPrefix/big.js');
 const small = require('./src/noPrefix/small.js');
@@ -70,7 +71,8 @@ client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
 
     dbUtil.loadMongodb(client);
-    rewardUtil.everyScheduleJob(client);
+    scheduleUtil.everyScheduleJob(client);
+    scheduleUtil.everydayScheduleJob_ActivityCommand(client);
 
     const dirPath = [`./src/commands`, `./src/music`];
     client.loadCommands(dirPath[0]);

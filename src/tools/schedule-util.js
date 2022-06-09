@@ -5,6 +5,7 @@ const schedule = require('node-schedule');
 module.exports = {
     everyScheduleJob: everyScheduleJob,
     everydayScheduleJob_ActivityCommand: everydayScheduleJob_ActivityCommand,
+    ScheduleJob_ActivityCommand: ScheduleJob_ActivityCommand
 };
 
 
@@ -39,15 +40,22 @@ async function everydayScheduleJob_ActivityCommand(client) {
     let msg_channel_id = '869585329072537680';
     let channel = await client.channels.fetch(msg_channel_id)
     for (let [key, value] of client.command_member_role_time) {
-        schedule.scheduleJob(value, async function () {
-            channel.messages.fetch(key).then(msg => {
-                msg.reactions.removeAll();
-                msg.edit({ content: `\n活動已於${timeStr}結束\n` + "記得刪除頻道及臨時身分組" });
-            });
-            client.command_member_role.delete(key);
-            client.command_member_role_time.delete(key);
-        });
+        ScheduleJob_ActivityCommand(client, channel, key, value)
     }
+}
+
+async function ScheduleJob_ActivityCommand(client, channel, msg_id, time) {
+
+    schedule.scheduleJob(time, async function () {
+        channel.messages.fetch(msg_id).then(msg => {
+            msg.reactions.removeAll();
+            msg.edit({ content: `\n活動已結束\n` });
+            msg.reply({ content: "記得刪除頻道及臨時身分組" });
+        });
+        client.command_member_role.delete(key);
+        client.command_member_role_time.delete(key);
+        client.Mdbcollection.update({ type: 'ActivityCommand' }, { $unset: { [`msg.${msg_id}`]: 1 } })
+    });
 }
 
 async function setCommand_member_role(client) {

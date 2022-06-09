@@ -4,6 +4,7 @@ const Discord = require('discord.js');
 const dcUtil = require('../tools/dc-util.js');
 const dbUtil = require('../tools/db-util.js');
 const { Permissions } = require('discord.js');
+const scheduleUtil = require('../tools/schedule-util.js');
 
 module.exports = {
     name: "test",
@@ -40,7 +41,8 @@ module.exports = {
                 let id = msg_.id;
                 client.command_member_role.set(id, roleId);
                 client.command_member_role_time.set(id, time_string);
-                addActivityCommand(client, id, time_string, roleId) // 要改
+                addActivityCommand(client, id, time_string, roleId);
+                scheduleUtil.ScheduleJob_ActivityCommand(client, msg.channel, id, time_string)
             });
 
         categoryId = '841529629290266706' // 綜合討論區
