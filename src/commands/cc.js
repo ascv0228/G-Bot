@@ -5,7 +5,7 @@ const dcUtil = require('../tools/dc-util.js');
 const dbUtil = require('../tools/db-util.js');
 
 module.exports = {
-    name: "test",
+    name: "cc",
     permissions: ['ADMINISTRATOR'],
 
     async execute(client, msg, args) {
