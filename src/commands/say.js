@@ -6,8 +6,10 @@ const dbUtil = require('../tools/db-util.js');
 
 module.exports = {
     name: "say",
+    permissions: ['ADMINISTRATOR'],
 
     async execute(client, msg, args) {
+        if (!msg.member.permissions.has(this.permissions[0])) return
         let str = args.join(" ")
         let roleId = dcUtil.pickUserId(str)
         if (roleId == null)
