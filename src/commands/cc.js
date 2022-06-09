@@ -25,7 +25,7 @@ module.exports = {
                 allow: [Permissions.FLAGS.VIEW_CHANNEL],
             },
         ]
-        createChannel(msg.guild, category, "test", p)
+        createChannel(msg.guild, categoryId, "test", p)
     }
 };
 
