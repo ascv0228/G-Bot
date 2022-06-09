@@ -29,7 +29,6 @@ function BaseHelp() {
         '`' + 'avatar, avt' + '`' + " : 查看頭像",
         '`' + 'memberavatar, memavt' + '`' + " : 查看伺服器頭像",
         '`' + 'ping' + '`' + " : 顯示延遲",
-        '`' + 'say' + '`' + " : 重複說話",
     ]
     return contentArray.join("\n")
 }
