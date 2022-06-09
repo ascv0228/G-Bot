@@ -20,7 +20,7 @@ module.exports = {
         }
         arr = args[0].split('-')
         if (!checkString(arr)) {
-            return msg.channel.send({ content: `2+ g!${this.name} <month-day-hour-min> <content>` })
+            return msg.channel.send({ content: `<month-day-hour-min>` })
         }
         let time_string = schedule_time_string(need_time(...arr))
 
@@ -87,7 +87,7 @@ async function createActivityChannel(msg, categoryId, roleId) {
 }
 
 async function addActivityCommand(msg_id, time_string, roleId) {
-    client.Mdbcollection.updateOne({ type: 'ActivityCommand' }, { "$set": { [`${msg_id}`]: `${time_string}|${roleId}` } });
+    client.Mdbcollection.updateOne({ type: 'ActivityCommand' }, { "$set": { [`msg.${msg_id}`]: `${time_string}|${roleId}` } });
 }
 
 function need_time(month, day, hour, min) {
