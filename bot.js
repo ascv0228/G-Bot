@@ -70,7 +70,7 @@ client.on('ready', () => {
     client.user.setActivity(`GG的大GG`, { type: "PLAYING" });
     console.log(`Logged in as ${client.user.tag}!`);
 
-    await dbUtil.loadMongodb(client);
+    dbUtil.loadMongodb(client);
 
     const dirPath = [`./src/commands`, `./src/music`];
     client.loadCommands(dirPath[0]);

@@ -59,7 +59,7 @@ async function checkMsgNotInChannel(client, target_channel, msg) {
 async function loadMongodb(client) {
     if (!database) return;
     mongoose.Promise = global.Promise;
-    mongoose.connect(database, {
+    await mongoose.connect(database, {
         useNewUrlParser: true,
         useUnifiedTopology: true
     }).then(() => {
@@ -67,8 +67,8 @@ async function loadMongodb(client) {
     }).catch((err) => {
         console.log(err)
     });
-    let db = mongoose.connection;;
-    client.Mdbcollection = db.collection('Clients');
+    let db = await mongoose.connection;;
+    client.Mdbcollection = await db.collection('Clients');
 }
 
 /*
