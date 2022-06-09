@@ -26,7 +26,7 @@ module.exports = {
 
         const repVoteEmbed = new Discord.MessageEmbed();
         repVoteEmbed.setTitle(`${msg.author.tag} 發起新活動`)
-            .setDescription(args.slice(1).join("\n") + `\n\n限時於${arr[0]}月${arr[1]}日${arr[2]}時${arr[7]}分(UTC+8)結束`)
+            .setDescription(args.slice(1).join("\n") + `\n\n限時於${arr[0]}月${arr[1]}日${arr[2]}時${arr[3]}分(UTC+8)結束`)
             .setFooter({
                 text: msg.author.tag,
                 iconURL: msg.member.displayAvatarURL({ dynamic: true })
@@ -39,7 +39,7 @@ module.exports = {
                 msg_.react(`✅`)
                 let id = msg_.id;
                 client.command_member_role.set(id, roleId);
-                client.command_member_role_time.set(key, time_string);
+                client.command_member_role_time.set(id, time_string);
                 addActivityCommand(client, id, time_string, roleId) // 要改
             });
 
