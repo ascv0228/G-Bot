@@ -19,7 +19,7 @@ module.exports = {
             return msg.channel.send({ content: `g!${this.name} <month-day-hour-min> <content>` })
         }
         arr = args[0].split('-')
-        if (checkString(arr)) {
+        if (!checkString(arr)) {
             return msg.channel.send({ content: `2+ g!${this.name} <month-day-hour-min> <content>` })
         }
         let time_string = schedule_time_string(need_time(...arr))
@@ -105,25 +105,11 @@ month_day = {
     '7': 31, '8': 31, '9': 30, '10': 31, '11': 30, '12': 31,
 };
 
-function checkString(arr) {/*
-    return (1 <= Number(arr[0]) && Number(arr[0]) <= 12 &&
-        1 <= Number(arr[1]) && Number(arr[1]) <= month_day[arr[0]] &&
-        0 <= Number(arr[2]) && Number(arr[2]) <= 59 &&
-        0 <= Number(arr[3]) && Number(arr[3]) <= 59
-    )*/
-    if (1 <= Number(arr[0]) && Number(arr[0]) <= 12)
-        console.log('month OK')
-    if (1 <= Number(arr[1]) && Number(arr[1]) <= month_day[arr[0]])
-        console.log('day OK')
-    if (0 <= Number(arr[2]) && Number(arr[2]) <= 59)
-        console.log('h OK')
-    if (0 <= Number(arr[3]) && Number(arr[3]) <= 59)
-        console.log('min OK')
-
-    return (1 <= Number(arr[0]) && Number(arr[0]) <= 12 &&
-        1 <= Number(arr[1]) && Number(arr[1]) <= month_day[arr[0]] &&
-        0 <= Number(arr[2]) && Number(arr[2]) <= 59 &&
-        0 <= Number(arr[3]) && Number(arr[3]) <= 59
+function checkString(arr) {
+    return (1 <= arr[0] && arr[0] <= 12 &&
+        1 <= arr[1] && arr[1] <= month_day[arr[0]] &&
+        0 <= arr[2] && arr[2] <= 59 &&
+        0 <= arr[3] && arr[3] <= 59
     )
 }
 
