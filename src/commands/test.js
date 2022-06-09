@@ -109,10 +109,10 @@ month_day = {
 };
 
 function checkString(arr) {
-    return (1 <= arr[0] && arr[0] <= 12 &&
-        1 <= arr[1] && arr[1] <= month_day[arr[0]] &&
-        0 <= arr[2] && arr[2] <= 59 &&
-        0 <= arr[3] && arr[3] <= 59
+    return (1 <= Number(arr[0]) && Number(arr[0]) <= 12 &&
+        1 <= Number(arr[1]) && Number(arr[1]) <= month_day[arr[0]] &&
+        0 <= Number(arr[2]) && Number(arr[2]) <= 59 &&
+        0 <= Number(arr[3]) && Number(arr[3]) <= 59
     )
 }
 
