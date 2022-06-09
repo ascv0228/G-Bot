@@ -26,7 +26,7 @@ module.exports = {
 
         const repVoteEmbed = new Discord.MessageEmbed();
         repVoteEmbed.setTitle(`${msg.author.tag} 發起新活動`)
-            .setDescription(args.slice(1).join("\n") + `\n\n限時${args[0]}分鐘\n於${time_string}結束`)
+            .setDescription(args.slice(1).join("\n") + `\n\n限時於${arr[0]}月${arr[1]}日${arr[2]}時${arr[7]}分(UTC+8)結束`)
             .setFooter({
                 text: msg.author.tag,
                 iconURL: msg.member.displayAvatarURL({ dynamic: true })
@@ -39,7 +39,7 @@ module.exports = {
                 msg_.react(`✅`)
                 let id = msg_.id;
                 client.command_member_role.set(id, roleId);
-                addActivityCommand(id, time_string, roleId) // 要改
+                addActivityCommand(client, id, time_string, roleId) // 要改
             });
 
         categoryId = '841529629290266706' // 綜合討論區
@@ -86,7 +86,7 @@ async function createActivityChannel(msg, categoryId, roleId) {
     dcUtil.createTextChannel(msg.guild, "【🎉】活動頻道", categoryId, p)
 }
 
-async function addActivityCommand(msg_id, time_string, roleId) {
+async function addActivityCommand(client, msg_id, time_string, roleId) {
     client.Mdbcollection.updateOne({ type: 'ActivityCommand' }, { "$set": { [`msg.${msg_id}`]: `${time_string}|${roleId}` } });
 }
 
