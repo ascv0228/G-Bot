@@ -79,6 +79,7 @@ async function ReadActivityCommandDB(client,) {
         giveReward(client);
     });
 }*/
+
 /*
 async function dbPush(client, field, )
 */
