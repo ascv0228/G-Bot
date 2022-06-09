@@ -39,6 +39,7 @@ module.exports = {
                 msg_.react(`✅`)
                 let id = msg_.id;
                 client.command_member_role.set(id, roleId);
+                client.command_member_role_time.set(key, time_string);
                 addActivityCommand(client, id, time_string, roleId) // 要改
             });
 

@@ -10,13 +10,8 @@ module.exports = {
 
     async execute(client, msg, args) {
         if (msg.author.id !== '411895879935590411') return;
-        setCommand_member_role(client);
+        //setCommand_member_role(client);
 
     }
 };
-
-async function setCommand_member_role(client) {
-    let temp = await client.Mdbcollection.find({ type: 'ActivityCommand' }).toArray();
-    console.log(temp)
-}
 

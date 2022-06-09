@@ -110,7 +110,7 @@ client.on('messageCreate', msg => {
 
 
 client.command_member_role = new Map();
-
+client.command_member_role_time = new Map();
 client.memberRoles = {
     '0️⃣': "853647561024864266", //決勝
     '1️⃣': "931946175827959819", //藍BUFF
