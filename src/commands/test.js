@@ -93,9 +93,6 @@ async function addActivityCommand(msg_id, time_string, roleId) {
 function need_time(month, day, hour, min) {
     now = new Date();
     need = new Date(now.getFullYear(), month - 1, day, hour, min);
-    if (now > need) {
-        return new Date(need.setFullYear(now.getFullYear() + 1) - 8 * 60 * 60 * 1000);
-    }
     return new Date(need - 8 * 60 * 60 * 1000)
 }
 
@@ -108,7 +105,21 @@ month_day = {
     '7': 31, '8': 31, '9': 30, '10': 31, '11': 30, '12': 31,
 };
 
-function checkString(arr) {
+function checkString(arr) {/*
+    return (1 <= Number(arr[0]) && Number(arr[0]) <= 12 &&
+        1 <= Number(arr[1]) && Number(arr[1]) <= month_day[arr[0]] &&
+        0 <= Number(arr[2]) && Number(arr[2]) <= 59 &&
+        0 <= Number(arr[3]) && Number(arr[3]) <= 59
+    )*/
+    if (1 <= Number(arr[0]) && Number(arr[0]) <= 12)
+        console.log('month OK')
+    if (1 <= Number(arr[1]) && Number(arr[1]) <= month_day[arr[0]])
+        console.log('day OK')
+    if (0 <= Number(arr[2]) && Number(arr[2]) <= 59)
+        console.log('h OK')
+    if (0 <= Number(arr[3]) && Number(arr[3]) <= 59)
+        console.log('min OK')
+
     return (1 <= Number(arr[0]) && Number(arr[0]) <= 12 &&
         1 <= Number(arr[1]) && Number(arr[1]) <= month_day[arr[0]] &&
         0 <= Number(arr[2]) && Number(arr[2]) <= 59 &&
