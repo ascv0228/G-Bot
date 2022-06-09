@@ -37,7 +37,6 @@ async function everydayScheduleJob(client) {  //https://www.codexpedia.com/javas
 async function everydayScheduleJob_ActivityCommand(client) {
     let msg_channel_id = '869585329072537680';
     let channel = await client.channels.fetch(msg_channel_id)
-    console.log('讀取後才進來')
     setCommand_member_role(client)
         .then(() => {
             for (let [key, value] of client.command_member_role_time) {
