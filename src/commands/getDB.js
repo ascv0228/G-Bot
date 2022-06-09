@@ -27,7 +27,7 @@ module.exports = {
         if (args.includes('check-msg'))
             getCheckMsg(client, msg, args)
         if (args.includes('activity') || args.includes('ActivityCommand'))
-            getActivityCommand();
+            getActivityCommand(client, msg, args);
 
         return msg.reply('Finish!');
     }

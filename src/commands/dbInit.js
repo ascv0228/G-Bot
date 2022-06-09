@@ -38,7 +38,7 @@ module.exports = {
             msg.reply('check-msg 清空');
         }
         if (args.includes('activity') || args.includes('ActivityCommand')) {
-            dbUtil.dbInitActivityCommand();
+            dbUtil.dbInitActivityCommand(client, args);
             msg.reply('activity 清空');
         }
         return msg.reply('Finish!');
