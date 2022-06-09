@@ -21,7 +21,7 @@ module.exports = {
                 deny: [Permissions.FLAGS.VIEW_CHANNEL],
             },
             {
-                id: msgauthor.id,
+                id: msg.author.id,
                 allow: [Permissions.FLAGS.VIEW_CHANNEL],
             },
         ]
