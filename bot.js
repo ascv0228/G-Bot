@@ -146,7 +146,7 @@ client.on('messageReactionAdd', (reaction, user) => {
 });
 
 client.on('messageReactionRemove', (reaction, user) => {
-    if (reaction.message.id != '978852872177471518') {
+    if (reaction.message.id == '978852872177471518') {
         const member = reaction.message.guild.members.cache.get(user.id);
         if (member.user.bot) return;
         if (!(reaction.emoji.name in client.memberRoles)) return;
