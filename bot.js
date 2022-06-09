@@ -71,12 +71,13 @@ client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
 
     dbUtil.loadMongodb(client);
-    scheduleUtil.everyScheduleJob(client);
-    scheduleUtil.everydayScheduleJob_ActivityCommand(client);
 
     const dirPath = [`./src/commands`, `./src/music`];
     client.loadCommands(dirPath[0]);
     //client.loadCommands();
+
+    scheduleUtil.everyScheduleJob(client);
+    scheduleUtil.everydayScheduleJob_ActivityCommand(client);
 });
 
 
