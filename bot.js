@@ -70,14 +70,15 @@ client.on('ready', () => {
     client.user.setActivity(`GG的大GG`, { type: "PLAYING" });
     console.log(`Logged in as ${client.user.tag}!`);
 
-    dbUtil.loadMongodb(client);
+    dbUtil.loadMongodb(client).then(() => {
+        scheduleUtil.everydayScheduleJob_ActivityCommand(client);
+    });
 
     const dirPath = [`./src/commands`, `./src/music`];
     client.loadCommands(dirPath[0]);
     //client.loadCommands();
 
     scheduleUtil.everyScheduleJob(client);
-    scheduleUtil.everydayScheduleJob_ActivityCommand(client);
 });
 
 
