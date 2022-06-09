@@ -26,6 +26,8 @@ module.exports = {
             getReward(client, msg, args);
         if (args.includes('check-msg'))
             getCheckMsg(client, msg, args)
+        if (args.includes('activity') || args.includes('ActivityCommand'))
+            getActivityCommand();
 
         return msg.reply('Finish!');
     }
@@ -48,6 +50,13 @@ async function getReward(client, msg, args) {
 
 async function getCheckMsg(client, msg, args) {
     let temp = await client.Mdbcollection.find({ type: 'check-msg' }).toArray();
+    jsonString = JSON.stringify({ ...temp }, null, 4);
+    const attachment = new Discord.MessageAttachment(Buffer.from(jsonString, 'utf-8'), 'log.json');
+    msg.author.send({ files: [attachment] });
+}
+
+async function getActivityCommand(client, msg, args) {
+    let temp = await client.Mdbcollection.find({ type: 'ActivityCommand' }).toArray();
     jsonString = JSON.stringify({ ...temp }, null, 4);
     const attachment = new Discord.MessageAttachment(Buffer.from(jsonString, 'utf-8'), 'log.json');
     msg.author.send({ files: [attachment] });

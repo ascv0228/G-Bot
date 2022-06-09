@@ -8,7 +8,8 @@ module.exports = {
     dbInitCheckMsg: dbInitCheckMsg,
     dbInitHashData: dbInitHashData,
     checkMsgNotInChannel: checkMsgNotInChannel,
-    loadMongodb: loadMongodb
+    loadMongodb: loadMongodb,
+    dbInitActivityCommand: dbInitActivityCommand
 }
 
 async function dbInitAll(client) {
@@ -45,6 +46,11 @@ async function dbInitHashData(client, args) {
     await client.Mdbcollection.insertOne({ type: 'hashData', channelId: '948120050458574878', hash: new Map() });
 }
 
+async function dbInitActivityCommand(client, args) {
+    await client.Mdbcollection.deleteMany({ type: 'ActivityCommand' })
+    await client.Mdbcollection.insertOne({ type: 'ActivityCommand', msg: new Map() });
+}
+
 async function checkMsgNotInChannel(client, target_channel, msg) {
     let temp = await client.Mdbcollection.find({ type: 'check-msg', channelId: target_channel }).toArray()
     return !temp[0].users.includes(msg.author.id);
@@ -64,6 +70,13 @@ async function loadMongodb(client) {
     let db = mongoose.connection;;
     client.Mdbcollection = db.collection('Clients');
 }
+
+/*
+async function ReadActivityCommandDB(client,) {
+    schedule.scheduleJob('50 59 15 * * *', async function () {
+        giveReward(client);
+    });
+}*/
 /*
 async function dbPush(client, field, )
 */

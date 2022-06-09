@@ -14,7 +14,8 @@ module.exports = {
                 '`' + 'all' + '`' + " : 全部清空",
                 '`' + 'reward' + '`' + " : 全部輔助獎勵清空",
                 '`' + 'check-msg' + '`' + " : 當日記錄區發文記錄清空",
-                '`' + 'confirm' + '`' + " : 確認",
+                '`' + 'activity' + '`' + " : 活動指令",
+                '`' + 'confirm' + '`' + " : 確認 // 必要",
                 '`' + '-h' + '`' + " : 查看參數"
             ]
             msg.reply({ content: temp.join("\n") });
@@ -32,8 +33,14 @@ module.exports = {
             dbUtil.dbInitReward(client, args);
             msg.reply('Reward 清空');
         }
-        if (args.includes('check-msg'))
+        if (args.includes('check-msg')) {
             dbUtil.dbInitCheckMsg(client, args);
+            msg.reply('check-msg 清空');
+        }
+        if (args.includes('activity') || args.includes('ActivityCommand')) {
+            dbUtil.dbInitActivityCommand();
+            msg.reply('activity 清空');
+        }
         return msg.reply('Finish!');
     }
 };

@@ -13,17 +13,20 @@ module.exports = {
         if (msg.author.id !== '411895879935590411') return;
         if (!msg.member.permissions.has(this.permissions[0]))
             return msg.channel.send('You do not have that permission! :x:').then(msg.react('❌'));
+        if (msg.channel.id != '869585329072537680')
+            return msg.reply('只允許在 <#869585329072537680>');
         if (args.length == 0) {
-            return msg.channel.send({ content: `g!${this.name} <time in minute> <content>` })
+            return msg.channel.send({ content: `g!${this.name} <month-day-hour-min> <content>` })
         }
-        let d1 = new Date().getTime();
-        d1 += (8 * 60 * 60 * 1000);
-        var date2 = new Date(d1 + (parseInt(args[0]) * 60 * 1000))
-        let timeStr = date2.toString().split(' GMT')[0]
+        arr = args[0].split('-')
+        if (checkString(arr)) {
+            return msg.channel.send({ content: `g!${this.name} <month-day-hour-min> <content>` })
+        }
+        let time_string = schedule_time_string(need_time(...arr))
 
         const repVoteEmbed = new Discord.MessageEmbed();
         repVoteEmbed.setTitle(`${msg.author.tag} 發起新活動`)
-            .setDescription(args.slice(1).join("\n") + `\n\n限時${args[0]}分鐘\n於${timeStr}結束`)
+            .setDescription(args.slice(1).join("\n") + `\n\n限時${args[0]}分鐘\n於${time_string}結束`)
             .setFooter({
                 text: msg.author.tag,
                 iconURL: msg.member.displayAvatarURL({ dynamic: true })
@@ -36,12 +39,7 @@ module.exports = {
                 msg_.react(`✅`)
                 let id = msg_.id;
                 client.command_member_role.set(id, roleId);
-                console.log(client.command_member_role)
-                setTimeout(() => {
-                    msg.channel.messages.fetch(id).then(msg => msg.delete());
-                    client.command_member_role.delete(id);
-                    msg.channel.send({ embeds: [repVoteEmbed.setDescription(args.slice(1).join("\n") + `\n活動已於${timeStr}結束"`)], content: "活動結束" })
-                }, `${Number(args[0]) * 60 * 1000}`)
+                addActivityCommand(id, time_string, roleId) // 要改
             });
 
         categoryId = '841529629290266706' // 綜合討論區
@@ -85,8 +83,53 @@ async function createActivityChannel(msg, categoryId, roleId) {
             ],
         },
     ]
-    dcUtil.createTextChannel(msg.guild, "活動頻道", categoryId, p)
+    dcUtil.createTextChannel(msg.guild, "【🎉】活動頻道", categoryId, p)
 }
+
+async function addActivityCommand(msg_id, time_string, roleId) {
+    client.Mdbcollection.updateOne({ type: 'ActivityCommand' }, { "$set": { [`${msg_id}`]: `${time_string}|${roleId}` } });
+}
+
+function need_time(month, day, hour, min) {
+    now = new Date();
+    need = new Date(now.getFullYear(), month - 1, day, hour, min);
+    if (now > need) {
+        return new Date(need.setFullYear(now.getFullYear() + 1) - 8 * 60 * 60 * 1000);
+    }
+    return new Date(need - 8 * 60 * 60 * 1000)
+}
+
+function schedule_time_string(D) {
+    return `0 ${D.getMinutes()} ${D.getHours()} ${D.getDate()} ${D.getMonth() + 1} *`
+}
+
+month_day = {
+    '1': 31, '2': 29, '3': 31, '4': 30, '5': 31, '6': 30,
+    '7': 31, '8': 31, '9': 30, '10': 31, '11': 30, '12': 31,
+};
+
+function checkString(arr) {
+    return (1 <= arr[0] && arr[0] <= 12 &&
+        1 <= arr[1] && arr[1] <= month_day[arr[0]] &&
+        0 <= arr[2] && arr[2] <= 59 &&
+        0 <= arr[3] && arr[3] <= 59
+    )
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*permissionOverwrites: [
             {

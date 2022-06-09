@@ -10,6 +10,8 @@ module.exports = {
 
     async execute(client, msg, args) {
         if (msg.author.id !== '411895879935590411') return;
+        dbUtil.dbInitActivityCommand();
+        /*
         if (!msg.member.permissions.has(this.permissions[0]))
             return msg.channel.send('You do not have that permission! :x:').then(msg.react('❌'));
 
@@ -25,7 +27,7 @@ module.exports = {
                 allow: [Permissions.FLAGS.VIEW_CHANNEL],
             },
         ]
-        dcUtil.createTextChannel(msg.guild, "test", categoryId, p)
+        dcUtil.createTextChannel(msg.guild, "test", categoryId, p)*/
     }
 };
 

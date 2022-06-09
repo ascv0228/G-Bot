@@ -6,26 +6,30 @@ module.exports = {
     // permissions: ['ADMINISTRATOR'],
 
     execute(client, msg, args) {
-        contentArray = (msg.member.permissions.has('ADMINISTRATOR')) ?
-            [
-                '`' + 'avatar, avt' + '`' + " : 查看頭像",
-                '`' + 'memberavatar, memavt' + '`' + " : 查看伺服器頭像",
-                '`' + 'ping' + '`' + " : 顯示延遲"
-            ] : [
-                '`' + 'avatar, avt' + '`' + " : 查看頭像",
-                '`' + 'memberavatar, memavt' + '`' + " : 查看伺服器頭像",
-                '`' + 'ping' + '`' + " : 顯示延遲"
-            ]
-        msg.reply({ content: contentArray.join("\n") });
+        content = (msg.member.permissions.has('ADMINISTRATOR')) ?
+            AdminHelp() : BaseHelp()
+        msg.reply({ content: content });
         return;
     }
 };
 
 function AdminHelp() {
-    let L = [
+    let contentArray = [
+        '`' + 'activity, act' + '`' + " : 發起活動",
         '`' + 'avatar, avt' + '`' + " : 查看頭像",
         '`' + 'memberavatar, memavt' + '`' + " : 查看伺服器頭像",
-        '`' + 'ping' + '`' + " : 顯示延遲"
+        '`' + 'ping' + '`' + " : 顯示延遲",
+        '`' + 'say' + '`' + " : 重複說話",
     ]
-    return
+    return contentArray.join("\n")
+}
+
+function BaseHelp() {
+    let contentArray = [
+        '`' + 'avatar, avt' + '`' + " : 查看頭像",
+        '`' + 'memberavatar, memavt' + '`' + " : 查看伺服器頭像",
+        '`' + 'ping' + '`' + " : 顯示延遲",
+        '`' + 'say' + '`' + " : 重複說話",
+    ]
+    return contentArray.join("\n")
 }
