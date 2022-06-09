@@ -3,13 +3,13 @@ const schedule = require('node-schedule');
 
 
 module.exports = {
-    everyScheduleJob: everyScheduleJob,
+    everydayScheduleJob: everydayScheduleJob,
     everydayScheduleJob_ActivityCommand: everydayScheduleJob_ActivityCommand,
     ScheduleJob_ActivityCommand: ScheduleJob_ActivityCommand
 };
 
 
-async function everyScheduleJob(client) {  //https://www.codexpedia.com/javascript/nodejs-cron-schedule-examples/
+async function everydayScheduleJob(client) {  //https://www.codexpedia.com/javascript/nodejs-cron-schedule-examples/
 
     // var rule1 = new schedule.RecurrenceRule();
     // rule1.minute = new schedule.Range(0, 59, 5);

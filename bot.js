@@ -78,7 +78,7 @@ client.on('ready', () => {
     client.loadCommands(dirPath[0]);
     //client.loadCommands();
 
-    scheduleUtil.everyScheduleJob(client);
+    scheduleUtil.everydayScheduleJob(client);
 });
 
 

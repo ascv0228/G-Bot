@@ -12,7 +12,7 @@ target_channel[3].channel_Id
 
 module.exports = {
     confirmReward: confirmReward,
-    everyScheduleJob: everyScheduleJob,
+    everydayScheduleJob: everydayScheduleJob,
     getRewardText: getRewardText,
     getRecordText: getRecordText
 };
@@ -54,7 +54,7 @@ async function giveReward(client) {
 
 }
 
-async function everyScheduleJob(client) {  //https://www.codexpedia.com/javascript/nodejs-cron-schedule-examples/
+async function everydayScheduleJob(client) {  //https://www.codexpedia.com/javascript/nodejs-cron-schedule-examples/
 
     // var rule1 = new schedule.RecurrenceRule();
     // rule1.minute = new schedule.Range(0, 59, 5);
