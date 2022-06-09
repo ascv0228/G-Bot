@@ -28,7 +28,6 @@ module.exports = {
                 iconURL: msg.member.displayAvatarURL({ dynamic: true })
             });
         msg.delete()
-        // let roleid = dcUtil.createRole(msg.guild, "活動參與者").id;
         let role = await createRole(msg.guild, "活動參與者");
         let roleid = role.id;
         msg.channel.send({ embeds: [repVoteEmbed], content: "活動進行中，點選下方貼圖" })
@@ -52,6 +51,22 @@ async function createRole(guild, name) {
         color: "RANDOM",
     })
 }
+
+async function createChannel(guild, category, name, permissionOverwrites) {
+    guild.channels.create(name, {
+        type: "text",
+        parent: category,
+        permissionOverwrites: permissionOverwrites
+    });
+}
+
+/*permissionOverwrites: [
+            {
+                id: message.guild.roles.everyone, //To make it be seen by a certain role, user an ID instead
+                allow: ['VIEW_CHANNEL', 'SEND_MESSAGES', 'READ_MESSAGE_HISTORY'], //Allow permissions
+                deny: ['VIEW_CHANNEL', 'SEND_MESSAGES', 'READ_MESSAGE_HISTORY'] //Deny permissions
+            }
+        ]*/
 /*let repUser = message.mentions.members.first();
 if (!repUser) {
     message.channel.send('Please mention the user you want to setup the vote for!').then((declineMsg) => {
