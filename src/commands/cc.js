@@ -13,8 +13,7 @@ module.exports = {
         if (!msg.member.permissions.has(this.permissions[0]))
             return msg.channel.send('You do not have that permission! :x:').then(msg.react('❌'));
 
-        category = await client.channels.fetch('834103866772946944')
-        if (category.type !== "category") return msg.reply('no category')
+        categoryId = '834103866772946944'
 
         p = [
             {
@@ -31,10 +30,10 @@ module.exports = {
 };
 
 
-async function createChannel(guild, category, name, permissionOverwrites) {
+async function createChannel(guild, categoryId, name, permissionOverwrites) {
     guild.channels.create(name, {
         type: 'GUILD_TEXT',
-        parent: category,
+        parent: categoryId,
         permissionOverwrites: permissionOverwrites
     });
 }
