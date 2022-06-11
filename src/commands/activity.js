@@ -24,7 +24,7 @@ module.exports = {
 
         const repVoteEmbed = new Discord.MessageEmbed();
         repVoteEmbed.setTitle(`${msg.author.tag} 發起新活動`)
-            .setDescription(args.slice(1).join("\n") + `\n\n限時於${arr[0]}月${arr[1]}日${arr[2]}時${arr[3]}分(UTC+8)結束`)
+            .setDescription(args.slice(1).join("\n") + `\n\n報名時間於${arr[0]}月${arr[1]}日${arr[2]}時${arr[3]}分(UTC+8)結束`)
             .setFooter({
                 text: msg.author.tag,
                 iconURL: msg.member.displayAvatarURL({ dynamic: true })
