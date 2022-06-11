@@ -161,6 +161,7 @@ client.on('messageReactionRemove', (reaction, user) => {
 });
 
 client.on('interactionCreate', interaction => {
+    console.log(interaction)
     if (!interaction.isSelectMenu()) return;
     let content = interaction.values[0];
     if (!content.startsWith(`${prefix}`)) return;
