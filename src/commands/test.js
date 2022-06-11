@@ -59,16 +59,15 @@ module.exports = {
                         {
                             label: '使用者頭像',
                             value: `g!avatar ${args[0] ? args[0] : ''}`,
-                        },/*
-                        {
-                            label: 'memavt',
-                            description: 'memavt',
-                            value: `g!memavt ${args[0]}`,
-                        },*/
+                        },
                         {
                             label: '伺服器頭像',
-                            value: `g!avatar ${args[0] ? args[0] : ''}`,
-                        },
+                            value: `g!memberavatar ${args[0] ? args[0] : ''}`,
+                        },/*
+                        {
+                            label: '橫幅',
+                            value: `g!banner ${args[0] ? args[0] : ''}`,
+                        },*/
                     ]),
             );
 
