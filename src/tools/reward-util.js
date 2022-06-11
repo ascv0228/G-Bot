@@ -14,7 +14,8 @@ module.exports = {
     confirmReward: confirmReward,
     everydayScheduleJob: everydayScheduleJob,
     getRewardText: getRewardText,
-    getRecordText: getRecordText
+    getRecordText: getRecordText,
+    giveReward: giveReward
 };
 
 async function confirmReward(client, msg) {

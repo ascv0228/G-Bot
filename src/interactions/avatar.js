@@ -4,7 +4,7 @@ const dcUtil = require('../tools/dc-util.js');
 module.exports = {
     name: "avatar",
 
-    async execute(client, interaction) {
+    async execute(client, interaction, args) {
         let msg = interaction.message;
         let member = interaction.member;
         /*
