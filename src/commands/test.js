@@ -54,22 +54,26 @@ module.exports = {
             .addComponents(
                 new MessageSelectMenu()
                     .setCustomId('select')
-                    .setPlaceholder('Nothing selected')
+                    .setPlaceholder('請選擇頭像來源/橫幅')
                     .addOptions([
                         {
-                            label: 'avt',
-                            description: 'avt',
-                            value: `g!avt ${args[0]}`,
-                        },
+                            label: '使用者頭像',
+                            value: `g!avatar ${args[0] ? args[0] : ' '}`,
+                        },/*
                         {
                             label: 'memavt',
                             description: 'memavt',
                             value: `g!memavt ${args[0]}`,
+                        },*/
+                        {
+                            label: '伺服器頭像',
+                            description: 'memavt',
+                            value: msg,
                         },
                     ]),
             );
 
-        await msg.reply({ content: 'Pong!', components: [row] });
+        await msg.channel.send({ components: [row] });
     }
 };
 

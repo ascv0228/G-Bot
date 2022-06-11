@@ -37,6 +37,7 @@ process.on('unhandledRejection', (reason, promise) => {
 */
 
 client.commands = new Discord.Collection();
+client.interactions = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.musicDict = new Map();
 client.command_member_role = new Map();
@@ -66,7 +67,25 @@ function loadCommands(dirPath) {
     });
 }
 
+function loadInteractions(dirPath) {
+
+    return tools.readDirAll(dirPath, (file) => {
+        if (file.match(/(\.js|\.ts)$/)) {
+            const interactions = require(file);
+
+            if (interactions.name) {
+                if (interactions.listens && interactions.listens.length > 0) {
+                    this.listens.set(interactions.name, interactions);
+                } else {
+                    this.commands.set(interactions.name, interactions);
+                }
+            }
+        }
+    });
+}
+
 client.loadCommands = loadCommands;
+client.loadInteractions = loadInteractions;
 
 client.on('ready', () => {
     client.user.setActivity(`GG的大GG`, { type: "PLAYING" });
@@ -76,9 +95,9 @@ client.on('ready', () => {
         scheduleUtil.everydayScheduleJob_ActivityCommand(client);
     });
 
-    const dirPath = [`./src/commands`, `./src/music`];
+    const dirPath = [`./src/commands`, `./src/music`, `./src/interactions`];
     client.loadCommands(dirPath[0]);
-    //client.loadCommands();
+    client.loadInteractions(dirPath[2])
 
     scheduleUtil.everydayScheduleJob(client);
 });
@@ -163,12 +182,14 @@ client.on('messageReactionRemove', (reaction, user) => {
 client.on('interactionCreate', interaction => {
     console.log(interaction)
     if (!interaction.isSelectMenu()) return;
-    let content = interaction.values[0];
-    if (!content.startsWith(`${prefix}`)) return;
-    const [cmd, ...args] = content.slice(prefix.length).trimEnd().split(/\s+/);
-    const exec = client.commands.get(cmd) || client.aliases.get(cmd);
-    // if(exec.channel && exec.channel.includes)
-    exec.execute(client, interaction.message, args);
+    if (interaction.customId === 'select') {
+        let content = interaction.values[0];
+        if (!content.startsWith(`${prefix}`)) return;
+        const [cmd, ...args] = content.slice(prefix.length).trimEnd().split(/\s+/);
+        const exec = client.interactions.get(cmd);
+        exec.execute(client, interaction.message, args);
+        await interaction.update({ components: [] });
+    }
 });
 
 
