@@ -64,7 +64,7 @@ module.exports = {
                         {
                             label: 'memavt',
                             description: 'memavt',
-                            value: `avt ${args[0]}`,
+                            value: `memavt ${args[0]}`,
                         },
                     ]),
             );
