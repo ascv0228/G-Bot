@@ -57,14 +57,14 @@ module.exports = {
                     .setPlaceholder('Nothing selected')
                     .addOptions([
                         {
-                            label: 'Select me',
-                            description: 'This is a description',
-                            value: 'first_option',
+                            label: 'avt',
+                            description: 'avt',
+                            value: ['avt', `${args[0]}`],
                         },
                         {
-                            label: 'You can select me too',
-                            description: 'This is also a description',
-                            value: 'second_option',
+                            label: 'memavt',
+                            description: 'memavt',
+                            value: ['memavt', `${args[0]}`],
                         },
                     ]),
             );
