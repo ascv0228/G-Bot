@@ -12,10 +12,11 @@ module.exports = {
 
     async execute(client, msg, args) {
         if (msg.author.id !== '411895879935590411') return;
+        /*
         if (!msg.member.permissions.has(this.permissions[0]))
             return msg.channel.send('You do not have that permission! :x:').then(msg.react('❌'));
-        /*if (msg.channel.id != '869585329072537680')
-            return msg.reply('只允許在 <#869585329072537680>');*/
+        if (msg.channel.id != '869585329072537680')
+            return msg.reply('只允許在 <#869585329072537680>');
         if (args.length == 0) {
             return msg.channel.send({ content: `g!${this.name} <month-day-hour-min> <content>` })
         }
@@ -46,7 +47,29 @@ module.exports = {
             });
 
         categoryId = '841529629290266706' // 綜合討論區
-        createActivityChannel(msg, categoryId, roleId)
+        createActivityChannel(msg, categoryId, roleId)*/
+
+
+        const row = new MessageActionRow()
+            .addComponents(
+                new MessageSelectMenu()
+                    .setCustomId('select')
+                    .setPlaceholder('Nothing selected')
+                    .addOptions([
+                        {
+                            label: 'Select me',
+                            description: 'This is a description',
+                            value: 'first_option',
+                        },
+                        {
+                            label: 'You can select me too',
+                            description: 'This is also a description',
+                            value: 'second_option',
+                        },
+                    ]),
+            );
+
+        await msg.reply({ content: 'Pong!', components: [row] });
     }
 };
 

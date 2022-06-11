@@ -41,7 +41,7 @@ async function everydayScheduleJob_ActivityCommand(client) {
     setCommand_member_role(client)
         .then(() => {
             for (let [key, value] of client.command_member_role_time) {
-                console.log(key + value)
+                // console.log(key + value)
                 ScheduleJob_ActivityCommand(client, channel, key, value)
             }
         });
