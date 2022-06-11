@@ -13,6 +13,7 @@ module.exports = {
 };
 
 function pickUserId(str) {
+    if (!str) return null;
     const mats = str.match(/^<@!?(\d+)>$/);
     if (mats) {
         return mats[1];
@@ -21,6 +22,7 @@ function pickUserId(str) {
 }
 
 function pickRoleId(str) {
+    if (!str) return null;
     const mats = str.match(/<@&(\d{18})>/);
     if (mats) {
         return mats[1];
