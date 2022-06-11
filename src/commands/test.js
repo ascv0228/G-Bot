@@ -58,7 +58,7 @@ module.exports = {
                     .addOptions([
                         {
                             label: '使用者頭像',
-                            value: `g!avatar ${args[0] ? args[0] : ' '}`,
+                            value: `g!avatar ${args[0] ? args[0] : ''}`,
                         },/*
                         {
                             label: 'memavt',
@@ -67,8 +67,7 @@ module.exports = {
                         },*/
                         {
                             label: '伺服器頭像',
-                            description: 'memavt',
-                            value: msg,
+                            value: `g!avatar ${args[0] ? args[0] : ''}`,
                         },
                     ]),
             );
