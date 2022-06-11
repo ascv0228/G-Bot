@@ -7,7 +7,6 @@ module.exports = {
     async execute(client, interaction) {
         let msg = interaction.message;
         let member = interaction.member;
-        console.log(interaction)
         /*
         let user = await dcUtil.getUserByTag(msg.guild, args[0]) || member.user;
         const avatarEmbed = new Discord.MessageEmbed()
