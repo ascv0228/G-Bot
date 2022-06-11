@@ -164,7 +164,7 @@ client.on('interactionCreate', interaction => {
     if (!interaction.isSelectMenu()) return;
     let content = interaction.values[0];
     if (!content.startsWith(`${prefix}`)) return;
-    const [cmd, ...args] = lines[i].slice(prefix.length).trimEnd().split(/\s+/);
+    const [cmd, ...args] = content.slice(prefix.length).trimEnd().split(/\s+/);
     const exec = client.commands.get(cmd) || client.aliases.get(cmd);
     // if(exec.channel && exec.channel.includes)
     exec.execute(client, interaction.message, args);
