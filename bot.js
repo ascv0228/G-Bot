@@ -166,8 +166,6 @@ client.on('interactionCreate', interaction => {
     interaction
 });
 
-const Discord = require('discord.js');
-const dcUtil = require('../tools/dc-util.js');
 
 
 
