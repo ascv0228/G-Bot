@@ -179,7 +179,7 @@ client.on('messageReactionRemove', (reaction, user) => {
     }
 });
 
-client.on('interactionCreate', interaction => {
+client.on('interactionCreate', async interaction => {
     console.log(interaction)
     if (!interaction.isSelectMenu()) return;
     if (interaction.customId === 'select') {
