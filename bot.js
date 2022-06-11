@@ -162,26 +162,14 @@ client.on('messageReactionRemove', (reaction, user) => {
 
 client.on('interactionCreate', interaction => {
     if (!interaction.isSelectMenu()) return;
-    avt2(client, interaction)
-    interaction
+    let content = interaction.values[0];
+    if (!content.startsWith(`${prefix}`)) return;
+    const [cmd, ...args] = lines[i].slice(prefix.length).trimEnd().split(/\s+/);
+    const exec = client.commands.get(cmd) || client.aliases.get(cmd);
+    // if(exec.channel && exec.channel.includes)
+    exec.execute(client, interaction.message, args);
 });
 
 
 
-
-async function avt2(client, interaction) {
-    let msg = interaction.message;
-    let args = interaction.values;
-    console.log(args)/*
-    let user = await dcUtil.getUserByTag(interaction.guild, args[0]) || msg.author;
-    const avatarEmbed = new Discord.MessageEmbed()
-        .setImage(user.displayAvatarURL({ size: 4096, dynamic: true }))
-        .setFooter({
-            text: msg.author.tag,
-            iconURL: msg.member.displayAvatarURL({ dynamic: true })
-        });
-    msg.channel.send({ embeds: [avatarEmbed] });*/
-
-    return;
-}
 client.login(token);

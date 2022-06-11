@@ -59,12 +59,12 @@ module.exports = {
                         {
                             label: 'avt',
                             description: 'avt',
-                            value: `avt ${args[0]}`,
+                            value: `g!avt ${args[0]}`,
                         },
                         {
                             label: 'memavt',
                             description: 'memavt',
-                            value: `memavt ${args[0]}`,
+                            value: `g!memavt ${args[0]}`,
                         },
                     ]),
             );
@@ -72,87 +72,6 @@ module.exports = {
         await msg.reply({ content: 'Pong!', components: [row] });
     }
 };
-
-async function createRole(guild, name) {
-    return await guild.roles.create({
-        name: name,
-        color: "RANDOM",
-    })
-}
-
-async function createActivityChannel(msg, categoryId, roleId) {
-
-    p = [
-        {
-            id: msg.guild.id,
-            deny: [
-                Permissions.FLAGS.VIEW_CHANNEL,
-                Permissions.FLAGS.SEND_MESSAGES,
-                Permissions.FLAGS.READ_MESSAGE_HISTORY
-            ],
-        },
-        {
-            id: msg.author.id,
-            allow: [
-                Permissions.FLAGS.VIEW_CHANNEL,
-                Permissions.FLAGS.SEND_MESSAGES,
-                Permissions.FLAGS.READ_MESSAGE_HISTORY,
-                Permissions.FLAGS.MANAGE_MESSAGES
-            ],
-        },
-        {
-            id: roleId,
-            allow: [
-                Permissions.FLAGS.VIEW_CHANNEL,
-                Permissions.FLAGS.SEND_MESSAGES,
-                Permissions.FLAGS.READ_MESSAGE_HISTORY
-            ],
-        },
-    ]
-    dcUtil.createTextChannel(msg.guild, "【🎉】活動頻道", categoryId, p)
-}
-
-async function addActivityCommand(client, msg_id, time_string, roleId) {
-    client.Mdbcollection.updateOne({ type: 'ActivityCommand' }, { "$set": { [`msg.${msg_id}`]: `${time_string}|${roleId}` } });
-}
-
-function need_time(month, day, hour, min) {
-    now = new Date();
-    need = new Date(now.getFullYear(), month - 1, day, hour, min);
-    return new Date(need - 8 * 60 * 60 * 1000)
-}
-
-function schedule_time_string(D) {
-    return `0 ${D.getMinutes()} ${D.getHours()} ${D.getDate()} ${D.getMonth() + 1} *`
-}
-
-month_day = {
-    '1': 31, '2': 29, '3': 31, '4': 30, '5': 31, '6': 30,
-    '7': 31, '8': 31, '9': 30, '10': 31, '11': 30, '12': 31,
-};
-
-function checkString(arr) {
-    return (1 <= arr[0] && arr[0] <= 12 &&
-        1 <= arr[1] && arr[1] <= month_day[arr[0]] &&
-        0 <= arr[2] && arr[2] <= 59 &&
-        0 <= arr[3] && arr[3] <= 59
-    )
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*permissionOverwrites: [
             {
