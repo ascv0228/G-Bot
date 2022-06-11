@@ -59,12 +59,12 @@ module.exports = {
                         {
                             label: 'avt',
                             description: 'avt',
-                            value: ['avt', `${args[0]}`],
+                            value: `avt ${args[0]}`,
                         },
                         {
                             label: 'memavt',
                             description: 'memavt',
-                            value: ['memavt', `${args[0]}`],
+                            value: `avt ${args[0]}`,
                         },
                     ]),
             );

@@ -172,7 +172,7 @@ client.on('interactionCreate', interaction => {
 async function avt2(client, interaction) {
     let msg = interaction.message;
     let args = interaction.values;
-    console.log(args)
+    console.log(args)/*
     let user = await dcUtil.getUserByTag(interaction.guild, args[0]) || msg.author;
     const avatarEmbed = new Discord.MessageEmbed()
         .setImage(user.displayAvatarURL({ size: 4096, dynamic: true }))
@@ -180,7 +180,7 @@ async function avt2(client, interaction) {
             text: msg.author.tag,
             iconURL: msg.member.displayAvatarURL({ dynamic: true })
         });
-    msg.channel.send({ embeds: [avatarEmbed] });
+    msg.channel.send({ embeds: [avatarEmbed] });*/
 
     return;
 }
