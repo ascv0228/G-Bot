@@ -5,7 +5,7 @@ const dcUtil = require('../tools/dc-util.js');
 const dbUtil = require('../tools/db-util.js');
 const { Permissions } = require('discord.js');
 const scheduleUtil = require('../tools/schedule-util.js');
-
+const { MessageActionRow, MessageSelectMenu } = require('discord.js');
 module.exports = {
     name: "test",
     permissions: ['ADMINISTRATOR'],
