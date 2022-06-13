@@ -18,7 +18,8 @@ const client = new Client(
     {
         intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS],
         partials: ['MESSAGE', 'CHANNEL', 'REACTION'],
-    });
+    }
+);
 
 
 process.on('uncaughtException', (err, origin) => {
@@ -135,14 +136,13 @@ client.on('messageReactionRemove', (reaction, user) => {
 });
 
 client.on('interactionCreate', async interaction => {
-    console.log(interaction)
     if (!interaction.isSelectMenu()) return;
     if (interaction.customId === 'select') {
         let content = interaction.values[0];
         if (!content.startsWith(`${prefix}`)) return;
         const [cmd, ...args] = content.slice(prefix.length).trimEnd().split(/\s+/);
+        if (args.pop() != interaction.user.id) return;
         const exec = client.interactions.get(cmd);
-        console.log(exec)
         if (!exec) return;
         exec.execute(client, interaction, args);
         await interaction.message.delete();
