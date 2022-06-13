@@ -74,11 +74,7 @@ function loadInteractions(dirPath) {
             const interactions = require(file);
 
             if (interactions.name) {
-                if (interactions.listens && interactions.listens.length > 0) {
-                    this.listens.set(interactions.name, interactions);
-                } else {
-                    this.commands.set(interactions.name, interactions);
-                }
+                this.interactions.set(interactions.name, interactions);
             }
         }
     });
