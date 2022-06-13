@@ -12,6 +12,7 @@ const tools = require('./src/tools/tools.js');
 const big = require('./src/noPrefix/big.js');
 const small = require('./src/noPrefix/small.js');
 const bluebuff = require('./src/noPrefix/bluebuff.js');
+const loader = require('./src/loader.js');
 
 const client = new Client(
     {
@@ -67,7 +68,7 @@ function loadCommands(dirPath) {
         }
     });
 }
-
+/*
 function loadInteractions(dirPath) {
 
     return tools.readDirAll(dirPath, (file) => {
@@ -79,10 +80,10 @@ function loadInteractions(dirPath) {
             }
         }
     });
-}
+}*/
 
 client.loadCommands = loadCommands;
-client.loadInteractions = loadInteractions;
+client.loadInteractions = loader.loadInteractions;
 
 client.on('ready', () => {
     client.user.setActivity(`GG的大GG`, { type: "PLAYING" });
