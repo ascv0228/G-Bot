@@ -37,8 +37,9 @@ process.on('unhandledRejection', (reason, promise) => {
 */
 
 client.commands = new Discord.Collection();
-client.interactions = new Discord.Collection();
 client.aliases = new Discord.Collection();
+client.listens = new Discord.Collection();
+client.interactions = new Discord.Collection();
 client.musicDict = new Map();
 client.command_member_role = new Map();
 client.command_member_role_time = new Map();
