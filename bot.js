@@ -187,6 +187,7 @@ client.on('interactionCreate', async interaction => {
         if (!content.startsWith(`${prefix}`)) return;
         const [cmd, ...args] = content.slice(prefix.length).trimEnd().split(/\s+/);
         const exec = client.interactions.get(cmd);
+        console.log(exec)
         if (!exec) return;
         exec.execute(client, interaction, args);
         await interaction.update({ components: [] });
