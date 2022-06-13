@@ -141,7 +141,12 @@ client.on('interactionCreate', async interaction => {
         let content = interaction.values[0];
         if (!content.startsWith(`${prefix}`)) return;
         const [cmd, ...args] = content.slice(prefix.length).trimEnd().split(/\s+/);
-        if (args.pop() != interaction.user.id) return;
+        if (args.pop() != interaction.user.id) return interaction.message.channel.send('You cannot use others\' commands.').then((declineMsg) => {
+            interaction.message.react('❌');
+            declineMsg.delete({
+                timeout: 5000,
+            });
+        });;
         const exec = client.interactions.get(cmd);
         if (!exec) return;
         exec.execute(client, interaction, args);
