@@ -58,11 +58,11 @@ module.exports = {
                     .addOptions([
                         {
                             label: '使用者頭像',
-                            value: `g!avatar ${args[0] ? args[0] : ''}`,
+                            value: `g!avatar ${args[0] ? args[0] : ''} ${msg.author.id}`,
                         },
                         {
                             label: '伺服器頭像',
-                            value: `g!memberavatar ${args[0] ? args[0] : ''}`,
+                            value: `g!memberavatar ${args[0] ? args[0] : ''} ${msg.author.id}`,
                         },/*
                         {
                             label: '橫幅',
