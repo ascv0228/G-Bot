@@ -187,7 +187,7 @@ client.on('interactionCreate', async interaction => {
         console.log(exec)
         if (!exec) return;
         exec.execute(client, interaction, args);
-        await interaction.update({ components: [] });
+        await interaction.message.delete();
     }
 });
 
