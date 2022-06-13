@@ -29,13 +29,6 @@ process.on('unhandledRejection', (reason, promise) => {
     console.error(reason);
 });
 
-/*
-* 1.  獎勵 0:00 再發  > OK
-* 2.  檢查 有記錄區 才能丟 每日  > BUG
-* 3.  分批清空資料庫指令 > half OK
-* 4.  img-hash bug  > maybe no bug
-* 5.  分檔  > OK
-*/
 
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
@@ -45,44 +38,8 @@ client.musicDict = new Map();
 client.command_member_role = new Map();
 client.command_member_role_time = new Map();
 
-function loadCommands(dirPath) {
-    // const dirPath = `./src/commands`;
-    // const dirPath = [`./src/commands`, `./src/music`];
 
-    return tools.readDirAll(dirPath, (file) => {
-        if (file.match(/(\.js|\.ts)$/)) {
-            const command = require(file);
-            if (command.aliases) {
-                command.aliases.forEach(alias => {
-                    this.aliases.set(alias, command);
-                });
-            }
-
-            if (command.name) {
-                if (command.listens && command.listens.length > 0) {
-                    this.listens.set(command.name, command);
-                } else {
-                    this.commands.set(command.name, command);
-                }
-            }
-        }
-    });
-}
-/*
-function loadInteractions(dirPath) {
-
-    return tools.readDirAll(dirPath, (file) => {
-        if (file.match(/(\.js|\.ts)$/)) {
-            const interactions = require(file);
-
-            if (interactions.name) {
-                this.interactions.set(interactions.name, interactions);
-            }
-        }
-    });
-}*/
-
-client.loadCommands = loadCommands;
+client.loadCommands = loader.loadCommands;
 client.loadInteractions = loader.loadInteractions;
 
 client.on('ready', () => {
