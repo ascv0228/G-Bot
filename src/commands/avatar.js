@@ -45,7 +45,7 @@ async function checkHasBanner(client, userId) {
     const discordBanners = new DiscordBanners(client);
     return new Promise(async function (resolve, reject) {
         const discordBanners = new DiscordBanners(client);
-        const banner = await discordBanners.getBanner(userId, { size: 2048, format: "png", dynamic: true }).catch(reject(null));
+        const banner = await discordBanners.getBanner(userId, { size: 2048, format: "png", dynamic: true }).catch(resolve(null));
         resolve(banner)
     });
 }
