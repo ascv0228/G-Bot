@@ -10,7 +10,7 @@ module.exports = {
 
     execute(client, msg) {
         let flag = msg.member.roles.cache.has('938748850112430091')
-        if (!flag || msg.member.permissions.has(this.permissions[0])) return msg.reply({ content: '<@&948118013293494303>, ' + `${msg.member} 找你` });;
+        if (!flag || msg.member.permissions.has(this.permissions[0])) return;
         if (!this.channels.includes(msg.channel.id))
             return msg.reply({ content: '頻道錯誤' });
         let d2 = new Date();
