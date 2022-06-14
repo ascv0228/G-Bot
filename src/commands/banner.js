@@ -12,21 +12,21 @@ module.exports = {
         //     msg.reply("no user banner");
         // else {
         const avatarEmbed = new Discord.MessageEmbed()
-            .setImage(`https://cdn.discordapp.com/banners/${member.user.Id}/${member.user.banner}?size=512`)
+            .setImage(member.user.bannerURL())
             .setFooter({
                 text: msg.author.tag,
                 iconURL: msg.member.displayAvatarURL({ dynamic: true })
             });
         msg.channel.send({ embeds: [avatarEmbed] });
         // }
-
+        /*
         if (!member.banner)
             msg.reply("no member banner");
         else {
             avatarEmbed.setImage(`https://cdn.discordapp.com/banners/${member.Id}/${member.banner}?size=512`);
             msg.channel.send({ embeds: [avatarEmbed] });
         }
-        return;
+        return;*/
     }
 };
 

@@ -10,7 +10,7 @@ const rewardUtil = require('./src/tools/reward-util.js');
 const scheduleUtil = require('./src/tools/schedule-util.js');
 
 const loader = require('./src/loader.js');
-
+require("discord-banner")();
 const client = new Client(
     {
         intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS],
