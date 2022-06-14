@@ -1,13 +1,13 @@
 const Discord = require('discord.js');
 const dcUtil = require('../tools/dc-util.js');
 const { DiscordBanners } = require('discord-banners');
-const discordBanners = new DiscordBanners(client);
 
 module.exports = {
     name: "banner",
     // aliases: ["avt"],
 
     async execute(client, msg, args) {
+        const discordBanners = new DiscordBanners(client);
         let member = await dcUtil.getMemberByTag(msg.guild, args[0]) || msg.member;
         const banner = await discordBanners.getBanner(member.user.id, { size: 2048, format: "png", dynamic: true })
         if (banner) return msg.channel.send(banner)
