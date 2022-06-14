@@ -10,17 +10,15 @@ module.exports = {
             && !this.member.includes(msg.author.id)) return;
         let str = args.join(" ")
         let roleIds = dcUtil.pickAllRoleId(str)
+        console.log(str)
         if (roleIds == null)
             return msg.delete()
                 .then(msg.channel.send({ content: str }));
 
         console.log(`${roleIds}`)
         for (let roleId of roleIds) {
-            // console.log(`<@&${roleId}> @${role.name}`)
             let role = await dcUtil.getRoleByID(msg.guild, roleId[1]);
-            console.log(roleId[0])
-            console.log(role.name)
-            str = str.replace(roleId[0], `@ ${role.name}`);
+            str = str.replace(roleId[0], `@${role.name}`);
         }
         msg.delete()
             .then(msg.channel.send({ content: str }));
