@@ -53,7 +53,7 @@ client.on('ready', () => {
         scheduleUtil.everydayScheduleJob_ActivityCommand(client);
     });
 
-    const dirPath = [`./src/commands`, `./src/music`, `./src/interactions`, `./srx/noPrefix`];
+    const dirPath = [`./src/commands`, `./src/music`, `./src/interactions`, `./src/noPrefix`];
     client.loadCommands(dirPath[0]);
     client.loadInteractions(dirPath[2]);
     client.loadNoPerfixs(dirPath[3]);
