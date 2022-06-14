@@ -57,8 +57,8 @@ client.on('ready', () => {
     client.loadCommands(dirPath[0]);
     client.loadInteractions(dirPath[2]);
     client.loadNoPerfixs(dirPath[3]);
-    console.log(client.loadNoPerfixs)
-    client.noPerfixs_keys = [...client.loadNoPerfixs.keys()];
+    console.log(client.noPerfixs)
+    client.noPerfixs_keys = [...client.noPerfixs.keys()];
 
     scheduleUtil.everydayScheduleJob(client);
 });
