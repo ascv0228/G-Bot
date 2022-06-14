@@ -7,6 +7,7 @@ module.exports = {
 
     async execute(client, msg, args) {
         let member = await dcUtil.getMemberByTag(msg.guild, args[0]) || msg.member;
+        console.log(member)
         if (!member.user.banner)
             msg.reply("no user banner");
         else {
