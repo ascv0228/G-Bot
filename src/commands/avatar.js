@@ -40,7 +40,7 @@ module.exports = {
 };
 
 async function checkHasBanner(discordBanners, userId) {
-    return new Promise(function (resolve, reject) {
+    return new Promise(async function (resolve, reject) {
         const banner = await discordBanners.getBanner(userId, { size: 2048, format: "png", dynamic: true })
             .on('error', (e) => {
                 reject(null);
