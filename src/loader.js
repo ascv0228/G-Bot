@@ -2,7 +2,8 @@ const tools = require('./tools/tools.js');
 
 module.exports = {
     loadInteractions: loadInteractions,
-    loadCommands: loadCommands
+    loadCommands: loadCommands,
+    loadNoPerfixs: loadCommands,
 }
 
 
@@ -36,6 +37,24 @@ function loadCommands(dirPath) {
                 } else {
                     this.commands.set(command.name, command);
                 }
+            }
+        }
+    });
+}
+
+
+function loadNoPerfixs(dirPath) {
+    return tools.readDirAll(dirPath, (file) => {
+        if (file.match(/(\.js|\.ts)$/)) {
+            const noPerfix = require(file);
+            if (noPerfix.aliases) {
+                noPerfix.aliases.forEach(alias => {
+                    this.noPerfixs.set(alias, noPerfix);
+                });
+            }
+
+            if (noPerfix.name) {
+                this.noPerfixs.set(noPerfix.name, noPerfix);
             }
         }
     });

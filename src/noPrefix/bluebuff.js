@@ -1,8 +1,9 @@
 
 
-
+/*
 module.exports = {
-    name: "@偷抓對面藍buff",
+    name: "@傳說",
+    aliases: ['@偷抓對面藍buff', '<@&931946175827959819>'],
     roles: ['931946175827959819'],
     channels: ['956874346108964864'],
     permissions: ['ADMINISTRATOR'],
@@ -15,4 +16,4 @@ module.exports = {
         return msg.reply({ content: `${msg.member} : ` + '<@&931946175827959819>, 出來嗨' });
 
     }
-};
+};*/

@@ -70,14 +70,3 @@ async function loadMongodb(client) {
     let db = await mongoose.connection;;
     client.Mdbcollection = await db.collection('Clients');
 }
-
-/*
-async function ReadActivityCommandDB(client,) {
-    schedule.scheduleJob('50 59 15 * * *', async function () {
-        giveReward(client);
-    });
-}*/
-
-/*
-async function dbPush(client, field, )
-*/

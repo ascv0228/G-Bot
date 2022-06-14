@@ -8,10 +8,10 @@ const { send } = require('process');
 const dbUtil = require('./src/tools/db-util.js');
 const rewardUtil = require('./src/tools/reward-util.js');
 const scheduleUtil = require('./src/tools/schedule-util.js');
-const tools = require('./src/tools/tools.js');
-const big = require('./src/noPrefix/big.js');
-const small = require('./src/noPrefix/small.js');
-const bluebuff = require('./src/noPrefix/bluebuff.js');
+const tools = require('./src/tools/tools.js');//
+const big = require('./src/noPrefix/big.js');//
+const small = require('./src/noPrefix/small.js');//
+const bluebuff = require('./src/noPrefix/bluebuff.js');//
 const loader = require('./src/loader.js');
 
 const client = new Client(
@@ -34,6 +34,7 @@ process.on('unhandledRejection', (reason, promise) => {
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.listens = new Discord.Collection();
+client.noPerfixs = new Discord.Collection();
 client.interactions = new Discord.Collection();
 client.musicDict = new Map();
 client.command_member_role = new Map();
@@ -42,6 +43,7 @@ client.command_member_role_time = new Map();
 
 client.loadCommands = loader.loadCommands;
 client.loadInteractions = loader.loadInteractions;
+client.loadNoPerfixs = loader.loadNoPerfixs;
 
 client.on('ready', () => {
     client.user.setActivity(`GG的大GG`, { type: "PLAYING" });
@@ -51,9 +53,11 @@ client.on('ready', () => {
         scheduleUtil.everydayScheduleJob_ActivityCommand(client);
     });
 
-    const dirPath = [`./src/commands`, `./src/music`, `./src/interactions`];
+    const dirPath = [`./src/commands`, `./src/music`, `./src/interactions`, `./srx/noPrefix`];
     client.loadCommands(dirPath[0]);
-    client.loadInteractions(dirPath[2])
+    client.loadInteractions(dirPath[2]);
+    client.loadNoPerfixs(dirPath[3]);
+    client.noPerfixs_keys = [...client.loadNoPerfixs.keys()];
 
     scheduleUtil.everydayScheduleJob(client);
 });
@@ -69,18 +73,30 @@ client.on('messageCreate', msg => {
     }
 
     rewardUtil.confirmReward(client, msg);
+    /*
     if (msg.content.includes('@佬') || msg.content.includes('<@&948118013293494303>')) {
         big.execute(client, msg);
     }
     if (msg.content.includes('@小萌新') || msg.content.includes('<@&938748850112430091>')) {
         small.execute(client, msg);
-    }/*
+    }*//*
     if (msg.content.includes('@傳說') || msg.content.includes('@偷抓對面藍buff') || msg.content.includes('<@&931946175827959819>')) {
         bluebuff.execute(client, msg);
     }*/
+    // const arrayOfStrings = ['ab', 'def', 'xyz'];
+    // const str = 'abc';
+    // const found = client.noPerfixs_keys.find(v => str.includes(v));
+
+    // console.log(found)
     const lines = msg.content.trim().split("\n");
     for (let i = 0; i < lines.length; ++i) {
-        if (!msg.content.startsWith(`${prefix}`)) return;
+        if (!lines[i].startsWith(`${prefix}`)) {
+            const found = client.noPerfixs_keys.find(v => lines[i].includes(v));
+            if (!found) continue;
+            const exec = client.noPerfixs.get(found);
+            exec.execute(client, msg);
+            continue;
+        }
         const [cmd, ...args] = lines[i].slice(prefix.length).trimEnd().split(/\s+/);
         const exec = client.commands.get(cmd) || client.aliases.get(cmd);
         if (!exec) continue;
