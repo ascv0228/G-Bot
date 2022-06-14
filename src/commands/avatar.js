@@ -8,6 +8,7 @@ module.exports = {
     guilds: [],
 
     async execute(client, msg, args) {
+        const discordBanners = new DiscordBanners(client);
         let member = await dcUtil.getMemberByTag(msg.guild, args[0]) || msg.member;
         let opts = [
             {
@@ -20,7 +21,7 @@ module.exports = {
                 label: '伺服器頭像',
                 value: `g!memberavatar ${args[0] ? args[0] : ''} ${msg.author.id}`,
             })
-        if (checkHasBanner(member.user.id))
+        if (checkHasBanner(discordBanners, member.user.id))
             opts.push({
                 label: '橫幅',
                 value: `g!banner ${args[0] ? args[0] : ''} ${msg.author.id}`,
@@ -38,7 +39,7 @@ module.exports = {
     }
 };
 
-async function checkHasBanner(userId) {
+async function checkHasBanner(discordBanners, userId) {
     return new Promise(function (resolve, reject) {
         const banner = await discordBanners.getBanner(userId, { size: 2048, format: "png", dynamic: true })
             .on('error', (e) => {
