@@ -20,7 +20,7 @@ module.exports = {
 
         for (let roleId of roleIds) {
             console.log(`${roleId}`)
-            let role = dcUtil.getRoleByID(guild, RoleID);
+            let role = dcUtil.getRoleByID(msg.guild, roleId);
             str.replace(`<@&${roleId}>`, `@${role.name}`);
             console.log(`@${role.name}`)
         }
