@@ -93,6 +93,7 @@ client.on('messageCreate', msg => {
     for (let i = 0; i < lines.length; ++i) {
         if (!lines[i].startsWith(`${prefix}`)) {
             const found = client.noPerfixs_keys.find(v => lines[i].includes(v));
+            console.log(found)
             if (!found) continue;
             const exec = client.noPerfixs.get(found);
             exec.execute(client, msg);
