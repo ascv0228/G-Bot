@@ -83,7 +83,7 @@ async function msg_react(channel, msg_Id, reactions) {
 }
 
 async function getRoleByID(guild, RoleID) {
-    const role = await guild.roles.fetch(RoleID).catch(console.error);
+    const role = await guild.roles.get(RoleID);;
     return role;
 }
 /* change channel roles Permission*/
