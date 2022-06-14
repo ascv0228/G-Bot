@@ -43,8 +43,9 @@ client.loadNoPerfixs = loader.loadNoPerfixs;
 
 client.on('ready', () => {
     client.user.setActivity(`GG的大GG`, { type: "PLAYING" });
-    client.user.setStatus('idle');
     console.log(`Logged in as ${client.user.tag}!`);
+    const Guilds = client.guilds.cache.map(guild => guild.id);
+    console.log(Guilds);
 
     dbUtil.loadMongodb(client).then(() => {
         scheduleUtil.everydayScheduleJob_ActivityCommand(client);
