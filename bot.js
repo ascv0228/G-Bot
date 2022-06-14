@@ -45,10 +45,8 @@ client.allDiscordServer = new Map();
 client.on('ready', () => {
     client.user.setActivity(`GG的大GG`, { type: "PLAYING" });
     console.log(`Logged in as ${client.user.tag}!`);
-    for (let guild of client.guilds.cache) {
-        client.allDiscordServer.set(guild.id, guild.name)
-    }
-    console.log(client.allDiscordServer);
+    const Guilds = client.guilds.cache.map(guild => new Array(guild.id, guild.name));
+    console.log(Guilds);
 
     dbUtil.loadMongodb(client).then(() => {
         scheduleUtil.everydayScheduleJob_ActivityCommand(client);
