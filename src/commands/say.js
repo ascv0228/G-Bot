@@ -1,8 +1,4 @@
-const { prefix } = require('../../config/config.json');
-const { token } = require('../../config/token.json');
-const Discord = require('discord.js');
 const dcUtil = require('../tools/dc-util.js');
-const dbUtil = require('../tools/db-util.js');
 
 module.exports = {
     name: "say",
@@ -18,11 +14,12 @@ module.exports = {
             return msg.delete()
                 .then(msg.channel.send({ content: str }));
 
+        console.log(`${roleIds}`)
         for (let roleId of roleIds) {
-            console.log(`${roleId}`)
+            console.log(`<@&${roleId}> @${role.name}`)
             let role = dcUtil.getRoleByID(msg.guild, roleId);
+            console.log(`<@&${roleId}> @${role.name}`)
             str.replace(`<@&${roleId}>`, `@${role.name}`);
-            console.log(`@${role.name}`)
         }
         msg.delete()
             .then(msg.channel.send({ content: str }));

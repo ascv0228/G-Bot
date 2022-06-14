@@ -6,7 +6,8 @@ module.exports = {
     // permissions: ['ADMINISTRATOR'],
 
     execute(client, msg, args) {
-        content = (msg.member.permissions.has('ADMINISTRATOR')) ?
+        content = (msg.member.permissions.has('ADMINISTRATOR')
+            && msg.guild == '829673608791851038') ?
             AdminHelp() : BaseHelp()
         msg.reply({ content: content });
         return;
@@ -28,6 +29,7 @@ function BaseHelp() {
     let contentArray = [
         '`' + 'avatar, avt' + '`' + " : 查看頭像",
         '`' + 'memberavatar, memavt' + '`' + " : 查看伺服器頭像",
+        '`' + 'nosex' + '`' + " : 不可以瑟瑟.jpg",
         '`' + 'ping' + '`' + " : 顯示延遲",
     ]
     return contentArray.join("\n")

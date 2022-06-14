@@ -6,9 +6,11 @@ const scheduleUtil = require('../tools/schedule-util.js');
 module.exports = {
     name: "activity",
     aliases: ["act"],
+    guilds: ['829673608791851038'],
     permissions: ['ADMINISTRATOR'],
 
     async execute(client, msg, args) {
+        if (this.guilds.length && !this.guilds.includes(msg.guild)) return;
         if (!msg.member.permissions.has(this.permissions[0]))
             return msg.channel.send('You do not have that permission! :x:').then(msg.react('❌'));
         if (msg.channel.id != '869585329072537680')
