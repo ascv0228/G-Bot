@@ -40,12 +40,15 @@ client.command_member_role_time = new Map();
 client.loadCommands = loader.loadCommands;
 client.loadInteractions = loader.loadInteractions;
 client.loadNoPerfixs = loader.loadNoPerfixs;
+client.allDiscordServer = new Map();
 
 client.on('ready', () => {
     client.user.setActivity(`GG的大GG`, { type: "PLAYING" });
     console.log(`Logged in as ${client.user.tag}!`);
-    const Guilds = client.guilds.cache.map(guild => { guild.id, guild.name });
-    console.log(Guilds);
+    for (let guild of client.guilds.cache) {
+        client.allDiscordServer.set(guild.id, guild.name)
+    }
+    console.log(client.allDiscordServer);
 
     dbUtil.loadMongodb(client).then(() => {
         scheduleUtil.everydayScheduleJob_ActivityCommand(client);
