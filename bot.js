@@ -44,7 +44,7 @@ client.loadNoPerfixs = loader.loadNoPerfixs;
 client.on('ready', () => {
     client.user.setActivity(`GG的大GG`, { type: "PLAYING" });
     console.log(`Logged in as ${client.user.tag}!`);
-    const Guilds = client.guilds.cache.map(guild => guild.id);
+    const Guilds = client.guilds.cache.map(guild => { guild.id, guild.name });
     console.log(Guilds);
 
     dbUtil.loadMongodb(client).then(() => {
