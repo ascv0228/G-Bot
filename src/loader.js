@@ -3,7 +3,7 @@ const tools = require('./tools/tools.js');
 module.exports = {
     loadInteractions: loadInteractions,
     loadCommands: loadCommands,
-    loadNoPerfixs: loadCommands,
+    loadNoPerfixs: loadNoPerfixs,
 }
 
 
