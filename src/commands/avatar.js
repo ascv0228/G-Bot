@@ -20,7 +20,7 @@ module.exports = {
                 label: '伺服器頭像',
                 value: `g!memberavatar ${args[0] ? args[0] : ''} ${msg.author.id}`,
             })
-        if (member.user.banner)
+        if (checkHasBanner(member.user.id))
             opts.push({
                 label: '橫幅',
                 value: `g!banner ${args[0] ? args[0] : ''} ${msg.author.id}`,
@@ -37,3 +37,15 @@ module.exports = {
         await msg.channel.send({ components: [row] });
     }
 };
+
+async function checkHasBanner(userId) {
+    return new Promise(function (resolve, reject) {
+        const banner = await discordBanners.getBanner(userId, { size: 2048, format: "png", dynamic: true })
+            .on('error', (e) => {
+                reject(null);
+            })
+            .on('end', () => {
+                resolve(banner);
+            });
+    });
+}
