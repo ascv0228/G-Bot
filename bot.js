@@ -8,10 +8,7 @@ const { send } = require('process');
 const dbUtil = require('./src/tools/db-util.js');
 const rewardUtil = require('./src/tools/reward-util.js');
 const scheduleUtil = require('./src/tools/schedule-util.js');
-const tools = require('./src/tools/tools.js');//
-const big = require('./src/noPrefix/big.js');//
-const small = require('./src/noPrefix/small.js');//
-const bluebuff = require('./src/noPrefix/bluebuff.js');//
+
 const loader = require('./src/loader.js');
 
 const client = new Client(
@@ -47,6 +44,8 @@ client.loadNoPerfixs = loader.loadNoPerfixs;
 
 client.on('ready', () => {
     client.user.setActivity(`GG的大GG`, { type: "PLAYING" });
+    client.user.setPresence({ activities: [{ name: 'with discord.js' }], status: 'idle' });
+    client.user.setStatus('idle');
     console.log(`Logged in as ${client.user.tag}!`);
 
     dbUtil.loadMongodb(client).then(() => {

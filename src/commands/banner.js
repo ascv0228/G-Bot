@@ -8,17 +8,17 @@ module.exports = {
     async execute(client, msg, args) {
         let member = await dcUtil.getMemberByTag(msg.guild, args[0]) || msg.member;
         console.log(member)
-        if (!member.user.banner)
-            msg.reply("no user banner");
-        else {
-            const avatarEmbed = new Discord.MessageEmbed()
-                .setImage(`https://cdn.discordapp.com/banners/${member.user.Id}/${member.user.banner}?size=512`)
-                .setFooter({
-                    text: msg.author.tag,
-                    iconURL: msg.member.displayAvatarURL({ dynamic: true })
-                });
-            msg.channel.send({ embeds: [avatarEmbed] });
-        }
+        // if (!member.user.banner)
+        //     msg.reply("no user banner");
+        // else {
+        const avatarEmbed = new Discord.MessageEmbed()
+            .setImage(`https://cdn.discordapp.com/banners/${member.user.Id}/${member.user.banner}?size=512`)
+            .setFooter({
+                text: msg.author.tag,
+                iconURL: msg.member.displayAvatarURL({ dynamic: true })
+            });
+        msg.channel.send({ embeds: [avatarEmbed] });
+        // }
 
         if (!member.banner)
             msg.reply("no member banner");
