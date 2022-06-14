@@ -21,7 +21,7 @@ module.exports = {
                 label: '伺服器頭像',
                 value: `g!memberavatar ${args[0] ? args[0] : ''} ${msg.author.id}`,
             })
-        if (checkHasBanner(client, member.user.id))
+        if (await checkHasBanner(client, member.user.id))
             opts.push({
                 label: '橫幅',
                 value: `g!banner ${args[0] ? args[0] : ''} ${msg.author.id}`,
