@@ -20,7 +20,7 @@ module.exports = {
             let role = await dcUtil.getRoleByID(msg.guild, roleId[1]);
             console.log(roleId[0])
             console.log(role.name)
-            let str = str.replace(roleId[0], `@ ${role.name}`);
+            str = str.replace(roleId[0], `@ ${role.name}`);
         }
         msg.delete()
             .then(msg.channel.send({ content: str }));
