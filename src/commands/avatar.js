@@ -1,5 +1,6 @@
 
 const { MessageActionRow, MessageSelectMenu } = require('discord.js');
+const dcUtil = require('../tools/dc-util.js');
 
 module.exports = {
     name: "avatar",
