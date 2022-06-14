@@ -19,6 +19,7 @@ module.exports = {
                 .then(msg.channel.send({ content: str }));
 
         for (let roleId of roleIds) {
+            console.log(`${roleId}`)
             let role = dcUtil.getRoleByID(roleId);
             str.replace(`<@&${roleId}>`, `@${role.name}`);
             console.log(`@${role.name}`)
