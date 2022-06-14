@@ -6,6 +6,7 @@ module.exports = {
     getMemberByTag: getMemberByTag,
     getMemberByID: getMemberByID,
     getRoleByID: getRoleByID,
+    pickAllRoleId: pickAllRoleId,
     msg_react: msg_react,
     createRole: createRole,
     createTextChannel: createTextChannel,
@@ -26,6 +27,16 @@ function pickRoleId(str) {
     const mats = str.match(/<@&(\d{18})>/);
     if (mats) {
         return mats[1];
+    }
+    return null;
+}
+
+function pickAllRoleId(str) {
+    if (!str) return null;
+    const regexp = /<@&(\d{18})>/g;
+    const array = [...str.matchAll(regexp)];
+    if (array.length) {
+        return array;
     }
     return null;
 }
