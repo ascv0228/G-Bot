@@ -6,12 +6,12 @@ module.exports = {
     // aliases: ["avt"],
 
     async execute(client, msg, args) {
-        let user = await dcUtil.getMemberByTag(msg.guild, args[0]) || msg.author;
-        if (!user.user.banner)
+        let member = await dcUtil.getMemberByTag(msg.guild, args[0]) || msg.member;
+        if (!member.user.banner)
             msg.reply("no user banner");
         else {
             const avatarEmbed = new Discord.MessageEmbed()
-                .setImage(`https://cdn.discordapp.com/banners/${user.user.Id}/${user.user.banner}?size=512`)
+                .setImage(`https://cdn.discordapp.com/banners/${member.user.Id}/${member.user.banner}?size=512`)
                 .setFooter({
                     text: msg.author.tag,
                     iconURL: msg.member.displayAvatarURL({ dynamic: true })
@@ -19,10 +19,10 @@ module.exports = {
             msg.channel.send({ embeds: [avatarEmbed] });
         }
 
-        if (!user.banner)
+        if (!member.banner)
             msg.reply("no member banner");
         else {
-            avatarEmbed.setImage(`https://cdn.discordapp.com/banners/${user.Id}/${user.banner}?size=512`);
+            avatarEmbed.setImage(`https://cdn.discordapp.com/banners/${member.Id}/${member.banner}?size=512`);
             msg.channel.send({ embeds: [avatarEmbed] });
         }
         return;

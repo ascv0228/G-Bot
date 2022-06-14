@@ -2,8 +2,8 @@ module.exports = {
     name: "version",
 
     execute(client, msg, args) {
-        let temp = ["分檔中...",
-            "play、playnext重複"]
+        let temp = ["avatar和memberavatar合在一起...",
+            "banner新增中"]
         msg.reply({ content: temp.join("\n") });
         return
     }
