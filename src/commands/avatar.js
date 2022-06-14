@@ -9,6 +9,7 @@ module.exports = {
     guilds: [],
 
     async execute(client, msg, args) {
+        const discordBanners = new DiscordBanners(client);
         let member = await dcUtil.getMemberByTag(msg.guild, args[0]) || msg.member;
         let opts = [
             {
@@ -43,6 +44,7 @@ async function checkHasBanner(client, userId) {
 
     const discordBanners = new DiscordBanners(client);
     return new Promise(async function (resolve, reject) {
+        const discordBanners = new DiscordBanners(client);
         const banner = await discordBanners.getBanner(userId, { size: 2048, format: "png", dynamic: true })
             .on('error', (e) => {
                 reject(null);
