@@ -20,12 +20,12 @@ module.exports = {
                 label: '伺服器頭像',
                 value: `g!memberavatar ${args[0] ? args[0] : ''} ${msg.author.id}`,
             })
-        if (member.user.banner) {
+        if (member.user.banner)
             opts.push({
                 label: '橫幅',
-                value: `g!banner ${args[0] ? args[0] : ''}`,
+                value: `g!banner ${args[0] ? args[0] : ''} ${msg.author.id}`,
             })
-        }
+
         const row = new MessageActionRow()
             .addComponents(
                 new MessageSelectMenu()
