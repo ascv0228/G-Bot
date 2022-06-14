@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "@discordjs/rest": "^0.4.1",
-    "discord-banner": "^1.6.7",
+    "discord-banners": "^1.0.1",
     "discord.js": "^13.6.0",
     "erela.js": "^2.3.3",
     "filereader": "^0.10.3",
