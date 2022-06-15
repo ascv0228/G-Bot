@@ -41,7 +41,8 @@ client.loadCommands = loader.loadCommands;
 client.loadInteractions = loader.loadInteractions;
 client.loadNoPerfixs = loader.loadNoPerfixs;
 client.allDiscordServer = new Map();
-
+client.allowServer = new Array('790338603141431336', '829673608791851038',
+    '864925734581043280', '901498054077714462', '964526913861341254');
 client.on('ready', () => {
     client.user.setActivity(`GG的大GG`, { type: "PLAYING" });
     console.log(`Logged in as ${client.user.tag}!`);
