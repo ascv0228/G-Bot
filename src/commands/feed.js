@@ -5,6 +5,7 @@ module.exports = {
     guilds: ['856793573194465300'],
 
     async execute(client, msg, args) {
+        console.log(msg.guilds.id)
         if (!this.guilds.includes(msg.guilds.id)) return;
         if (msg.author.id == "927937812605595739")
             return msg.reply(`然喵: 窩餵窩自己，豪ㄘouo，窩也要窩的寶貝餵窩吃`);
