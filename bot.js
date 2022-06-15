@@ -35,7 +35,7 @@ client.interactions = new Discord.Collection();
 client.musicDict = new Map();
 client.command_member_role = new Map();
 client.command_member_role_time = new Map();
-
+// client.dispatcher = new Discord.Collection();
 
 client.loadCommands = loader.loadCommands;
 client.loadInteractions = loader.loadInteractions;
@@ -55,6 +55,7 @@ client.on('ready', () => {
 
     const dirPath = [`./src/commands`, `./src/music`, `./src/interactions`, `./src/noPrefix`];
     client.loadCommands(dirPath[0]);
+    // client.loadCommands(dirPath[1]);
     client.loadInteractions(dirPath[2]);
     client.loadNoPerfixs(dirPath[3]);
     client.noPerfixs_keys = [...client.noPerfixs.keys()];

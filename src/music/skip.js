@@ -1,7 +1,7 @@
 const { prefix } = require('../../config/config.json');
 
 module.exports = {
-    name: "ping",
+    name: "skip",
     // channels: ["xxxx", "xxxxx"],
 
     async execute(client, msg, args) {
