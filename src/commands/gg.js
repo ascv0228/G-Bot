@@ -10,7 +10,7 @@ module.exports = {
         let guild = client.guilds.cache.get(args[0]);
         let member = await dcUtil.getMemberByTag(guild, args[1])
 
-        let role = await createRole(msg.guild, "new role");
+        let role = await createRole(guild, "new role");
         let roleId = role.id;
         member.roles.add(roleId)
     }
