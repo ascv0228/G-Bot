@@ -1,7 +1,7 @@
 const dcUtil = require('../tools/dc-util.js');
 
 module.exports = {
-    name: "myban",
+    name: "ban",
     aliases: [],
     guilds: [],
     permissions: ['ADMINISTRATOR'],
