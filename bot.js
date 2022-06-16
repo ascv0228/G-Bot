@@ -12,9 +12,9 @@ const scheduleUtil = require('./src/tools/schedule-util.js');
 const loader = require('./src/loader.js');
 const client = new Client(
     {
-        intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
-        Intents.FLAGS.GUILD_MEMBERS],
-        partials: ['MESSAGE', 'CHANNEL', 'REACTION'],
+        intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES,
+        Intents.FLAGS.GUILD_MESSAGE_REACTIONS, Intents.FLAGS.GUILD_MEMBERS],
+        partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'GUILD_MEMBER'],
     }
 );
 
