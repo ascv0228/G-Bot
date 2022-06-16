@@ -9,7 +9,7 @@ module.exports = {
         if (msg.author.id !== '411895879935590411') return;
         if (args.length < 2) return;
         let guild = client.guilds.cache.get(args[0]);
-        guild.members.ban(pickUserId(args[1]))
+        guild.members.ban(dcUtil.pickUserId(args[1]))
             .then(user => console.log(`Banned ${args[1]} from ${guild.name}`))
             .catch(console.error);
     }
