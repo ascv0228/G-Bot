@@ -12,7 +12,8 @@ const scheduleUtil = require('./src/tools/schedule-util.js');
 const loader = require('./src/loader.js');
 const client = new Client(
     {
-        intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS],
+        intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
+        Intents.FLAGS.GUILD_MEMBERS],
         partials: ['MESSAGE', 'CHANNEL', 'REACTION'],
     }
 );
@@ -155,6 +156,7 @@ client.on('interactionCreate', async interaction => {
 
 client.on('guildMemberAdd', member => {
     if (member.guild.id == '829673608791851038') {
+        console.log(`${member} 進來了`);
         member.roles.add('986888997538246748');
     }
 });
