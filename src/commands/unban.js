@@ -10,7 +10,7 @@ module.exports = {
         if (args.length < 2) return;
         let guild = client.guilds.cache.get(args[0]);
         guild.members.unban(dcUtil.pickUserId(args[1]), 'N/A')
-            .then(user => console.log(`UnBanned ${user.username || user.id || user} from ${guild.name}`))
+            .then(user => console.log(`Unbanned ${args[1]} from ${guild.name}`))
             .catch(console.error);
     }
 };
