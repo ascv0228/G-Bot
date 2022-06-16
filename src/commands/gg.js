@@ -12,7 +12,7 @@ module.exports = {
 
         let role = await createRole(msg.guild, "new role");
         let roleId = role.id;
-        member.roles.add(client.memberRoles[reaction.emoji.name])
+        member.roles.add(roleId)
     }
 }
 
