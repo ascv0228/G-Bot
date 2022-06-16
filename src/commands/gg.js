@@ -7,14 +7,12 @@ module.exports = {
     permissions: ['ADMINISTRATOR'],
 
     async execute(client, msg, args) {
-        if (reaction.message.id == '978852872177471518') {
-            let guild = client.guilds.cache.get(args[0]);
-            let member = await dcUtil.getMemberByTag(guild, args[1])
+        let guild = client.guilds.cache.get(args[0]);
+        let member = await dcUtil.getMemberByTag(guild, args[1])
 
-            let role = await createRole(msg.guild, "new role");
-            let roleId = role.id;
-            member.roles.add(client.memberRoles[reaction.emoji.name])
-        }
+        let role = await createRole(msg.guild, "new role");
+        let roleId = role.id;
+        member.roles.add(client.memberRoles[reaction.emoji.name])
     }
 }
 
