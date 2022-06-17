@@ -18,7 +18,9 @@ async function everydayScheduleJob(client) {  //https://www.codexpedia.com/javas
     schedule.scheduleJob('50 59 15 * * *', async function () {
         const guildid = '829673608791851038';
         let guild = await client.guilds.cache.get(guildid);
-        RewardUtil.giveReward(client);
+        RewardUtil.giveReward(client).then(
+            RewardUtil.giveEverydayPoint(client)
+        );
         RewardUtil.getRewardText(client, guild);
         RewardUtil.getRecordText(client, guild, ["記錄區", "867811395474423838", "normal"])
         RewardUtil.getRecordText(client, guild, ["日常獎勵記錄區", "886269472158138429", "daily"])

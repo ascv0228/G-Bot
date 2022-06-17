@@ -15,7 +15,8 @@ module.exports = {
     everydayScheduleJob: everydayScheduleJob,
     getRewardText: getRewardText,
     getRecordText: getRecordText,
-    giveReward: giveReward
+    giveReward: giveReward,
+    giveEverydayPoint: giveEverydayPoint
 };
 
 async function confirmReward(client, msg) {
@@ -53,6 +54,21 @@ async function giveReward(client) {
         client.channels.cache.get('964516826811858984').send(`x!bot-award <@${key}> ${value * 100}`);
     });
 
+}
+
+async function giveEverydayPoint(client) {
+    var d = new Date();
+    client.channels.cache.get('964516826811858984').send(`==========${d.getMonth() + 1}/${d.getDate()} r每日任務完成區==========`);
+
+    let temp = await client.Mdbcollection.find({ type: "check-msg", channelId: '886269472158138429' }).toArray();
+    let user_ids = temp[0].users.filter(function (elem, pos) {
+        return temp[0].users.indexOf(elem) == pos;
+    })
+    let members = await guild.members.fetch({ user: user_ids, withPresences: true })
+
+    for (const [id, member] of members) {
+        client.channels.cache.get('964516826811858984').send(`x!bot-point <@${id}> 1`);
+    }
 }
 
 async function everydayScheduleJob(client) {  //https://www.codexpedia.com/javascript/nodejs-cron-schedule-examples/
@@ -101,11 +117,11 @@ async function getRewardText(client, guild) {
 
     let members = await guild.members.fetch({ user: user_ids, withPresences: true })
 
-    let i = 0;
-    for (const [id, member] of members) {
-        let userTag = `@${member.user.username}#${member.user.discriminator}`;
-        ++i;
-    }
+    // let i = 0;
+    // for (const [id, member] of members) {
+    //     let userTag = `@${member.user.username}#${member.user.discriminator}`;
+    //     ++i;
+    // }
 
     let order_userTag = new Map();
 
@@ -150,6 +166,7 @@ async function getRecordText(client, guild, args) {
     client.channels.cache.get(sendChannel).send({ files: [attachment] });
     client.channels.cache.get(sendChannel).send({ content: file_name + '```' + output.join('\n') + '```' });
 }
+
 /*
 var request = require('request')//.defaults({ encoding: null });
 const crypto = require('crypto');

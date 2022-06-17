@@ -12,6 +12,11 @@ module.exports = {
         if (msg.author.id !== '411895879935590411') return;
         console.log(client.command_member_role);
         console.log(client.command_member_role_time);
+        let channelID = '883618737700347946'
+        let msg_id = '978852872177471518'
+        let channel = await client.channels.fetch(channelID)
+        let message = await channel.messages.fetch(msg_id);
+        message.react('9️⃣');
 
     }
 };
