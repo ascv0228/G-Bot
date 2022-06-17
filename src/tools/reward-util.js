@@ -67,7 +67,7 @@ async function giveEverydayPoint(client) {
     let members = await guild.members.fetch({ user: user_ids, withPresences: true })
 
     for (const [id, member] of members) {
-        client.channels.cache.get('964516826811858984').send(`x!bot-point <@${id}> 1`);
+        client.channels.cache.get('964516826811858984').send(`x!bot-point <@${id}> 2`);
     }
 }
 
