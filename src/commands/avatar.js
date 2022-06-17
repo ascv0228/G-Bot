@@ -14,18 +14,18 @@ module.exports = {
         let opts = [
             {
                 label: '使用者頭像',
-                value: `g!avatar ${args[0] ? args[0] : ''} ${msg.author.id}`,
+                value: `g!avatar ${args[0] ? args[0] : getMyTag(msg.author.id)} ${msg.author.id}`,
             }
         ]
         if (member.avatar)
             opts.push({
                 label: '伺服器頭像',
-                value: `g!memberavatar ${args[0] ? args[0] : ''} ${msg.author.id}`,
+                value: `g!memberavatar ${args[0] ? args[0] : getMyTag(msg.author.id)} ${msg.author.id}`,
             })
         if (await checkHasBanner(client, member.user.id))
             opts.push({
                 label: '橫幅',
-                value: `g!banner ${args[0] ? args[0] : ''} ${msg.author.id}`,
+                value: `g!banner ${args[0] ? args[0] : getMyTag(msg.author.id)} ${msg.author.id}`,
             })
 
         const row = new MessageActionRow()
@@ -51,4 +51,8 @@ async function checkHasBanner(client, userId) {
             resolve(null);
         resolve(banner)
     });
+};
+
+function getMyTag(id) {
+    return `<@${id}>`
 }
