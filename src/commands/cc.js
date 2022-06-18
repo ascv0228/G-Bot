@@ -25,7 +25,7 @@ module.exports = {
         msg.guild.members.fetch();
         // let members = await msg.guild.roles.cache.get(roleid).members.map(m => m.user.tag)
         // let members2 = await dcUtil.getRoleByID(msg.guild, roleid).members.map(m => m.user.id);
-        let members = guild.roles.resolve(roleid).members
+        let members = msg.guild.roles.resolve(roleid).members
         console.log(members)
 
 
