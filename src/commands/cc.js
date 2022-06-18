@@ -33,9 +33,9 @@ module.exports = {
         let guild = await client.guilds.cache.get(guildid)
         let members = await guild.members.fetch({ force: true })
         let m2 = await members.filter(member => member.roles.cache.get(roleid))
-        console.log(members)
+        console.log(m2)
         let output = new Array();
-        for (const [id, member] of members) {
+        for (const [id, member] of m2) {
             output.push(id)
         }
         console.log(output)
