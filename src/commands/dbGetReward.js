@@ -13,7 +13,7 @@ module.exports = {
         if (!msg.member.permissions.has(this.permissions[0])) return;
 
         const guildid = '829673608791851038';
-        let guild = dcUtil.getGuildByID(client, guildid);
+        let guild = await dcUtil.getGuildByID(client, guildid);
         RewardUtil.getRewardText(client, guild);
         RewardUtil.getRecordText(client, guild, ["記錄區", "867811395474423838", "normal"])
         RewardUtil.getRecordText(client, guild, ["日常獎勵記錄區", "886269472158138429", "daily"])

@@ -11,7 +11,7 @@ module.exports = {
             console.log(`g!${this.name} <server-id> <tag-user>`)
             return;
         }
-        let guild = dcUtil.getGuildByID(client, args[0]);
+        let guild = await dcUtil.getGuildByID(client, args[0]);
         if (guild == null) return msg.reply(`Unknown ${args[0]}`)
         guild.members.unban(dcUtil.pickUserId(args[1]), 'N/A')
             .then(user => console.log(`Unbanned ${args[1]} from ${guild.name}`))
