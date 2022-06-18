@@ -11,6 +11,7 @@ module.exports = {
     async execute(client, msg, args) {
         const discordBanners = new DiscordBanners(client);
         let member = await dcUtil.getMemberByTag(msg.guild, args[0]) || msg.member;
+        /*
         let opts = [
             {
                 label: '使用者頭像',
@@ -26,8 +27,24 @@ module.exports = {
             opts.push({
                 label: '橫幅',
                 value: `g!banner ${args[0] ? args[0] : getMyTag(msg.author.id)} ${msg.author.id}`,
+            })*/
+        console.log(member.id)
+        let opts = [
+            {
+                label: '使用者頭像',
+                value: `g!avatar <@${member.id}> ${msg.author.id}`,
+            }
+        ]
+        if (member.avatar)
+            opts.push({
+                label: '伺服器頭像',
+                value: `g!memberavatar <@${member.id}> ${msg.author.id}`,
             })
-
+        if (await checkHasBanner(client, member.user.id))
+            opts.push({
+                label: '橫幅',
+                value: `g!banner <@${member.id}> ${msg.author.id}`,
+            })
         const row = new MessageActionRow()
             .addComponents(
                 new MessageSelectMenu()
