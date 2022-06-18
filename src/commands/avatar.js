@@ -60,6 +60,20 @@ module.exports = {
 async function checkHasBanner(client, userId) {
 
     const discordBanners = new DiscordBanners(client);
+    // let banner;
+    try {
+        const banner = await discordBanners.getBanner(userId, { size: 2048, format: "png", dynamic: true });
+        if (!banner.includes('http')) return null;
+        return banner;
+    }
+    catch {
+        return null;
+    }
+}
+/*
+async function checkHasBanner(client, userId) {
+
+    const discordBanners = new DiscordBanners(client);
     return new Promise(async function (resolve, reject) {
         const discordBanners = new DiscordBanners(client);
         const banner = await discordBanners.getBanner(userId, { size: 2048, format: "png", dynamic: true })
@@ -68,7 +82,7 @@ async function checkHasBanner(client, userId) {
             resolve(null);
         resolve(banner)
     });
-};
+};*/
 
 function getMyTag(id) {
     return `<@${id}>`
