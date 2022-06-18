@@ -71,7 +71,7 @@ async function getMemberByTag(guild, str) {
 
 async function getMemberByID(guild, MemberID) {
     try {
-        const member = await guild.members.fetch(MemberID).catch(console.error);
+        const member = await guild.members.fetch(MemberID);
         return member;
     }
     catch {
@@ -88,8 +88,13 @@ async function msg_react(channel, msg_Id, reactions) {
 }
 
 async function getRoleByID(guild, RoleID) {
-    const role = await guild.roles.fetch(RoleID).catch(console.error);
-    return role;
+    try {
+        const role = await guild.roles.fetch(RoleID);
+        return role;
+    }
+    catch {
+        return null;
+    }
 }
 /* change channel roles Permission*/
 
