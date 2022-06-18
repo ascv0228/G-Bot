@@ -7,7 +7,8 @@ const RewardUtil = require('./reward-util.js');
 module.exports = {
     everydayScheduleJob: everydayScheduleJob,
     everydayScheduleJob_ActivityCommand: everydayScheduleJob_ActivityCommand,
-    ScheduleJob_ActivityCommand: ScheduleJob_ActivityCommand
+    ScheduleJob_ActivityCommand: ScheduleJob_ActivityCommand,
+    ScheduleJob_RemoveNewMemberRole: ScheduleJob_RemoveNewMemberRole
 };
 
 
@@ -76,7 +77,8 @@ async function setCommand_member_role(client) {
 
 async function ScheduleJob_RemoveNewMemberRole(client) {
 
-    schedule.scheduleJob('50 59 15 * * *', async function () {
+    // schedule.scheduleJob('50 59 15 * * *', async function () {
+    schedule.scheduleJob('50 49 14 * * *', async function () {
         let d = new Date()
         const guildid = '829673608791851038';
         const roleid = '986888997538246748';

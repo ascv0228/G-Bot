@@ -62,6 +62,7 @@ client.on('ready', () => {
     client.noPerfixs_keys = [...client.noPerfixs.keys()];
 
     scheduleUtil.everydayScheduleJob(client);
+    scheduleUtil.ScheduleJob_RemoveNewMemberRole(client)
 });
 
 
