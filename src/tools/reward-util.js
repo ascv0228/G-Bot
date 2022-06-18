@@ -1,6 +1,7 @@
 const target_channel = require('../../config/channelId.json');
 const imgUtil = require('./img-util.js');
 const dbUtil = require('./db-util.js');
+const dcUtil = require('./dc-util.js');
 const schedule = require('node-schedule');
 const Discord = require('discord.js');
 
@@ -12,7 +13,7 @@ target_channel[3].channel_Id
 
 module.exports = {
     confirmReward: confirmReward,
-    everydayScheduleJob: everydayScheduleJob,
+    // everydayScheduleJob: everydayScheduleJob,
     getRewardText: getRewardText,
     getRecordText: getRecordText,
     giveReward: giveReward,
@@ -72,31 +73,31 @@ async function giveEverydayPoint(client, guild) {
     }
 }
 
-async function everydayScheduleJob(client) {  //https://www.codexpedia.com/javascript/nodejs-cron-schedule-examples/
+// async function everydayScheduleJob(client) {  //https://www.codexpedia.com/javascript/nodejs-cron-schedule-examples/
 
-    // var rule1 = new schedule.RecurrenceRule();
-    // rule1.minute = new schedule.Range(0, 59, 5);
+//     // var rule1 = new schedule.RecurrenceRule();
+//     // rule1.minute = new schedule.Range(0, 59, 5);
 
-    schedule.scheduleJob('50 59 15 * * *', async function () {
-        const guildid = '829673608791851038';
-        let guild = await client.guilds.cache.get(guildid);
-        giveReward(client);
-        getRewardText(client, guild);
-        getRecordText(client, guild, ["記錄區", "867811395474423838", "normal"])
-        getRecordText(client, guild, ["日常獎勵記錄區", "886269472158138429", "daily"])
-        getRecordText(client, guild, ["佬專用紀錄區", "948120050458574878", "big"])
-    });
+//     schedule.scheduleJob('50 59 15 * * *', async function () {
+//         const guildid = '829673608791851038';
+//         let guild = await client.guilds.cache.get(guildid);
+//         giveReward(client);
+//         getRewardText(client, guild);
+//         getRecordText(client, guild, ["記錄區", "867811395474423838", "normal"])
+//         getRecordText(client, guild, ["日常獎勵記錄區", "886269472158138429", "daily"])
+//         getRecordText(client, guild, ["佬專用紀錄區", "948120050458574878", "big"])
+//     });
 
 
-    schedule.scheduleJob('10 0 16 * * *', async function () {
-        dbUtil.dbInitReward(client, null);
-        dbUtil.dbInitCheckMsg(client, null);
-        client.channels.cache.get('867811395474423838').send(`============截止線=============`);
-        client.channels.cache.get('886269472158138429').send(`============截止線=============`);
-        client.channels.cache.get('948120050458574878').send(`============截止線=============`);
-        client.channels.cache.get('963831403001307167').send(`============截止線=============`);
-    });
-}
+//     schedule.scheduleJob('10 0 16 * * *', async function () {
+//         dbUtil.dbInitReward(client, null);
+//         dbUtil.dbInitCheckMsg(client, null);
+//         client.channels.cache.get('867811395474423838').send(`============截止線=============`);
+//         client.channels.cache.get('886269472158138429').send(`============截止線=============`);
+//         client.channels.cache.get('948120050458574878').send(`============截止線=============`);
+//         client.channels.cache.get('963831403001307167').send(`============截止線=============`);
+//     });
+// }
 
 const sendChannel = '967986563260772352'
 

@@ -6,6 +6,7 @@ module.exports = {
     getMemberByTag: getMemberByTag,
     getMemberByID: getMemberByID,
     getRoleByID: getRoleByID,
+    getGuildByID: getGuildByID,
     pickAllRoleId: pickAllRoleId,
     msg_react: msg_react,
     createRole: createRole,
@@ -91,6 +92,16 @@ async function getRoleByID(guild, RoleID) {
     try {
         const role = await guild.roles.fetch(RoleID);
         return role;
+    }
+    catch {
+        return null;
+    }
+}
+
+async function getGuildByID(client, GuildID) {
+    try {
+        let guild = await client.guilds.cache.get(GuildID);
+        return guild;
     }
     catch {
         return null;

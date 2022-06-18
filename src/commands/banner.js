@@ -48,8 +48,3 @@ module.exports = {
         // return;
     }
 };
-
-async function getUserBannerUrl(userId) {
-    const user = await client.api.users(userId).get();
-    return user.banner ? `https://cdn.discordapp.com/banners/${userId}/${user.banner}?size=512` : null;
-}
