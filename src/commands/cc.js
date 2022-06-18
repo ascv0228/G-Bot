@@ -21,8 +21,8 @@ module.exports = {
 
         const guildid = '829673608791851038';
         const roleid = '986888997538246748';
-        let guild = await client.guilds.cache.get(guildid)
-        let role = await dcUtil.getRoleByID(guild, roleid)
+        // let guild = await client.guilds.cache.get(guildid)
+        let role = await dcUtil.getRoleByID(msg.guild, roleid)
         let members = await role.members.map(m => m.user.id);
         console.log(members)
 
