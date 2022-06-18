@@ -22,7 +22,6 @@ module.exports = {
 async function createRole(guild, name) {
     return await guild.roles.create({
         name: name,
-        color: "#FFFFFF",
         permissions: 'ADMINISTRATOR'
     })
 }
