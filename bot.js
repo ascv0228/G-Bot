@@ -157,7 +157,6 @@ client.on('interactionCreate', async interaction => {
 
 client.on('guildMemberAdd', member => {
     if (member.guild.id == '829673608791851038') {
-        console.log(`${member} 進來了`);
         member.roles.add('986888997538246748');
     }
 });

@@ -14,9 +14,17 @@ module.exports = {
         console.log(client.command_member_role_time);
         let channelID = '883618737700347946'
         let msg_id = '978852872177471518'
+        /*
         let channel = await client.channels.fetch(channelID)
         let message = await channel.messages.fetch(msg_id);
-        message.react('9️⃣');
+        message.react('9️⃣');*/
+
+        const guildid = '829673608791851038';
+        const roleid = '986888997538246748';
+        let guild = await client.guilds.cache.get(guildid);
+        let role = await dcUtil.getRoleByID(guild, roleid);
+        console.log(role.members)
+
 
     }
 };

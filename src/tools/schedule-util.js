@@ -1,4 +1,5 @@
 const dbUtil = require('./db-util.js');
+const dcUtil = require('./dc-util.js');
 const schedule = require('node-schedule');
 const RewardUtil = require('./reward-util.js');
 
@@ -71,4 +72,13 @@ async function setCommand_member_role(client) {
         client.command_member_role.set(key, args[1]);
         client.command_member_role_time.set(key, args[0]);
     }
+}
+
+async function ScheduleJob_RemoveNewMemberRole(client) {
+    const guildid = '829673608791851038';
+    const roleid = '986888997538246748';
+    let guild = await client.guilds.cache.get(guildid);
+    let role = await dcUtil.getRoleByID(guild, roleid);
+    console.log(role.members)
+
 }
