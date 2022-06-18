@@ -78,7 +78,7 @@ async function setCommand_member_role(client) {
 async function ScheduleJob_RemoveNewMemberRole(client) {
 
     // schedule.scheduleJob('50 59 15 * * *', async function () {
-    schedule.scheduleJob('50 49 14 * * *', async function () {
+    schedule.scheduleJob('50 52 14 * * *', async function () {
         let d = new Date()
         const guildid = '829673608791851038';
         const roleid = '986888997538246748';
@@ -86,7 +86,7 @@ async function ScheduleJob_RemoveNewMemberRole(client) {
         let members = (await guild.members.fetch({ force: true })).filter(member => member.roles.cache.get(roleid))
 
         // let output = new Array();
-        for (const [id, member] of m2) {
+        for (const [id, member] of members) {
             if (d - member.joinedAt > (7 * 1000 * 3600 * 24))
                 member.roles.remove(roleid);
         }
