@@ -46,6 +46,9 @@ async function getUserByTag(guild, str) {
     let UserID = pickUserId(str);
     if (!UserID) return;
     let member = await getMemberByID(guild, UserID);
+    if (member == null) {
+        return null;
+    }
     return member.user
 }
 
@@ -53,12 +56,9 @@ async function getUserByID(guild, UserID) {
     //const user = await guild.users.fetch(UserID).catch(console.error);
     //console.log(user);
     let member = await getMemberByID(guild, UserID);
-    return member.user
-}
-async function getUserByID(guild, UserID) {
-    //const user = await guild.users.fetch(UserID).catch(console.error);
-    //console.log(user);
-    let member = await getMemberByID(guild, UserID);
+    if (member == null) {
+        return null;
+    }
     return member.user
 }
 
@@ -70,8 +70,13 @@ async function getMemberByTag(guild, str) {
 }
 
 async function getMemberByID(guild, MemberID) {
-    const member = await guild.members.fetch(MemberID).catch(console.error);
-    return member;
+    try {
+        const member = await guild.members.fetch(MemberID).catch(console.error);
+        return member;
+    }
+    catch {
+        return null;
+    }
 }
 
 async function msg_react(channel, msg_Id, reactions) {

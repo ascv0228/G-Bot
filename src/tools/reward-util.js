@@ -57,7 +57,7 @@ async function giveReward(client) {
 
 }
 
-async function giveEverydayPoint(client) {
+async function giveEverydayPoint(client, guild) {
     var d = new Date();
     client.channels.cache.get('964516826811858984').send(`==========${d.getMonth() + 1}/${d.getDate()} r每日任務完成區==========`);
 

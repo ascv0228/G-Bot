@@ -19,7 +19,7 @@ async function everydayScheduleJob(client) {  //https://www.codexpedia.com/javas
         const guildid = '829673608791851038';
         let guild = await client.guilds.cache.get(guildid);
         RewardUtil.giveReward(client).then(
-            RewardUtil.giveEverydayPoint(client)
+            RewardUtil.giveEverydayPoint(client, guild)
         );
         RewardUtil.getRewardText(client, guild);
         RewardUtil.getRecordText(client, guild, ["記錄區", "867811395474423838", "normal"])
