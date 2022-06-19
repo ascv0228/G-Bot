@@ -17,16 +17,16 @@ async function everydayScheduleJob(client) {  //https://www.codexpedia.com/javas
     // var rule1 = new schedule.RecurrenceRule();
     // rule1.minute = new schedule.Range(0, 59, 5);
 
-    schedule.scheduleJob('50 59 15 * * *', async function () {
+    schedule.scheduleJob('40 59 15 * * *', async function () {
         const guildid = '829673608791851038';
         let guild = await client.guilds.cache.get(guildid);
         RewardUtil.giveReward(client).then(
             RewardUtil.giveEverydayPoint(client, guild)
         );
         RewardUtil.getRewardText(client, guild);
-        RewardUtil.getRecordText(client, guild, ["記錄區", "867811395474423838", "normal"])
-        RewardUtil.getRecordText(client, guild, ["日常獎勵記錄區", "886269472158138429", "daily"])
-        RewardUtil.getRecordText(client, guild, ["佬專用紀錄區", "948120050458574878", "big"])
+        RewardUtil.getRecordText(client, guild, ["記錄區", "867811395474423838", "normal"], [["x!award", 'x!point'], ""])
+        RewardUtil.getRecordText(client, guild, ["日常獎勵記錄區", "886269472158138429", "daily"], [['x!point'], "1"])
+        RewardUtil.getRecordText(client, guild, ["佬專用紀錄區", "948120050458574878", "big"], [['x!ticket'], ""])
     });
 
     schedule.scheduleJob('10 0 16 * * *', async function () {

@@ -10,10 +10,12 @@ module.exports = {
 
     async execute(client, msg, args) {
         if (msg.author.id !== '411895879935590411') return;
-        console.log(client.command_member_role);
-        console.log(client.command_member_role_time);
-        let channelID = '883618737700347946'
-        let msg_id = '978852872177471518'
+        // console.log(client.command_member_role);
+        // console.log(client.command_member_role_time);
+        // let channelID = '883618737700347946'
+        // let msg_id = '978852872177471518'
+
+        await client.Mdbcollection.insertOne({ type: 'reward-big-ticket', msg: new Map() });
         /*
         let channel = await client.channels.fetch(channelID)
         let message = await channel.messages.fetch(msg_id);
@@ -28,15 +30,15 @@ module.exports = {
         // let members = msg.guild.roles.resolve(roleid).members
         // console.log(members)
 
-        const guildid = '829673608791851038';
-        const roleid = '986888997538246748';
-        let guild = await client.guilds.cache.get(guildid)
-        let members = (await guild.members.fetch({ force: true })).filter(member => member.roles.cache.get(roleid))
-        let output = new Array();
-        for (const [id, member] of m2) {
-            output.push(id)
-        }
-        console.log(output)
+        // const guildid = '829673608791851038';
+        // const roleid = '986888997538246748';
+        // let guild = await client.guilds.cache.get(guildid)
+        // let members = (await guild.members.fetch({ force: true })).filter(member => member.roles.cache.get(roleid))
+        // let output = new Array();
+        // for (const [id, member] of m2) {
+        //     output.push(id)
+        // }
+        // console.log(output)
 
 
 
