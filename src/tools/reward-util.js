@@ -70,7 +70,7 @@ async function giveBigReward(client) {
     var d = new Date();
     let temp = await client.Mdbcollection.find({ type: 'reward-big-ticket' }).toArray();
 
-    client.channels.cache.get('964516826811858984').send(`==========${d.getMonth() + 1}/${d.getDate()} 輔助獎勵區==========`);
+    client.channels.cache.get('964516826811858984').send(`==========${d.getMonth() + 1}/${d.getDate()} 佬獎勵區==========`);
     new Map(Object.entries(temp[0].msg)).forEach((value, key) => {
         client.channels.cache.get('964516826811858984').send(`x!bot-ticket <@${key}> ${value}`);
     });
@@ -79,7 +79,7 @@ async function giveBigReward(client) {
 async function giveEverydayPoint(client, guild) {
     var d = new Date();
 
-    let texts = [['886269472158138429', '每日任務完成區', '2'], ['948120050458574878', '每日佬完成區', '1']]
+    let texts = [['886269472158138429', '每日任務完成區', '2']]
     for (let [channel_Id, text, points] of texts) {
         let output_text = new Array();
         output_text.push('```');
