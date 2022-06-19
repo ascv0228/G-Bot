@@ -17,6 +17,7 @@ module.exports = {
     getRewardText: getRewardText,
     getRecordText: getRecordText,
     giveReward: giveReward,
+    giveBigReward: giveBigReward,
     giveEverydayPoint: giveEverydayPoint
 };
 
@@ -44,6 +45,14 @@ async function confirmReward(client, msg) {
         count = (count + originCount > 5) ? 5 : count + originCount;
         client.Mdbcollection.updateOne({ type: 'reward-ticket' }, { "$set": { [`msg.${msg.member.id}`]: `${2 * count}` } });
     }
+    if (msg.channel.id == channelList[3]) {
+        let temp = await client.Mdbcollection.find({ type: 'reward-big-ticket' }).toArray();
+        let originCount = temp[0].msg[msg.member.id]
+        originCount = (originCount == undefined || originCount == NaN) ? 0 : originCount / 2
+
+        count = (count + originCount > 5) ? 5 : count + originCount;
+        client.Mdbcollection.updateOne({ type: 'reward-big-ticket' }, { "$set": { [`msg.${msg.member.id}`]: `${2 * count}` } });
+    }
 
 }
 
@@ -55,7 +64,16 @@ async function giveReward(client) {
     new Map(Object.entries(temp[0].msg)).forEach((value, key) => {
         client.channels.cache.get('964516826811858984').send(`x!bot-ticket <@${key}> ${value}`);
     });
+}
 
+async function giveBigReward(client) {
+    var d = new Date();
+    let temp = await client.Mdbcollection.find({ type: 'reward-big-ticket' }).toArray();
+
+    client.channels.cache.get('964516826811858984').send(`==========${d.getMonth() + 1}/${d.getDate()} 輔助獎勵區==========`);
+    new Map(Object.entries(temp[0].msg)).forEach((value, key) => {
+        client.channels.cache.get('964516826811858984').send(`x!bot-ticket <@${key}> ${value}`);
+    });
 }
 
 async function giveEverydayPoint(client, guild) {
@@ -117,16 +135,6 @@ async function getRewardText(client, guild) {
     const attachment = new Discord.MessageAttachment(Buffer.from(output.join('\n')), file_name);
     client.channels.cache.get(sendChannel).send({ files: [attachment] });
     client.channels.cache.get(sendChannel).send({ content: file_name + '```' + output.join('\n') + '```' });
-}
-
-async function giveBigReward(client) {
-    var d = new Date();
-    let temp = await client.Mdbcollection.find({ type: 'reward-big-ticket' }).toArray();
-
-    client.channels.cache.get('964516826811858984').send(`==========${d.getMonth() + 1}/${d.getDate()} 佬獎勵區==========`);
-    new Map(Object.entries(temp[0].msg)).forEach((value, key) => {
-        client.channels.cache.get('964516826811858984').send(`x!bot-ticket <@${key}> ${value}`);
-    });
 }
 
 async function getRecordText(client, guild, args, prefix_suffix) {

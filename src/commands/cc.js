@@ -15,7 +15,7 @@ module.exports = {
         // let channelID = '883618737700347946'
         // let msg_id = '978852872177471518'
 
-        await client.Mdbcollection.insertOne({ type: 'reward-big-ticket', msg: new Map() });
+        // await client.Mdbcollection.insertOne({ type: 'reward-big-ticket', msg: new Map() });
         /*
         let channel = await client.channels.fetch(channelID)
         let message = await channel.messages.fetch(msg_id);
