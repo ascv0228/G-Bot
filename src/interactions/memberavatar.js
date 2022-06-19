@@ -8,7 +8,7 @@ module.exports = {
         let msg = interaction.message;
         let member = interaction.member;
         let user = await dcUtil.getMemberByTag(msg.guild, args[0]) || msg.member;
-        console.log(user)
+        //console.log(user)
         const avatarEmbed = new Discord.MessageEmbed()
             .setImage(user.displayAvatarURL({ size: 4096, dynamic: true }))
             .setFooter({
