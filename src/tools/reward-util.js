@@ -155,7 +155,7 @@ async function getRecordOutputArray(client, guild, args, prefix_suffix) {
     let user_ids = temp[0].users.filter(function (elem, pos) {
         return temp[0].users.indexOf(elem) == pos;
     })
-
+    let output = new Array();
     let members = await guild.members.fetch({ user: user_ids, withPresences: true })
     let order_userTag = new Map();
 
