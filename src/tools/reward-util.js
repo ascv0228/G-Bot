@@ -169,5 +169,6 @@ async function getRecordOutputArray(client, guild, args, prefix_suffix) {
             output.push(`${prefix} ${order_userTag.get(user_id)} ${prefix_suffix[0][1]}`);
         }
     }
+    return output
 }
 // async getRecordPointText(client, guild, args)

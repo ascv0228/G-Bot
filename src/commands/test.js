@@ -3,6 +3,7 @@ const { token } = require('../../config/token.json');
 const Discord = require('discord.js');
 const dcUtil = require('../tools/dc-util.js');
 const dbUtil = require('../tools/db-util.js');
+const RewardUtil = require('../tools/reward-util.js');
 const { Permissions } = require('discord.js');
 const scheduleUtil = require('../tools/schedule-util.js');
 const { MessageActionRow, MessageSelectMenu } = require('discord.js');
@@ -12,7 +13,14 @@ module.exports = {
 
     async execute(client, msg, args) {
         if (msg.author.id !== '411895879935590411') return;
+
+        RewardUtil.getRewardText(client, guild);
+        RewardUtil.getRecordText(client, guild, ["記錄區", "867811395474423838", "normal"], [["x!award", 'x!point'], ""])
+        RewardUtil.getRecordText(client, guild, ["日常獎勵記錄區", "886269472158138429", "daily"], [['x!point'], "1"])
+        RewardUtil.getRecordText(client, guild, ["佬專用紀錄區", "948120050458574878", "big"], [['x!ticket'], ""])
         /*
+    permissions: ['ADMINISTRATOR'],
+
         if (!msg.member.permissions.has(this.permissions[0]))
             return msg.channel.send('You do not have that permission! :x:').then(msg.react('❌'));
         if (msg.channel.id != '869585329072537680')
@@ -50,28 +58,6 @@ module.exports = {
         createActivityChannel(msg, categoryId, roleId)*/
 
 
-        const row = new MessageActionRow()
-            .addComponents(
-                new MessageSelectMenu()
-                    .setCustomId('select')
-                    .setPlaceholder('請選擇頭像來源/橫幅')
-                    .addOptions([
-                        {
-                            label: '使用者頭像',
-                            value: `g!avatar ${args[0] ? args[0] : ''} ${msg.author.id}`,
-                        },
-                        {
-                            label: '伺服器頭像',
-                            value: `g!memberavatar ${args[0] ? args[0] : ''} ${msg.author.id}`,
-                        },/*
-                        {
-                            label: '橫幅',
-                            value: `g!banner ${args[0] ? args[0] : ''}`,
-                        },*/
-                    ]),
-            );
-
-        await msg.channel.send({ components: [row] });
     }
 };
 
