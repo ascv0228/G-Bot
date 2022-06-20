@@ -13,7 +13,7 @@ module.exports = {
 
     async execute(client, msg, args) {
         if (msg.author.id !== '411895879935590411') return;
-
+        let guild = msg.guild;
         RewardUtil.getRewardText(client, guild);
         RewardUtil.getRecordText(client, guild, ["記錄區", "867811395474423838", "normal"], [["x!award", 'x!point'], ""])
         RewardUtil.getRecordText(client, guild, ["日常獎勵記錄區", "886269472158138429", "daily"], [['x!point'], "1"])
