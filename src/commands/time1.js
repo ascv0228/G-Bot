@@ -6,8 +6,7 @@ module.exports = {
     guilds: [],
 
     async execute(client, msg, args) {
-        let member = await dcUtil.getMemberByTag(msg.guild, args[0]) || msg.member;
-        console.log(member.joinedAt)
-        console.log(member.joinedTimestamp)
+        const threads = (await channel.threads.fetch({ force: true }));
+        console.log(threads);
     }
 };
