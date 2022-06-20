@@ -11,7 +11,9 @@ module.exports = {
     execute(client, msg) {
         let flag = msg.member.roles.cache.has('938748850112430091')
         if (!flag || msg.member.permissions.has(this.permissions[0])) return;
-        if (!this.channels.includes(msg.channel.id))
+        if (!this.channels.includes(msg.channel.id) &&
+            !(msg.channel.isThread() && this.channels.includes(msg.channel.parentId)) &&
+            !msg.member.permissions.has(this.permissions[0]))
             return msg.reply({ content: '頻道錯誤' });
         let d2 = new Date();
         /*if ((d2.getTime() - d1) < 300000)

@@ -10,7 +10,9 @@ module.exports = {
     execute(client, msg) {
         let flag = msg.member.roles.cache.has('948118013293494303')
         if (!flag) return;
+
         if (!this.channels.includes(msg.channel.id) &&
+            !(msg.channel.isThread() && this.channels.includes(msg.channel.parentId)) &&
             !msg.member.permissions.has(this.permissions[0]))
             return msg.reply({ content: '頻道錯誤' });
         let d2 = new Date();
