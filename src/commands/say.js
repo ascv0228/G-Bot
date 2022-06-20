@@ -6,8 +6,8 @@ module.exports = {
     member: ['411895879935590411', '927937812605595739'],
     substring: ['@everyone', '@here'],
     async execute(client, msg, args) {
-        if (!msg.member.permissions.has(this.permissions[0])
-            && !this.member.includes(msg.author.id)) return;
+        // if (!msg.member.permissions.has(this.permissions[0])
+        //     && !this.member.includes(msg.author.id)) return;
         let str = args.join(" ")
         let roleIds = dcUtil.pickAllRoleId(str)
         str = str.replace('@everyone', `@ everyone`);

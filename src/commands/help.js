@@ -18,7 +18,7 @@ function AdminHelp() {
     let contentArray = [
         '`' + 'activity, act' + '`' + " : 發起活動",
         '`' + 'avatar, avt' + '`' + " : 查看頭像",
-        '`' + 'memberavatar, memavt' + '`' + " : 查看伺服器頭像",
+        '`' + 'nosex' + '`' + " : 不可以瑟瑟.jpg",
         '`' + 'ping' + '`' + " : 顯示延遲",
         '`' + 'say' + '`' + " : 重複說話",
     ]
@@ -28,9 +28,9 @@ function AdminHelp() {
 function BaseHelp() {
     let contentArray = [
         '`' + 'avatar, avt' + '`' + " : 查看頭像",
-        '`' + 'memberavatar, memavt' + '`' + " : 查看伺服器頭像",
         '`' + 'nosex' + '`' + " : 不可以瑟瑟.jpg",
         '`' + 'ping' + '`' + " : 顯示延遲",
+        '`' + 'say' + '`' + " : 重複說話",
     ]
     return contentArray.join("\n")
 }
