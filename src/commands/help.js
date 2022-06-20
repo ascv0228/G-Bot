@@ -16,6 +16,7 @@ module.exports = {
 
 function AdminHelp() {
     let contentArray = [
+        '`' + 'ban' + '`' + " : ban人",
         '`' + 'activity, act' + '`' + " : 發起活動",
         '`' + 'avatar, avt' + '`' + " : 查看頭像",
         '`' + 'nosex' + '`' + " : 不可以瑟瑟.jpg",

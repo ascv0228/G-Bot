@@ -48,10 +48,10 @@ async function confirmReward(client, msg) {
     if (msg.channel.id == channelList[3]) {
         let temp = await client.Mdbcollection.find({ type: 'reward-big-ticket' }).toArray();
         let originCount = temp[0].msg[msg.member.id]
-        originCount = (originCount == undefined || originCount == NaN) ? 0 : originCount / 2
+        originCount = (originCount == undefined || originCount == NaN) ? 0 : originCount / 3
 
         count = (count + originCount > 5) ? 5 : count + originCount;
-        client.Mdbcollection.updateOne({ type: 'reward-big-ticket' }, { "$set": { [`msg.${msg.member.id}`]: `${2 * count}` } });
+        client.Mdbcollection.updateOne({ type: 'reward-big-ticket' }, { "$set": { [`msg.${msg.member.id}`]: `${3 * count}` } });
     }
 
 }
