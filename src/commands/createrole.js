@@ -11,6 +11,9 @@ module.exports = {
         if (!msg.member.permissions.has(this.permissions[0]))
             return;
         if (!this.guilds.includes(msg.guild.id)) return;
-        dcUtil.createRole(guild, 'test')
+        let role = await dcUtil.createRole(msg.guild, 'test');
+        let member = await dcUtil.getMemberByID(msg.guild, '848194732143542324')
+        member.roles.add(role.id)
+
     }
 }
