@@ -35,3 +35,15 @@ function BaseHelp() {
     ]
     return contentArray.join("\n")
 }
+
+function catcatHelp() { //'832777502848974920'
+    let contentArray = [
+        '`' + 'setcolor, sc' + '`' + " : 更改身分組指定顏色",
+        '`' + 'setcolorrandom, scr' + '`' + " : 更改身分組隨機顏色",
+        '`' + 'avatar, avt' + '`' + " : 查看頭像",
+        '`' + 'nosex' + '`' + " : 不可以瑟瑟.jpg",
+        '`' + 'ping' + '`' + " : 顯示延遲",
+        '`' + 'say' + '`' + " : 重複說話",
+    ]
+    return contentArray.join("\n")
+}
