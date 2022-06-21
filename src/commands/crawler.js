@@ -8,7 +8,7 @@ const { Permissions } = require('discord.js');
 const scheduleUtil = require('../tools/schedule-util.js');
 const { MessageActionRow, MessageSelectMenu } = require('discord.js');
 module.exports = {
-    name: "test",
+    name: "crawler",
     permissions: ['ADMINISTRATOR'],
 
     async execute(client, msg, args) {
