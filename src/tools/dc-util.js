@@ -126,13 +126,10 @@ async function changeChannelPermission(guild, channel_Id, role_id, changePermiss
 }
 
 async function createRole(guild, name) {
-    let role = await guild.roles.create({
-        data: {
-            name: name,
-            color: 'RANDOM',
-        }
+    return await guild.roles.create({
+        name: name,
+        color: "RANDOM",
     })
-    return role
 }
 
 async function createTextChannel(guild, name, categoryId, permissionOverwrites) {
