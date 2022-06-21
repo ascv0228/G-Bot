@@ -18,7 +18,8 @@ module.exports = {
         let channel = await client.channels.fetch(args[0])
         let before = args[1];
         let after = args[2];
-        let messages = await channel.messages.fetch({ before: before, after: after })
+        let messages = await channel.messages.fetch({ before: before, after: after, force: true })
+        console.log(messages.size)
         for (let [msg_id, message] of messages) {
             // console.log(message.author)
             console.log(`@${message.author.username}#${message.author.discriminator}`)
