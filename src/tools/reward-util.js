@@ -155,24 +155,23 @@ async function getRecordOutputArray(client, guild, args, prefix_suffix) {
     let user_ids = temp[0].users.filter(function (elem, pos) {
         return temp[0].users.indexOf(elem) == pos;
     })
-    console.log(user_ids);
+    // console.log(user_ids);
     let output = new Array();
-    guild.members.fetch().then(console.log)
     // let members = await guild.members.fetch({ user: user_ids, withPresences: true })
     let members = await guild.members.fetch({ force: true })
     let order_userTag = new Map();
     for (const [id, member] of members) {
         let userTag = `@${member.user.username}#${member.user.discriminator}`;
-        console.log(userTag)
+        // console.log(userTag)
         order_userTag.set(id, userTag);
     }
     for (let prefix of prefix_suffix[0]) {
         for (let user_id of user_ids) {
-            console.log(`${prefix} ${order_userTag.get(user_id)} ${prefix_suffix[1]}`);
+            // console.log(`${prefix} ${order_userTag.get(user_id)} ${prefix_suffix[1]}`);
             output.push(`${prefix} ${order_userTag.get(user_id)} ${prefix_suffix[1]}`);
         }
     }
-    console.log(output)
+    // console.log(output)
     return output
 }
 // async getRecordPointText(client, guild, args)
