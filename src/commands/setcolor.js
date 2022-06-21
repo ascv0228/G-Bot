@@ -31,7 +31,7 @@ module.exports = {
 
 function getColor(str) {
     if (!str) return null;
-    const mats = str.match(/^#?[0-9a-f]{1,6}$/);
+    const mats = str.match(/^#?[0-9a-fA-F]{1,6}$/);
     if (mats) {
         if (str.startsWith('#')) return str;
         return '#' + str;
