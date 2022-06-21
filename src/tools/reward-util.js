@@ -165,7 +165,7 @@ async function getRecordOutputArray(client, guild, args, prefix_suffix) {
     }
     for (let prefix of prefix_suffix[0]) {
         for (let user_id of user_ids) {
-            // console.log(user_id);
+            console.log(`${prefix} ${order_userTag.get(user_id)} ${prefix_suffix[0][1]}`);
             output.push(`${prefix} ${order_userTag.get(user_id)} ${prefix_suffix[0][1]}`);
         }
     }
