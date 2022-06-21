@@ -157,8 +157,9 @@ async function getRecordOutputArray(client, guild, args, prefix_suffix) {
     })
     console.log(user_ids);
     let output = new Array();
-    guild.members.fetch({ user: user_ids, withPresences: true }).then(console.log)
-    let members = await guild.members.fetch({ user: user_ids, withPresences: true })
+    guild.members.fetch().then(console.log)
+    // let members = await guild.members.fetch({ user: user_ids, withPresences: true })
+    let members = await guild.members.fetch()
     let order_userTag = new Map();
     for (const [id, member] of members) {
         let userTag = `@${member.user.username}#${member.user.discriminator}`;
