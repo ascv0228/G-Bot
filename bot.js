@@ -12,8 +12,11 @@ const scheduleUtil = require('./src/tools/schedule-util.js');
 const loader = require('./src/loader.js');
 const client = new Client(
     {
+        // https://discord.js.org/#/docs/main/stable/class/Intents?scrollTo=s-FLAGS
         intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES,
         Intents.FLAGS.GUILD_MESSAGE_REACTIONS, Intents.FLAGS.GUILD_MEMBERS],
+
+        // https://discord.js.org/#/docs/main/stable/typedef/PartialType
         partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'GUILD_MEMBER'],
     }
 );

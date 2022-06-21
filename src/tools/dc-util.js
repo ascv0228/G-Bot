@@ -129,7 +129,7 @@ async function createRole(guild, name) {
     let role = await guild.roles.create({
         data: {
             name: name,
-            color: 'BLUE',
+            color: 'RANDOM',
         }
     })
     return role
