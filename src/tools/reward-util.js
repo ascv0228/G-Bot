@@ -155,6 +155,7 @@ async function getRecordOutputArray(client, guild, args, prefix_suffix) {
     let user_ids = temp[0].users.filter(function (elem, pos) {
         return temp[0].users.indexOf(elem) == pos;
     })
+    console.log(user_ids);
     let output = new Array();
     let members = await guild.members.fetch({ user: user_ids, withPresences: true })
     let order_userTag = new Map();
@@ -165,8 +166,8 @@ async function getRecordOutputArray(client, guild, args, prefix_suffix) {
     }
     for (let prefix of prefix_suffix[0]) {
         for (let user_id of user_ids) {
-            console.log(`${prefix} ${order_userTag.get(user_id)} ${prefix_suffix[0][1]}`);
-            output.push(`${prefix} ${order_userTag.get(user_id)} ${prefix_suffix[0][1]}`);
+            console.log(`${prefix} ${order_userTag.get(user_id)} ${prefix_suffix[1]}`);
+            output.push(`${prefix} ${order_userTag.get(user_id)} ${prefix_suffix[1]}`);
         }
     }
     console.log(output)
