@@ -142,7 +142,7 @@ async function getRecordText(client, guild, args, prefix_suffix) {
     nowDate += (8 * 60 * 60 * 1000);
     var date = new Date(nowDate)
     let output_prefix = [`==========${date.getMonth() + 1}/${date.getDate()} ${args[0]}==========\n`];
-    let output = getRecordOutputArray(client, guild, args, prefix_suffix);
+    let output = await getRecordOutputArray(client, guild, args, prefix_suffix);
     let file_name = `${date.getMonth() + 1}-${date.getDate()}(${args[2]}).txt`
     const attachment = new Discord.MessageAttachment(Buffer.from((output_prefix.concat(output)).join('\n')), file_name);
     client.channels.cache.get(sendChannel).send({ files: [attachment] });
