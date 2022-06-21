@@ -138,9 +138,9 @@ async function getRewardText(client, guild) {
 }
 
 async function getRecordText(client, guild, args, prefix_suffix) {
-    var nowDate = new Date().getTime();
-    nowDate += (8 * 60 * 60 * 1000);
-    var date = new Date(nowDate)
+    // var nowDate = new Date().getTime();
+    // nowDate += (8 * 60 * 60 * 1000);
+    var date = new Date(new Date() + (8 * 60 * 60 * 1000))
     let output_prefix = [`==========${date.getMonth() + 1}/${date.getDate()} ${args[0]}==========\n`];
     let output = await getRecordOutputArray(client, guild, args, prefix_suffix);
     let file_name = `${date.getMonth() + 1}-${date.getDate()}(${args[2]}).txt`
@@ -158,7 +158,7 @@ async function getRecordOutputArray(client, guild, args, prefix_suffix) {
     let output = new Array();
     let members = await guild.members.fetch({ user: user_ids, withPresences: true })
     let order_userTag = new Map();
-
+    console.log(members)
     for (const [id, member] of members) {
         let userTag = `@${member.user.username}#${member.user.discriminator}`;
         order_userTag.set(id, userTag);
