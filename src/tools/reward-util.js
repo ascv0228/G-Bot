@@ -144,9 +144,9 @@ async function getRecordText(client, guild, args, prefix_suffix) {
     let output_prefix = [`==========${date.getMonth() + 1}/${date.getDate()} ${args[0]}==========\n`];
     let output = getRecordOutputArray(client, guild, args, prefix_suffix);
     let file_name = `${date.getMonth() + 1}-${date.getDate()}(${args[2]}).txt`
-    const attachment = new Discord.MessageAttachment(Buffer.from(output_prefix.concat(output).join('\n')), file_name);
+    const attachment = new Discord.MessageAttachment(Buffer.from((output_prefix.concat(output)).join('\n')), file_name);
     client.channels.cache.get(sendChannel).send({ files: [attachment] });
-    client.channels.cache.get(sendChannel).send({ content: file_name + '```' + output_prefix.concat(output).join('\n') + '```' });
+    client.channels.cache.get(sendChannel).send({ content: file_name + '```' + (output_prefix.concat(output)).join('\n') + '```' });
 }
 
 
@@ -169,6 +169,7 @@ async function getRecordOutputArray(client, guild, args, prefix_suffix) {
             output.push(`${prefix} ${order_userTag.get(user_id)} ${prefix_suffix[0][1]}`);
         }
     }
+    console.log(output)
     return output
 }
 // async getRecordPointText(client, guild, args)
