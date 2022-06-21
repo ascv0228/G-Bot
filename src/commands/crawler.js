@@ -18,7 +18,7 @@ module.exports = {
         let channel = await client.channels.fetch(args[0])
         let after = args[1];
         let before = args[2];
-        let messages = await channel.messages.fetch({ before: before, after: after, force: true, limit: 100 })
+        let messages = await channel.messages.fetch({ before: before, after: after, force: true })
         console.log(messages.size)
         for (let [msg_id, message] of messages) {
             // console.log(message.author)
