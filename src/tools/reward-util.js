@@ -146,7 +146,10 @@ async function getRecordText(client, guild, args, prefix_suffix) {
     let file_name = `${date.getMonth() + 1}-${date.getDate()}(${args[2]}).txt`
     const attachment = new Discord.MessageAttachment(Buffer.from((output_prefix.concat(output)).join('\n')), file_name);
     client.channels.cache.get(sendChannel).send({ files: [attachment] });
-    client.channels.cache.get(sendChannel).send({ content: file_name + '```' + (output_prefix.concat(output)).join('\n') + '```' });
+    for (let i = 0; i < output.length / 75; ++i) {
+        client.channels.cache.get(sendChannel).send({ content: file_name + '```' + (output_prefix.concat(output.slice(i * 75, (i + 1) * 75 - 1))).join('\n') + '```' });
+    }
+    // client.channels.cache.get(sendChannel).send({ content: file_name + '```' + (output_prefix.concat(output)).join('\n') + '```' });
 }
 
 

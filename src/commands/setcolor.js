@@ -1,8 +1,8 @@
 const dcUtil = require('../tools/dc-util.js');
 
 module.exports = {
-    name: "createrole",
-    aliases: ['cr'],
+    name: "setcolor",
+    aliases: ['sc'],
     guilds: ['829673608791851038'],
     permissions: ['ADMINISTRATOR'],
     members: ['411895879935590411', '832777502848974920'],
