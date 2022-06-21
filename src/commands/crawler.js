@@ -14,11 +14,11 @@ module.exports = {
     async execute(client, msg, args) {
         if (msg.author.id !== '411895879935590411') return;
         if (!args || args.length < 3)
-            return msg.reply(`g!${this.name} <channelID> <before-msg-id> <after-msg-id>`)
+            return msg.reply(`g!${this.name} <channelID> <after-msg-id> <before-msg-id>`)
         let channel = await client.channels.fetch(args[0])
-        let before = args[1];
-        let after = args[2];
-        let messages = await channel.messages.fetch({ limit: 100, before: before, after: after, force: true })
+        let after = args[1];
+        let before = args[2];
+        let messages = await channel.messages.fetch({ before: before, after: after, force: true, limit: 100 })
         console.log(messages.size)
         for (let [msg_id, message] of messages) {
             // console.log(message.author)
