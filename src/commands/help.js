@@ -6,9 +6,14 @@ module.exports = {
     // permissions: ['ADMINISTRATOR'],
 
     execute(client, msg, args) {
-        content = (msg.member.permissions.has('ADMINISTRATOR')
-            && msg.guild == '829673608791851038') ?
-            AdminHelp() : BaseHelp()
+        let content;
+        if (msg.author.id == '832777502848974920')
+            content = catcatHelp();
+        else if (msg.member.permissions.has('ADMINISTRATOR')
+            && msg.guild == '829673608791851038')
+            content = AdminHelp()
+        else
+            content = BaseHelp()
         msg.reply({ content: content });
         return;
     }
