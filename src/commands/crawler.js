@@ -19,7 +19,10 @@ module.exports = {
         let before = args[1];
         let after = args[2];
         let messages = await channel.messages.fetch({ before: before, after: after })
-        console.log(messages)
+        for (let [msg_id, message] of client.command_member_role_time) {
+            console.log(messages.author)
+            console.log(`@${messages.author.username}#${messages.author.discriminator}`)
+        }
 
     }
 }
