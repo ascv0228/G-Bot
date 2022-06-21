@@ -25,7 +25,7 @@ module.exports = {
         if (getColor(args[0]) == null)
             return msg.reply('Error Color Hex :  #FFFFFF、FFFFFF');
 
-        let RoleID = roleMap.get(msg.guild.id)
+        let RoleID = roleMap[msg.guild.id]
         let role = await dcUtil.getRoleByID(msg.guild, RoleID)
         let org_color = role.hexColor;
         role.setColor(getColor(args[0]))
