@@ -2,7 +2,7 @@ const dcUtil = require('../tools/dc-util.js');
 
 module.exports = {
     name: "setcolorrandom",
-    aliases: ['scr'],
+    aliases: ['scr', 'cr'],
     guilds: ['988795992667193395'],
     permissions: ['ADMINISTRATOR'],
     members: ['411895879935590411', '832777502848974920'],
