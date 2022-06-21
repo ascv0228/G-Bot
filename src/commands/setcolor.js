@@ -1,9 +1,15 @@
 const dcUtil = require('../tools/dc-util.js');
 
+let roleMap = {
+    '829673608791851038': '988641623384662066',
+    '988795992667193395': '988804577509904414'
+}
+
+
 module.exports = {
     name: "setcolor",
     aliases: ['sc'],
-    guilds: ['829673608791851038'],
+    guilds: ['829673608791851038', '988795992667193395'],
     permissions: ['ADMINISTRATOR'],
     members: ['411895879935590411', '832777502848974920'],
     Owner: '411895879935590411',
@@ -19,7 +25,7 @@ module.exports = {
         if (getColor(args[0]) == null)
             return msg.reply('Error Color Hex :  #FFFFFF、FFFFFF');
 
-        let RoleID = '988641623384662066'
+        let RoleID = roleMap.get(msg.guild.id)
         let role = await dcUtil.getRoleByID(msg.guild, RoleID)
         let org_color = role.hexColor;
         role.setColor(getColor(args[0]))
