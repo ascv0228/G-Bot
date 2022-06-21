@@ -18,7 +18,7 @@ module.exports = {
         let RoleID = '988804577509904414'
         let role = await dcUtil.getRoleByID(msg.guild, RoleID)
         role.setColor('RANDOM')
-            .then(updated => msg.reply(`Color: ${updated.color}`))
+            .then(updated => msg.reply(`Color: ${updated.hexColor}`))
             .catch(console.error);
 
     }
