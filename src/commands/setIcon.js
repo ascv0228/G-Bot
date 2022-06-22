@@ -30,7 +30,8 @@ module.exports = {
             if (emoji_id) icon = emoji_url(emoji_id);
         }
         if (!icon) {
-            icon = getColorUrl(getColor(args[0]))
+            let color = getColor(args[0])
+            if (color != null) icon = getColorUrl(color)
         }
         if (!icon) {
             icon = args[0];
