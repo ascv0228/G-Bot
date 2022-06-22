@@ -30,7 +30,7 @@ module.exports = {
             if (emoji_id) icon = emoji_url(emoji_id);
         }
         if (!icon) {
-            icon = getColorUrl(getColor(str))
+            icon = getColorUrl(getColor(args[0]))
         }
         if (!icon) {
             icon = args[0];
