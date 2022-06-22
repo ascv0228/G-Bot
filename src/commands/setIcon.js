@@ -38,11 +38,11 @@ module.exports = {
         }
         let RoleID = roleMap[msg.guild.id]
         let role = await dcUtil.getRoleByID(msg.guild, RoleID)
-        console.log(icon)
+        // console.log(icon)
         role.setIcon(icon)
             .then(updated => {
                 const iconEmbed = new Discord.MessageEmbed()
-                    .setDescription('<@988641623384662066> 貼圖更改')
+                    .setDescription('<@&988641623384662066> 貼圖更改')
                     .setImage(updated.iconURL({ extension: 'png', size: 4096 }))
                     .setFooter({
                         text: msg.member.user.tag,
