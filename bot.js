@@ -124,7 +124,7 @@ client.on('messageReactionAdd', async (reaction, user) => {
     if (reaction.message.id == '988964977224318986') {
         if (reaction.emoji.name != '✅') return;
         let EW_guild = await client.guilds.cache.get('856793573194465300');
-        const member = EW_guild.members.cache.get(user.id);
+        const member = await EW_guild.members.cache.get(user.id);
         member.roles.add('987326459402145852');
     }
     if (client.command_member_role.has(reaction.message.id)) {
@@ -151,7 +151,7 @@ client.on('messageReactionRemove', async (reaction, user) => {
     if (reaction.message.id == '988964977224318986') {
         if (reaction.emoji.name != '✅') return;
         let EW_guild = await client.guilds.cache.get('856793573194465300');
-        const member = EW_guild.members.cache.get(user.id);
+        const member = await EW_guild.members.cache.get(user.id);
         member.roles.remove('987326459402145852');
     }
 });
