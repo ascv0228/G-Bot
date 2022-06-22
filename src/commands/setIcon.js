@@ -21,7 +21,10 @@ module.exports = {
             return msg.reply('只能用在外星群');
         if (args.length == 0)
             return msg.reply('Need __image\'s url__ or __emoji__ or __Color("white"、"白色"、"#FFFFFF"、"透明".....)__');
-        let icon = colorMap[args[0]];
+        let icon = getImgUrlFromAttachment(msg);
+        if (!icon) {
+            icon = colorMap[args[0]];
+        }
         if (!icon) {
             let emoji_id = pickEmojiId(args[0]);
             if (emoji_id) icon = emoji_url(emoji_id);
@@ -35,7 +38,7 @@ module.exports = {
         // msg.reply(`${role.iconURL({ extension: 'png', forceStatic: true, size: 4096 })}`)
         // let org_color = role.hexColor;
         role.setIcon(icon)
-            .then(updated => msg.reply(`Set icon: ${updated.iconURL({ extension: 'png', forceStatic: true, size: 4096 })}`))
+            .then(updated => msg.reply(`Set icon: ${updated.iconURL({ extension: 'png', size: 4096 })}`))
             .catch(err => { msg.reply(`Set icon: Error`); console.log(err) });
 
     }
@@ -66,3 +69,17 @@ function pickEmojiId(str) {
 function emoji_url(id) {
     return `https://cdn.discordapp.com/emojis/${id}.webp?size=4096&quality=lossless`
 }
+
+function getImgUrlFromAttachment(msg) {
+    for (const [_, att] of msg.attachments) {
+        let found = suffix_array.find(v => att.url.endsWith(v));
+        if (!found) continue;
+        return att.url;
+    }
+    return null;
+}
+let suffix_array = [
+    '.webp', '.png', '.jpg', '.jpeg',
+    '.WEBP', '.PNG', '.JPG', '.JPEG',
+    '.gif', '.GIF'
+]
