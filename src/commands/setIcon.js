@@ -9,7 +9,7 @@ let roleMap = {
 module.exports = {
     name: "seticon",
     aliases: ['si'],
-    guilds: ['829673608791851038', '988795992667193395'],
+    guilds: ['829673608791851038'],
     permissions: ['ADMINISTRATOR'],
     members: ['411895879935590411', '832777502848974920'],
     Owner: '411895879935590411',
@@ -42,7 +42,7 @@ module.exports = {
         role.setIcon(icon)
             .then(updated => {
                 const iconEmbed = new Discord.MessageEmbed()
-                    .setDescription('臭GG 身分組貼圖更改')
+                    .setDescription('<@988641623384662066> 貼圖更改')
                     .setImage(updated.iconURL({ extension: 'png', size: 4096 }))
                     .setFooter({
                         text: msg.member.user.tag,
