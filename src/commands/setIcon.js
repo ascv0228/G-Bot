@@ -32,9 +32,10 @@ module.exports = {
 
         let RoleID = roleMap[msg.guild.id]
         let role = await dcUtil.getRoleByID(msg.guild, RoleID)
+        msg.reply(`${role.iconURL({ extension: 'png', forceStatic: true, size: 4096 })}`)
         // let org_color = role.hexColor;
         role.setIcon(icon)
-            .then(updated => msg.reply(`Set icon: ${icon}`))
+            .then(updated => msg.reply(`Set icon: ${args[0]}`))
             .catch(err => { msg.reply(`Set icon: Error`); console.log(err) });
 
     }
@@ -59,5 +60,5 @@ function pickEmojiId(str) {
 }
 
 function emoji_url(id) {
-    return `https://cdn.discordapp.com/emojis/${id}.webp?size=480&quality=lossless`
+    return `https://cdn.discordapp.com/emojis/${id}.webp?size=4096&quality=lossless`
 }
