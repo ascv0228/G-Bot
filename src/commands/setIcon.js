@@ -1,5 +1,5 @@
 const dcUtil = require('../tools/dc-util.js');
-
+const Discord = require('discord.js');
 let roleMap = {
     '829673608791851038': '988641623384662066',
     '988795992667193395': '988804577509904414'
