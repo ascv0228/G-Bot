@@ -32,10 +32,10 @@ module.exports = {
 
         let RoleID = roleMap[msg.guild.id]
         let role = await dcUtil.getRoleByID(msg.guild, RoleID)
-        msg.reply(`${role.iconURL({ extension: 'png', forceStatic: true, size: 4096 })}`)
+        // msg.reply(`${role.iconURL({ extension: 'png', forceStatic: true, size: 4096 })}`)
         // let org_color = role.hexColor;
         role.setIcon(icon)
-            .then(updated => msg.reply(`Set icon: ${args[0]}`))
+            .then(updated => msg.reply(`Set icon: ${updated.iconURL({ extension: 'png', forceStatic: true, size: 4096 })}`))
             .catch(err => { msg.reply(`Set icon: Error`); console.log(err) });
 
     }
@@ -47,7 +47,11 @@ let colorMap = {
     '#FFFFFF': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdj+P///38ACfsD/QVDRcoAAAAASUVORK5CYII=',
     'ffffff': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdj+P///38ACfsD/QVDRcoAAAAASUVORK5CYII=',
     '#ffffff': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdj+P///38ACfsD/QVDRcoAAAAASUVORK5CYII=',
-    '透明': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdjMLO0/w8AAwUBrjnr9IQAAAAASUVORK5CYII='
+    '透明': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdjMLO0/w8AAwUBrjnr9IQAAAAASUVORK5CYII=',
+    '#36393F': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdjMLO0/w8AAwUBrjnr9IQAAAAASUVORK5CYII=',
+    '36393F': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdjMLO0/w8AAwUBrjnr9IQAAAAASUVORK5CYII=',
+    '#36393f': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdjMLO0/w8AAwUBrjnr9IQAAAAASUVORK5CYII=',
+    '36393f': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdjMLO0/w8AAwUBrjnr9IQAAAAASUVORK5CYII=',
 };
 
 function pickEmojiId(str) {
