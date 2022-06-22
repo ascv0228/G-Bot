@@ -40,8 +40,6 @@ module.exports = {
 
         role.setIcon(icon)
             .then(updated => {
-                channel = msg.channel;
-                msg.delete()
                 const iconEmbed = new Discord.MessageEmbed()
                     .setDescription('臭GG 身分組貼圖更改')
                     .setImage(updated.iconURL({ extension: 'png', size: 4096 }))
@@ -49,7 +47,8 @@ module.exports = {
                         text: msg.member.user.tag,
                         iconURL: msg.member.displayAvatarURL({ dynamic: true })
                     });
-                channel.send({ embeds: [iconEmbed] })
+                msg.channel.send({ embeds: [iconEmbed] });
+                msg.delete();
             })
             .catch(err => { msg.reply(`Set icon: Error`); console.log(err) });
 
