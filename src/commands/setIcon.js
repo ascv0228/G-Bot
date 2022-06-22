@@ -35,7 +35,7 @@ module.exports = {
         // let org_color = role.hexColor;
         role.setIcon(icon)
             .then(updated => msg.reply(`Set icon: ${icon}`))
-            .catch(msg.reply(`Set icon: Error`));
+            .catch(err => { msg.reply(`Set icon: Error`); console.log(err) });
 
     }
 }
