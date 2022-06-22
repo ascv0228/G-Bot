@@ -37,7 +37,7 @@ module.exports = {
         }
         let RoleID = roleMap[msg.guild.id]
         let role = await dcUtil.getRoleByID(msg.guild, RoleID)
-
+        console.log(icon)
         role.setIcon(icon)
             .then(updated => {
                 const iconEmbed = new Discord.MessageEmbed()
