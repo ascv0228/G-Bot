@@ -20,7 +20,7 @@ module.exports = {
         if (!this.guilds.includes(msg.guild.id))
             return msg.reply('只能用在外星群');
         if (args.length == 0 && msg.attachments.length == 0)
-            return msg.reply('Need __image__ or __image\'s url__ or __emoji__ or __Color("white"、"白色"、"#FFFFFF"、"透明".....)__');
+            return msg.reply('Need __image__ or __image\'s url__ or __emoji__ or __Color(white、白色、透明.....)__ or __Color\'s Hex(#FFFFFF、#36393f)__');
         let icon = getImgUrlFromAttachment(msg);
         if (!icon) {
             icon = colorMap[args[0]];
@@ -31,6 +31,9 @@ module.exports = {
         }
         if (!icon) {
             icon = args[0];
+        }
+        if (!icon) {
+            icon = getColorUrl(getColor(str))
         }
         let RoleID = roleMap[msg.guild.id]
         let role = await dcUtil.getRoleByID(msg.guild, RoleID)
@@ -53,17 +56,9 @@ module.exports = {
     }
 }
 let colorMap = {
-    'white': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdj+P///38ACfsD/QVDRcoAAAAASUVORK5CYII=',
-    '白色': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdj+P///38ACfsD/QVDRcoAAAAASUVORK5CYII=',
-    'FFFFFF': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdj+P///38ACfsD/QVDRcoAAAAASUVORK5CYII=',
-    '#FFFFFF': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdj+P///38ACfsD/QVDRcoAAAAASUVORK5CYII=',
-    'ffffff': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdj+P///38ACfsD/QVDRcoAAAAASUVORK5CYII=',
-    '#ffffff': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdj+P///38ACfsD/QVDRcoAAAAASUVORK5CYII=',
-    '透明': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdjMLO0/w8AAwUBrjnr9IQAAAAASUVORK5CYII=',
-    '#36393F': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdjMLO0/w8AAwUBrjnr9IQAAAAASUVORK5CYII=',
-    '36393F': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdjMLO0/w8AAwUBrjnr9IQAAAAASUVORK5CYII=',
-    '#36393f': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdjMLO0/w8AAwUBrjnr9IQAAAAASUVORK5CYII=',
-    '36393f': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdjMLO0/w8AAwUBrjnr9IQAAAAASUVORK5CYII=',
+    'white': 'https://www.analogouscolors.com/image/512x512/ffffff.jpg',
+    '白色': 'https://www.analogouscolors.com/image/512x512/ffffff.jpg',
+    '透明': 'https://www.analogouscolors.com/image/512x512/36393f.jpg',
 };
 
 function pickEmojiId(str) {
@@ -92,3 +87,14 @@ let suffix_array = [
     '.WEBP', '.PNG', '.JPG', '.JPEG',
     '.gif', '.GIF'
 ]
+function getColor(str) {
+    if (!str) return null;
+    const mats = str.match(/^#?([0-9a-fA-F]{1,6})$/);
+    if (mats) {
+        return mats[1];
+    }
+    return null;
+}
+function getColorUrl(color) {
+    return `https://www.analogouscolors.com/image/512x512/${color}.jpg`
+}
