@@ -30,10 +30,10 @@ module.exports = {
             if (emoji_id) icon = emoji_url(emoji_id);
         }
         if (!icon) {
-            icon = args[0];
+            icon = getColorUrl(getColor(str))
         }
         if (!icon) {
-            icon = getColorUrl(getColor(str))
+            icon = args[0];
         }
         let RoleID = roleMap[msg.guild.id]
         let role = await dcUtil.getRoleByID(msg.guild, RoleID)
