@@ -19,8 +19,8 @@ module.exports = {
             return;
         if (!this.guilds.includes(msg.guild.id))
             return msg.reply('只能用在外星群');
-        if (args.length == 0)
-            return msg.reply('Need __image\'s url__ or __emoji__ or __Color("white"、"白色"、"#FFFFFF"、"透明".....)__');
+        if (args.length == 0 && msg.attachments.length == 0)
+            return msg.reply('Need __image__ or __image\'s url__ or __emoji__ or __Color("white"、"白色"、"#FFFFFF"、"透明".....)__');
         let icon = getImgUrlFromAttachment(msg);
         if (!icon) {
             icon = colorMap[args[0]];
@@ -30,7 +30,7 @@ module.exports = {
             if (emoji_id) icon = emoji_url(emoji_id);
         }
         if (!icon) {
-            icon = args[0]
+            icon = args[0];
         }
 
         let RoleID = roleMap[msg.guild.id]
