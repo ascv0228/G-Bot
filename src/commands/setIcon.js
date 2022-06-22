@@ -38,14 +38,15 @@ module.exports = {
 
         role.setIcon(icon)
             .then(updated => {
+                msg.delete()
                 const iconEmbed = new Discord.MessageEmbed()
                     .setDescription('臭GG 身分組貼圖更改')
                     .setImage(updated.iconURL({ extension: 'png', size: 4096 }))
                     .setFooter({
-                        text: member.user.tag,
-                        iconURL: member.displayAvatarURL({ dynamic: true })
+                        text: msg.member.user.tag,
+                        iconURL: msg.member.displayAvatarURL({ dynamic: true })
                     });
-                msg.send({ embeds: [iconEmbed] })
+                msg.channel.send({ embeds: [iconEmbed] })
             })
             .catch(err => { msg.reply(`Set icon: Error`); console.log(err) });
 
