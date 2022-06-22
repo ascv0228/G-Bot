@@ -32,13 +32,21 @@ module.exports = {
         if (!icon) {
             icon = args[0];
         }
-
+        msg.delete()
         let RoleID = roleMap[msg.guild.id]
         let role = await dcUtil.getRoleByID(msg.guild, RoleID)
-        // msg.reply(`${role.iconURL({ extension: 'png', forceStatic: true, size: 4096 })}`)
-        // let org_color = role.hexColor;
+
         role.setIcon(icon)
-            .then(updated => msg.reply(`Set icon: ${updated.iconURL({ extension: 'png', size: 4096 })}`))
+            .then(updated => {
+                const iconEmbed = new Discord.MessageEmbed()
+                    .setDescription('臭GG 身分組貼圖更改')
+                    .setImage(updated.iconURL({ extension: 'png', size: 4096 }))
+                    .setFooter({
+                        text: member.user.tag,
+                        iconURL: member.displayAvatarURL({ dynamic: true })
+                    });
+                msg.send({ embeds: [iconEmbed] })
+            })
             .catch(err => { msg.reply(`Set icon: Error`); console.log(err) });
 
     }
