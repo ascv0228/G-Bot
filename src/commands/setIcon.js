@@ -32,7 +32,6 @@ module.exports = {
         if (!icon) {
             icon = args[0];
         }
-        msg.delete()
         let RoleID = roleMap[msg.guild.id]
         let role = await dcUtil.getRoleByID(msg.guild, RoleID)
 
