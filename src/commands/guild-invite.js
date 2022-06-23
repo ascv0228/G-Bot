@@ -9,14 +9,24 @@ module.exports = {
     async execute(client, msg, args) {
         if (msg.author.id !== '411895879935590411') return;
         let guild = msg.guild;
-        console.log(guild)
-        console.log(guild.invite)
-        // guild.fetchInvites().then(invites => {
-        //     invites.forEach(invite => {
-        //         msg.channel.send(`${invite}`)
-        //     })
-        //     console.log(invites)
-        // })
+        // if (guild.vanityURLCode) return msg.reply(`https://discord.gg/${vanityURLCode}`);
+        const invites = await guild.invites.fetch();
+
+        const codeUses = new Map();
+        invites.each(inv => codeUses.set(inv.code, inv.uses));
+        console.log(codeUses)
+
+        guild.invites.fetch()
+            .then(invites => {
+                console.log("INVITES CACHED");
+                const codeUses = new Map();
+                invites.each(inv => codeUses.set(inv.code, inv.uses));
+
+                guildInvites.set(guild.id, codeUses);
+            })
+            .catch(err => {
+                console.log("OnReady Error:", err)
+            })
 
     }
 }
