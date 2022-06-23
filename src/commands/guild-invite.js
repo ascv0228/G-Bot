@@ -15,19 +15,7 @@ module.exports = {
         const codeUses = new Map();
         invites.each(inv => codeUses.set(inv.code, inv.uses));
         console.log(codeUses)
-
-        guild.invites.fetch()
-            .then(invites => {
-                console.log("INVITES CACHED");
-                const codeUses = new Map();
-                invites.each(inv => codeUses.set(inv.code, inv.uses));
-                console.log(inv.code)
-
-                guildInvites.set(guild.id, codeUses);
-            })
-            .catch(err => {
-                console.log("OnReady Error:", err)
-            })
+        console.log(invites)
 
     }
 }
