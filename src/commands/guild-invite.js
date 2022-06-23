@@ -13,29 +13,23 @@ module.exports = {
         let hasVanity = guild.vanityURLCode;
         if (hasVanity) {
             let vanity = await guild.fetchVanityData();
-            msg.reply(`https://discord.gg/${vanity.code}`);
+            return msg.reply(`https://discord.gg/${vanity.code}`);
         }
 
-        // if (vanity) return msg.reply(`https://discord.gg/${vanity.code}`);
-        // if (vanity) msg.reply(`https://discord.gg/${vanity.code}`);
-
-        // const invites = await guild.invites.fetch();
-        // for (let [code, inv] of invites) {
-        //     if (inv.maxAge == 0) msg.reply(`https://discord.gg/${code}`);
-        // }
+        const invites = await guild.invites.fetch();
+        for (let [code, inv] of invites) {
+            if (inv.maxAge == 0) return msg.reply(`https://discord.gg/${code}`);
+        }
         let channel = guild.systemChannel
-        let channelID = guild.systemChannelId
-        console.log(channel)
-        console.log(channelID)
 
-        let invites = new Array()
         if (!channel) return;
-        await channel.createInvite({ maxAge: 0, maxUses: 0 })
-            .then(async (invite) => {
-                invites.push(`${guild.name} - ${invite.url}`); // push invite link and guild name to array
-            })
-            .catch((error) => console.log(error));
-        console.log(invites);
+        let createInvite = await channel.createInvite({ maxAge: 0, maxUses: 0 })
+        console.log(invite.url)
+        // .then(async (invite) => {
+        //     invites.push(`${guild.name} - ${invite.url}`); // push invite link and guild name to array
+        // })
+        // .catch((error) => console.log(error));
+        // console.log(invites);
 
     }
 }
