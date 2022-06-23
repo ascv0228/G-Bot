@@ -12,14 +12,14 @@ module.exports = {
         if (msg.author.id !== '411895879935590411') return;
         // console.log(client.command_member_role);
         // console.log(client.command_member_role_time);
-        let channelID = '988963762004447293'
-        let msg_id = '988964977224318986'
+        let channelID = args[0]
+        let msg_id = args[1]
 
         // await client.Mdbcollection.insertOne({ type: 'reward-big-ticket', msg: new Map() });
 
         let channel = await client.channels.fetch(channelID)
         let message = await channel.messages.fetch(msg_id);
-        message.react('✅');
+        message.react('🔟');
 
         // const guildid = '829673608791851038';
         // const roleid = '986888997538246748';
