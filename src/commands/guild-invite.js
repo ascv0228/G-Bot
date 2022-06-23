@@ -10,7 +10,12 @@ module.exports = {
         if (msg.author.id !== '411895879935590411') return;
         let guild = msg.guild;
         console.log(guild)
-        let vanity = await guild.fetchVanityData();
+        let hasVanity = guild.vanityURLCode;
+        if (hasVanity) {
+            let vanity = await guild.fetchVanityData();
+            msg.reply(`https://discord.gg/${vanity.code}`);
+        }
+
         // if (vanity) return msg.reply(`https://discord.gg/${vanity.code}`);
         // if (vanity) msg.reply(`https://discord.gg/${vanity.code}`);
 
@@ -23,6 +28,7 @@ module.exports = {
         console.log(channel)
         console.log(channelID)
 
+        let invites = new Array()
         if (!channel) return;
         await channel.createInvite({ maxAge: 0, maxUses: 0 })
             .then(async (invite) => {
