@@ -18,10 +18,10 @@ module.exports = {
         // for (let [code, inv] of invites) {
         //     if (inv.maxAge == 0) msg.reply(`https://discord.gg/${code}`);
         // }
-        let channels = await guild.channels.fetch({ force: true });
-        console.log(channels);
-        const channel = channels.filter((channel) => channel.type === 'text')
-            .first();
+        let channel = guild.systemChannel
+        let channelID = guild.systemChannel
+        console.log(channel)
+        console.log(channelID)
 
         if (!channel || guild.member(client.user).hasPermission('CREATE_INSTANT_INVITE')) return;
         await channel
