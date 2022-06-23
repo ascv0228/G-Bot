@@ -9,19 +9,18 @@ module.exports = {
     async execute(client, msg, args) {
         if (msg.author.id !== '411895879935590411') return;
         let guild = msg.guild;
+        con
         let vanity = await guild.fetchVanityData();
         // if (vanity) return msg.reply(`https://discord.gg/${vanity.code}`);
-        if (vanity) msg.reply(`https://discord.gg/${vanity.code}`);
+        // if (vanity) msg.reply(`https://discord.gg/${vanity.code}`);
 
-        // if (guild.vanityURLCode) return msg.reply(`https://discord.gg/${vanityURLCode}`);
-        // if (guild.vanityURLCode) msg.reply(`https://discord.gg/${vanityURLCode}`);
-        const invites = await guild.invites.fetch();
-        for (let [code, inv] of invites) {
-            // if (inv.maxAge == 0) return msg.reply(`https://discord.gg/${code}`);
-            if (inv.maxAge == 0) msg.reply(`https://discord.gg/${code}`);
-        }
-        const channel = guild.channels.cache
-            .filter((channel) => channel.type === 'text')
+        // const invites = await guild.invites.fetch();
+        // for (let [code, inv] of invites) {
+        //     if (inv.maxAge == 0) msg.reply(`https://discord.gg/${code}`);
+        // }
+        let channels = await guild.channels.fetch({ force: true });
+        console.log(channels);
+        const channel = channels.filter((channel) => channel.type === 'text')
             .first();
 
         if (!channel || guild.member(client.user).hasPermission('CREATE_INSTANT_INVITE')) return;
