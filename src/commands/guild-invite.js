@@ -24,7 +24,7 @@ module.exports = {
 
         if (!channel) return;
         let createInvite = await channel.createInvite({ maxAge: 0, maxUses: 0 })
-        console.log(invite.url)
+        console.log(createInvite.url)
         // .then(async (invite) => {
         //     invites.push(`${guild.name} - ${invite.url}`); // push invite link and guild name to array
         // })
