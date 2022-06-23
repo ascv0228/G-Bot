@@ -38,7 +38,7 @@ module.exports = {
         }
         let RoleID = roleMap[msg.guild.id]
         let role = await dcUtil.getRoleByID(msg.guild, RoleID)
-        // console.log(icon)
+        console.log(icon)
         role.setIcon(icon)
             .then(updated => {
                 const iconEmbed = new Discord.MessageEmbed()
@@ -48,6 +48,7 @@ module.exports = {
                         text: msg.member.user.tag,
                         iconURL: msg.member.displayAvatarURL({ dynamic: true })
                     });
+                console.log(updated.iconURL({ extension: 'png', size: 4096 }))
                 msg.channel.send({ embeds: [iconEmbed] });
                 msg.delete();
             })
