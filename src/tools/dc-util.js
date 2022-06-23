@@ -11,7 +11,8 @@ module.exports = {
     msg_react: msg_react,
     createRole: createRole,
     createTextChannel: createTextChannel,
-    createVoiceChannel: createVoiceChannel
+    createVoiceChannel: createVoiceChannel,
+    createInvite: createInvite
 };
 
 function pickUserId(str) {
