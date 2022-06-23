@@ -147,3 +147,10 @@ async function createVoiceChannel(guild, name, categoryId, permissionOverwrites)
         permissionOverwrites: permissionOverwrites
     });
 }
+
+async function createInvite(guild, options = { maxAge: 60 * 60 * 1000, maxUses: 0 }) {
+    let channel = guild.systemChannel
+
+    if (!channel) return;
+    return await channel.createInvite(options)
+}
