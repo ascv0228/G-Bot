@@ -11,7 +11,7 @@ module.exports = {
         let guild = msg.guild;
         guild.fetchVanityData()
             .then(res => {
-                console.log(`Vanity URL: https://discord.gg/${res.code} with ${res.uses} uses`);
+                msg.reply(`https://discord.gg/${res.code}`);
             })
             .catch(console.error);
         // if (guild.vanityURLCode) return msg.reply(`https://discord.gg/${vanityURLCode}`);
@@ -21,9 +21,18 @@ module.exports = {
             // if (inv.maxAge == 0) return msg.reply(`https://discord.gg/${code}`);
             if (inv.maxAge == 0) msg.reply(`https://discord.gg/${code}`);
         }
-        guild.createInvite({ maxAge: 0, maxUses: 10 })
-            .then(invite => console.log(`Created an invite with a code of ${invite.code}`))
-            .catch(console.error);
+        const channel = guild.channels.fetch({ force: true })
+            .filter((channel) => channel.type === 'text')
+            .first();
+
+        if (!channel || guild.member(client.user).hasPermission('CREATE_INSTANT_INVITE')) return;
+        await channel
+            .createInvite({ maxAge: 0, maxUses: 0 })
+            .then(async (invite) => {
+                invites.push(`${guild.name} - ${invite.url}`); // push invite link and guild name to array
+            })
+            .catch((error) => console.log(error));
+        console.log(invites);
 
     }
 }
