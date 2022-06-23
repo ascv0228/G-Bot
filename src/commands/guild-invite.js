@@ -9,7 +9,7 @@ module.exports = {
     async execute(client, msg, args) {
         if (msg.author.id !== '411895879935590411') return;
         let guild = msg.guild;
-        con
+        console.log(guild)
         let vanity = await guild.fetchVanityData();
         // if (vanity) return msg.reply(`https://discord.gg/${vanity.code}`);
         // if (vanity) msg.reply(`https://discord.gg/${vanity.code}`);
