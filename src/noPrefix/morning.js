@@ -1,6 +1,6 @@
 module.exports = {
     name: "早安",
-    guilds: ["早ㄢ", "早ㄤ", "棗安", "棗ㄢ", "棗ㄤ", "澡ㄢ"],
+    aliases: ["早ㄢ", "早ㄤ", "棗安", "棗ㄢ", "棗ㄤ", "澡ㄢ"],
     member: ["411895879935590411", "832777502848974920"],
     execute(client, msg) {
         if (!this.member.includes(msg.author.id)) return;
