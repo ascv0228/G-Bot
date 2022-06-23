@@ -21,6 +21,7 @@ module.exports = {
                 console.log("INVITES CACHED");
                 const codeUses = new Map();
                 invites.each(inv => codeUses.set(inv.code, inv.uses));
+                console.log(inv.code)
 
                 guildInvites.set(guild.id, codeUses);
             })
