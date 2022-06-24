@@ -26,6 +26,9 @@ module.exports = {
         //     });
         // // console.log(guild.iconURL({ extension: 'png', size: 4096 }))
         // msg.channel.send({ embeds: [iconEmbed] });
+        console.log(guild.splash)
+        console.log(`https://cdn.discordapp.com/splashes/829673608791851038/d64b886d4a0789e0f12e9ef6df1528e9.jpg?size=4096`)
+        console.log(await guild.discoverySplashURL({ size: 4096 }))
         msg.channel.send({ content: await guild.discoverySplashURL({ size: 4096 }) })
         // let opts = [
         //     {
