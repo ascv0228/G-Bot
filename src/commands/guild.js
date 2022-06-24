@@ -17,9 +17,11 @@ module.exports = {
     async execute(client, msg, args) {
         // let member = await dcUtil.getMemberByTag(msg.guild, args[0]) || msg.member;
         let guild = msg.guild;
+        let format = guild.banner.startsWith('a_') ? "gif" : "png";
+        console.log(guild.banner)
         const iconEmbed = new Discord.MessageEmbed()
-            .setDescription(`${guild.name} 背景: `)
-            .setImage(guild.bannerURL({ size: 4096, format: 'gif' }))
+            .setDescription(`${guild.name} 橫幅: `)
+            .setImage(guild.bannerURL({ size: 4096, format: format }))
             .setFooter({
                 text: msg.member.user.tag,
                 iconURL: msg.member.displayAvatarURL({ dynamic: true })
