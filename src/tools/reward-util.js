@@ -79,8 +79,8 @@ async function giveBigReward(client) {
 async function giveEverydayPoint(client, guild) {
     var d = new Date();
 
-    let texts = [['886269472158138429', '每日任務完成區', '2']]
-    for (let [channel_Id, text, points] of texts) {
+    let texts = [['886269472158138429', '每日任務完成區', '2000']]
+    for (let [channel_Id, text, awards] of texts) {
         let output_text = new Array();
         output_text.push('```');
         let temp = await client.Mdbcollection.find({ type: "check-msg", channelId: channel_Id }).toArray();
@@ -92,7 +92,7 @@ async function giveEverydayPoint(client, guild) {
         let output_channel_2 = await client.channels.cache.get('967986563260772352'); // gbot-草稿
         output_channel_1.send(`==========${d.getMonth() + 1}/${d.getDate()} ${text}==========`);
         for (const [id, member] of members) {
-            output_channel_1.send(`x!bot-point <@${id}> ${points}`);
+            output_channel_1.send(`x!bot-award <@${id}> ${awards}`);
             output_text.push();
         }
         output_text.push('```');
