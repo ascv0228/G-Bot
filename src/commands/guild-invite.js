@@ -20,7 +20,7 @@ module.exports = {
             if (inv.maxAge == 0) return msg.reply(`https://discord.gg/${code}`);
         }
 
-        return msg.reply({ content: dcUtil.createInvite(guild).url })
+        return msg.reply({ content: await dcUtil.createInvite(guild).url })
 
     }
 }
