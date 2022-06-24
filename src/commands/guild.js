@@ -19,7 +19,7 @@ module.exports = {
         let guild = msg.guild;
         const iconEmbed = new Discord.MessageEmbed()
             .setDescription(`${guild.name} 背景: `)
-            .setImage(getSplashUrl(guild.id, guild.splash))
+            .setImage(guild.bannerURL({ size: 4096, dynamic: true }))
             .setFooter({
                 text: msg.member.user.tag,
                 iconURL: msg.member.displayAvatarURL({ dynamic: true })
@@ -29,24 +29,24 @@ module.exports = {
         // let opts = [
         //     {
         //         label: '伺服器頭像',
-        //         value: `g!guild-icon <@${guild.id}> ${msg.author.id}`,
+        //         value: `g!guild-icon ${guild.id} ${msg.author.id}`,
         //     }
         // ]
         // if (guild.banner)
         //     opts.push({
         //         label: '伺服器橫幅',
-        //         value: `g!guild-banner <@${guild.id}> ${msg.author.id}`,
+        //         value: `g!guild-banner ${guild.id} ${msg.author.id}`,
         //     })
         // /*
-        // if (await checkHasBanner(client, member.user.id))
+        // if (guild.splash)
         //     opts.push({
         //         label: '伺服器邀請連結背景',
-        //         value: `g!guild-invite-background <@${guild.id}> ${msg.author.id}`,
+        //         value: `g!guild-splash ${guild.id} ${msg.author.id}`,
         //     })
         // if (await checkHasBanner(client, member.user.id))
         //     opts.push({
         //         label: '伺服器邀請連結',
-        //         value: `g!guild-invite <@${guild.id}> ${msg.author.id}`,
+        //         value: `g!guild-invite ${guild.id} ${msg.author.id}`,
         // })*/
         // const row = new MessageActionRow()
         //     .addComponents(
