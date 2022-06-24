@@ -3,7 +3,7 @@ module.exports = {
     name: "x!ban",
     aliases: [],
     member: ["832777502848974920"],
-    execute(client, msg) {
+    async execute(client, msg) {
         if (!msg.content.startsWith(`x!ban`)) return;
         if (!this.member.includes(msg.author.id)) return;
         let args = msg.content.slice('x!ban'.length).trimEnd().split(/\s+/);
