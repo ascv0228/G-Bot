@@ -2,6 +2,7 @@ const dcUtil = require('../tools/dc-util.js');
 
 module.exports = {
     name: "guild-invite",
+    members: ['411895879935590411'],
 
     async execute(client, interaction, args) {
         let msg = interaction.message;
@@ -19,7 +20,10 @@ module.exports = {
             if (inv.maxAge == 0) return msg.channel.send(`https://discord.gg/${code}`);
         }
 
-        return msg.channel.send({ content: (await dcUtil.createInvite(guild)).url })
+        if (this.members.includes(member.id))
+            return msg.channel.send({ content: (await dcUtil.createInvite(guild, options = { maxAge: 0, maxUses: 0 })).url })
+        else
+            return msg.channel.send({ content: (await dcUtil.createInvite(guild)).url })
 
     }
 }
