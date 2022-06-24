@@ -17,15 +17,16 @@ module.exports = {
     async execute(client, msg, args) {
         // let member = await dcUtil.getMemberByTag(msg.guild, args[0]) || msg.member;
         let guild = msg.guild;
-        const iconEmbed = new Discord.MessageEmbed()
-            .setDescription(`${guild.name} 頭貼: `)
-            .setImage(guild.discoverySplashURL({ size: 4096, dynamic: true }))
-            .setFooter({
-                text: msg.member.user.tag,
-                iconURL: msg.member.displayAvatarURL({ dynamic: true })
-            });
-        // console.log(guild.iconURL({ extension: 'png', size: 4096 }))
-        msg.channel.send({ embeds: [iconEmbed] });
+        // const iconEmbed = new Discord.MessageEmbed()
+        //     .setDescription(`${guild.name} 背景: `)
+        //     .setImage()
+        //     .setFooter({
+        //         text: msg.member.user.tag,
+        //         iconURL: msg.member.displayAvatarURL({ dynamic: true })
+        //     });
+        // // console.log(guild.iconURL({ extension: 'png', size: 4096 }))
+        // msg.channel.send({ embeds: [iconEmbed] });
+        msg.channel.send({ content: await guild.discoverySplashURL({ size: 4096 }) })
         // let opts = [
         //     {
         //         label: '伺服器頭像',

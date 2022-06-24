@@ -72,7 +72,7 @@ function pickEmojiId(str) {
 }
 
 function emoji_url(id) {
-    return `https://cdn.discordapp.com/emojis/${id}.webp?size=4096&quality=lossless`
+    return `https://cdn.discordapp.com/emojis/${id}.png?size=4096&quality=lossless`
 }
 
 function getImgUrlFromAttachment(msg) {
