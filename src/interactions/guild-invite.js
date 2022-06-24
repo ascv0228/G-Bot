@@ -2,11 +2,8 @@ const dcUtil = require('../tools/dc-util.js');
 
 module.exports = {
     name: "guild-invite",
-    aliases: ["invite"],
-    guilds: [],
-    permissions: ['ADMINISTRATOR'],
 
-    async execute(client, msg, args) {
+    async execute(client, interaction, args) {
         let msg = interaction.message;
         let member = interaction.member;
 
