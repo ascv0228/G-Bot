@@ -33,11 +33,10 @@ module.exports = {
                 label: '伺服器邀請連結背景',
                 value: `g!guild-splash ${guild.id} ${msg.author.id}`,
             })
-        if (client, member.user.id)
-            opts.push({
-                label: '伺服器邀請連結',
-                value: `g!guild-invite ${guild.id} ${msg.author.id}`,
-            })
+        opts.push({
+            label: '伺服器邀請連結',
+            value: `g!guild-invite ${guild.id} ${msg.author.id}`,
+        })
         const row = new MessageActionRow()
             .addComponents(
                 new MessageSelectMenu()
