@@ -2,26 +2,23 @@ const Discord = require('discord.js');
 const dcUtil = require('../tools/dc-util.js');
 
 module.exports = {
-    name: "guild-splash",
+    name: "guild-banner",
 
     async execute(client, interaction, args) {
         let msg = interaction.message;
         let member = interaction.member;
 
         let guild = await client.guilds.cache.get(args[0]);
-        const splashEmbed = new Discord.MessageEmbed()
-            .setDescription(`${guild.name} 邀請連結背景: `)
-            .setImage(getSplashUrl(guild.id, guild.splash))
+
+        const bannerEmbed = new Discord.MessageEmbed()
+            .setDescription(`${guild.name} 橫幅: `)
+            .setImage(guild.bannerURL({ size: 4096, format: 'gif' }))
             .setFooter({
                 text: member.user.tag,
                 iconURL: member.displayAvatarURL({ dynamic: true })
             });
-        msg.channel.send({ embeds: [splashEmbed] });
+        msg.channel.send({ embeds: [bannerEmbed] });
 
         return;
     }
 };
-
-function getSplashUrl(guildId, splashHash) {
-    return `https://cdn.discordapp.com/splashes/${guildId}/${splashHash}.jpg?size=4096`
-}

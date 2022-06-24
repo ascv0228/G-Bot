@@ -15,53 +15,37 @@ module.exports = {
 
 
     async execute(client, msg, args) {
-        // let member = await dcUtil.getMemberByTag(msg.guild, args[0]) || msg.member;
-        let guild = msg.guild;
-        let format = guild.banner.startsWith('a_') ? "gif" : "png";
-        console.log(guild.banner)
-        const iconEmbed = new Discord.MessageEmbed()
-            .setDescription(`${guild.name} 橫幅: `)
-            .setImage(guild.bannerURL({ size: 4096, format: format }))
-            .setFooter({
-                text: msg.member.user.tag,
-                iconURL: msg.member.displayAvatarURL({ dynamic: true })
-            });
-        // console.log(guild.iconURL({ extension: 'png', size: 4096 }))
-        msg.channel.send({ embeds: [iconEmbed] });
-        // let opts = [
-        //     {
-        //         label: '伺服器頭像',
-        //         value: `g!guild-icon ${guild.id} ${msg.author.id}`,
-        //     }
-        // ]
-        // if (guild.banner)
-        //     opts.push({
-        //         label: '伺服器橫幅',
-        //         value: `g!guild-banner ${guild.id} ${msg.author.id}`,
-        //     })
-        // /*
-        // if (guild.splash)
-        //     opts.push({
-        //         label: '伺服器邀請連結背景',
-        //         value: `g!guild-splash ${guild.id} ${msg.author.id}`,
-        //     })
-        // if (await checkHasBanner(client, member.user.id))
-        //     opts.push({
-        //         label: '伺服器邀請連結',
-        //         value: `g!guild-invite ${guild.id} ${msg.author.id}`,
-        // })*/
-        // const row = new MessageActionRow()
-        //     .addComponents(
-        //         new MessageSelectMenu()
-        //             .setCustomId('select')
-        //             .setPlaceholder('請選擇伺服器頭像/橫幅/邀請連結')
-        //             .addOptions(opts),
-        //     );
+        let guild = await dcUtil.getGuildByID(client, args[0]) || msg.guild;
 
-        // await msg.channel.send({ components: [row] });
+        let opts = [
+            {
+                label: '伺服器頭像',
+                value: `g!guild-icon ${guild.id} ${msg.author.id}`,
+            }
+        ]
+        if (guild.banner)
+            opts.push({
+                label: '伺服器橫幅',
+                value: `g!guild-banner ${guild.id} ${msg.author.id}`,
+            })
+        if (guild.splash)
+            opts.push({
+                label: '伺服器邀請連結背景',
+                value: `g!guild-splash ${guild.id} ${msg.author.id}`,
+            })
+        if (client, member.user.id)
+            opts.push({
+                label: '伺服器邀請連結',
+                value: `g!guild-invite ${guild.id} ${msg.author.id}`,
+            })
+        const row = new MessageActionRow()
+            .addComponents(
+                new MessageSelectMenu()
+                    .setCustomId('select')
+                    .setPlaceholder('請選擇伺服器頭像/橫幅/邀請連結背景/邀請連結')
+                    .addOptions(opts),
+            );
+
+        await msg.channel.send({ components: [row] });
     }
 };
-
-function getSplashUrl(guildId, splashHash) {
-    return `https://cdn.discordapp.com/splashes/${guildId}/${splashHash}.jpg?size=4096`
-}
