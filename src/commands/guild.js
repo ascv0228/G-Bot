@@ -19,7 +19,7 @@ module.exports = {
         let guild = msg.guild;
         const iconEmbed = new Discord.MessageEmbed()
             .setDescription(`${guild.name} 背景: `)
-            .setImage(guild.bannerURL({ size: 4096, dynamic: true }))
+            .setImage(guild.bannerURL({ size: 4096, format: 'gif' }))
             .setFooter({
                 text: msg.member.user.tag,
                 iconURL: msg.member.displayAvatarURL({ dynamic: true })
