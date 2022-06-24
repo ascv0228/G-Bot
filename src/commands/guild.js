@@ -7,15 +7,15 @@ module.exports = {
     name: "guild",
     aliases: ["server"],
     guilds: [],
-
-    // 1. icon
-    // 2. banner
-    // 3. 邀請連結
-    // 4. 邀請連結背景
+    members: ['411895879935590411'],
 
 
     async execute(client, msg, args) {
-        let guild = await dcUtil.getGuildByID(client, args[0]) || msg.guild;
+        let guild;
+        if (this.members.includes(msg.author.id))
+            guild = await dcUtil.getGuildByID(client, args[0]) || msg.guild;
+        else
+            guild = msg.guild
 
         let opts = new Array();
         if (guild.icon)
