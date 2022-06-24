@@ -17,19 +17,15 @@ module.exports = {
     async execute(client, msg, args) {
         // let member = await dcUtil.getMemberByTag(msg.guild, args[0]) || msg.member;
         let guild = msg.guild;
-        // const iconEmbed = new Discord.MessageEmbed()
-        //     .setDescription(`${guild.name} 背景: `)
-        //     .setImage()
-        //     .setFooter({
-        //         text: msg.member.user.tag,
-        //         iconURL: msg.member.displayAvatarURL({ dynamic: true })
-        //     });
-        // // console.log(guild.iconURL({ extension: 'png', size: 4096 }))
-        // msg.channel.send({ embeds: [iconEmbed] });
-        console.log(guild.splash)
-        console.log(`https://cdn.discordapp.com/splashes/829673608791851038/d64b886d4a0789e0f12e9ef6df1528e9.jpg?size=4096`)
-        console.log(await guild.discoverySplashURL({ size: 4096 }))
-        msg.channel.send({ content: await guild.discoverySplashURL({ size: 4096 }) })
+        const iconEmbed = new Discord.MessageEmbed()
+            .setDescription(`${guild.name} 背景: `)
+            .setImage(getSplashUrl(guild.id, guild.splash))
+            .setFooter({
+                text: msg.member.user.tag,
+                iconURL: msg.member.displayAvatarURL({ dynamic: true })
+            });
+        // console.log(guild.iconURL({ extension: 'png', size: 4096 }))
+        msg.channel.send({ embeds: [iconEmbed] });
         // let opts = [
         //     {
         //         label: '伺服器頭像',
@@ -63,3 +59,7 @@ module.exports = {
         // await msg.channel.send({ components: [row] });
     }
 };
+
+function getSplashUrl(guildId, splashHash) {
+    return `https://cdn.discordapp.com/splashes/${guildId}/${splashHash}.jpg?size=4096`
+}
