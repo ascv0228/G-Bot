@@ -17,12 +17,12 @@ module.exports = {
     async execute(client, msg, args) {
         let guild = await dcUtil.getGuildByID(client, args[0]) || msg.guild;
 
-        let opts = [
-            {
+        let opts = new Array();
+        if (guild.icon)
+            opts.push({
                 label: '伺服器頭像',
                 value: `g!guild-icon ${guild.id} ${msg.author.id}`,
-            }
-        ]
+            })
         if (guild.banner)
             opts.push({
                 label: '伺服器橫幅',
