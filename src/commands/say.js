@@ -15,31 +15,41 @@ module.exports = {
             d1 = d2;
 
         }
-        let msg1;
-        if (msg.type === 'REPLY') {
-            msg1 = await msg.fetchReference();
-        }
         let str = args.join(" ")
         str = newlines(str)
-        // let start = msg.content.indexOf('g!say');
-        // let str = msg.content.substr(start, msg.content.length - 1)
         if (str.length == 0)
             return;
         let roleIds = dcUtil.pickAllRoleId(str)
         str = str.replace('@everyone', `@ everyone`);
         str = str.replace('@here', `@ here`);
+        let msg1;
+        if (msg.type === 'REPLY') {
+            msg1 = await msg.fetchReference();
+        }
+        if (msg1) {
+            if (roleIds == null)
+                return msg.delete()
+                    .then(msg1.reply({ content: str }));
+
+            for (let roleId of roleIds) {
+                let role = await dcUtil.getRoleByID(msg.guild, roleId[1]);
+                str = str.replace(roleId[0], `@${role.name}`);
+            }
+            msg.delete()
+                .then(msg1.reply({ content: str }));
+            return
+        }
+        let channel = msg.channel
         if (roleIds == null)
             return msg.delete()
-                .then(msg1.reply({ content: str }));
+                .then(channel.send({ content: str }));
 
-        console.log(`${roleIds}`)
         for (let roleId of roleIds) {
             let role = await dcUtil.getRoleByID(msg.guild, roleId[1]);
             str = str.replace(roleId[0], `@${role.name}`);
         }
-        let channel = msg.channel
         msg.delete()
-            .then(msg1.reply({ content: str }));
+            .then(channel.send({ content: str }));
 
 
     }
