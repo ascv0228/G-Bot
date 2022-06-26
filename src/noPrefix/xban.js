@@ -4,11 +4,13 @@ module.exports = {
     aliases: [],
     member: ['411895879935590411', "832777502848974920"],
     async execute(client, msg) {
-        if (!msg.content.startsWith(`x!ban`)) return;
+        if (!msg.content.startsWith(`x!ban `)) return;
         if (!this.member.includes(msg.author.id)) return;
-        let args = msg.content.slice('x!ban'.length).trim().split(/\s+/);
+        let args = msg.content.slice('x!ban '.length).trim().split(/\s+/);
         console.log(args)
         let member = await dcUtil.getMemberByTag(msg.guild, args[0]);
+        if (member == null)
+            return;
         switch (msg.author.id) {
             case this.member[0]:
             case this.member[1]:
