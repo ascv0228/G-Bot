@@ -4,8 +4,9 @@ module.exports = {
     name: "envelope",
     aliases: ["pasred"],
 
-    execute(client, msg, args) {
+    execute(client, msg) {
         if (!msg.content.startsWith(`x!`)) return;
+        let args = msg.content.slice('x!ban '.length).trim().split(/\s+/);
         try {
             if (msg.content.startsWith(`x!envelope`) && args.length > 2) {
                 client.channels.cache.get('964699991601995787').send(msg.url);
