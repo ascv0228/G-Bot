@@ -7,6 +7,9 @@ module.exports = {
         if (!msg.content.startsWith(`x!ban`)) return;
         if (!this.member.includes(msg.author.id)) return;
         let args = msg.content.slice('x!ban'.length).trimEnd().split(/\s+/);
+        console.log(args)
+        let [...args2] = msg.content.slice('x!ban'.length).trimEnd().split(/\s+/);
+        console.log(args2)
         let member = await dcUtil.getMemberByTag(msg.guild, args[0]);
         console.log(member)
         switch (msg.author.id) {
