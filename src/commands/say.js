@@ -1,14 +1,26 @@
 const dcUtil = require('../tools/dc-util.js');
+let d1 = new Date();
 
 module.exports = {
     name: "say",
     permissions: ['ADMINISTRATOR'],
-    member: ['411895879935590411', '927937812605595739'],
+    member: ['411895879935590411', '832777502848974920'],
     substring: ['@everyone', '@here'],
     async execute(client, msg, args) {
-        // if (!msg.member.permissions.has(this.permissions[0])
-        //     && !this.member.includes(msg.author.id)) return;
-        let str = args.join(" ")
+        if (!msg.member.permissions.has(this.permissions[0])
+            && !this.member.includes(msg.author.id)) {
+            let d2 = new Date();
+            if ((d2 - d1) < 300000)
+                return msg.reply({ content: '冷卻中' });
+            d1 = d2;
+
+        }
+
+        // let str = args.join(" ")
+        let start = msg.content.indexOf('g!say');
+        let str = msg.content.substr(start, msg.content.length - 1)
+        if (str.length == 0)
+            return;
         let roleIds = dcUtil.pickAllRoleId(str)
         str = str.replace('@everyone', `@ everyone`);
         str = str.replace('@here', `@ here`);
