@@ -18,7 +18,8 @@ module.exports = {
                     msg.channel.send(`Banned ${user.username || user.id || user} from ${guild.name}`);
                 })
         }
-        catch {
+        catch (e) {
+            console.log(e)
             msg.channel.send(`你無法 ban ${args[0]}`)
         }
 
