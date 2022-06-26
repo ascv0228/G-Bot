@@ -66,7 +66,8 @@ async function getUserByID(guild, UserID) {
 
 async function getMemberByTag(guild, str) {
     let MemberID = pickUserId(str);
-    if (!MemberID) return;
+    console.log(MemberID)
+    if (!MemberID) return null;
     let member = await getMemberByID(guild, MemberID);
     return member
 }
