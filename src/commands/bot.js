@@ -19,6 +19,6 @@ module.exports = {
             .setTimestamp()
             .setFooter(`Requested by ${msg.author.username}`, msg.author.displayAvatarURL({ dynamic: true }))
 
-        msg.channel.send(embed)
+        msg.channel.send({ embeds: [embed] })
     }
 };
