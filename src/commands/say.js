@@ -23,33 +23,21 @@ module.exports = {
         str = str.replace('@everyone', `@ everyone`);
         str = str.replace('@here', `@ here`);
         let msg1;
+        let output_function = msg.channel.send;
         if (msg.type === 'REPLY') {
             msg1 = await msg.fetchReference();
+            output_function = msg1.reply
         }
-        if (msg1) {
-            if (roleIds == null)
-                return msg.delete()
-                    .then(msg1.reply({ content: str }));
-
-            for (let roleId of roleIds) {
-                let role = await dcUtil.getRoleByID(msg.guild, roleId[1]);
-                str = str.replace(roleId[0], `@${role.name}`);
-            }
-            msg.delete()
-                .then(msg1.reply({ content: str }));
-            return
-        }
-        let channel = msg.channel
         if (roleIds == null)
             return msg.delete()
-                .then(channel.send({ content: str }));
+                .then(output_function({ content: str }));
 
         for (let roleId of roleIds) {
             let role = await dcUtil.getRoleByID(msg.guild, roleId[1]);
             str = str.replace(roleId[0], `@${role.name}`);
         }
         msg.delete()
-            .then(channel.send({ content: str }));
+            .then(output_function({ content: str }));
 
 
     }
