@@ -15,7 +15,10 @@ module.exports = {
             d1 = d2;
 
         }
-
+        let msg1;
+        if (msg.type === 'REPLY') {
+            msg1 = await msg.fetchReference();
+        }
         let str = args.join(" ")
         str = newlines(str)
         // let start = msg.content.indexOf('g!say');
@@ -27,7 +30,7 @@ module.exports = {
         str = str.replace('@here', `@ here`);
         if (roleIds == null)
             return msg.delete()
-                .then(msg.channel.send({ content: str }));
+                .then(msg1.send({ content: str }));
 
         console.log(`${roleIds}`)
         for (let roleId of roleIds) {
@@ -36,7 +39,7 @@ module.exports = {
         }
         let channel = msg.channel
         msg.delete()
-            .then(channel.send({ content: str }));
+            .then(msg1.reply({ content: str }));
 
 
     }
