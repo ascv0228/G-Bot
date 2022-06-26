@@ -30,7 +30,7 @@ module.exports = {
         str = str.replace('@here', `@ here`);
         if (roleIds == null)
             return msg.delete()
-                .then(msg1.send({ content: str }));
+                .then(msg1.reply({ content: str }));
 
         console.log(`${roleIds}`)
         for (let roleId of roleIds) {
