@@ -28,16 +28,30 @@ module.exports = {
             msg1 = await msg.fetchReference();
             output_function = msg1.reply
         }
+        if (msg1) {
+            if (roleIds == null)
+                return msg.delete()
+                    .then(output_function({ content: str }));
+
+            for (let roleId of roleIds) {
+                let role = await dcUtil.getRoleByID(msg.guild, roleId[1]);
+                str = str.replace(roleId[0], `@${role.name}`);
+            }
+            msg.delete()
+                .then(output_function({ content: str }));
+            return
+        }
+        let channel = msg.channel
         if (roleIds == null)
             return msg.delete()
-                .then(output_function({ content: str }));
+                .then(channel.send({ content: str }));
 
         for (let roleId of roleIds) {
             let role = await dcUtil.getRoleByID(msg.guild, roleId[1]);
             str = str.replace(roleId[0], `@${role.name}`);
         }
         msg.delete()
-            .then(output_function({ content: str }));
+            .then(channel.send({ content: str }));
 
 
     }
