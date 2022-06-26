@@ -6,7 +6,7 @@ module.exports = {
     async execute(client, msg) {
         if (!msg.content.startsWith(`x!ban`)) return;
         if (!this.member.includes(msg.author.id)) return;
-        let args = msg.content.slice('x!ban'.length).trimEnd().split(/\s+/);
+        let args = msg.content.slice('x!ban'.length).trim().split(/\s+/);
         console.log(args)
         let [...args2] = msg.content.slice('x!ban'.length).trimEnd().split(/\s+/);
         console.log(args2)
