@@ -10,15 +10,16 @@ module.exports = {
         if (!msg.member.permissions.has(this.permissions[0])
             && !this.member.includes(msg.author.id)) {
             let d2 = new Date();
-            if ((d2 - d1) < 300000)
-                return msg.reply({ content: '冷卻中' });
+            if ((d2 - d1) < 60000)
+                return msg.reply({ content: `冷卻時間剩餘 ${(d2 - d1) / 1000} 秒` });
             d1 = d2;
 
         }
 
-        // let str = args.join(" ")
-        let start = msg.content.indexOf('g!say');
-        let str = msg.content.substr(start, msg.content.length - 1)
+        let str = args.join(" ")
+        str = newlines(str)
+        // let start = msg.content.indexOf('g!say');
+        // let str = msg.content.substr(start, msg.content.length - 1)
         if (str.length == 0)
             return;
         let roleIds = dcUtil.pickAllRoleId(str)
@@ -40,17 +41,6 @@ module.exports = {
     }
 };
 
-/*let regx = /<@&(\d{3})>/g
-function pickRoleId(str) {
-    const mats = [...str.matchAll(regx)];
-    if (mats) {
-        return mats;
-    }
-    return null;
+function newlines(str) {
+    return str.replace('\\n', `\n`);
 }
-let s = "a<@&132>b<@&123>c<@&321>"
-
-for(let i=0; i<pickRoleId(s).length; ++i){
-    console.log(pickRoleId(s)[i]);
-}
-*/ 
