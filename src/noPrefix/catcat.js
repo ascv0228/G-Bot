@@ -3,7 +3,7 @@ module.exports = {
     aliases: ["喵"],
 
     execute(client, msg) {
-        return msg.reply({ content: `<@${832777502848974920}>` });
+        return msg.reply({ content: `<@832777502848974920>` });
     }
 
 };
