@@ -8,14 +8,11 @@ module.exports = {
         if (!this.member.includes(msg.author.id)) return;
         let args = msg.content.slice('x!ban'.length).trim().split(/\s+/);
         console.log(args)
-        let [...args2] = msg.content.slice('x!ban'.length).trimEnd().split(/\s+/);
-        console.log(args2)
         let member = await dcUtil.getMemberByTag(msg.guild, args[0]);
-        console.log(member)
         switch (msg.author.id) {
             case this.member[0]:
             case this.member[1]:
-                return msg.reply({ content: `<@${member.id}>(${member.nickname}) 退出伺服器&刪庫` });
+                return msg.reply({ content: `<@${member.id}>(${member.nickname | member.user.username}) 退出伺服器&刪庫` });
         }
 
 
