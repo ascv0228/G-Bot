@@ -11,6 +11,7 @@ module.exports = {
         console.log(member)
         switch (msg.author.id) {
             case this.member[0]:
+            case this.member[1]:
                 return msg.reply({ content: `<@${member.id}>(${member.nickname}) 退出伺服器&刪庫` });
         }
 
