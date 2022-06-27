@@ -5,7 +5,7 @@ module.exports = {
     aliases: ["pasred"],
     channels: ['990817755328573441', '964699991601995787'],
 
-    execute(client, msg) {
+    async execute(client, msg) {
         if (!msg.content.startsWith(`x!`)) return;
         console.log(msg.content)
         let [cmd, ...args] = msg.content.slice().trim().split(/\s+/);
