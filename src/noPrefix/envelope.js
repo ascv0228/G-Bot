@@ -10,12 +10,12 @@ module.exports = {
         let [cmd, ...args] = msg.content.slice().trim().split(/\s+/);
         for (let chl of this.channels) {
             try {
-                if (msg.content.startsWith(`x!envelope`) && args.length > 1) {
+                if (cmd === `x!envelope` && args.length > 1) {
                     client.channels.cache.get(chl).send(msg.url);
                     client.channels.cache.get(chl).send("無口令");
                     continue;
                 }
-                if (msg.content.startsWith(`x!pasred`) && args.length > 2) {
+                if (cmd === `x!pasred` && args.length > 2) {
                     client.channels.cache.get(chl).send(msg.url);
                     client.channels.cache.get(chl).send("口令:");
                     client.channels.cache.get(chl).send(msg.content.split(' ').splice(3, 3, '').join(' '));

@@ -69,6 +69,7 @@ client.on('ready', () => {
 });
 
 
+client.catOpen = false;
 client.on('messageCreate', msg => {
     try {
         if (!msg.guild || !msg.member) return;
@@ -77,7 +78,6 @@ client.on('messageCreate', msg => {
     } catch (err) {
         return;
     }
-
     rewardUtil.confirmReward(client, msg);
 
     const lines = msg.content.trim().split("\n");
