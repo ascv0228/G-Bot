@@ -14,6 +14,7 @@ module.exports = {
 
         let user = await dcUtil.getMemberByTag(msg.guild, args[0]) || msg.member;
         const banner = await discordBanners.getBanner(user.user.id, { size: 2048, format: "png", dynamic: true })
+        console.log(banner);
         if (banner) {
             const avatarEmbed = new Discord.MessageEmbed()
                 .setImage(banner)
