@@ -4,7 +4,7 @@ let d1 = new Date();
 module.exports = {
     name: "sticker",
 
-    execute(client, msg) {
+    async execute(client, msg) {
         let msg1;
         if (msg.type === 'REPLY') {
             msg1 = await msg.fetchReference();
