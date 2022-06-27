@@ -13,7 +13,7 @@ module.exports = {
         console.log(msg1)
         console.log(msg1.stickers)
         let member = msg.member;
-        for (let s in msg1.stickers) {
+        for (let [a, s] of msg1.stickers) {
             const avatarEmbed = new Discord.MessageEmbed()
                 .setImage(getWeb_1(s))
                 .setFooter({
