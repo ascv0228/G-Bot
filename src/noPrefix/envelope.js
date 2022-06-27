@@ -8,6 +8,7 @@ module.exports = {
     execute(client, msg) {
         if (!msg.content.startsWith(`x!`)) return;
         let [cmd, ...args] = msg.content.slice().trim().split(/\s+/);
+        console.log(cmd)
         for (let chl of this.channels) {
             try {
                 if (cmd === `x!envelope` && args.length > 1) {
