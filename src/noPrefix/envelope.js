@@ -7,18 +7,22 @@ module.exports = {
 
     execute(client, msg) {
         if (!msg.content.startsWith(`x!`)) return;
+        console.log(msg.content)
         let [cmd, ...args] = msg.content.slice().trim().split(/\s+/);
+        console.log(cmd)
+        console.log(args)
         for (let chl of this.channels) {
+            let channel = await client.channels.cache.get(chl)
             try {
                 if (msg.content.startsWith(`x!envelope`) && args.length > 1) {
-                    client.channels.cache.get(chl).send(msg.url);
-                    client.channels.cache.get(chl).send("無口令");
+                    channel.send(msg.url);
+                    channel.send("無口令");
                     continue;
                 }
                 if (msg.content.startsWith(`x!pasred`) && args.length > 2) {
-                    client.channels.cache.get(chl).send(msg.url);
-                    client.channels.cache.get(chl).send("口令:");
-                    client.channels.cache.get(chl).send(msg.content.split(' ').splice(3, 3, '').join(' '));
+                    channel.send(msg.url);
+                    channel.send("口令:");
+                    channel.send(msg.content.split(' ').splice(3, 3, '').join(' '));
                     continue;
                 }
             }
