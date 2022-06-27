@@ -11,6 +11,8 @@ module.exports = {
         }
         else return msg.reply("要回覆一則有'貼圖'(sticker)的訊息");
         console.log(msg1)
+        console.log(msg1.stickers)
+        console.log(await msg1.stickers.fetch())
     }
 }
 
