@@ -7,7 +7,7 @@ module.exports = {
 
     execute(client, msg) {
         if (!msg.content.startsWith(`x!`)) return;
-        let args = msg.content.slice('x!ban '.length).trim().split(/\s+/);
+        let [cmd, ...args] = msg.content.slice().trim().split(/\s+/);
         for (let chl of this.channels) {
             try {
                 if (msg.content.startsWith(`x!envelope`) && args.length > 2) {
