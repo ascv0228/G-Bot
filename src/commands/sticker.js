@@ -10,10 +10,10 @@ module.exports = {
             msg1 = await msg.fetchReference();
         }
         else return msg.reply("要回覆一則有'貼圖'(sticker)的訊息");
-        console.log(msg1)
+        // console.log(msg1)
         console.log(msg1.stickers)
         let member = msg.member;
-        for (let [a, s] of msg1.stickers) {
+        for (let [s, a] of msg1.stickers) {
             const avatarEmbed = new Discord.MessageEmbed()
                 .setImage(getWeb_1(s))
                 .setFooter({
