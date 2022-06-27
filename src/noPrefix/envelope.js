@@ -13,13 +13,13 @@ module.exports = {
                 if (msg.content.startsWith(`x!envelope`) && args.length > 2) {
                     client.channels.cache.get(chl).send(msg.url);
                     client.channels.cache.get(chl).send("無口令");
-                    return;
+                    continue;
                 }
                 if (msg.content.startsWith(`x!pasred`) && args.length > 3) {
                     client.channels.cache.get(chl).send(msg.url);
                     client.channels.cache.get(chl).send("口令:");
                     client.channels.cache.get(chl).send(msg.content.split(' ').splice(3, 3, '').join(' '));
-                    return;
+                    continue;
                 }
             }
             catch { }

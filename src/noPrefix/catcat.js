@@ -4,10 +4,8 @@ module.exports = {
     guilds: ['829673608791851038', '988795992667193395'],
 
     execute(client, msg) {
-        try {
-            return msg.reply({ content: `<@832777502848974920>` });
-        }
-        catch { }
+        return (await msg.reply({ content: `<@832777502848974920>` }))
+            .catch(() => { })
     }
 
 };
