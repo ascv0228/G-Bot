@@ -6,6 +6,6 @@ module.exports = {
     async execute(client, msg, args) {
         if (!this.members.includes(msg.author.id))
             return;
-        client.catOpen = (args[0] != 'open') ? false : true;
+        client.catOpen = (args.length == 0 || args[0] != 'open') ? false : true;
     }
 }
