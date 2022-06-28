@@ -7,7 +7,6 @@ module.exports = {
         if (!msg.content.startsWith(`x!ban `)) return;
         if (!this.member.includes(msg.author.id)) return;
         let args = msg.content.slice('x!ban '.length).trim().split(/\s+/);
-        console.log(args)
         let member = await dcUtil.getMemberByTag(msg.guild, args[0]);
         if (member == null)
             return;
