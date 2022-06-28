@@ -1,3 +1,4 @@
+const dcUtil = require('../tools/dc-util.js');
 module.exports = {
     name: "EW_guild_admin",
     message_Id: ['988964977224318986'],
