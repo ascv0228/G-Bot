@@ -1,3 +1,5 @@
+const dcUtil = require('../tools/dc-util.js');
+
 module.exports = {
     name: "getGameRoles",
     message_Id: ["978852872177471518"],
@@ -16,8 +18,8 @@ module.exports = {
     },
 
     async execute(client, event, reaction, user) {
-        if (!(reaction.emoji.name in client.memberRoles)) return;
-        const member = reaction.message.guild.cache.get(user.id);
+        if (!(reaction.emoji.name in this.memberRoles)) return;
+        const member = await dcUtil.getMemberByID(reaction.message.guild, user.id);
         switch (event) {
             case 'messageReactionAdd':
                 member.roles.add(this.memberRoles[reaction.emoji.name])
