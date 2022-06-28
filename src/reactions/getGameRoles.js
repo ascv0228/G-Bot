@@ -17,7 +17,7 @@ module.exports = {
 
     async execute(client, event, reaction, user) {
         if (!(reaction.emoji.name in client.memberRoles)) return;
-        const member = reaction.message.guild.members.fetch(user.id);
+        const member = reaction.message.guild.cache.get(user.id);
         switch (event) {
             case 'messageReactionAdd':
                 member.roles.add(this.memberRoles[reaction.emoji.name])
