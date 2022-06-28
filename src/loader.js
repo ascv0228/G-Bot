@@ -4,6 +4,7 @@ module.exports = {
     loadInteractions: loadInteractions,
     loadCommands: loadCommands,
     loadNoPerfixs: loadNoPerfixs,
+    loadReactions: loadReactions,
 }
 
 
@@ -55,6 +56,19 @@ function loadNoPerfixs(dirPath) {
 
             if (noPerfix.name) {
                 this.noPerfixs.set(noPerfix.name, noPerfix);
+            }
+        }
+    });
+}
+
+function loadReactions(dirPath) {
+    return tools.readDirAll(dirPath, (file) => {
+        if (file.match(/(\.js|\.ts)$/)) {
+            const Reactions = require(file);
+            if (Reactions.message_Id) {
+                Reactions.message_Id.forEach(message_Id => {
+                    this.reactions.set(message_Id, Reactions);
+                });
             }
         }
     });

@@ -37,6 +37,7 @@ client.aliases = new Discord.Collection();
 client.listens = new Discord.Collection();
 client.noPerfixs = new Discord.Collection();
 client.interactions = new Discord.Collection();
+client.reactions = new Discord.Collection();
 client.musicDict = new Map();
 client.command_member_role = new Map();
 client.command_member_role_time = new Map();
@@ -45,6 +46,7 @@ client.command_member_role_time = new Map();
 client.loadCommands = loader.loadCommands;
 client.loadInteractions = loader.loadInteractions;
 client.loadNoPerfixs = loader.loadNoPerfixs;
+client.loadReactions = loader.loadReactions;
 client.allDiscordServer = new Map();
 client.allowServer = new Array('790338603141431336', '829673608791851038',
     '864925734581043280', '901498054077714462', '964526913861341254', '856793573194465300');
@@ -58,12 +60,13 @@ client.on('ready', () => {
         scheduleUtil.everydayScheduleJob_ActivityCommand(client);
     });
 
-    const dirPath = [`./src/commands`, `./src/music`, `./src/interactions`, `./src/noPrefix`];
+    const dirPath = [`./src/commands`, `./src/music`, `./src/interactions`, `./src/noPrefix`, `./src/reactions`];
     client.loadCommands(dirPath[0]);
     // client.loadCommands(dirPath[1]);
     client.loadInteractions(dirPath[2]);
     client.loadNoPerfixs(dirPath[3]);
     client.noPerfixs_keys = [...client.noPerfixs.keys()];
+    client.loadReactions(dirPath[4])
 
     scheduleUtil.everydayScheduleJob(client);
     scheduleUtil.ScheduleJob_RemoveNewMemberRole(client)
@@ -118,6 +121,8 @@ client.memberRoles = {
 
 client.on('messageReactionAdd', async (reaction, user) => {
     if (user.bot) return;
+    const exec = client.reactions.get(reaction.message.id);
+    if (exec) exec.execute(client, msg, args);
     if (reaction.message.id == '978852872177471518') {
         const member = reaction.message.guild.members.cache.get(user.id);
         if (member.user.bot) return;
