@@ -6,7 +6,7 @@ module.exports = {
         if (reaction.emoji.name != '✅') return;
         let admin_role_id = '987326459402145852';
         let EW_guild = await client.guilds.cache.get('856793573194465300');
-        const member = EW_guild.members.fetch({ user: user.id });
+        const member = EW_guild.members.fetch(user.id);
 
         switch (event) {
             case 'messageReactionAdd':
