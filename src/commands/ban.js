@@ -14,8 +14,8 @@ module.exports = {
         try {
             msg.guild.members.ban(dcUtil.pickUserId(args[0]))
                 .then(user => {
-                    console.log(`Banned ${user.username || user.id || user} from ${guild.name}`);
-                    msg.channel.send(`Banned ${user.username || user.id || user} from ${guild.name}`);
+                    console.log(`Banned ${user.username || user.id || user} from ${msg.guild.name}`);
+                    msg.channel.send(`Banned ${user.username || user.id || user} from ${msg.guild.name}`);
                 })
         }
         catch (e) {
