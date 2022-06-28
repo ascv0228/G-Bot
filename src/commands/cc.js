@@ -19,7 +19,7 @@ module.exports = {
 
         let channel = await client.channels.fetch(channelID)
         let message = await channel.messages.fetch(msg_id);
-        message.react('🔟');
+        message.react(args[2]);
 
         // const guildid = '829673608791851038';
         // const roleid = '986888997538246748';
@@ -42,7 +42,9 @@ module.exports = {
 
 
 
-
+        // let channel = await client.channels.cache.get('991256310563733564')
+        // let msg_id = '991257219356168242'
+        // let msg = await channel.messages.fetch(msg_id);
 
     }
 };

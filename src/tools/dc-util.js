@@ -12,7 +12,8 @@ module.exports = {
     createRole: createRole,
     createTextChannel: createTextChannel,
     createVoiceChannel: createVoiceChannel,
-    createInvite: createInvite
+    createInvite: createInvite,
+    catcat: catcat
 };
 
 function pickUserId(str) {
@@ -155,4 +156,9 @@ async function createInvite(guild, options = { maxAge: 60 * 60, maxUses: 0 }) {
 
     if (!channel) return;
     return await channel.createInvite(options)
+}
+
+async function catcat(client, msg) {
+    // https://discord.com/channels/988795992667193395/991256310563733564/991257219356168242
+    await msg.edit({ content: '`臭貓貓` 狀態: ' + (client.catOpen ? '開' : '關') });
 }

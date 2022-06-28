@@ -10,6 +10,7 @@ const rewardUtil = require('./src/tools/reward-util.js');
 const scheduleUtil = require('./src/tools/schedule-util.js');
 
 const loader = require('./src/loader.js');
+const dcUtil = require('./src/tools/dc-util');
 const client = new Client(
     {
         // https://discord.js.org/#/docs/main/stable/class/Intents?scrollTo=s-FLAGS
@@ -116,6 +117,7 @@ client.memberRoles = {
 }
 
 client.on('messageReactionAdd', async (reaction, user) => {
+    if (user.bot) return;
     if (reaction.message.id == '978852872177471518') {
         const member = reaction.message.guild.members.cache.get(user.id);
         if (member.user.bot) return;
@@ -128,6 +130,16 @@ client.on('messageReactionAdd', async (reaction, user) => {
         const member = await EW_guild.members.fetch({ user: user.id });
         // console.log(member)
         member.roles.add('987326459402145852');
+    }
+    if (reaction.message.id == '991257219356168242') {
+        if (reaction.emoji.name == '✅') {
+            client.catOpen = true
+        }
+        else {
+            client.catOpen = false
+        }
+        dcUtil.catcat(client, reaction.message)
+        reaction.users.remove(user.id);
     }
     if (client.command_member_role.has(reaction.message.id)) {
         const member = reaction.message.guild.members.cache.get(user.id);
