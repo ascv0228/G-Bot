@@ -13,6 +13,6 @@ module.exports = {
         let reaction = args[2];
         let channel = await client.channels.fetch(channelID);
         let message = await channel.messages.fetch(msg_id);
-        message.react(reaction);
+        message.react(reaction).catch(() => { });
     }
 };

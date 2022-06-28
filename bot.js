@@ -122,7 +122,7 @@ client.memberRoles = {
 client.on('messageReactionAdd', async (reaction, user) => {
     if (user.bot) return;
     const exec = client.reactions.get(reaction.message.id);
-    if (exec) exec.execute(client, msg, args);
+    if (exec) exec.execute(client, 'messageReactionAdd', reaction, user);
     if (reaction.message.id == '978852872177471518') {
         const member = reaction.message.guild.members.cache.get(user.id);
         if (member.user.bot) return;
