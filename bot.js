@@ -123,12 +123,7 @@ client.on('messageReactionAdd', async (reaction, user) => {
     if (user.bot) return;
     const exec = client.reactions.get(reaction.message.id);
     if (exec) exec.execute(client, 'messageReactionAdd', reaction, user);
-    if (reaction.message.id == '978852872177471518') {
-        const member = reaction.message.guild.members.cache.get(user.id);
-        if (member.user.bot) return;
-        if (!(reaction.emoji.name in client.memberRoles)) return;
-        member.roles.add(client.memberRoles[reaction.emoji.name])
-    }
+
     if (reaction.message.id == '988964977224318986') {
         if (reaction.emoji.name != '✅') return;
         let EW_guild = await client.guilds.cache.get('856793573194465300');
@@ -136,16 +131,16 @@ client.on('messageReactionAdd', async (reaction, user) => {
         // console.log(member)
         member.roles.add('987326459402145852');
     }
-    if (reaction.message.id == '991257219356168242') {
-        if (reaction.emoji.name == '✅') {
-            client.catOpen = true
-        }
-        else {
-            client.catOpen = false
-        }
-        dcUtil.catcat(client, reaction.message)
-        reaction.users.remove(user.id);
-    }
+    // if (reaction.message.id == '991257219356168242') {
+    //     if (reaction.emoji.name == '✅') {
+    //         client.catOpen = true
+    //     }
+    //     else {
+    //         client.catOpen = false
+    //     }
+    //     dcUtil.catcat(client, reaction.message)
+    //     reaction.users.remove(user.id);
+    // }
     if (client.command_member_role.has(reaction.message.id)) {
         const member = reaction.message.guild.members.cache.get(user.id);
         if (member.user.bot) return;
@@ -155,25 +150,29 @@ client.on('messageReactionAdd', async (reaction, user) => {
 });
 
 client.on('messageReactionRemove', async (reaction, user) => {
-    if (reaction.message.id == '978852872177471518') {
-        const member = reaction.message.guild.members.cache.get(user.id);
-        if (member.user.bot) return;
-        if (!(reaction.emoji.name in client.memberRoles)) return;
-        member.roles.remove(client.memberRoles[reaction.emoji.name]);
-    }
+    if (user.bot) return;
+    const exec = client.reactions.get(reaction.message.id);
+    if (exec) exec.execute(client, 'messageReactionAdd', reaction, user);
+
+    // if (reaction.message.id == '978852872177471518') {
+    //     const member = reaction.message.guild.members.cache.get(user.id);
+    //     if (member.user.bot) return;
+    //     if (!(reaction.emoji.name in client.memberRoles)) return;
+    //     member.roles.remove(client.memberRoles[reaction.emoji.name]);
+    // }
     if (client.command_member_role.has(reaction.message.id)) {
         const member = reaction.message.guild.members.cache.get(user.id);
         if (member.user.bot) return;
         if (reaction.emoji.name != '✅') return;
         member.roles.remove(client.command_member_role.get(reaction.message.id));
     }
-    if (reaction.message.id == '988964977224318986') {
-        if (reaction.emoji.name != '✅') return;
-        let EW_guild = await client.guilds.cache.get('856793573194465300');
-        const member = await EW_guild.members.fetch({ user: user.id });
-        // console.log(member)
-        member.roles.remove('987326459402145852');
-    }
+    // if (reaction.message.id == '988964977224318986') {
+    //     if (reaction.emoji.name != '✅') return;
+    //     let EW_guild = await client.guilds.cache.get('856793573194465300');
+    //     const member = await EW_guild.members.fetch({ user: user.id });
+    //     // console.log(member)
+    //     member.roles.remove('987326459402145852');
+    // }
 });
 
 client.on('interactionCreate', async interaction => {

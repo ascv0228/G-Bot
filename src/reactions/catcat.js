@@ -1,6 +1,6 @@
 module.exports = {
     name: "catcat",
-    // message_Id: ["991257219356168242"],
+    message_Id: ["991257219356168242"],
 
     async execute(client, event, reaction, user) {
         switch (event) {
@@ -11,9 +11,14 @@ module.exports = {
                 else {
                     client.catOpen = false
                 }
-                dcUtil.catcat(client, reaction.message)
+                catcat(client, reaction.message)
                 reaction.users.remove(user.id);
 
         }
     }
 };
+
+async function catcat(client, msg) {
+    // https://discord.com/channels/988795992667193395/991256310563733564/991257219356168242
+    await msg.edit({ content: '`臭貓貓` 狀態: ' + (client.catOpen ? '開' : '關') });
+}
