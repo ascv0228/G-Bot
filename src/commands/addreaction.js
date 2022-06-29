@@ -16,12 +16,18 @@ module.exports = {
 };
 
 async function myAddReaction(client, msg, args) {
-    return (await replyMsgAddEmoji(client, msg, args)
-        || await useMsgUrl(client, msg, args)
-        || await useChannelAndMsgId(client, msg, args)
-        || await msg.reply('`1.(using reply)` ' + `${prefix}${this.name}  <reaction>\n`
-            + '`2.             ` ' + `${prefix}${this.name} <msg_url> <reaction>`
-            + '`3.             ` ' + `${prefix}${this.name} <channel_Id> <msg_Id> <reaction>`))
+    // return (await replyMsgAddEmoji(client, msg, args)
+    //     || await useMsgUrl(client, msg, args)
+    //     || await useChannelAndMsgId(client, msg, args)
+    //     || await msg.reply('`1.(using reply)` ' + `${prefix}${this.name}  <reaction>\n`
+    //         + '`2.             ` ' + `${prefix}${this.name} <msg_url> <reaction>`
+    //         + '`3.             ` ' + `${prefix}${this.name} <channel_Id> <msg_Id> <reaction>`))
+    if (replyMsgAddEmoji(client, msg, args)) return;
+    if (useMsgUrl(client, msg, args)) return;
+    if (useChannelAndMsgId(client, msg, args)) return;
+    return await msg.reply('`1.(using reply)` ' + `${prefix}${this.name}  <reaction>\n`
+        + '`2.             ` ' + `${prefix}${this.name} <msg_url> <reaction>`
+        + '`3.             ` ' + `${prefix}${this.name} <channel_Id> <msg_Id> <reaction>`))
     // if (msg.type === 'REPLY') {
     //     if (!args || args.length < 1) {
     //         return msg.reply('`1.(using reply)` ' + `${prefix}${this.name}  <reaction>\n`
