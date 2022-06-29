@@ -12,8 +12,8 @@ module.exports = {
 
 
         for (let guild of client.Guilds) {
-            for (let emoji of await ((await dcUtil.getGuildByID(client, guild[0])).emojis.fetch())) {
-                channel.send({ content: `${emoji}  ${emoji.id}` })
+            for (let [emoji_id, emoji] of await ((await dcUtil.getGuildByID(client, guild[0])).emojis.fetch())) {
+                channel.send({ content: `${emoji}  ${emoji_id}` })
             }
         }
         // switch (args[0]) {
