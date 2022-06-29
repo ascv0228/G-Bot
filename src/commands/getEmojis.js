@@ -15,7 +15,7 @@ module.exports = {
             channel.send({ content: `ˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇ${guild[1]}ˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇ` })
             for (let [emoji_id, emoji] of await ((await dcUtil.getGuildByID(client, guild[0])).emojis.fetch())) {
                 msg_array.push(`${emoji}  ${emoji_id}`)
-                if (msg_array.length == 40) {
+                if (msg_array.length == 20) {
                     await channel.send({ content: `${msg_array.join('\n')}` })
                     msg_array = new Array()
                 }
