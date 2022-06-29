@@ -9,9 +9,16 @@ module.exports = {
         // console.log(client.emojis)
         // for (let guildID of client.Guilds) {
         // for (let emoji of await ((await dcUtil.getGuildByID(client, guildID)).emojis.fetch({ force: true }))) {
-        for (let emoji of await msg.guild.emojis.fetch({ force: true })) {
-            console.log(emoji)
-        }
+        msg.guild.emojis.fetch({ force: true })
+            .then(emojis => {
+                for (let emoji of emojis) {
+                    console.log(`${emoji}`)
+                }
+            })
+            .catch(console.error);
+        // for (let emoji of await msg.guild.emojis.fetch({ force: true })) {
+        //     console.log(emoji)
+        // }
         // }
     }
 };
