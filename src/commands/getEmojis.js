@@ -16,7 +16,7 @@ module.exports = {
                 channel.send({ content: `${emoji}  ${emoji_id}` })
             }
         }
-        // switch (args[0]) {
+        // switch (args[0]) {a
 
 
         //     case 'd':
