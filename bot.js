@@ -53,8 +53,8 @@ client.allowServer = new Array('790338603141431336', '829673608791851038',
 client.on('ready', () => {
     client.user.setActivity(`GG的大GG`, { type: "PLAYING" });
     console.log(`Logged in as ${client.user.tag}!`);
-    const Guilds = client.guilds.cache.map(guild => new Array(guild.id, guild.name));
-    console.log(Guilds);
+    client.Guilds = client.guilds.cache.map(guild => new Array(guild.id, guild.name));
+    console.log(client.Guilds);
 
     dbUtil.loadMongodb(client).then(() => {
         scheduleUtil.everydayScheduleJob_ActivityCommand(client);
