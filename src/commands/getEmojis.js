@@ -2,7 +2,7 @@ const dcUtil = require('../tools/dc-util.js');
 
 module.exports = {
     name: "getEmojis",
-    permissions: ['ge'],
+    aliases: ['ge'],
 
     async execute(client, msg, args) {
         if (msg.author.id !== '411895879935590411') return;
