@@ -16,10 +16,10 @@ module.exports = {
 };
 
 async function myAddReaction(client, msg, args) {
-    return (replyMsgAddEmoji(client, msg, args)
-        || useMsgUrl(client, msg, args)
-        || useChannelAndMsgId(client, msg, args)
-        || msg.reply('`1.(using reply)` ' + `${prefix}${this.name}  <reaction>\n`
+    return (await replyMsgAddEmoji(client, msg, args)
+        || await useMsgUrl(client, msg, args)
+        || await useChannelAndMsgId(client, msg, args)
+        || await msg.reply('`1.(using reply)` ' + `${prefix}${this.name}  <reaction>\n`
             + '`2.             ` ' + `${prefix}${this.name} <msg_url> <reaction>`
             + '`3.             ` ' + `${prefix}${this.name} <channel_Id> <msg_Id> <reaction>`))
     // if (msg.type === 'REPLY') {
