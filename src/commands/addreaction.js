@@ -22,12 +22,15 @@ async function myAddReaction(client, msg, args) {
     //     || await msg.reply('`1.(using reply)` ' + `${prefix}${this.name}  <reaction>\n`
     //         + '`2.             ` ' + `${prefix}${this.name} <msg_url> <reaction>`
     //         + '`3.             ` ' + `${prefix}${this.name} <channel_Id> <msg_Id> <reaction>`))
+    console.log(replyMsgAddEmoji(client, msg, args))
+    console.log(useMsgUrl(client, msg, args))
+    console.log(useChannelAndMsgId(client, msg, args))
     // if (replyMsgAddEmoji(client, msg, args)) return;
-    if (useMsgUrl(client, msg, args)) return;
-    if (useChannelAndMsgId(client, msg, args)) return;
-    return await msg.reply('`1.(using reply)` ' + `${prefix}${this.name}  <reaction>\n`
-        + '`2.             ` ' + `${prefix}${this.name} <msg_url> <reaction>`
-        + '`3.             ` ' + `${prefix}${this.name} <channel_Id> <msg_Id> <reaction>`)
+    // if (useMsgUrl(client, msg, args)) return;
+    // if (useChannelAndMsgId(client, msg, args)) return;
+    // return await msg.reply('`1.(using reply)` ' + `${prefix}${this.name}  <reaction>\n`
+    //     + '`2.             ` ' + `${prefix}${this.name} <msg_url> <reaction>`
+    //     + '`3.             ` ' + `${prefix}${this.name} <channel_Id> <msg_Id> <reaction>`)
     // if (msg.type === 'REPLY') {
     //     if (!args || args.length < 1) {
     //         return msg.reply('`1.(using reply)` ' + `${prefix}${this.name}  <reaction>\n`
@@ -58,7 +61,7 @@ async function myAddReaction(client, msg, args) {
 }
 
 async function catAddReaction(client, msg, args) {
-    if (msg.type !== 'REPLY') {
+    if (!msg || msg.type !== 'REPLY') {
         return msg.reply('need reply one message')
         // return msg.reply('`(using reply)`  ' + `${prefix}${this.name}  <reaction>`)
     }
@@ -67,7 +70,7 @@ async function catAddReaction(client, msg, args) {
 
 async function replyMsgAddEmoji(client, msg, args) {
     console.log('replyMsgAddEmoji')
-    if (!args || args.length < 1 || msg.type != 'REPLY') return null;
+    if (!msg || !args || args.length < 1 || msg.type != 'REPLY') return null;
 
     console.log('replyMsgAddEmoji(client, msg, args)')
     let msg1 = await msg.fetchReference();
@@ -79,7 +82,7 @@ async function replyMsgAddEmoji(client, msg, args) {
 
 async function useChannelAndMsgId(client, msg, args) {
     console.log('useChannelAndMsgId')
-    if (!args || args.length < 3) return null;
+    if (!msg || !args || args.length < 3) return null;
     console.log('useChannelAndMsgId(client, msg, args)')
     let channelID = args[0];
     let msg_id = args[1];
@@ -93,7 +96,7 @@ async function useChannelAndMsgId(client, msg, args) {
 
 async function useMsgUrl(client, msg, args) {
     console.log('useMsgUrl')
-    if (!args || args.length < 2) return null;
+    if (!msg || !args || args.length < 2) return null;
     let mat = matchMsgUrl(args[0]);
     if (!mat) return null;
     console.log('useMsgUrl(client, msg, args)')
