@@ -7,14 +7,13 @@ module.exports = {
     async execute(client, msg, args) {
         if (msg.author.id !== '411895879935590411') return;
         // console.log(client.emojis)
-        let channel = client.channels.fetch((args[0] == 'a') ? '991628130336907315' : '991629663900270632');
-        if (args[0] == 'a') {
-            client.channels.fetch('991628130336907315')
-        }
+        let channel_id = (args[0] == 'a') ? '991628130336907315' : '991629663900270632'
+        let channel = (args[0] == 'b') ? (await client.channels.fetch(channel_id)) : msg.channel;
+
 
         for (let guild of client.Guilds) {
             for (let emoji of await ((await dcUtil.getGuildByID(client, guild[0])).emojis.fetch())) {
-                channel.send({ content: `${emoji.toString()}  ${emoji.id}` })
+                channel.send({ content: `${emoji}  ${emoji.id}` })
             }
         }
         // switch (args[0]) {
