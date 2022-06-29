@@ -26,9 +26,17 @@ module.exports = {
                 break
             case 'c':
                 const emojis = msg.guild.emojis.cache
-                    .map((e) => `${e} **-** \`:${e.name}:\` and \`${e.id}\``)
+                    .map((e) => `${e}  -> \`${e.id}\``)
                     .join(', ');
-                console.log(emojis)
+                // console.log(emojis)
+                console.log(emojis.size)
+                break
+
+            case 'd':
+                msg.guild.emojis.fetch()
+                    .then(emojis => console.log(`${emojis.size}`))
+                    .catch(console.error);
+                break
 
         }
         // for (let emoji of await msg.guild.emojis.fetch({ force: true })) {
