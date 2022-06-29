@@ -16,7 +16,12 @@ module.exports = {
 };
 
 async function myAddReaction(client, msg, args) {
-    return replyMsgAddEmoji(client, msg, args) || useMsgUrl(client, msg, args) || useChannelAndMsgId(client, msg, args)
+    return replyMsgAddEmoji(client, msg, args)
+        || useMsgUrl(client, msg, args)
+        || useChannelAndMsgId(client, msg, args)
+        || msg.reply('`1.(using reply)` ' + `${prefix}${this.name}  <reaction>\n`
+            + '`2.             ` ' + `${prefix}${this.name} <msg_url> <reaction>`
+            + '`3.             ` ' + `${prefix}${this.name} <channel_Id> <msg_Id> <reaction>`)
     // if (msg.type === 'REPLY') {
     //     if (!args || args.length < 1) {
     //         return msg.reply('`1.(using reply)` ' + `${prefix}${this.name}  <reaction>\n`
@@ -55,9 +60,9 @@ async function catAddReaction(client, msg, args) {
 }
 
 async function replyMsgAddEmoji(client, msg, args) {
-    if (!args || args.length < 1 || msg.type != 'REPLY') {
-        return null;
-    }
+    if (!args || args.length < 1 || msg.type != 'REPLY') return null;
+
+    console.log('replyMsgAddEmoji(client, msg, args)')
     let msg1 = await msg.fetchReference();
     let reaction = matchEmoji(args[0]);
     msg1.react(reaction).catch(() => { msg.reply('error reaction') });
@@ -67,6 +72,7 @@ async function replyMsgAddEmoji(client, msg, args) {
 
 async function useChannelAndMsgId(client, msg, args) {
     if (!args || args.length < 3) return null;
+    console.log('useChannelAndMsgId(client, msg, args)')
     let channelID = args[0];
     let msg_id = args[1];
     let reaction = matchEmoji(args[2]);
@@ -81,6 +87,7 @@ async function useMsgUrl(client, msg, args) {
     if (!args || args.length < 2) return null;
     let mat = matchMsgUrl(args[0]);
     if (!mat) return null;
+    console.log('useMsgUrl(client, msg, args)')
     let reaction = matchEmoji(args[1]);
     let channel = await client.channels.fetch(mat.channel);
     let message = await channel.messages.fetch(mat.msg);
