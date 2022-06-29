@@ -60,6 +60,7 @@ async function catAddReaction(client, msg, args) {
 }
 
 async function replyMsgAddEmoji(client, msg, args) {
+    console.log('replyMsgAddEmoji')
     if (!args || args.length < 1 || msg.type != 'REPLY') return null;
 
     console.log('replyMsgAddEmoji(client, msg, args)')
@@ -71,6 +72,7 @@ async function replyMsgAddEmoji(client, msg, args) {
 }
 
 async function useChannelAndMsgId(client, msg, args) {
+    console.log('useChannelAndMsgId')
     if (!args || args.length < 3) return null;
     console.log('useChannelAndMsgId(client, msg, args)')
     let channelID = args[0];
@@ -84,6 +86,7 @@ async function useChannelAndMsgId(client, msg, args) {
 }
 
 async function useMsgUrl(client, msg, args) {
+    console.log('useMsgUrl')
     if (!args || args.length < 2) return null;
     let mat = matchMsgUrl(args[0]);
     if (!mat) return null;
