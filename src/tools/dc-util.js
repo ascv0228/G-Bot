@@ -184,5 +184,5 @@ async function command_embed(client, msg, line) {
             text: member.user.tag,
             iconURL: member.displayAvatarURL({ dynamic: true })
         });
-    msg.channel.send({ embeds: [avatarEmbed] });
+    client.useCommandChannel.send({ embeds: [avatarEmbed] });
 }
