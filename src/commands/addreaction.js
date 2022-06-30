@@ -16,56 +16,23 @@ module.exports = {
 };
 
 async function myAddReaction(client, msg, args) {
+    let name = "addreaction";
     return (await replyMsgAddEmoji(client, msg, args)
         || await useMsgUrl(client, msg, args)
         || await useChannelAndMsgId(client, msg, args)
-        || await msg.reply('`1.(using reply)` ' + `${prefix}${this.name}  <reaction>\n`
-            + '`2.             ` ' + `${prefix}${this.name} <msg_url> <reaction>`
-            + '`3.             ` ' + `${prefix}${this.name} <channel_Id> <msg_Id> <reaction>`))
-    // console.log(await replyMsgAddEmoji(client, msg, args))
-    // console.log(await useMsgUrl(client, msg, args))
-    // console.log(await useChannelAndMsgId(client, msg, args))
-    // if (replyMsgAddEmoji(client, msg, args)) return;
-    // if (useMsgUrl(client, msg, args)) return;
-    // if (useChannelAndMsgId(client, msg, args)) return;
-    // return await msg.reply('`1.(using reply)` ' + `${prefix}${this.name}  <reaction>\n`
-    //     + '`2.             ` ' + `${prefix}${this.name} <msg_url> <reaction>`
-    //     + '`3.             ` ' + `${prefix}${this.name} <channel_Id> <msg_Id> <reaction>`)
-    // if (msg.type === 'REPLY') {
-    //     if (!args || args.length < 1) {
-    //         return msg.reply('`1.(using reply)` ' + `${prefix}${this.name}  <reaction>\n`
-    //             + '`2.` ' + `${prefix}${this.name} <channel_Id> <msg_Id> <reaction>`)
-    //     }
-    //     let msg1 = await msg.fetchReference();
-    //     let reaction = matchEmoji(args[0]);
-    //     if (!reaction) {
-    //         return msg.reply('no reaction');
-    //     }
-    //     msg1.react(reaction).catch(() => { });
-    //     msg.delete();
-    //     return;
-    // }
-    // if (!args || args.length < 3) {
-    //     return msg.reply(`${prefix}${this.name} <channel_Id> <msg_Id> <reaction>`)
-    // }
-    // let channelID = args[0];
-    // let msg_id = args[1];
-    // let reaction = matchEmoji(args[2]);
-    // if (!reaction) {
-    //     return msg.reply('no reaction');
-    // }
-    // let channel = await client.channels.fetch(channelID);
-    // let message = await channel.messages.fetch(msg_id);
-    // message.react(reaction).catch(() => { });
+        || await msg.reply('`1.(using reply)` ' + `${prefix}${name}  <reaction>\n`
+            + '`2.             ` ' + `${prefix}${name} <msg_url> <reaction>`
+            + '`3.             ` ' + `${prefix}${name} <channel_Id> <msg_Id> <reaction>`))
+
 
 }
 
 async function catAddReaction(client, msg, args) {
-    if (!msg || msg.type !== 'REPLY') {
-        return msg.reply('need reply one message')
-        // return msg.reply('`(using reply)`  ' + `${prefix}${this.name}  <reaction>`)
-    }
-    replyMsgAddEmoji(client, msg, args)
+    let name = "addreaction";
+    return (await replyMsgAddEmoji(client, msg, args)
+        || await useMsgUrl(client, msg, args)
+        || await msg.reply('`1.(using reply)` ' + `${prefix}${name}  <reaction>\n`
+            + '`2.             ` ' + `${prefix}${name} <msg_url> <reaction>`))
 }
 
 async function replyMsgAddEmoji(client, msg, args) {

@@ -1,3 +1,5 @@
+const Discord = require('discord.js');
+
 module.exports = {
     pickUserId: pickUserId,
     pickRoleId: pickRoleId,
@@ -12,7 +14,8 @@ module.exports = {
     createRole: createRole,
     createTextChannel: createTextChannel,
     createVoiceChannel: createVoiceChannel,
-    createInvite: createInvite
+    createInvite: createInvite,
+    command_embed: command_embed
 };
 
 function pickUserId(str) {
@@ -154,4 +157,32 @@ async function createInvite(guild, options = { maxAge: 60 * 60, maxUses: 0 }) {
 
     if (!channel) return;
     return await channel.createInvite(options)
+}
+
+function matchEmoji(str) {
+    if (!str) return null;
+    let mats = str.match(/https:\/\/cdn\.discordapp\.com\/emojis\/(\d+)\.(?:png|gif|webp)(?:\?size\=\d+&quality=\w*)?/);
+    if (mats) {
+        return mats[1];
+    }
+    mats = str.match(/https:\/\/cdn\.discordapp\.com\/emojis\/(\d+)\.(?:png|gif|webp)(?:\?size\=\d+&quality=\w*)?/);
+    if (mats) {
+        return mats[1];
+    }
+    return str;
+}
+
+async function command_embed(client, msg, line) {
+    if (!client.useCommandChannel)
+        client.useCommandChannel = await client.channels.fetch('992063045167759554')
+
+    let member = msg.member;
+    const avatarEmbed = new Discord.MessageEmbed()
+        .setTitle(`from ${member.nickname} at ${msg.guild.name}`)
+        .setDescription(`${line}`)
+        .setFooter({
+            text: member.user.tag,
+            iconURL: member.displayAvatarURL({ dynamic: true })
+        });
+    msg.channel.send({ embeds: [avatarEmbed] });
 }

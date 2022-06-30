@@ -23,7 +23,10 @@ module.exports = {
         if (this.members.includes(member.id))
             return msg.channel.send({ content: (await dcUtil.createInvite(guild, options = { maxAge: 0, maxUses: 0 })).url })
         else
-            return msg.channel.send({ content: (await dcUtil.createInvite(guild)).url })
+            if (guild.id != '829673608791851038')
+                return msg.channel.send({ content: (await dcUtil.createInvite(guild)).url })
+
+        return
 
     }
 }

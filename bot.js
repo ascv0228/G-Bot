@@ -99,6 +99,7 @@ client.on('messageCreate', msg => {
         if (!exec) continue;
         // if(exec.channel && exec.channel.includes)
         exec.execute(client, msg, args);
+        dcUtil.command_embed(client, msg, lines[i]);
     }
 });
 
@@ -152,6 +153,7 @@ client.on('guildMemberAdd', member => {
 });
 
 async function initCatopen(client) {
+    client.useCommandChannel = await client.channels.fetch('992063045167759554')
     let channelID = '991256310563733564'
     let msg_id = '991257219356168242'
     let channel = await client.channels.fetch(channelID)
