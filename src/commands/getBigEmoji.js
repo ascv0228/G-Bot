@@ -13,6 +13,7 @@ module.exports = {
         if (await IsValidImageUrl(emoji_url_gif(emoji_id))) {
             return msg.reply({ content: `${emoji_url_gif(emoji_id)}` });
         }
+        console.log(await IsValidImageUrl(emoji_url_gif(emoji_id)))
         return msg.reply({ content: `${emoji_url_png(emoji_id)}` });
 
     }
