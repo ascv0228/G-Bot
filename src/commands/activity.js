@@ -10,6 +10,7 @@ module.exports = {
     permissions: ['ADMINISTRATOR'],
 
     async execute(client, msg, args) {
+        console.log('0')
         if (!this.guilds.includes(msg.guild)) return;
         console.log('A')
         if (!msg.member.permissions.has(this.permissions[0]))
