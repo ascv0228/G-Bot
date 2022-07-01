@@ -12,9 +12,8 @@ module.exports = {
         // console.log(await getBase64FromImageUrl(emoji_url_gif(emoji_id)))
         // console.log(await getBase64FromImageUrl(emoji_url_png(emoji_id)))
         let url = 'https://cdn.discordapp.com/emojis/989663551385927712.png'
-
-
         console.log(await getBase64FromImageUrl(url));
+
         url = 'https://cdn.discordapp.com/emojis/989663551385927712.gif'
         console.log(await getBase64FromImageUrl(url));
     }
@@ -35,10 +34,7 @@ async function getBase64FromImageUrl(url) {
     return new Promise(function (resolve, reject) {
         const gzip = zlib.createGzip();
 
-        const data = [];
-
         request.get(url)
-            .pipe(gzip)
             .on('response', function (response) {
                 console.log(response.statusCode);
                 console.log(response.headers['content-type']);
@@ -46,7 +42,8 @@ async function getBase64FromImageUrl(url) {
             })
             .on('error', (e) => {
                 reject(e);
-            });
+            })
+            .pipe(gzip);
     });
 }
 
