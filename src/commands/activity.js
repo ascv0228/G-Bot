@@ -40,6 +40,7 @@ module.exports = {
                 let id = msg_.id;
                 client.command_member_role.set(id, roleId);
                 client.command_member_role_time.set(id, time_string);
+                loadNewActivity(client, id)
                 addActivityCommand(client, id, time_string, roleId);
                 scheduleUtil.ScheduleJob_ActivityCommand(client, msg.channel, id, time_string)
             });
@@ -113,4 +114,14 @@ function checkString(arr) {
         0 <= arr[2] && arr[2] <= 59 &&
         0 <= arr[3] && arr[3] <= 59
     )
+}
+const tools = require('../tools/tools.js');
+function loadNewActivity(client, message_Id) {
+    let dirPath = `../reactions`;
+    tools.readDirAll(dirPath, (file) => {
+        if (file.match(/(activity\.js|activity\.ts)$/)) {
+            const Reactions = require(file);
+            client.reactions.set(message_Id, Reactions);
+        }
+    });
 }
