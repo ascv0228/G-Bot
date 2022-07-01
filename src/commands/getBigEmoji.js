@@ -11,11 +11,10 @@ module.exports = {
         msg.reply({ content: `${emoji_url_gif(emoji_id)}` });
         // console.log(await getBase64FromImageUrl(emoji_url_gif(emoji_id)))
         // console.log(await getBase64FromImageUrl(emoji_url_png(emoji_id)))
-        let Url = 'https://cdn.discordapp.com/emojis/989663551385927712.png'
+        let url = 'https://cdn.discordapp.com/emojis/989663551385927712.png'
 
-        var request = require('request')
-        request.get(Url)
-        console.log(JSON.stringify(request.headers));
+
+        console.log(await getBase64FromImageUrl(url));
     }
 }
 
@@ -27,7 +26,30 @@ function emoji_url_png(id) {
 function emoji_url_gif(id) {
     return `https://cdn.discordapp.com/emojis/${id}.gif?size=4096&quality=lossless`
 }
+var request = require('request').defaults({ encoding: null });
 
+const zlib = require('zlib');
+async function getBase64FromImageUrl(url) {
+    return new Promise(function (resolve, reject) {
+        const gzip = zlib.createGzip();
+
+        const data = [];
+
+        request.get(url)
+            .pipe(gzip)
+            .on('data', (d) => {
+                data.push(d);
+            })
+            .on('error', (e) => {
+                reject(e);
+            })
+            .on('end', () => {
+                resolve(`${url} is OK`);
+            });
+    });
+}
+
+/*
 async function getUrlResopne(url) {
     let request = new XMLHttpRequest();
     request.open("HEAD", url, true);
@@ -55,4 +77,4 @@ async function getUrlResopne(url) {
         }
     }
 
-}
+}*/
