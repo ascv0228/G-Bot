@@ -10,7 +10,7 @@ module.exports = {
     permissions: ['ADMINISTRATOR'],
 
     async execute(client, msg, args) {
-        if (this.guilds.length && !this.guilds.includes(msg.guild)) return;
+        if (!this.guilds.includes(msg.guild)) return;
         console.log('A')
         if (!msg.member.permissions.has(this.permissions[0]))
             return msg.channel.send('You do not have that permission! :x:').then(msg.react('❌'));
