@@ -13,7 +13,9 @@ module.exports = {
         // console.log(await getBase64FromImageUrl(emoji_url_png(emoji_id)))
         let Url = 'https://cdn.discordapp.com/emojis/989663551385927712.png'
 
-        console.log(await getUrlResopne(Url));
+        var request = require('request')
+        request.get(Url)
+        console.log(JSON.stringify(request.headers));
     }
 }
 
