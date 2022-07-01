@@ -40,7 +40,7 @@ async function getBase64FromImageUrl(url) {
         request.get(url)
             .pipe(gzip)
             .on('data', (d) => {
-                console.log(d)
+                console.log(d.toString())
                 data.push(d);
             })
             .on('error', (e) => {
