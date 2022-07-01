@@ -16,7 +16,8 @@ module.exports = {
     createTextChannel: createTextChannel,
     createVoiceChannel: createVoiceChannel,
     createInvite: createInvite,
-    command_embed: command_embed
+    command_embed: command_embed,
+    matchEmoji: matchEmoji
 };
 
 function pickUserId(str) {
