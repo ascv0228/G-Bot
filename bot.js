@@ -57,7 +57,7 @@ client.on('ready', () => {
     console.log(client.Guilds);
 
     dbUtil.loadMongodb(client).then(() => {
-        scheduleUtil.everydayScheduleJob_ActivityCommand(client);
+        await scheduleUtil.everydayScheduleJob_ActivityCommand(client);
     });
 
     const dirPath = [`./src/commands`, `./src/music`, `./src/interactions`, `./src/noPrefix`, `./src/reactions`];

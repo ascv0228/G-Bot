@@ -61,7 +61,8 @@ async function ScheduleJob_ActivityCommand(client, channel, msg_id, time) {
             msg.reply({ content: "記得刪除頻道及臨時身分組" });
         });
         client.command_member_role.delete(msg_id);
-        client.command_member_role_time.delete(msg_id);
+        client.command_member_role.delete(msg_id);
+        client.reactions.delete(msg_id);
         client.Mdbcollection.updateOne({ type: 'ActivityCommand' }, { $unset: { [`msg.${msg_id}`]: 1 } })
     });
 }
