@@ -122,11 +122,6 @@ function checkString(arr) {
 }
 const tools = require('../tools/tools.js');
 function loadNewActivity(client, message_Id) {
-    let dirPath = `../reactions`;
-    tools.readDirAll(dirPath, (file) => {
-        if (file.match(/(activity\.js|activity\.ts)$/)) {
-            const Reactions = require(file);
-            client.reactions.set(message_Id, Reactions);
-        }
-    });
+    const Reactions = require(`../reactions/activity.js`);
+    client.reactions.set(message_Id, Reactions);
 }
