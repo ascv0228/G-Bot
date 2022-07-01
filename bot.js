@@ -50,7 +50,7 @@ client.loadReactions = loader.loadReactions;
 client.allDiscordServer = new Map();
 client.allowServer = new Array('790338603141431336', '829673608791851038',
     '864925734581043280', '901498054077714462', '964526913861341254', '856793573194465300');
-client.on('ready', () => {
+client.on('ready', async () => {
     client.user.setActivity(`GG的大GG`, { type: "PLAYING" });
     console.log(`Logged in as ${client.user.tag}!`);
     client.Guilds = client.guilds.cache.map(guild => new Array(guild.id, guild.name));
