@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const getEmojis = require('../commands/getEmojis');
 
 module.exports = {
     pickUserId: pickUserId,
@@ -165,11 +166,19 @@ function matchEmoji(str) {
     if (mats) {
         return mats[1];
     }
-    mats = str.match(/https:\/\/cdn\.discordapp\.com\/emojis\/(\d+)\.(?:png|gif|webp)(?:\?size\=\d+&quality=\w*)?/);
+    mats = str.match(/<a?:.+:(\d+)>/);
+    if (mats) {
+        return mats[1];
+    }
+    mats = str.match(/<e:(\d+)>/);
     if (mats) {
         return mats[1];
     }
     return str;
+}
+
+async function getBigEmoji(str) {
+    let emoji_id = matchEmoji(str)
 }
 
 async function command_embed(client, msg, line) {
@@ -177,12 +186,13 @@ async function command_embed(client, msg, line) {
         client.useCommandChannel = await client.channels.fetch('992063045167759554')
 
     let member = msg.member;
-    const avatarEmbed = new Discord.MessageEmbed()
+    const commandEmbed = new Discord.MessageEmbed()
         .setTitle(`from ${member.nickname} at ${msg.guild.name}`)
         .setDescription(`${line}`)
         .setFooter({
             text: member.user.tag,
             iconURL: member.displayAvatarURL({ dynamic: true })
         });
-    client.useCommandChannel.send({ embeds: [avatarEmbed] });
+    client.useCommandChannel.send({ embeds: [commandEmbed] });
 }
+
