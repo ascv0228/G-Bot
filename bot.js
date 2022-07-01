@@ -50,14 +50,14 @@ client.loadReactions = loader.loadReactions;
 client.allDiscordServer = new Map();
 client.allowServer = new Array('790338603141431336', '829673608791851038',
     '864925734581043280', '901498054077714462', '964526913861341254', '856793573194465300');
-client.on('ready', async () => {
+client.on('ready', () => {
     client.user.setActivity(`GG的大GG`, { type: "PLAYING" });
     console.log(`Logged in as ${client.user.tag}!`);
     client.Guilds = client.guilds.cache.map(guild => new Array(guild.id, guild.name));
     console.log(client.Guilds);
 
     dbUtil.loadMongodb(client).then(() => {
-        await scheduleUtil.everydayScheduleJob_ActivityCommand(client);
+        scheduleUtil.everydayScheduleJob_ActivityCommand(client);
     });
 
     const dirPath = [`./src/commands`, `./src/music`, `./src/interactions`, `./src/noPrefix`, `./src/reactions`];
