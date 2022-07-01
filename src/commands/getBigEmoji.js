@@ -35,6 +35,9 @@ async function IsValidImageUrl(url) {
 
         request.get(url)
             .on('response', function (response) {
+                console.log(response.statusCode) // 200
+                console.log(response.headers['content-type'])
+                console.log(response.headers['content-length'])
                 resolve(response.headers['content-length']);
             })
             .on('error', (e) => {
