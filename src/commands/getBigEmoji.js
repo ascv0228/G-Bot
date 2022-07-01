@@ -15,6 +15,8 @@ module.exports = {
 
 
         console.log(await getBase64FromImageUrl(url));
+        url = 'https://cdn.discordapp.com/emojis/989663551385927712.gif'
+        console.log(await getBase64FromImageUrl(url));
     }
 }
 
