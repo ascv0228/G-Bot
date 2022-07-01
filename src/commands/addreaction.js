@@ -36,10 +36,7 @@ async function catAddReaction(client, msg, args) {
 }
 
 async function replyMsgAddEmoji(client, msg, args) {
-    console.log('replyMsgAddEmoji')
     if (!msg || !args || args.length < 1 || msg.type != 'REPLY') return null;
-
-    console.log('replyMsgAddEmoji(client, msg, args)')
     let msg1 = await msg.fetchReference();
     let reaction = matchEmoji(args[0]);
     msg1.react(reaction).catch(() => { msg.reply('error reaction') });
@@ -48,9 +45,7 @@ async function replyMsgAddEmoji(client, msg, args) {
 }
 
 async function useChannelAndMsgId(client, msg, args) {
-    console.log('useChannelAndMsgId')
     if (!msg || !args || args.length < 3) return null;
-    console.log('useChannelAndMsgId(client, msg, args)')
     let channelID = args[0];
     let msg_id = args[1];
     let reaction = matchEmoji(args[2]);
@@ -62,11 +57,9 @@ async function useChannelAndMsgId(client, msg, args) {
 }
 
 async function useMsgUrl(client, msg, args) {
-    console.log('useMsgUrl')
     if (!msg || !args || args.length < 2) return null;
     let mat = matchMsgUrl(args[0]);
     if (!mat) return null;
-    console.log('useMsgUrl(client, msg, args)')
     let reaction = matchEmoji(args[1]);
     let channel = await client.channels.fetch(mat.channel);
     let message = await channel.messages.fetch(mat.msg);

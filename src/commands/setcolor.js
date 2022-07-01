@@ -21,7 +21,6 @@ module.exports = {
             return msg.reply('只能用在外星群');
         if (args.length == 0)
             return msg.reply('Need Color Hex');
-        console.log(args[0])
         if (getColor(args[0]) == null)
             return msg.reply('Error Color Hex :  #FFFFFF、FFFFFF');
 
