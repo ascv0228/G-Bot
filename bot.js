@@ -109,12 +109,13 @@ client.on('messageReactionAdd', async (reaction, user) => {
     const exec = client.reactions.get(reaction.message.id);
     if (exec) exec.execute(client, 'messageReactionAdd', reaction, user);
 
-    if (client.command_member_role.has(reaction.message.id)) {
-        const member = await dcUtil.getMemberByID(reaction.message.guild, user.id);
-        if (member.user.bot) return;
-        if (reaction.emoji.name != '✅') return;
-        member.roles.add(client.command_member_role.get(reaction.message.id));
-    }
+
+    // if (client.command_member_role.has(reaction.message.id)) {
+    //     const member = await dcUtil.getMemberByID(reaction.message.guild, user.id);
+    //     if (member.user.bot) return;
+    //     if (reaction.emoji.name != '✅') return;
+    //     member.roles.add(client.command_member_role.get(reaction.message.id));
+    // }
 });
 
 client.on('messageReactionRemove', async (reaction, user) => {
@@ -122,12 +123,12 @@ client.on('messageReactionRemove', async (reaction, user) => {
     const exec = client.reactions.get(reaction.message.id);
     if (exec) exec.execute(client, 'messageReactionRemove', reaction, user);
 
-    if (client.command_member_role.has(reaction.message.id)) {
-        const member = await dcUtil.getMemberByID(reaction.message.guild, user.id);
-        if (member.user.bot) return;
-        if (reaction.emoji.name != '✅') return;
-        member.roles.remove(client.command_member_role.get(reaction.message.id));
-    }
+    // if (client.command_member_role.has(reaction.message.id)) {
+    //     const member = await dcUtil.getMemberByID(reaction.message.guild, user.id);
+    //     if (member.user.bot) return;
+    //     if (reaction.emoji.name != '✅') return;
+    //     member.roles.remove(client.command_member_role.get(reaction.message.id));
+    // }
 });
 
 client.on('interactionCreate', async interaction => {
