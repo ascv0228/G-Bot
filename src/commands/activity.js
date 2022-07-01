@@ -10,12 +10,9 @@ module.exports = {
     permissions: ['ADMINISTRATOR'],
 
     async execute(client, msg, args) {
-        console.log('0')
-        if (!this.guilds.includes(msg.guild)) return;
-        console.log('A')
+        if (this.guilds.length && !this.guilds.includes(msg.guild.id)) return;
         if (!msg.member.permissions.has(this.permissions[0]))
             return msg.channel.send('You do not have that permission! :x:').then(msg.react('❌'));
-        console.log('B')
         if (msg.channel.id != '869585329072537680')
             return msg.reply('只允許在 <#869585329072537680>');
         if (args.length == 0) {

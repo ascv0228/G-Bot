@@ -9,7 +9,7 @@ module.exports = {
     permissions: ['ADMINISTRATOR'],
 
     async execute(client, msg, args) {
-        if (this.guilds.length && !this.guilds.includes(msg.guild)) return;
+        if (this.guilds.length && !this.guilds.includes(msg.guild.id)) return;
         if (!msg.member.permissions.has(this.permissions[0])) return;
 
         const guildid = '829673608791851038';
