@@ -39,15 +39,13 @@ async function getBase64FromImageUrl(url) {
 
         request.get(url)
             .pipe(gzip)
-            .on('data', (d) => {
-                console.log(d.toString())
-                data.push(d);
+            .on('response', function (response) {
+                console.log(response.statusCode);
+                console.log(response.headers['content-type']);
+                console.log(response.headers['content-length']);
             })
             .on('error', (e) => {
                 reject(e);
-            })
-            .on('end', () => {
-                resolve(`${url} is OK`);
             });
     });
 }
