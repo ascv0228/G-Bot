@@ -123,7 +123,7 @@ client.on('messageReactionRemove', async (reaction, user) => {
     if (exec) exec.execute(client, 'messageReactionRemove', reaction, user);
 
     if (client.command_member_role.has(reaction.message.id)) {
-        const member = await dcUtil.getMemberByID(EW_guild, user.id);
+        const member = await dcUtil.getMemberByID(reaction.message.guild, user.id);
         if (member.user.bot) return;
         if (reaction.emoji.name != '✅') return;
         member.roles.remove(client.command_member_role.get(reaction.message.id));

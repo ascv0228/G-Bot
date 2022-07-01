@@ -67,7 +67,14 @@ function loadReactions(dirPath) {
             const Reactions = require(file);
             if (Reactions.message_Id) {
                 Reactions.message_Id.forEach(message_Id => {
-                    this.reactions.set(message_Id, Reactions);
+                    if (!message_Id.includes('client.')) {
+                        this.reactions.set(message_Id, Reactions);
+                    }
+                    else {
+                        for (let elem of this[message_Id.slice('client.'.length)]) {
+                            this.reactions.set(elem, Reactions);
+                        }
+                    }
                 });
             }
         }
