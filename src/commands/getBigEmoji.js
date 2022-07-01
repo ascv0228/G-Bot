@@ -44,8 +44,11 @@ async function IsValidImageUrl(url) {
             .on('error', (e) => {
                 reject(e);
             })
+            .on('end', (e) => {
+                resolve(null);
+            })
             .pipe(gzip);
-        resolve(null);
+
     });
 }
 
