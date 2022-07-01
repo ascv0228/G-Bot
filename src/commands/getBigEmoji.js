@@ -17,5 +17,5 @@ function emoji_url_png(id) {
 }
 
 function emoji_url_gif(id) {
-    return `https://cdn.discordapp.com/emojis/${id}.png?size=4096&quality=lossless`
+    return `https://cdn.discordapp.com/emojis/${id}.gif?size=4096&quality=lossless`
 }
