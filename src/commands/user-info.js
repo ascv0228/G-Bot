@@ -9,8 +9,9 @@ module.exports = {
     async execute(client, msg, args) {
         let mention = (await dcUtil.getMemberByTag(msg.guild, args[0])) || msg.member;
         let member = msg.member
+        const memberRoles = member.roles.cache.map((role) => role.toString());
         const infoEmbed = new Discord.MessageEmbed()
-            .setTitle(`${mention.user.tag}使用者資訊`)
+            .setTitle(`${mention.user.tag} 使用者資訊`)
             .setThumbnail(mention.displayAvatarURL({ size: 4096, dynamic: true }))
             .addFields(
                 { name: '暱稱', value: `${mention.nickname || mention.user.username}`, inline: true },
@@ -27,10 +28,10 @@ module.exports = {
             });
         msg.channel.send({ embeds: [infoEmbed] });
 
-        console.log(mention.roles)
-        console.log(mention.presence)
-        console.log(mention.premiumSince)
-        console.log(mention.presence.status)
+        // console.log(mention.roles)
+        // console.log(mention.presence)
+        // console.log(mention.premiumSince)
+        // console.log(mention.presence.status)
         // 入群時間
         // 創建時間
         // 暱稱
