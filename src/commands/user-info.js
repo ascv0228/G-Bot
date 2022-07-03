@@ -18,17 +18,15 @@ module.exports = {
             .addFields(
                 { name: '暱稱', value: `${mention.nickname || mention.user.username}`, inline: true },
                 { name: 'ID', value: `${mention.id}`, inline: true },
-                { name: '成員狀態', value: `${mention.user.presence?.status}`, inline: true }
+                { name: '成員狀態', value: `${mention.user.presence ? mention.user.presence.status : "None"}`, inline: true }
             )
             .addField(`身分組[${memberRoles.length}]`, `${memberRoles}`)
             .addFields(
                 { name: '加入Discord時間', value: `${mention.user.createdAt.toLocaleString('zh-TW', { timeZone: 'UTC' })}`, inline: true },
                 { name: '加入伺服器時間', value: `${mention.joinedAt.toLocaleString('zh-TW', { timeZone: 'UTC' })}`, inline: true },
-                { name: '<a:nitro:993077592754229288>加成伺服器時間', value: `${mention.premiumSince?.toLocaleString('zh-TW', { timeZone: 'UTC' })}`, inline: true },
+                { name: '<a:nitro:993077592754229288>加成伺服器時間', value: `${mention.premiumSince ? mention.premiumSince.toLocaleString('zh-TW', { timeZone: 'UTC' }) : "None"}`, inline: true },
 
             )
-            // .addField('加入伺服器時間', `${mention.joinedAt.toLocaleString('zh-TW', { timeZone: 'UTC' })}`)
-            // .addField('<a:nitro:993077592754229288>加成伺服器時間', `${mention.premiumSince?.toLocaleString('zh-TW', { timeZone: 'UTC' })}`)
             .addField('伺服器權限', `${permissions_en_zh(mention.permissions.toArray()).join(', ')} `)
             .setFooter({
                 text: member.user.tag,
