@@ -1,4 +1,4 @@
-const { message_Id } = require('../reactions/activity.js');
+const Discord = require('discord.js');
 const dcUtil = require('../tools/dc-util.js');
 
 module.exports = {
