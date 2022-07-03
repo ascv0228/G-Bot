@@ -16,8 +16,9 @@ module.exports = {
             .addFields(
                 { name: '暱稱', value: `${mention.nickname || mention.user.username}`, inline: true },
                 { name: 'ID', value: `${mention.id}`, inline: true },
-                { name: '成員狀態', value: `${mention.presence ? mention.presence.status : "None"}`, inline: true }
+                { name: '成員狀態', value: `${mention.user.presence ? mention.user.presence.status : "None"}`, inline: true }
             )
+            .addField(`身分組[${memberRoles.length}]`, `${memberRoles}`)
             .addField('建立時間', `${mention.user.createdAt.toLocaleString('zh-TW', { timeZone: 'UTC' })}`)
             .addField('加入伺服器時間', `${mention.joinedAt.toLocaleString('zh-TW', { timeZone: 'UTC' })}`)
             .addField('<a:nitro:993077592754229288>加成伺服器時間', `${mention.premiumSince ? mention.premiumSince.toLocaleString('zh-TW', { timeZone: 'UTC' }) : "None"}`)
