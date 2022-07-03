@@ -12,9 +12,11 @@ module.exports = {
         const infoEmbed = new Discord.MessageEmbed()
             .setTitle(`${mention.user.tag}使用者資訊`)
             .setThumbnail(mention.displayAvatarURL({ size: 4096, dynamic: true }))
-            .addField('暱稱', `${mention.nickname || mention.user.username}`)
-            .addField('ID', `${mention.id}`, true)
-            .addField('成員狀態', `${mention.presence ? mention.presence.status : "None"}`)
+            .addField(
+                { name: '暱稱', value: `${mention.nickname || mention.user.username}`, inline: true },
+                { name: 'ID', value: `${mention.id}`, inline: true },
+                { name: '成員狀態', value: `${mention.presence ? mention.presence.status : "None"}`, inline: true }
+            )
             .addField('建立時間', `${mention.user.createdAt.toLocaleString('zh-TW', { timeZone: 'UTC' })}`)
             .addField('加入伺服器時間', `${mention.joinedAt.toLocaleString('zh-TW', { timeZone: 'UTC' })}`)
             .addField('<a:nitro:993077592754229288>加成伺服器時間', `${mention.premiumSince ? mention.premiumSince.toLocaleString('zh-TW', { timeZone: 'UTC' }) : "None"}`)
