@@ -8,7 +8,7 @@ module.exports = {
 
     async execute(client, msg, args) {
         if (args.length == 0) return;
-        let mention = dcUtil.getMemberByTag(msg.guild, args[0]) || msg.member;
+        let mention = (await dcUtil.getMemberByTag(msg.guild, args[0])) || msg.member;
         let member = msg.member
         console.log(mention)
         const infoEmbed = new Discord.MessageEmbed()
