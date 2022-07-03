@@ -19,9 +19,8 @@ module.exports = {
             .addFields(
                 { name: '暱稱', value: `${mention.nickname || mention.user.username}`, inline: true },
                 { name: '成員狀態', value: `${mention.presence ? mention.presence.status : "None"}`, inline: true },
-                { name: 'ID', value: `${mention.id}`, inline: true },
                 { name: '成員裝置', value: `${mention.presence ? Object.keys(mention.presence.clientStatus) : "None"}`, inline: true },
-
+                { name: 'ID', value: `${mention.id}` },
             )
             .addField(`身分組[${memberRoles.length}]`, `${memberRoles}`)
             .addFields(
@@ -31,11 +30,11 @@ module.exports = {
 
             )
             .addField('伺服器權限', `${permissions_en_zh(mention.permissions.toArray()).join(', ')} `)
-        // .setTimestamp()
-        // .setFooter({
-        //     text: member.user.tag,
-        //     iconURL: member.displayAvatarURL({ dynamic: true })
-        // });
+            .setTimestamp()
+            .setFooter({
+                text: member.user.tag,
+                iconURL: member.displayAvatarURL({ dynamic: true })
+            });
         msg.channel.send({ embeds: [infoEmbed] });
     }
 };
