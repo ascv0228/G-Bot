@@ -18,7 +18,7 @@ module.exports = {
             // .addField('成員狀態', `${mention.presence ? null : mention.presence.status}`)
             .addField('建立時間', `${mention.user.createdAt.toLocaleString('zh-TW', { timeZone: 'UTC' })}`)
             .addField('加入伺服器時間', `${mention.joinedAt.toLocaleString('zh-TW', { timeZone: 'UTC' })}`)
-            .addField('<a:nitro:993077592754229288>加成伺服器時間', `${mention.premiumSince.toLocaleString('zh-TW', { timeZone: 'UTC' })}`)
+            .addField('<a:nitro:993077592754229288>加成伺服器時間', `${mention.premiumSince ? "None" : mention.premiumSince.toLocaleString('zh-TW', { timeZone: 'UTC' })}`)
             .addField('伺服器權限', `${mention.permissions.toArray()}`)
             .setFooter({
                 text: member.user.tag,
