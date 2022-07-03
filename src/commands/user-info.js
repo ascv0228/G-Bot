@@ -31,7 +31,7 @@ module.exports = {
 
             )
             .addField('伺服器權限', `${permissions_en_zh(mention.permissions.toArray()).join(', ')} `)
-            .setTimestamp()
+        // .setTimestamp()
         // .setFooter({
         //     text: member.user.tag,
         //     iconURL: member.displayAvatarURL({ dynamic: true })
