@@ -12,7 +12,7 @@ module.exports = {
         const infoEmbed = new Discord.MessageEmbed()
             .setTitle(`${mention.user.tag}使用者資訊`)
             .setThumbnail(mention.displayAvatarURL({ size: 4096, dynamic: true }))
-            .addField(
+            .addFields(
                 { name: '暱稱', value: `${mention.nickname || mention.user.username}`, inline: true },
                 { name: 'ID', value: `${mention.id}`, inline: true },
                 { name: '成員狀態', value: `${mention.presence ? mention.presence.status : "None"}`, inline: true }
