@@ -188,7 +188,7 @@ async function command_embed(client, msg, line) {
 
     let member = msg.member;
     const commandEmbed = new Discord.MessageEmbed()
-        .setTitle(`from ${member.nickname} at ${msg.guild.name}`)
+        .setTitle(`from ${member.nickname || member.user.username} at ${msg.guild.name}`)
         .setDescription(`${line}`)
         .setFooter({
             text: member.user.tag,
