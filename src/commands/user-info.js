@@ -13,15 +13,14 @@ module.exports = {
         const memberRoles = mention.roles.cache.map((role) => role.toString());
         memberRoles.pop()
         const infoEmbed = new Discord.MessageEmbed()
+            .setColor('#0099ff')
             .setTitle(`${mention.user.tag} 使用者資訊`)
             .setThumbnail(mention.displayAvatarURL({ size: 4096, dynamic: true }))
             .addFields(
                 { name: '暱稱', value: `${mention.nickname || mention.user.username}`, inline: true },
-                { name: 'ID', value: `${mention.id}`, inline: true }
-            )
-            .addFields(
-                { name: '成員狀態', value: `${mention.presence ? mention.presence.status : "None"}` },
-                { name: '成員裝置', value: `${mention.presence ? Object.keys(mention.presence.clientStatus) : "None"}`, inline: true }
+                { name: '成員狀態', value: `${mention.presence ? mention.presence.status : "None"}`, inline: true },
+                { name: '成員裝置', value: `${mention.presence ? Object.keys(mention.presence.clientStatus) : "None"}`, inline: true },
+                { name: 'ID', value: `${mention.id}` }
             )
             .addField(`身分組[${memberRoles.length}]`, `${memberRoles}`)
             .addFields(
@@ -31,23 +30,12 @@ module.exports = {
 
             )
             .addField('伺服器權限', `${permissions_en_zh(mention.permissions.toArray()).join(', ')} `)
+            .setTimestamp()
             .setFooter({
                 text: member.user.tag,
                 iconURL: member.displayAvatarURL({ dynamic: true })
             });
         msg.channel.send({ embeds: [infoEmbed] });
-
-        // console.log(mention.roles)
-        // console.log(mention.presence)
-        // console.log(mention.presence.clientStatus)
-        // console.log(Object.keys(mention.presence.clientStatus))
-        // console.log(mention.presence?.status)
-        // 入群時間
-        // 創建時間
-        // 暱稱
-        // 頭像
-        // 身分組
-        // ID
     }
 };
 
@@ -63,6 +51,8 @@ function getUserCreateAt_string(user) {
 
 function permissions_en_zh(p_array) {
     let permissionArray = new Array()
+    console.log(typeof permissionArray[0])
+    console.log(permissionArray[0])
     for (let p of p_array) {
         permissionArray.push(permissionMap[p])
     }
