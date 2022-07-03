@@ -15,10 +15,10 @@ const client = new Client(
     {
         // https://discord.js.org/#/docs/main/stable/class/Intents?scrollTo=s-FLAGS
         intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES,
-        Intents.FLAGS.GUILD_MESSAGE_REACTIONS, Intents.FLAGS.GUILD_MEMBERS],
+        Intents.FLAGS.GUILD_MESSAGE_REACTIONS, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_PRESENCES],
 
         // https://discord.js.org/#/docs/main/stable/typedef/PartialType
-        partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'GUILD_MEMBER'],
+        partials: ['USER', 'GUILD_MEMBER', 'REACTION', 'MESSAGE', 'CHANNEL'],
     }
 );
 
