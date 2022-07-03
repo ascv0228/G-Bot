@@ -58,7 +58,6 @@ function permissions_en_zh(p_array) {
     return permissionArray
 }
 let permissionMap = {
-    none,
     'KICK_MEMBERS': '踢出成員',
     'BAN_MEMBERS': '封鎖成員',
     'ADMINISTRATOR': '管理員',
