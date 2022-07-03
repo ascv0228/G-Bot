@@ -10,6 +10,7 @@ module.exports = {
         if (args.length == 0) return;
         let mention = dcUtil.getMemberByTag(msg.guild, args[0]) || msg.member;
         let member = msg.member
+        console.log(mention)
         const infoEmbed = new Discord.MessageEmbed()
             .setTitle(`${mention.user.tag}使用者資訊`)
             .setThumbnail(mention.displayAvatarURL({ size: 4096, dynamic: true }))
