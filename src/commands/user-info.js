@@ -19,7 +19,7 @@ module.exports = {
                 { name: '暱稱', value: `${mention.nickname || mention.user.username}`, inline: true },
                 { name: 'ID', value: `${mention.id}`, inline: true },
                 { name: '成員狀態', value: `${mention.presence ? mention.presence.status : "None"}`, inline: true },
-                { name: '成員裝置', value: `${mention.presence ? mention.presence.status.clientStatus : "None"}`, inline: true }
+                { name: '成員裝置', value: `${mention.presence ? mention.presence.clientStatus : "None"}`, inline: true }
             )
             .addField(`身分組[${memberRoles.length}]`, `${memberRoles}`)
             .addFields(
@@ -37,8 +37,8 @@ module.exports = {
 
         // console.log(mention.roles)
         console.log(mention.presence)
-        console.log(mention.clientStatus)
-        console.log(Object.keys(mention.clientStatus))
+        console.log(mention.presence.clientStatus)
+        console.log(Object.keys(mention.presence.clientStatus))
         // console.log(mention.presence?.status)
         // 入群時間
         // 創建時間
