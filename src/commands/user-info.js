@@ -51,9 +51,9 @@ function getUserCreateAt_string(user) {
 
 function permissions_en_zh(p_array) {
     let permissionArray = new Array()
-    console.log(typeof p_array[0])
-    console.log(p_array[0])
     for (let p of p_array) {
+        if (!permissionMap[p])
+            console.log(`Permission: ${p}`)
         permissionArray.push(permissionMap[p])
     }
     return permissionArray
