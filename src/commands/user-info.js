@@ -20,7 +20,7 @@ module.exports = {
                 { name: 'ID', value: `${mention.id}`, inline: true }
             )
             .addFields(
-                { name: '成員狀態', value: `${mention.presence ? mention.presence.status : "None"}`, inline: true },
+                { name: '成員狀態', value: `${mention.presence ? mention.presence.status : "None"}` },
                 { name: '成員裝置', value: `${mention.presence ? Object.keys(mention.presence.clientStatus) : "None"}`, inline: true }
             )
             .addField(`身分組[${memberRoles.length}]`, `${memberRoles}`)
@@ -38,9 +38,9 @@ module.exports = {
         msg.channel.send({ embeds: [infoEmbed] });
 
         // console.log(mention.roles)
-        console.log(mention.presence)
-        console.log(mention.presence.clientStatus)
-        console.log(Object.keys(mention.presence.clientStatus))
+        // console.log(mention.presence)
+        // console.log(mention.presence.clientStatus)
+        // console.log(Object.keys(mention.presence.clientStatus))
         // console.log(mention.presence?.status)
         // 入群時間
         // 創建時間
