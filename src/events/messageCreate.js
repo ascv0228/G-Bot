@@ -1,5 +1,6 @@
 
 const client = require("../../bot.js");
+const { prefix } = require('../../config/config.json');
 const rewardUtil = require('../tools/reward-util.js');
 const dcUtil = require('../tools/dc-util');
 client.on('messageCreate', msg => {
