@@ -108,32 +108,16 @@ client.on('messageReactionAdd', async (reaction, user) => {
     if (user.bot) return;
     const exec = client.reactions.get(reaction.message.id);
     if (exec) exec.execute(client, 'messageReactionAdd', reaction, user);
-
-
-    // if (client.command_member_role.has(reaction.message.id)) {
-    //     const member = await dcUtil.getMemberByID(reaction.message.guild, user.id);
-    //     if (member.user.bot) return;
-    //     if (reaction.emoji.name != '✅') return;
-    //     member.roles.add(client.command_member_role.get(reaction.message.id));
-    // }
 });
 
 client.on('messageReactionRemove', async (reaction, user) => {
     if (user.bot) return;
     const exec = client.reactions.get(reaction.message.id);
     if (exec) exec.execute(client, 'messageReactionRemove', reaction, user);
-
-    // if (client.command_member_role.has(reaction.message.id)) {
-    //     const member = await dcUtil.getMemberByID(reaction.message.guild, user.id);
-    //     if (member.user.bot) return;
-    //     if (reaction.emoji.name != '✅') return;
-    //     member.roles.remove(client.command_member_role.get(reaction.message.id));
-    // }
 });
 
 client.on('interactionCreate', async interaction => {
-    if (!interaction.isSelectMenu()) return;
-    if (interaction.customId === 'select') {
+    if (interaction.isSelectMenu() && interaction.customId === 'select') {
         let content = interaction.values[0];
         if (!content.startsWith(`${prefix}`)) return;
         const [cmd, ...args] = content.slice(prefix.length).trimEnd().split(/\s+/);
