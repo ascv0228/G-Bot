@@ -30,7 +30,7 @@ module.exports = {
             if (emoji_id) icon = emoji_url(emoji_id);
         }
         if (!icon) {
-            let color = getColor(args[0])
+            let color = pickColorHex(args[0])
             if (color != null) icon = getColorUrl(color)
         }
         if (!icon) {
@@ -88,7 +88,7 @@ let suffix_array = [
     '.WEBP', '.PNG', '.JPG', '.JPEG',
     '.gif', '.GIF'
 ]
-function getColor(str) {
+function pickColorHex(str) {
     if (!str) return null;
     const mats = str.match(/^#?([0-9a-fA-F]{1,6})$/);
     if (mats) {
