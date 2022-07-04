@@ -1,3 +1,4 @@
+const Discord = require('discord.js');
 const client = require("../../bot.js");
 const loader = require('../loader.js');
 const dbUtil = require('../tools/db-util');
