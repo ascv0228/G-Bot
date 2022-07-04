@@ -1,5 +1,6 @@
 const client = require("../../bot.js");
 
+const { prefix } = require('../../config/config.json');
 client.on('interactionCreate', async interaction => {
     if (interaction.isSelectMenu() && interaction.customId === 'select') {
         let content = interaction.values[0];
