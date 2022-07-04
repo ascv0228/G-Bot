@@ -10,7 +10,7 @@ module.exports = {
         let moneys_array = args.map((wave) => getMoney(wave));
         let output_string = moneys_array.join('+') + '\n';
         const sum = moneys_array.reduce((partialSum, a) => partialSum + a, 0);
-        output_string += `總共: ${sum}`
+        output_string += `總共: ${sum > 4000 ? 4000 : sum}`
 
         msg.reply({ content: output_string })
 
@@ -20,6 +20,7 @@ module.exports = {
 
 function getMoney(wave) {
     if (wave < 55) return 0;
+    if (wave >= 500) return 4000;
     if (wave >= 90) return 1000;
     return 300 + Math.floor((wave - 55) / 5) * 100
 }
