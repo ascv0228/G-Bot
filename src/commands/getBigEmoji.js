@@ -5,18 +5,38 @@ module.exports = {
     aliases: ['gbe'],
 
     async execute(client, msg, args) {
+        if (msg.type == 'REPLY')
+            getEmojiByReply(msg);
+        if (!args.length)
+            return;
         let emoji_id = dcUtil.matchEmoji(args[0])
         if (!emoji_id) return;
 
         // console.log(await getBase64FromImageUrl(emoji_url_gif(emoji_id)))
         // console.log(await getBase64FromImageUrl(emoji_url_png(emoji_id)))
-        if (await IsValidImageUrl(emoji_url_gif(emoji_id))) {
-            return msg.reply({ content: `${emoji_url_gif(emoji_id)}` });
-        }
-        console.log(await IsValidImageUrl(emoji_url_gif(emoji_id)))
-        return msg.reply({ content: `${emoji_url_png(emoji_id)}` });
+        // if (await IsValidImageUrl(emoji_url_gif(emoji_id))) {
+        //     return msg.reply({ content: `${emoji_url_gif(emoji_id)}` });
+        // }
+        // console.log(await IsValidImageUrl(emoji_url_gif(emoji_id)))
+        return msg.reply({ content: `${await getUrl(emoji_id)}` });
 
     }
+}
+
+async function getEmojiByReply(msg) {
+    let msg1 = await msg.fetchReference();
+    let [...args] = msg1.content.trimEnd().split(/\s+/);
+    args.map(arg => {
+        const emoji_id = dcUtil.matchEmoji(arg);
+        msg.reply({ content: `${await getUrl(emoji_id)}` });
+    })
+}
+
+async function getUrl(emoji_id) {
+    if (await IsValidImageUrl(emoji_url_gif(emoji_id))) {
+        return `${emoji_url_gif(emoji_id)}`;
+    }
+    return `${emoji_url_png(emoji_id)}`;
 }
 
 
