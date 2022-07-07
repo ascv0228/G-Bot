@@ -9,7 +9,7 @@ client.on('messageUpdate', function (oldMessage, newMessage) {
     } catch (err) {
         return;
     }
-    if (newMessage.channel.id != '867811395474423838') {
+    if (newMessage.channel.id == '867811395474423838') {
         let channel = client.channels.fetch('964516826811858984')
         channel.send({ content: '```' + `${newMessage.member.tag} 在記錄區更改文字\n` + `(old) :${oldMessage.content}\n` + `=> (new) :${newMessage.content}` })
     }
