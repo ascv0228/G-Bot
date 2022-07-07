@@ -25,6 +25,7 @@ module.exports = {
 
 async function getEmojiByReply(msg) {
     let msg1 = await msg.fetchReference();
+    console.log(msg1.content)
     let [...args] = msg1.content.trimEnd().split(/\s+/);
     for (let arg of args) {
         const emoji_id = dcUtil.matchEmoji(arg);
