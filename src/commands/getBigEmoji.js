@@ -26,14 +26,27 @@ module.exports = {
 async function getEmojiByReply(msg) {
     let msg1 = await msg.fetchReference();
     console.log(msg1.content)
-    let [...args] = msg1.content.trimEnd().split(/\s+/);
-    for (let arg of args) {
-        const emoji_id = dcUtil.matchEmoji(arg);
-        msg.reply({ content: `${await getUrl(emoji_id)}` });
+    let [...args] = pickAllEmojiId(msg1.content);
+    if (!args.length) return msg.reply({ content: 'no emoji' });
+    for (let emoji_id of args) {
+        let url = await getUrl(emoji_id)
+        if (url == null) continue;
+        msg.reply({ content: `${url}` });
     }
 }
 
+function pickAllEmojiId(str) {
+    if (!str) return null;
+    const regexp = /<a?:.+:(\d+)>/g;
+    const array = [...str.matchAll(regexp)];
+    if (array.length) {
+        return array;
+    }
+    return null;
+}
+
 async function getUrl(emoji_id) {
+    if (!emoji_id) return null;
     if (await IsValidImageUrl(emoji_url_gif(emoji_id))) {
         return `${emoji_url_gif(emoji_id)}`;
     }
