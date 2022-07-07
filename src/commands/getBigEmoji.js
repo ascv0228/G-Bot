@@ -26,7 +26,7 @@ module.exports = {
 async function getEmojiByReply(msg) {
     let msg1 = await msg.fetchReference();
     console.log(msg1.content)
-    let [...args] = pickAllEmojiId(msg1.content);
+    let args = pickAllEmojiId(msg1.content);
     if (!args.length) return msg.reply({ content: 'no emoji' });
     for (let emoji_id of args) {
         let url = await getUrl(emoji_id)
