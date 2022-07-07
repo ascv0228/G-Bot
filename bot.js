@@ -27,6 +27,7 @@ module.exports = client;
 
 require("./src/events/ready.js")
 require("./src/events/messageCreate.js")
+require("./src/events/messageUpdate.js")
 require("./src/events/messageReactionAdd.js")
 require("./src/events/messageReactionRemove.js")
 require("./src/events/interactionCreate.js")
