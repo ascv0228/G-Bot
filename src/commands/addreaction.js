@@ -4,12 +4,19 @@ module.exports = {
     aliases: ["ar"],
     member: ["411895879935590411", "832777502848974920"],
     async execute(client, msg, args) {
-        if (!this.member.includes(msg.author.id)) return;
-        switch (msg.author.id) {
-            case this.member[0]:
-                return myAddReaction(client, msg, args);
-            case this.member[1]:
-                return catAddReaction(client, msg, args);
+        // if (!this.member.includes(msg.author.id)) return;
+        try {
+            switch (msg.author.id) {
+                case this.member[0]:
+                    return myAddReaction(client, msg, args);
+                case this.member[1]:
+                    return catAddReaction(client, msg, args);
+                default:
+                    return catAddReaction(client, msg, args);
+            }
+        }
+        catch {
+            msg.reply('cannot use other server emoji')
         }
 
     }
@@ -21,7 +28,7 @@ async function myAddReaction(client, msg, args) {
         || await useMsgUrl(client, msg, args)
         || await useChannelAndMsgId(client, msg, args)
         || await msg.reply('`1.(using reply)` ' + `${prefix}${name}  <reaction>\n`
-            + '`2.             ` ' + `${prefix}${name} <msg_url> <reaction>`
+            + '`2.             ` ' + `${prefix}${name} <msg_url> <reaction>\n`
             + '`3.             ` ' + `${prefix}${name} <channel_Id> <msg_Id> <reaction>`))
 
 
