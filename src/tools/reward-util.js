@@ -25,18 +25,23 @@ async function confirmReward(client, msg) {
     // if (msg.channel.id == "863086136180342804")
     //     return imgUtil.getImageBase64(client, msg);
     if (!channelList.includes(msg.channel.id)) return;
+    /*
     if (msg.channel.id == channelList[2] && await dbUtil.checkMsgNotInChannel(client, channelList[1], msg)) {
         let ImageArray = await imgUtil.getImageUrlArray(msg);
         if (ImageArray.length == 0) return;
         msg.reply(' 提醒 : <#867811395474423838> 有4000的紀錄才能來這邊貼發文');
         client.channels.cache.get('964516826811858984').send('<@' + msg.member + '>今日尚未於 <#867811395474423838> 發文');
         return;
-    }
+    }*/
     let count = await imgUtil.getNotDupeCountFromMsg(client, msg);
     if (count == 0 || count == NaN) return;
 
     client.Mdbcollection.updateOne({ type: 'check-msg', channelId: msg.channel.id }, { $push: { users: { $each: [msg.author.id] } } });
 
+    if (msg.channel.id == channelList[1]) { // 4000
+        let reward = get4000Reward(msg)
+        client.Mdbcollection.updateOne({ type: 'reward-4000-ticket' }, { "$set": { [`msg.${msg.member.id}`]: `${reward}` } });
+    }
     if (msg.channel.id == channelList[0]) {
         let temp = await client.Mdbcollection.find({ type: 'reward-ticket' }).toArray();
         let originCount = temp[0].msg[msg.member.id]
@@ -59,20 +64,30 @@ async function confirmReward(client, msg) {
 async function giveReward(client) {
     var d = new Date();
     let temp = await client.Mdbcollection.find({ type: 'reward-ticket' }).toArray();
-
-    client.channels.cache.get('964516826811858984').send(`==========${d.getMonth() + 1}/${d.getDate()} 輔助獎勵區==========`);
+    channel = await client.channels.fetch('964516826811858984')
+    channel.send(`==========${d.getMonth() + 1}/${d.getDate()} 輔助獎勵區==========`);
     new Map(Object.entries(temp[0].msg)).forEach((value, key) => {
-        client.channels.cache.get('964516826811858984').send(`x!bot-ticket <@${key}> ${value}`);
+        channel.send(`x!bot-ticket <@${key}> ${value}`);
     });
 }
 
 async function giveBigReward(client) {
     var d = new Date();
     let temp = await client.Mdbcollection.find({ type: 'reward-big-ticket' }).toArray();
-
-    client.channels.cache.get('964516826811858984').send(`==========${d.getMonth() + 1}/${d.getDate()} 佬獎勵區==========`);
+    channel = await client.channels.fetch('964516826811858984')
+    channel.send(`==========${d.getMonth() + 1}/${d.getDate()} 佬獎勵區==========`);
     new Map(Object.entries(temp[0].msg)).forEach((value, key) => {
-        client.channels.cache.get('964516826811858984').send(`x!bot-ticket <@${key}> ${value}`);
+        channel.send(`x!bot-ticket <@${key}> ${value}`);
+    });
+}
+
+async function give4000Reward(client) {
+    var d = new Date();
+    let temp = await client.Mdbcollection.find({ type: 'reward-4000-ticket' }).toArray();
+    channel = await client.channels.fetch('964516826811858984')
+    channel.send(`==========${d.getMonth() + 1}/${d.getDate()} 4000紀錄區獎勵==========`);
+    new Map(Object.entries(temp[0].msg)).forEach((value, key) => {
+        channel.send(`x!test-award <@${key}> ${value}`);
     });
 }
 
@@ -178,3 +193,31 @@ async function getRecordOutputArray(client, guild, args, prefix_suffix) {
     return output
 }
 // async getRecordPointText(client, guild, args)
+
+function pickMoneyId(str) {
+    if (!str) return null;
+    const mats = str.match(/\+?(\d{3,4})/);
+    return mats
+}
+
+function pickAllMentionId(str) {
+    if (!str) return null;
+    const regexp = /<@!?(\d{18})>/g;
+    const array = [...str.matchAll(regexp)];
+    if (array.length) {
+        return array;
+    }
+    return null;
+}
+
+function get4000Reward(msg) {
+    let str = msg.content;
+    if (!str) return 'NaN'
+    if (pickAllMentionId(str)) {
+        for (let mat of pickAllMentionId(str))
+            str = str.replace(mat[0], '');
+    }
+    let args = pickMoneyId(str)
+    if (!args || !args.length) return 'NaN'
+    return pickMoneyId(str)[1]
+}

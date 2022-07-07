@@ -15,11 +15,11 @@ module.exports = {
         let channelID = args[0]
         let msg_id = args[1]
 
-        // await client.Mdbcollection.insertOne({ type: 'reward-big-ticket', msg: new Map() });
+        await client.Mdbcollection.insertOne({ type: 'reward-4000-ticket', msg: new Map() });
 
-        let channel = await client.channels.fetch(channelID)
-        let message = await channel.messages.fetch(msg_id);
-        message.react(args[2]);
+        // let channel = await client.channels.fetch(channelID)
+        // let message = await channel.messages.fetch(msg_id);
+        // message.react(args[2]);
 
         // const guildid = '829673608791851038';
         // const roleid = '986888997538246748';
