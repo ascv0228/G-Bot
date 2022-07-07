@@ -57,7 +57,7 @@ async function IsValidImageUrl(url) {
         request.get(url)
             .on('response', function (response) {
                 console.log(response.statusCode) // 200
-                if (response.statusCode == 415) resolve(null);
+                if (response.statusCode != 200) resolve(null);
                 resolve(response.headers['content-length']);
             })
             .on('error', (e) => {
