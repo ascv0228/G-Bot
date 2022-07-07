@@ -2,7 +2,7 @@ const client = require("../../bot.js");
 const { prefix } = require('../../config/config.json');
 const rewardUtil = require('../tools/reward-util.js');
 const dcUtil = require('../tools/dc-util');
-client.on('messageUpdate', function (oldMessage, newMessage) {
+client.on('messageUpdate', async function (oldMessage, newMessage) {
     try {
         if (!oldMessage.guild || !newMessage.guild) return;
         if (oldMessage.member.user.bot || newMessage.member.user.bot) return;
