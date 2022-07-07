@@ -27,8 +27,10 @@ async function getEmojiByReply(msg) {
     let msg1 = await msg.fetchReference();
     console.log(msg1.content)
     let args = pickAllEmojiId(msg1.content);
+    console.log(args)
     if (!args || !args.length) return msg.reply({ content: 'no emoji' });
-    for (let emoji_id of args) {
+    for (let arg of args) {
+        let emoji_id = arg[1]
         let url = await getUrl(emoji_id)
         if (url == null) continue;
         msg.reply({ content: `${url}` });
