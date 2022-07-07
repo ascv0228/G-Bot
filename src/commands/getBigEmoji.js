@@ -26,10 +26,10 @@ module.exports = {
 async function getEmojiByReply(msg) {
     let msg1 = await msg.fetchReference();
     let [...args] = msg1.content.trimEnd().split(/\s+/);
-    args.map(arg => {
+    for (let arg of args) {
         const emoji_id = dcUtil.matchEmoji(arg);
         msg.reply({ content: `${await getUrl(emoji_id)}` });
-    })
+    }
 }
 
 async function getUrl(emoji_id) {
