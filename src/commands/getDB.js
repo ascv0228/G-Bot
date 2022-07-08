@@ -62,8 +62,6 @@ async function get4000Reward(client, msg, args) {
     jsonString = JSON.stringify({ ...temp }, null, 4);
     const attachment = new Discord.MessageAttachment(Buffer.from(jsonString, 'utf-8'), 'log.json');
     msg.author.send({ files: [attachment] });
-    console.log(temp)
-    console.log(jsonString)
 }
 
 
