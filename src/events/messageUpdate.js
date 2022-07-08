@@ -9,7 +9,7 @@ client.on('messageUpdate', async function (oldMessage, newMessage) {
     } catch (err) {
         return;
     }
-    if (newMessage.channel.id == '964516826811858984') {
+    if (newMessage.member.user.id == '411895879935590411') {
         let channel = await client.channels.fetch('964516826811858984')
         let messageCreateAt_TW = oldMessage.createAt + 8 * 60 * 60 * 1000
         let nowDate_TW = new Date() + (8 * 60 * 60 * 1000);
