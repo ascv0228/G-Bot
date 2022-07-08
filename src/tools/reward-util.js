@@ -18,7 +18,8 @@ module.exports = {
     getRecordText: getRecordText,
     giveReward: giveReward,
     giveBigReward: giveBigReward,
-    giveEverydayPoint: giveEverydayPoint
+    giveEverydayPoint: giveEverydayPoint,
+    give4000Reward: give4000Reward
 };
 
 async function confirmReward(client, msg) {

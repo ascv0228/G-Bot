@@ -79,7 +79,11 @@ async function insertHashToDatabase(client, msg, hashData) {
         client.Mdbcollection.updateOne({ type: 'hashData', channelId: channelId }, { "$set": { [`hash.${hashData}`]: urlEncode(msg.url) } });
         return true;
     } else {
-        client.channels.cache.get('964516826811858984').send('<@' + msg.member + '>' + ' use same image! in <#' + channelId + '> , ' + msg.url + '\n'
+        let gbotlogchannel = await client.channels.fetch('964516826811858984')
+        let gbotlogchannel2 = await client.channels.fetch('994873994597646468')
+        gbotlogchannel.send('<@' + msg.member + '>' + ' use same image! in <#' + channelId + '> , ' + msg.url + '\n'
+            + 'origin url in: ' + decodeUrl(flag, guildId, channelId));
+        gbotlogchannel2.send('<@' + msg.member + '>' + ' use same image! in <#' + channelId + '> , ' + msg.url + '\n'
             + 'origin url in: ' + decodeUrl(flag, guildId, channelId));
         return false;
     }

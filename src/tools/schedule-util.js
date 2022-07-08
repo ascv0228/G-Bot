@@ -22,6 +22,7 @@ async function everydayScheduleJob(client) {  //https://www.codexpedia.com/javas
         let guild = await client.guilds.cache.get(guildid);
         await RewardUtil.giveReward(client);
         await RewardUtil.giveBigReward(client);
+        await RewardUtil.give4000Reward(client);
         // await RewardUtil.giveEverydayPoint(client, guild);
         RewardUtil.getRewardText(client, guild);
         RewardUtil.getRecordText(client, guild, ["記錄區", "867811395474423838", "normal"], [["x!award", 'x!point'], ""])
@@ -33,7 +34,6 @@ async function everydayScheduleJob(client) {  //https://www.codexpedia.com/javas
         dbUtil.dbInitReward(client, null);
         dbUtil.dbInitCheckMsg(client, null);
         client.channels.cache.get('867811395474423838').send(`============截止線=============`);
-        client.channels.cache.get('886269472158138429').send(`============截止線=============`);
         client.channels.cache.get('948120050458574878').send(`============截止線=============`);
         client.channels.cache.get('963831403001307167').send(`============截止線=============`);
     });
