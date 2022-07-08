@@ -230,4 +230,20 @@ async function give4000RewardText(client, guild) {
     let user_ids = temp[0].users.filter(function (elem, pos) {
         return temp[0].users.indexOf(elem) == pos;
     })
+    let output = new Array();
+    let temp2 = (await client.Mdbcollection.find({ type: 'reward-4000-ticket' }).toArray())[0]['msg'];
+    let members = await guild.members.fetch({ user: user_ids, force: true })
+    let order_userTag = new Map();
+    for (const [id, member] of members) {
+        let userTag = `@${member.user.username}#${member.user.discriminator}`;
+        // console.log(userTag)
+        order_userTag.set(id, userTag);
+    }
+    for (let id of user_ids) {
+        output.push(`x!award ${order_userTag.get(id)} ${temp2[`${id}`] ?? 'NaN'}`)
+    }
+    let channel = client.channels.cache.get(sendChannel);
+    for (let i = 0; i < output.length / 75; ++i) {
+        channel.send({ content: '```' + (output_prefix.concat(output.slice(i * 75, (i + 1) * 75 - 1))).join('\n') + '```' });
+    }
 }
