@@ -222,3 +222,12 @@ function get4000Reward(msg) {
     if (!args || !args.length) return 'NaN'
     return pickMoneyId(str)[1]
 }
+
+function give4000RewardText(client, guild) {
+    var date = new Date(new Date() + (8 * 60 * 60 * 1000))
+    let output_prefix = [`==========${date.getMonth() + 1}/${date.getDate()} 記錄區獎勵(money)==========\n`];
+    let temp = await client.Mdbcollection.find({ type: "check-msg", channelId: '867811395474423838' }).toArray();
+    let user_ids = temp[0].users.filter(function (elem, pos) {
+        return temp[0].users.indexOf(elem) == pos;
+    })
+}

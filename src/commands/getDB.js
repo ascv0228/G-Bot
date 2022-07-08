@@ -22,8 +22,11 @@ module.exports = {
         }
         if (args.includes('all'))
             getAll(client, msg, args);
-        if (args.includes('reward'))
+        if (args.includes('reward')) {
             getReward(client, msg, args);
+            getBigReward(client, msg, args);
+            get4000Reward(client, msg, args);
+        }
         if (args.includes('check-msg'))
             getCheckMsg(client, msg, args)
         if (args.includes('activity') || args.includes('ActivityCommand'))
@@ -47,6 +50,23 @@ async function getReward(client, msg, args) {
     const attachment = new Discord.MessageAttachment(Buffer.from(jsonString, 'utf-8'), 'log.json');
     msg.author.send({ files: [attachment] });
 }
+
+async function getBigReward(client, msg, args) {
+    let temp = await client.Mdbcollection.find({ type: 'reward-big-ticket' }).toArray();
+    jsonString = JSON.stringify({ ...temp }, null, 4);
+    const attachment = new Discord.MessageAttachment(Buffer.from(jsonString, 'utf-8'), 'log.json');
+    msg.author.send({ files: [attachment] });
+}
+async function get4000Reward(client, msg, args) {
+    let temp = await client.Mdbcollection.find({ type: 'reward-4000-ticket' }).toArray();
+    jsonString = JSON.stringify({ ...temp }, null, 4);
+    const attachment = new Discord.MessageAttachment(Buffer.from(jsonString, 'utf-8'), 'log.json');
+    msg.author.send({ files: [attachment] });
+    console.log(temp)
+    console.log(jsonString)
+}
+
+
 
 async function getCheckMsg(client, msg, args) {
     let temp = await client.Mdbcollection.find({ type: 'check-msg' }).toArray();
