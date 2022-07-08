@@ -9,6 +9,7 @@ client.on('messageUpdate', async function (oldMessage, newMessage) {
     } catch (err) {
         return;
     }
+    /*
     if (newMessage.channel.id == '867811395474423838') {
         let gbotlogchannel = await client.channels.fetch('964516826811858984')
         let gbotlogchannel2 = await client.channels.fetch('994873994597646468')
@@ -18,7 +19,7 @@ client.on('messageUpdate', async function (oldMessage, newMessage) {
         gbotlogchannel.send({ content: '```' + `${newMessage.member.user.tag} 在記錄區更改文字\n` + `(old) :${oldMessage.content}\n` + `=> (new) :${newMessage.content}` + '```' })
         gbotlogchannel2.send({ content: '```' + `${newMessage.member.user.tag} 在記錄區更改文字\n` + `(old) :${oldMessage.content}\n` + `=> (new) :${newMessage.content}` + '```' })
 
-    }
+    }*/
 })
 
 function isSameDate(oldTimestamp, newTimestamp) {
