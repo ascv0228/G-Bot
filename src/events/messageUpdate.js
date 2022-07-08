@@ -9,11 +9,14 @@ client.on('messageUpdate', async function (oldMessage, newMessage) {
     } catch (err) {
         return;
     }
-    if (newMessage.member.id == '411895879935590411') {
-        let channel = await client.channels.fetch('964516826811858984')
+    if (newMessage.channel.id == '867811395474423838') {
+        let gbotlogchannel = await client.channels.fetch('964516826811858984')
+        let gbotlogchannel2 = await client.channels.fetch('994873994597646468')
         if (!isSameDate(oldMessage.createdTimestamp, newMessage.editedTimestamp)) return;
-        await checkInDB_4000reward(client, newMessage.member.id);
-        // channel.send({ content: '```' + `${newMessage.member.user.tag} 在記錄區更改文字\n` + Title + '\n' + `(old) :${oldMessage.content}\n` + `=> (new) :${newMessage.content}` + '```' })
+        if (!(await checkInDB_4000reward(client, newMessage.member.id))) return;
+        client.Mdbcollection.updateOne({ type: 'reward-4000-ticket' }, { "$set": { [`msg.${newMessage.member.id}`]: `${get4000Reward(newMessage)}` } });
+        gbotlogchannel.send({ content: '```' + `${newMessage.member.user.tag} 在記錄區更改文字\n` + `(old) :${oldMessage.content}\n` + `=> (new) :${newMessage.content}` + '```' })
+        gbotlogchannel2.send({ content: '```' + `${newMessage.member.user.tag} 在記錄區更改文字\n` + `(old) :${oldMessage.content}\n` + `=> (new) :${newMessage.content}` + '```' })
 
     }
 })
@@ -29,5 +32,34 @@ async function checkInDB_4000reward(client, user_id) {
     let user_ids = temp[0].users.filter(function (elem, pos) {
         return temp[0].users.indexOf(elem) == pos;
     })
-    console.log(user_ids)
+    return user_ids.includes(user_id)
+}
+
+
+function pickMoneyId(str) {
+    if (!str) return null;
+    const mats = str.match(/\+?(\d{3,4})/);
+    return mats
+}
+
+function pickAllMentionId(str) {
+    if (!str) return null;
+    const regexp = /<@!?(\d{18})>/g;
+    const array = [...str.matchAll(regexp)];
+    if (array.length) {
+        return array;
+    }
+    return null;
+}
+
+function get4000Reward(msg) {
+    let str = msg.content;
+    if (!str) return 'NaN'
+    if (pickAllMentionId(str)) {
+        for (let mat of pickAllMentionId(str))
+            str = str.replace(mat[0], '');
+    }
+    let args = pickMoneyId(str)
+    if (!args || !args.length) return 'NaN'
+    return pickMoneyId(str)[1]
 }
