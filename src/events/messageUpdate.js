@@ -11,14 +11,23 @@ client.on('messageUpdate', async function (oldMessage, newMessage) {
     }
     if (newMessage.member.id == '411895879935590411') {
         let channel = await client.channels.fetch('964516826811858984')
-        let messageCreateAt_TW = new Date(oldMessage.createdTimestamp + 8 * 60 * 60 * 1000)
-        let messageEditAt_TW = new Date(newMessage.editedTimestamp + (8 * 60 * 60 * 1000));
-        console.log(messageCreateAt_TW)
-        console.log(messageEditAt_TW)
-        console.log(messageCreateAt_TW.toDateString())
-        console.log(messageEditAt_TW.toDateString())
-        let Title = (messageCreateAt_TW.toDateString() == messageEditAt_TW.toDateString()) ?
-            '✅' + '編輯同一天的訊息' : '❌' + '編輯不同一天的訊息'
-        channel.send({ content: '```' + `${newMessage.member.user.tag} 在記錄區更改文字\n` + Title + '\n' + `(old) :${oldMessage.content}\n` + `=> (new) :${newMessage.content}` + '```' })
+        if (!isSameDate(oldMessage.createdTimestamp, newMessage.editedTimestamp)) return;
+        await checkInDB_4000reward(client, user_id);
+        // channel.send({ content: '```' + `${newMessage.member.user.tag} 在記錄區更改文字\n` + Title + '\n' + `(old) :${oldMessage.content}\n` + `=> (new) :${newMessage.content}` + '```' })
+
     }
 })
+
+function isSameDate(oldTimestamp, newTimestamp) {
+    let messageCreateAt_TW = new Date(oldTimestamp + 8 * 60 * 60 * 1000);
+    let messageEditAt_TW = new Date(newTimestamp + (8 * 60 * 60 * 1000));
+    return (messageCreateAt_TW.toDateString() == messageEditAt_TW.toDateString())
+}
+
+async function checkInDB_4000reward(client, user_id) {
+    let temp = await client.Mdbcollection.find({ type: "check-msg", channelId: '867811395474423838' }).toArray();
+    let user_ids = temp[0].users.filter(function (elem, pos) {
+        return temp[0].users.indexOf(elem) == pos;
+    })
+    console.log(user_ids)
+}
