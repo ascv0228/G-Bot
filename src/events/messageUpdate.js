@@ -12,7 +12,7 @@ client.on('messageUpdate', async function (oldMessage, newMessage) {
     if (newMessage.member.id == '411895879935590411') {
         let channel = await client.channels.fetch('964516826811858984')
         if (!isSameDate(oldMessage.createdTimestamp, newMessage.editedTimestamp)) return;
-        await checkInDB_4000reward(client, user_id);
+        await checkInDB_4000reward(client, newMessage.member.id);
         // channel.send({ content: '```' + `${newMessage.member.user.tag} 在記錄區更改文字\n` + Title + '\n' + `(old) :${oldMessage.content}\n` + `=> (new) :${newMessage.content}` + '```' })
 
     }
