@@ -37,7 +37,7 @@ async function confirmReward(client, msg) {
     if (count == 0 || count == NaN) return;
 
     client.Mdbcollection.updateOne({ type: 'check-msg', channelId: msg.channel.id }, { $push: { users: { $each: [msg.author.id] } } });
-
+    msg.react('844246188492193812')
     if (msg.channel.id == channelList[1]) { // 4000
         let reward = get4000Reward(msg)
         client.Mdbcollection.updateOne({ type: 'reward-4000-ticket' }, { "$set": { [`msg.${msg.member.id}`]: `${reward}` } });
