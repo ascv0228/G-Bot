@@ -15,6 +15,8 @@ client.on('messageUpdate', async function (oldMessage, newMessage) {
         let gbotlogchannel2 = await client.channels.fetch('994873994597646468')
         if (!isSameDate(oldMessage.createdTimestamp, newMessage.editedTimestamp)) return;
         if (!(await checkInDB_4000reward(client, newMessage.member.id))) return;
+        let reward = get4000Reward(get4000Reward(newMessage))
+        newMessage.react(reward == 'NaN' ? '995540046117609492' : '858466486011035668')
         client.Mdbcollection.updateOne({ type: 'reward-4000-ticket' }, { "$set": { [`msg.${newMessage.member.id}`]: `${get4000Reward(newMessage)}` } });
         gbotlogchannel.send({ content: '```' + `${newMessage.member.user.tag} 在記錄區更改文字\n` + `(old) :${oldMessage.content}\n` + `=> (new) :${newMessage.content}` + '```' + newMessage.url })
         gbotlogchannel2.send({ content: '```' + `${newMessage.member.user.tag} 在記錄區更改文字\n` + `(old) :${oldMessage.content}\n` + `=> (new) :${newMessage.content}` + '```' + newMessage.url })

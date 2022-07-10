@@ -42,6 +42,7 @@ async function confirmReward(client, msg) {
     msg.react('844246188492193812')
     if (msg.channel.id == channelList[1]) { // 4000
         let reward = get4000Reward(msg)
+        msg.react(reward == 'NaN' ? '995540046117609492' : '858466486011035668')
         client.Mdbcollection.updateOne({ type: 'reward-4000-ticket' }, { "$set": { [`msg.${msg.member.id}`]: `${reward}` } });
     }
     if (msg.channel.id == channelList[0]) {
@@ -86,10 +87,15 @@ async function giveBigReward(client) {
 async function give4000Reward(client) {
     var d = new Date();
     let temp = await client.Mdbcollection.find({ type: 'reward-4000-ticket' }).toArray();
-    channel = await client.channels.fetch('964516826811858984')
+    channel = await client.channels.fetch('964516826811858984') // 機器人log
+    let channel2 = await client.channels.fetch('867820624215146506') // 秘書log
     channel.send(`==========${d.getMonth() + 1}/${d.getDate()} 4000紀錄區獎勵==========`);
+    channel2.send(`==========${d.getMonth() + 1}/${d.getDate()} 紀錄區獎勵==========`);
     new Map(Object.entries(temp[0].msg)).forEach((value, key) => {
-        channel.send(`x!test-award <@${key}> ${value}`);
+        if (value != 'NaN') {
+            channel.send(`x!bot-award <@${key}> ${value}`);
+            channel2.send(`<@${key}>, 已發獎勵`);
+        }
     });
 }
 
@@ -241,7 +247,8 @@ async function give4000RewardText(client, guild) {
         order_userTag.set(id, userTag);
     }
     for (let id of user_ids) {
-        output.push(`x!award ${order_userTag.get(id)} ${temp2[`${id}`] ?? 'NaN'}`)
+        if (temp2[`${id}`] == 'NaN')
+            output.push(`x!award ${order_userTag.get(id)} ${temp2[`${id}`] ?? 'NaN'}`)
     }
     let channel = client.channels.cache.get(sendChannel);
     for (let i = 0; i < output.length / 75; ++i) {
