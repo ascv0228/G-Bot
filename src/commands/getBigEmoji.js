@@ -39,7 +39,7 @@ async function getEmojiByReply(msg) {
 
 function pickAllEmojiId(str) {
     if (!str) return null;
-    const regexp = /<a?:.+:(\d+)>/g;
+    const regexp = /<a?:\w+:(\d+)>/g;
     const array = [...str.matchAll(regexp)];
     if (array.length) {
         return array;
