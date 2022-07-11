@@ -11,10 +11,11 @@ client.on('messageUpdate', async function (oldMessage, newMessage) {
     }
 
     if (newMessage.channel.id == '867811395474423838') {
-        let gbotlogchannel = await client.channels.fetch('964516826811858984')
-        let gbotlogchannel2 = await client.channels.fetch('994873994597646468')
+        if (msg.attachments.length == 0) return;
         if (!isSameDate(oldMessage.createdTimestamp, newMessage.editedTimestamp)) return;
         if (!(await checkInDB_4000reward(client, newMessage.member.id))) return;
+        let gbotlogchannel = await client.channels.fetch('964516826811858984')
+        let gbotlogchannel2 = await client.channels.fetch('994873994597646468')
         let reward = get4000Reward(newMessage)
         newMessage.react(reward == 'NaN' ? '995540046117609492' : '858466486011035668')
         client.Mdbcollection.updateOne({ type: 'reward-4000-ticket' }, { "$set": { [`msg.${newMessage.member.id}`]: `${reward}` } });
