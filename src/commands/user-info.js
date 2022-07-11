@@ -3,7 +3,7 @@ const dcUtil = require('../tools/dc-util.js');
 
 module.exports = {
     name: "user-info",
-    aliases: [],
+    aliases: ['ui'],
     guilds: [],
 
     async execute(client, msg, args) {
@@ -12,6 +12,14 @@ module.exports = {
         // const memberRoles = mention.roles.cache.filter((roles) => roles.id !== msg.guild.id).map((role) => role.toString());
         const memberRoles = mention.roles.cache.map((role) => role.toString());
         memberRoles.pop()
+        console.log(`${mention.nickname || mention.user.username}`)
+        console.log(`${mention.presence ? mention.presence.status : "None"}`)
+        console.log(`${mention.presence ? Object.keys(mention.presence.clientStatus) : "None"}`)
+        console.log(`${mention.id}`)
+        console.log(`${mention.user.createdAt.toLocaleString('zh-TW', { timeZone: 'UTC' })}`)
+        console.log(`${mention.joinedAt.toLocaleString('zh-TW', { timeZone: 'UTC' })}`)
+        console.log(`${mention.premiumSince ? mention.premiumSince.toLocaleString('zh-TW', { timeZone: 'UTC' }) : "None"}`)
+        console.log(`${permissions_en_zh(mention.permissions.toArray()).join(', ')} `)
         const infoEmbed = new Discord.MessageEmbed()
             .setColor('#0099ff')
             .setTitle(`${mention.user.tag} 使用者資訊`)
