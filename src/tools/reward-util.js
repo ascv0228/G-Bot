@@ -67,20 +67,26 @@ async function confirmReward(client, msg) {
 async function giveReward(client) {
     var d = new Date();
     let temp = await client.Mdbcollection.find({ type: 'reward-ticket' }).toArray();
-    channel = await client.channels.fetch('964516826811858984')
+    let channel = await client.channels.fetch('964516826811858984') // 機器人log
+    let channel2 = await client.channels.fetch('867820624215146506') // 秘書log
     channel.send(`==========${d.getMonth() + 1}/${d.getDate()} 輔助獎勵區==========`);
+    channel2.send(`==========${d.getMonth() + 1}/${d.getDate()} <#963831403001307167> 獎勵==========`);
     new Map(Object.entries(temp[0].msg)).forEach((value, key) => {
         channel.send(`x!bot-ticket <@${key}> ${value}`);
+        channel2.send(`<@${key}>, 已發 <#963831403001307167> 獎勵`);
     });
 }
 
 async function giveBigReward(client) {
     var d = new Date();
     let temp = await client.Mdbcollection.find({ type: 'reward-big-ticket' }).toArray();
-    channel = await client.channels.fetch('964516826811858984')
+    let channel = await client.channels.fetch('964516826811858984')
+    let channel2 = await client.channels.fetch('867820624215146506') // 秘書log
     channel.send(`==========${d.getMonth() + 1}/${d.getDate()} 佬獎勵區==========`);
+    channel2.send(`==========${d.getMonth() + 1}/${d.getDate()} <#948120050458574878> 獎勵==========`);
     new Map(Object.entries(temp[0].msg)).forEach((value, key) => {
         channel.send(`x!bot-ticket <@${key}> ${value}`);
+        channel2.send(`<@${key}>, 已發 <#948120050458574878> 獎勵`);
     });
 }
 
@@ -90,12 +96,12 @@ async function give4000Reward(client) {
     let channel = await client.channels.fetch('964516826811858984') // 機器人log
     let channel2 = await client.channels.fetch('867820624215146506') // 秘書log
     channel.send(`==========${d.getMonth() + 1}/${d.getDate()} 4000紀錄區獎勵==========`);
-    channel2.send(`==========${d.getMonth() + 1}/${d.getDate()} 紀錄區獎勵==========`);
+    channel2.send(`==========${d.getMonth() + 1}/${d.getDate()} <#867811395474423838> 獎勵==========`);
     let NaNOutput = new Array();
     new Map(Object.entries(temp[0].msg)).forEach((value, key) => {
         if (value != 'NaN') {
             channel.send(`x!bot-award <@${key}> ${value}`);
-            channel2.send(`<@${key}>, 已發獎勵`);
+            channel2.send(`<@${key}>, 已發 <#867811395474423838> 獎勵`);
         }
         else {
             NaNOutput.push(`<@${key}>, 等待人工獎勵`)
