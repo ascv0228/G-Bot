@@ -9,11 +9,6 @@ client.on('messageUpdate', async function (oldMessage, newMessage) {
     } catch (err) {
         return;
     }
-    if (newMessage.member.user.id == '411895879935590411') {
-        console.log(newMessage.attachments.length)
-        console.log(newMessage.attachments)
-        console.log(newMessage)
-    }
     if (newMessage.channel.id == '867811395474423838') {
         if (newMessage.attachments.size == 0) return;
         if (!isSameDate(oldMessage.createdTimestamp, newMessage.editedTimestamp)) return;
