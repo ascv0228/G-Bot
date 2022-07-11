@@ -12,7 +12,6 @@ module.exports = {
         // const memberRoles = mention.roles.cache.filter((roles) => roles.id !== msg.guild.id).map((role) => role.toString());
         const memberRoles = mention.roles.cache.map((role) => role.toString());
         memberRoles.pop()
-        console.log(`${mention.presence ? Object.keys(mention.presence.clientStatus) + '⁡' : "None"}`)
         const infoEmbed = new Discord.MessageEmbed()
             .setColor('#0099ff')
             .setTitle(`${mention.user.tag} 使用者資訊`)
