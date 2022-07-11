@@ -91,12 +91,17 @@ async function give4000Reward(client) {
     let channel2 = await client.channels.fetch('867820624215146506') // 秘書log
     channel.send(`==========${d.getMonth() + 1}/${d.getDate()} 4000紀錄區獎勵==========`);
     channel2.send(`==========${d.getMonth() + 1}/${d.getDate()} 紀錄區獎勵==========`);
+    let NaNOutput = new Array();
     new Map(Object.entries(temp[0].msg)).forEach((value, key) => {
         if (value != 'NaN') {
             channel.send(`x!bot-award <@${key}> ${value}`);
             channel2.send(`<@${key}>, 已發獎勵`);
         }
+        else {
+            NaNOutput.push(`<@${key}>, 等待人工獎勵`)
+        }
     });
+    channel2.send({ content: NaNOutput.join('\n') })
 }
 
 async function giveEverydayPoint(client, guild) {
