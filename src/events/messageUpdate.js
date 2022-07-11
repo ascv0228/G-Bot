@@ -15,7 +15,7 @@ client.on('messageUpdate', async function (oldMessage, newMessage) {
         console.log(newMessage)
     }
     if (newMessage.channel.id == '867811395474423838') {
-        if (newMessage.attachments.length == 0) return;
+        if (newMessage.attachments.size == 0) return;
         if (!isSameDate(oldMessage.createdTimestamp, newMessage.editedTimestamp)) return;
         if (!(await checkInDB_4000reward(client, newMessage.member.id))) return;
         let gbotlogchannel = await client.channels.fetch('964516826811858984')
