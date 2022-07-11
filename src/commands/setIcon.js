@@ -19,7 +19,7 @@ module.exports = {
             return;
         if (!this.guilds.includes(msg.guild.id))
             return msg.reply('只能用在外星群');
-        if (args.length == 0 && msg.attachments.length == 0)
+        if (args.length == 0 && msg.attachments.size == 0)
             return msg.reply('Need __image__ or __image\'s url__ or __emoji__ or __Color(white、白色、透明.....)__ or __Color\'s Hex(#FFFFFF、#36393f)__');
         let icon = getImgUrlFromAttachment(msg);
         if (!icon) {
