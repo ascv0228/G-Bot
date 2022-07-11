@@ -12,14 +12,7 @@ module.exports = {
         // const memberRoles = mention.roles.cache.filter((roles) => roles.id !== msg.guild.id).map((role) => role.toString());
         const memberRoles = mention.roles.cache.map((role) => role.toString());
         memberRoles.pop()
-        console.log(`${mention.nickname || mention.user.username}`)
-        console.log(`${mention.presence ? mention.presence.status : "None"}`)
-        console.log(`${mention.presence ? Object.keys(mention.presence.clientStatus) : "None"}`)
-        console.log(`${mention.id}`)
-        console.log(`${mention.user.createdAt.toLocaleString('zh-TW', { timeZone: 'UTC' })}`)
-        console.log(`${mention.joinedAt.toLocaleString('zh-TW', { timeZone: 'UTC' })}`)
-        console.log(`${mention.premiumSince ? mention.premiumSince.toLocaleString('zh-TW', { timeZone: 'UTC' }) : "None"}`)
-        console.log(`${permissions_en_zh(mention.permissions.toArray()).join(', ')} `)
+        console.log(mention.presence ?? Object.keys(mention.presence.clientStatus))
         const infoEmbed = new Discord.MessageEmbed()
             .setColor('#0099ff')
             .setTitle(`${mention.user.tag} 使用者資訊`)
@@ -27,7 +20,7 @@ module.exports = {
             .addFields(
                 { name: '暱稱', value: `${mention.nickname || mention.user.username}`, inline: true },
                 { name: '成員狀態', value: `${mention.presence ? mention.presence.status : "None"}`, inline: true },
-                { name: '成員裝置', value: `${mention.presence ? Object.keys(mention.presence.clientStatus) : "None"}`, inline: true },
+                { name: '成員裝置', value: `${mention.presence ? Object.keys(mention.presence.clientStatus) + '⁡' : "None"}`, inline: true },
                 { name: 'ID', value: `${mention.id}` },
             )
             .addField(`身分組[${memberRoles.length}]`, `${memberRoles}`)
