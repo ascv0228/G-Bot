@@ -15,6 +15,11 @@ module.exports = {
             d1 = d2;
 
         }
+        if (!this.member.includes(msg.author.id)) {
+            if (args[0].startsWith('x!') || args[0].startsWith('z!')) {
+                return msg.reply({ content: "欠扁" })
+            }
+        }
         let str = args.join(" ")
         str = newlines(str)
         if (str.length == 0)
