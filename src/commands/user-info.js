@@ -5,37 +5,14 @@ module.exports = {
     name: "user-info",
     aliases: ['ui'],
     guilds: [],
+    owner: "411895879935590411",
 
     async execute(client, msg, args) {
         let mention = (await dcUtil.getMemberByTag(msg.guild, args[0])) || msg.member;
-        let member = msg.member
-        // const memberRoles = mention.roles.cache.filter((roles) => roles.id !== msg.guild.id).map((role) => role.toString());
-        const memberRoles = mention.roles.cache.map((role) => role.toString());
-        memberRoles.pop()
-        const infoEmbed = new Discord.MessageEmbed()
-            .setColor('#0099ff')
-            .setTitle(`${mention.user.tag} 使用者資訊`)
-            .setThumbnail(mention.displayAvatarURL({ size: 4096, dynamic: true }) || mention.user.displayAvatarURL({ size: 4096, dynamic: true }))
-            .addFields(
-                { name: '暱稱', value: `${mention.nickname || mention.user.username}`, inline: true },
-                { name: '成員狀態', value: `${mention.presence ? mention.presence.status : "None"}`, inline: true },
-                { name: '成員裝置', value: `${mention.presence ? Object.keys(mention.presence.clientStatus) + '⁡' : "None"}`, inline: true },
-                { name: 'ID', value: `${mention.id}` },
-            )
-            .addField(`身分組[${memberRoles.length}]`, `${memberRoles}`)
-            .addFields(
-                { name: '加入Discord時間', value: `${mention.user.createdAt.toLocaleString('zh-TW', { timeZone: 'UTC' })}`, inline: true },
-                { name: '加入伺服器時間', value: `${mention.joinedAt.toLocaleString('zh-TW', { timeZone: 'UTC' })}`, inline: true },
-                { name: '<a:nitro:993077592754229288>加成伺服器時間', value: `${mention.premiumSince ? mention.premiumSince.toLocaleString('zh-TW', { timeZone: 'UTC' }) : "None"}`, inline: true },
-
-            )
-            .addField('伺服器權限', `${permissions_en_zh(mention.permissions.toArray()).join(', ')} `)
-            .setTimestamp()
-            .setFooter({
-                text: member.user.tag,
-                iconURL: member.displayAvatarURL({ dynamic: true })
-            });
-        msg.channel.send({ embeds: [infoEmbed] });
+        if (msg.member.permissions.has('ADMINISTRATOR') || msg.member.user.id == this.owner)
+            AdminUserInfo(msg, mention);
+        else
+            BaseUserInfo(msg, mention);
     }
 };
 
@@ -47,7 +24,60 @@ function getUserCreateAt_string(user) {
         + `${User_time_TW.toLocaleTimeString('zh-TW')} `
 }
 
+function AdminUserInfo(msg, mention) {
+    const memberRoles = mention.roles.cache.map((role) => role.toString());
+    memberRoles.pop()
+    const infoEmbed = new Discord.MessageEmbed()
+        .setColor('#0099ff')
+        .setTitle(`${mention.user.tag} 使用者資訊`)
+        .setThumbnail(mention.displayAvatarURL({ size: 4096, dynamic: true }) || mention.user.displayAvatarURL({ size: 4096, dynamic: true }))
+        .addFields(
+            { name: '暱稱', value: `${mention.nickname || mention.user.username}`, inline: true },
+            { name: '成員狀態', value: `${mention.presence ? mention.presence.status : "None"}`, inline: true },
+            { name: '成員裝置', value: `${mention.presence ? Object.keys(mention.presence.clientStatus) + '⁡' : "None"}`, inline: true },
+            { name: 'ID', value: `${mention.id}` },
+        )
+        .addField(`身分組[${memberRoles.length}]`, `${memberRoles}`)
+        .addFields(
+            { name: '加入Discord時間', value: `${mention.user.createdAt.toLocaleString('zh-TW', { timeZone: 'UTC' })}`, inline: true },
+            { name: '加入伺服器時間', value: `${mention.joinedAt.toLocaleString('zh-TW', { timeZone: 'UTC' })}`, inline: true },
+            { name: '<a:nitro:993077592754229288>加成伺服器時間', value: `${mention.premiumSince ? mention.premiumSince.toLocaleString('zh-TW', { timeZone: 'UTC' }) : "None"}`, inline: true },
 
+        )
+        .addField('伺服器權限', `${permissions_en_zh(mention.permissions.toArray()).join(', ')} `)
+        .setTimestamp()
+        .setFooter({
+            text: member.user.tag,
+            iconURL: member.displayAvatarURL({ dynamic: true })
+        });
+    msg.channel.send({ embeds: [infoEmbed] });
+}
+
+function BaseUserInfo(msg, mention) {
+    const memberRoles = mention.roles.cache.map((role) => role.toString());
+    memberRoles.pop()
+    const infoEmbed = new Discord.MessageEmbed()
+        .setColor('#0099ff')
+        .setTitle(`${mention.user.tag} 使用者資訊`)
+        .setThumbnail(mention.displayAvatarURL({ size: 4096, dynamic: true }) || mention.user.displayAvatarURL({ size: 4096, dynamic: true }))
+        .addFields(
+            { name: '暱稱', value: `${mention.nickname || mention.user.username}`, inline: true },
+            { name: '成員狀態', value: `${mention.presence ? mention.presence.status : "None"}`, inline: true }
+        )
+        .addField(`身分組[${memberRoles.length}]`, `${memberRoles}`)
+        .addFields(
+            { name: '加入Discord時間', value: `${mention.user.createdAt.toLocaleString('zh-TW', { timeZone: 'UTC' })}`, inline: true },
+            { name: '加入伺服器時間', value: `${mention.joinedAt.toLocaleString('zh-TW', { timeZone: 'UTC' })}`, inline: true },
+            { name: '<a:nitro:993077592754229288>加成伺服器時間', value: `${mention.premiumSince ? mention.premiumSince.toLocaleString('zh-TW', { timeZone: 'UTC' }) : "None"}`, inline: true },
+
+        )
+        .setTimestamp()
+        .setFooter({
+            text: member.user.tag,
+            iconURL: member.displayAvatarURL({ dynamic: true })
+        });
+    msg.channel.send({ embeds: [infoEmbed] });
+}
 
 function permissions_en_zh(p_array) {
     let permissionArray = new Array()
