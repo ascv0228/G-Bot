@@ -107,6 +107,7 @@ async function give4000Reward(client) {
             NaNOutput.push(`<@${key}>, 等待人工獎勵`)
         }
     });
+    if (!NaNOutput.length) return
     channel2.send({ content: NaNOutput.join('\n') })
 }
 
