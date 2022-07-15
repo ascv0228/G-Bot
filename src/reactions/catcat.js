@@ -1,3 +1,4 @@
+const dcUtil = require('../tools/dc-util.js');
 module.exports = {
     name: "catcat",
     message_Id: ["991257219356168242"],
@@ -23,4 +24,9 @@ module.exports = {
 async function catcat(client, msg) {
     // https://discord.com/channels/988795992667193395/991256310563733564/991257219356168242
     await msg.edit({ content: '`臭貓貓` 狀態: ' + (client.catOpen ? '開 (✅)' : '關 (❌)') });
-}
+    let guild = await client.guilds.cache.get('829673608791851038');
+    let role = await dcUtil.getRoleByID(guild, '988641623384662066');
+    role.setMentionable(client.catOpen)
+        .then(updated => console.log(`Role updated ${updated.name}, mentionable = ${updated.mentionable}`))
+        .catch(console.error);
+}//.setMentionable(true)
