@@ -27,6 +27,4 @@ async function catcat(client, msg) {
     let guild = await client.guilds.cache.get('829673608791851038');
     let role = await dcUtil.getRoleByID(guild, '988641623384662066');
     role.setMentionable(client.catOpen)
-        .then(updated => console.log(`Role updated ${updated.name}, mentionable = ${updated.mentionable}`))
-        .catch(console.error);
 }//.setMentionable(true)
