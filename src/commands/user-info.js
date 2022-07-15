@@ -42,13 +42,12 @@ function AdminUserInfo(msg, mention) {
             { name: '加入Discord時間', value: `${mention.user.createdAt.toLocaleString('zh-TW', { timeZone: 'UTC' })}`, inline: true },
             { name: '加入伺服器時間', value: `${mention.joinedAt.toLocaleString('zh-TW', { timeZone: 'UTC' })}`, inline: true },
             { name: '<a:nitro:993077592754229288>加成伺服器時間', value: `${mention.premiumSince ? mention.premiumSince.toLocaleString('zh-TW', { timeZone: 'UTC' }) : "None"}`, inline: true },
-
         )
         .addField('伺服器權限', `${permissions_en_zh(mention.permissions.toArray()).join(', ')} `)
         .setTimestamp()
         .setFooter({
-            text: member.user.tag,
-            iconURL: member.displayAvatarURL({ dynamic: true })
+            text: msg.member.user.tag,
+            iconURL: msg.member.displayAvatarURL({ dynamic: true })
         });
     msg.channel.send({ embeds: [infoEmbed] });
 }
@@ -69,12 +68,11 @@ function BaseUserInfo(msg, mention) {
             { name: '加入Discord時間', value: `${mention.user.createdAt.toLocaleString('zh-TW', { timeZone: 'UTC' })}`, inline: true },
             { name: '加入伺服器時間', value: `${mention.joinedAt.toLocaleString('zh-TW', { timeZone: 'UTC' })}`, inline: true },
             { name: '<a:nitro:993077592754229288>加成伺服器時間', value: `${mention.premiumSince ? mention.premiumSince.toLocaleString('zh-TW', { timeZone: 'UTC' }) : "None"}`, inline: true },
-
         )
         .setTimestamp()
         .setFooter({
-            text: member.user.tag,
-            iconURL: member.displayAvatarURL({ dynamic: true })
+            text: msg.member.user.tag,
+            iconURL: msg.member.displayAvatarURL({ dynamic: true })
         });
     msg.channel.send({ embeds: [infoEmbed] });
 }
