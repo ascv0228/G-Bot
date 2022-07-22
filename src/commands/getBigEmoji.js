@@ -18,7 +18,8 @@ module.exports = {
         //     return msg.reply({ content: `${emoji_url_gif(emoji_id)}` });
         // }
         // console.log(await IsValidImageUrl(emoji_url_gif(emoji_id)))
-        return msg.reply({ content: `${await getUrl(emoji_id)}` });
+        let emoji_url = await getUrl(emoji_id);
+        return msg.reply({ content: `${emoji_url || 'no emoji'}` });
 
     }
 }
@@ -52,7 +53,10 @@ async function getUrl(emoji_id) {
     if (await IsValidImageUrl(emoji_url_gif(emoji_id))) {
         return `${emoji_url_gif(emoji_id)}`;
     }
-    return `${emoji_url_png(emoji_id)}`;
+    if (await IsValidImageUrl(emoji_url_png(emoji_id))) {
+        return `${emoji_url_png(emoji_id)}`;
+    }
+    return null;
 }
 
 
