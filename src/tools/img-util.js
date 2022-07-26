@@ -90,7 +90,9 @@ async function insertHashToDatabase(client, msg, hashData) {
 }
 
 function urlEncode(url) {
-    return url.substring(85 - 18, 85);
+    if (!url) return null;
+    const mats = url.match(/https:\/\/discord\.com\/channels\/(\d+)\/(\d+)\/(\d+)/);
+    return mats[3]
 }
 
 function decodeUrl(encodeUrl, guildID, channelID) {
