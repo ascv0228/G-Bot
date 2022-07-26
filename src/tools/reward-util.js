@@ -222,7 +222,7 @@ function pickMoneyId(str) {
 
 function pickAllMentionId(str) {
     if (!str) return null;
-    const regexp = /<@!?(\d{18})>/g;
+    const regexp = /<@!?(\d{15,})>/g;
     const array = [...str.matchAll(regexp)];
     if (array.length) {
         return array;
