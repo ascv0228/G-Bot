@@ -18,14 +18,12 @@ module.exports = {
         if (args.length == 0) {
             return msg.channel.send({ content: `g!${this.name} <month-day-hour-min> <content>` })
         }
-        console.log('C')
         arr = args[0].split('-')
         if (!checkString(arr)) {
             return msg.channel.send({ content: `<month-day-hour-min>` })
         }
         let time_string = schedule_time_string(need_time(...arr))
 
-        console.log('D')
         const repVoteEmbed = new Discord.MessageEmbed();
         repVoteEmbed.setTitle(`${msg.author.tag} 發起新活動`)
             .setDescription(args.slice(1).join("\n") + `\n\n報名時間於${arr[0]}月${arr[1]}日${arr[2]}時${arr[3]}分(UTC+8)結束`)
@@ -34,9 +32,7 @@ module.exports = {
                 iconURL: msg.member.displayAvatarURL({ dynamic: true })
             });
 
-        console.log('E')
         msg.delete()
-        console.log('F')
         let role = await createRole(msg.guild, "活動參與者");
         let roleId = role.id;
         msg.channel.send({ embeds: [repVoteEmbed], content: "活動進行中，點選下方貼圖" })
