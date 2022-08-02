@@ -29,6 +29,10 @@ module.exports = {
             dbUtil.dbInitAll(client);
             msg.reply('All 清空');
         }
+        if (args.includes('hash')) {
+            dbUtil.dbInitHash(client);
+            msg.reply('Hash 清空');
+        }
         if (args.includes('reward')) {
             dbUtil.dbInitReward(client, args);
             msg.reply('Reward 清空');
