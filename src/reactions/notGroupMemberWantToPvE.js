@@ -12,8 +12,11 @@ module.exports = {
     },
 
     async execute(client, event, reaction, user) {
-        if (!(reaction.emoji.name in this.memberRoles[reaction.message.id])) return;
+        if (!(reaction.emoji.name in this.memberRoles[reaction.message.id]))
+            return reaction.users.remove(user.id);;
         const member = await dcUtil.getMemberByID(reaction.message.guild, user.id);
+        if (!member.roles.cache.has('987187660172955710'))
+            return reaction.users.remove(user.id);
         switch (event) {
             case 'messageReactionAdd':
                 member.roles.add(this.memberRoles[reaction.message.id][reaction.emoji.name])
