@@ -1,6 +1,3 @@
-let d1 = new Date().getTime();
-
-
 module.exports = {
     name: "@輸出",
     aliases: ['<@&987180143275569212>'],
