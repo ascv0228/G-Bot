@@ -9,23 +9,31 @@ module.exports = {
     dbInitHashData: dbInitHashData,
     checkMsgNotInChannel: checkMsgNotInChannel,
     loadMongodb: loadMongodb,
-    dbInitActivityCommand: dbInitActivityCommand
+    dbInitActivityCommand: dbInitActivityCommand,
+    dbInitHash: dbInitHash
 }
 
 async function dbInitAll(client) {
     await client.Mdbcollection.drop()
     await client.Mdbcollection.insertOne({ type: 'hashData', channelId: '963831403001307167', hash: new Map() });
     await client.Mdbcollection.insertOne({ type: 'hashData', channelId: '867811395474423838', hash: new Map() });
-    await client.Mdbcollection.insertOne({ type: 'hashData', channelId: '886269472158138429', hash: new Map() });
     await client.Mdbcollection.insertOne({ type: 'hashData', channelId: '948120050458574878', hash: new Map() });
     await client.Mdbcollection.insertOne({ type: 'reward-ticket', msg: new Map() });
     await client.Mdbcollection.insertOne({ type: 'reward-big-ticket', msg: new Map() });
     await client.Mdbcollection.insertOne({ type: 'reward-4000-ticket', msg: new Map() });
     await client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '963831403001307167', users: new Array() });
     await client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '867811395474423838', users: new Array() });
-    await client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '886269472158138429', users: new Array() });
     await client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '948120050458574878', users: new Array() });
 }
+
+async function dbInitHash(client) {
+    await client.Mdbcollection.deleteMany({ type: 'hashData' })
+    await client.Mdbcollection.insertOne({ type: 'hashData', channelId: '963831403001307167', hash: new Map() });
+    await client.Mdbcollection.insertOne({ type: 'hashData', channelId: '867811395474423838', hash: new Map() });
+    await client.Mdbcollection.insertOne({ type: 'hashData', channelId: '948120050458574878', hash: new Map() });
+}
+
+
 
 async function dbInitReward(client, args) {
     await client.Mdbcollection.deleteMany({ type: 'reward-ticket' })
