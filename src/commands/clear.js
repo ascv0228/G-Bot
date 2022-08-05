@@ -1,8 +1,9 @@
 module.exports = {
-    name: "catcat",
+    name: "clear",
     permissions: ['ADMINISTRATOR'],
-    members: ['411895879935590411', '832777502848974920'],
     async execute(client, msg, args) {
+        if (!msg.member.permissions.has(this.permissions[0]))
+            return;
         let messages;
         do {
             messages = await msg.channel.messages.fetch({ force: true })
