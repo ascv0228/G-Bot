@@ -14,7 +14,6 @@ module.exports = {
             channel.delete()
             testchl.send('這就是 #' + testchl.name + ' 頻道的起點')
             console.log(testchl.name)
-            console.log(testchl.partial)
         }
     }
 };
