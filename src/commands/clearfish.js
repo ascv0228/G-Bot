@@ -8,6 +8,10 @@ module.exports = {
         let category = await client.channels.fetch(categoryId)
         let chl = category.children
         console.log(chl.keys())
+        console.log(chl.size)
+        for (let [id, channel] of chl) {
+            console.log(id)
+        }
     }
 };
 
