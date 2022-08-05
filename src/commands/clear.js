@@ -5,6 +5,7 @@ module.exports = {
         if (!msg.member.permissions.has(this.permissions[0]))
             return;
         let messages;
+        /*
         do {
             messages = await msg.channel.messages.fetch({ force: true })
             console.log(messages.size)
@@ -12,6 +13,6 @@ module.exports = {
                 message.delete()
             }
         }
-        while (messages.size >= 2);
+        while (messages.size >= 2);*/
     }
 }
