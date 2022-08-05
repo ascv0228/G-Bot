@@ -8,19 +8,14 @@ module.exports = {
         let categoryId = '1005021325519233106'
         let category = await client.channels.fetch(categoryId)
         let chl = category.children
-        console.log(chl.keys())
-        console.log(chl.size)
         for (let [id, channel] of chl) {
-            console.log(id)
             let testchl = await channel.clone()
             testchl.setParent({ channel: categoryId, lockPermissions: false })
-
+            channel.delete()
+            testchl.send('這就是 #' + testchl.name + ' 頻道的起點')
+            console.log(testchl.name)
+            console.log(testchl.partial)
         }
     }
 };
 
-function sleep(ms) {
-    return new Promise((resolve) => {
-        setTimeout(resolve, ms);
-    });
-}
