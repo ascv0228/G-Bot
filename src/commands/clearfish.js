@@ -7,9 +7,7 @@ module.exports = {
         let categoryId = '1005021325519233106'
         let category = await client.channels.fetch(categoryId)
         let chl = category.children
-        let ch2 = chl.cache
-        console.log(chl)
-        console.log(ch2)
+        console.log(chl.keys())
     }
 };
 
