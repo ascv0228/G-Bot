@@ -31,7 +31,7 @@ client.on('ready', () => {
     dbUtil.loadMongodb(client).then(() => {
         scheduleUtil.everydayScheduleJob_ActivityCommand(client);
     });
-
+    scheduleUtil.scheduleJob_CloneTextChannel(client);
     const dirPath = [`./src/commands`, `./src/music`, `./src/interactions`, `./src/noPrefix`, `./src/reactions`];
     client.loadCommands(dirPath[0]);
     // client.loadCommands(dirPath[1]);
