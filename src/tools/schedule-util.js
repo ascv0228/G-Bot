@@ -8,7 +8,8 @@ module.exports = {
     everydayScheduleJob: everydayScheduleJob,
     everydayScheduleJob_ActivityCommand: everydayScheduleJob_ActivityCommand,
     ScheduleJob_ActivityCommand: ScheduleJob_ActivityCommand,
-    ScheduleJob_RemoveNewMemberRole: ScheduleJob_RemoveNewMemberRole
+    ScheduleJob_RemoveNewMemberRole: ScheduleJob_RemoveNewMemberRole,
+    scheduleJob_CloneTextChannel: scheduleJob_CloneTextChannel
 };
 
 
