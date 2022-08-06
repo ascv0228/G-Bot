@@ -91,7 +91,10 @@ async function createActivityChannel(msg, categoryId, roleId) {
 }
 
 async function addActivityCommand(client, msg_id, time_string, roleId) {
-    client.Mdbcollection.updateOne({ type: 'ActivityCommand' }, { "$set": { [`msg.${msg_id}`]: `${time_string}|${roleId}` } });
+    client.Mdbcollection.updateOne(
+        { type: 'ActivityCommand' },
+        { "$set": { [`msg.${msg_id}`]: `${time_string}|${roleId}` } }
+    );
 }
 
 function need_time(month, day, hour, min) {
