@@ -24,6 +24,7 @@ async function dbInitAll(client) {
     await client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '963831403001307167', users: new Array() });
     await client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '867811395474423838', users: new Array() });
     await client.Mdbcollection.insertOne({ type: 'check-msg', channelId: '948120050458574878', users: new Array() });
+    await client.Mdbcollection.insertOne({ type: 'ActivityCommand', msg: new Map() });
 }
 
 async function dbInitHash(client) {
