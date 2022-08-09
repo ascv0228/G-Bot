@@ -28,7 +28,7 @@ client.on('messageCreate', async msg => {
 
         let cId = '1006419928364105778'
         let channel = await client.channels.fetch(cId);
-        channel.send({ content: `<@${userId}`, embeds: [repVoteEmbed] })
+        channel.send({ content: `<@${userId}>`, embeds: [repVoteEmbed] })
     }
     if (msg.member.user.bot) return;
     rewardUtil.confirmReward(client, msg);
