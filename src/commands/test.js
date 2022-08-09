@@ -13,33 +13,14 @@ module.exports = {
 
     async execute(client, msg, args) {
         if (msg.author.id !== '411895879935590411') return;
-
         if (msg.type != 'REPLY') return;
         let msg1 = await msg.fetchReference();
-        console.log(msg1);
-        console.log('=================================');
-        console.log(msg1.embeds);
-        console.log('=================================');
-        console.log(msg1.embeds[0].fields);
-        console.log('=================================');
-        console.log(msg1.embeds[0].image);
-        console.log('=================================');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        console.log(msg1.embeds[0].title);
+        console.log('==================================')
+        const repVoteEmbed = new Discord.MessageEmbed(msg1.embeds[0])
+            .setDescription('verify')
+            .setFooter({ text: 'verify' })
+        msg.channel.send({ embeds: [repVoteEmbed] })
 
         // let guild = msg.guild;
         // RewardUtil.getRewardText(client, guild);
