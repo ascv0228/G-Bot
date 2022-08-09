@@ -10,10 +10,10 @@ client.on('messageCreate', async msg => {
     } catch (err) {
         return;
     }
-    if (message.author.id == '574652751745777665') {
-        if (!(message.embeds && message.embeds.length == 0))
+    if (msg.author.id == '574652751745777665') {
+        if (!(msg.embeds && msg.embeds.length == 0))
             return;
-        if (message.embeds[0].title != 'Anti-bot\n%verify <result>')
+        if (msg.embeds[0].title != 'Anti-bot\n%verify <result>')
             return;
         let cId = '1006419928364105778'
         // let categoryId = args[0]
