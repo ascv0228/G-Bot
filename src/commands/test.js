@@ -32,7 +32,7 @@ module.exports = {
         let userId = (await msg.guild.members.fetch({ force: true }))
             .filter(member => member.user.username == args[0]).keys().next().value;
 
-        msg.reply(`<@${userId}`)
+        msg.reply(`<@${userId}>`)
 
 
 
