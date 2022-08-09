@@ -21,9 +21,7 @@ client.on('messageCreate', async msg => {
             .setColor(65535)
             .setDescription('%verify')
             .setImage(msg.embeds[0].image.url)
-        msg.channel.send({ embeds: [repVoteEmbed] })
         let cId = '1006419928364105778'
-        // let categoryId = args[0]
         let channel = await client.channels.fetch(cId);
         channel.send({ embeds: [repVoteEmbed] })
     }
