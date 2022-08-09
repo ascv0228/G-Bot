@@ -13,22 +13,23 @@ module.exports = {
 
     async execute(client, msg, args) {
         if (msg.author.id !== '411895879935590411') return;
-        // if (msg.type != 'REPLY') return;
-        // let msg1 = await msg.fetchReference();
-        // console.log(msg1.embeds[0].title);
-        // console.log('==================================')
-        // const repVoteEmbed = new Discord.MessageEmbed()
-        //     .setAuthor(msg1.embeds[0].author)
-        //     .setColor(65535)
-        //     .setDescription('%verify')
-        //     .setImage(msg1.embeds[0].image.url)
-        // msg.channel.send({ embeds: [repVoteEmbed] })
+        if (msg.type != 'REPLY') return;
+        let msg1 = await msg.fetchReference();
+        console.log(msg1.embeds[0].title);
+        console.log('==================================')
+        const repVoteEmbed = new Discord.MessageEmbed()
+            .setAuthor(msg1.embeds[0].author)
+            .setColor(65535)
+            .setDescription('%verify')
+            .setImage(msg1.embeds[0].image.url)
+        msg.channel.send({ embeds: [repVoteEmbed] })
 
         // console.log('msg1.embeds' + `${!!msg1.embeds}`)
         // console.log('msg1.embeds.length' + `${msg1.embeds.length}`)
         // console.log(!(msg1.embeds || msg1.embeds.length != 0))
 
         // let id = client.users.get("name", "TESTname");
+        console.log(msg1.embeds[0].author)
         let userId = (await msg.guild.members.fetch({ force: true }))
             .filter(member => member.user.username == args[0]).keys().next().value;
 
