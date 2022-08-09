@@ -25,7 +25,7 @@ module.exports = {
         msg.channel.send({ embeds: [repVoteEmbed] })
 
         console.log('msg1.embeds' + `${!!msg1.embeds}`)
-        console.log('msg1.embeds.length' + `${msg1.embeds.length != 0}`)
+        console.log('msg1.embeds.length' + `${msg1.embeds.length}`)
         console.log(!(msg1.embeds || msg1.embeds.length != 0))
         // let guild = msg.guild;
         // RewardUtil.getRewardText(client, guild);
