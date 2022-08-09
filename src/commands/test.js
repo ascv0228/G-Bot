@@ -21,9 +21,12 @@ module.exports = {
             .setAuthor(msg1.embeds[0].author)
             .setColor(65535)
             .setDescription('%verify')
-            .setImage(msg1.embeds[0].image)
+            .setImage(msg1.embeds[0].image.url)
         msg.channel.send({ embeds: [repVoteEmbed] })
-        console.log(!(msg1.embeds && msg1.embeds.length != 0))
+
+        console.log('msg1.embeds' + `${!!msg1.embeds}`)
+        console.log('msg1.embeds.length' + `${msg1.embeds.length != 0}`)
+        console.log(!(msg1.embeds || msg1.embeds.length != 0))
         // let guild = msg.guild;
         // RewardUtil.getRewardText(client, guild);
         // RewardUtil.getRecordText(client, guild, ["記錄區", "867811395474423838", "normal"], [["x!award", 'x!point'], ""])
