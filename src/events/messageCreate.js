@@ -3,7 +3,7 @@ const client = require("../../bot.js");
 const { prefix } = require('../../config/config.json');
 const rewardUtil = require('../tools/reward-util.js');
 const dcUtil = require('../tools/dc-util');
-client.on('messageCreate', msg => {
+client.on('messageCreate', async msg => {
     try {
         if (!msg.guild || !msg.member) return;
         if (!msg.member.user) return;
