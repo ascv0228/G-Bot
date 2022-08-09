@@ -13,10 +13,38 @@ module.exports = {
 
     async execute(client, msg, args) {
         if (msg.author.id !== '411895879935590411') return;
-        let guild = msg.guild;
+
+        if (msg.type != 'REPLY') return;
+        let msg1 = await msg.fetchReference();
+        console.log(msg1);
+        console.log('=================================');
+        console.log(msg1.embeds);
+        console.log('=================================');
+        console.log(msg1.embeds[0].fields);
+        console.log('=================================');
+        console.log(msg1.embeds[0].image);
+        console.log('=================================');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // let guild = msg.guild;
         // RewardUtil.getRewardText(client, guild);
         // RewardUtil.getRecordText(client, guild, ["記錄區", "867811395474423838", "normal"], [["x!award", 'x!point'], ""])
-        RewardUtil.getRecordText(client, guild, ["日常獎勵記錄區", "886269472158138429", "daily"], [['x!point'], "1"])
+        // RewardUtil.getRecordText(client, guild, ["日常獎勵記錄區", "886269472158138429", "daily"], [['x!point'], "1"])
         // RewardUtil.getRecordText(client, guild, ["佬專用紀錄區", "948120050458574878", "big"], [['x!ticket'], ""])
         /*
     permissions: ['ADMINISTRATOR'],
