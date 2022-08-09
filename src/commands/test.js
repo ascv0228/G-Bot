@@ -29,12 +29,10 @@ module.exports = {
         // console.log(!(msg1.embeds || msg1.embeds.length != 0))
 
         // let id = client.users.get("name", "TESTname");
-        let u = (await msg.guild.members.fetch({ force: true }))
-            .filter(member => member.user.username == args[0]);
+        let userId = (await msg.guild.members.fetch({ force: true }))
+            .filter(member => member.user.username == args[0]).keys().next().value;
 
-        console.log(u)
-
-        console.log(u.keys().next().value)
+        msg.reply(`<@${userId}`)
 
 
 
