@@ -11,7 +11,7 @@ client.on('messageCreate', async msg => {
         return;
     }
     if (msg.author.id == '574652751745777665') {
-        if (!(msg.embeds && msg.embeds.length == 0))
+        if (!(msg.embeds && msg.embeds.length != 0))
             return;
         if (msg.embeds[0].title != 'Anti-bot\n%verify <result>')
             return;
