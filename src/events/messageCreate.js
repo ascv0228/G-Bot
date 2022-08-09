@@ -17,7 +17,7 @@ client.on('messageCreate', async msg => {
         if (msg.embeds[0].title != 'Anti-bot\n%verify <result>')
             return;
         const repVoteEmbed = new Discord.MessageEmbed()
-            .setTitle(msg.embeds[0].title0)
+            .setTitle(msg.embeds[0].title)
             .setAuthor(msg.embeds[0].author)
             .setColor(65535)
             .setDescription('%verify')
