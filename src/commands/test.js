@@ -17,9 +17,11 @@ module.exports = {
         let msg1 = await msg.fetchReference();
         console.log(msg1.embeds[0].title);
         console.log('==================================')
-        const repVoteEmbed = new Discord.MessageEmbed(msg1.embeds[0])
+        const repVoteEmbed = new Discord.MessageEmbed()
+            .setAuthor(msg1.embeds[0].author)
+            .setColor(65535)
             .setDescription('%verify')
-            .setFooter({ text: undefined })
+            .setImage(msg1.embeds[0].image)
         msg.channel.send({ embeds: [repVoteEmbed] })
         console.log(!(msg1.embeds && msg1.embeds.length != 0))
         // let guild = msg.guild;
@@ -29,7 +31,7 @@ module.exports = {
         // RewardUtil.getRecordText(client, guild, ["佬專用紀錄區", "948120050458574878", "big"], [['x!ticket'], ""])
         /*
     permissions: ['ADMINISTRATOR'],
-
+    
         if (!msg.member.permissions.has(this.permissions[0]))
             return msg.channel.send('You do not have that permission! :x:').then(msg.react('❌'));
         if (msg.channel.id != '869585329072537680')
@@ -42,7 +44,7 @@ module.exports = {
             return msg.channel.send({ content: `<month-day-hour-min>` })
         }
         let time_string = schedule_time_string(need_time(...arr))
-
+    
         const repVoteEmbed = new Discord.MessageEmbed();
         repVoteEmbed.setTitle(`${msg.author.tag} 發起新活動`)
             .setDescription(args.slice(1).join("\n") + `\n\n限時於${arr[0]}月${arr[1]}日${arr[2]}時${arr[3]}分(UTC+8)結束`)
@@ -62,7 +64,7 @@ module.exports = {
                 addActivityCommand(client, id, time_string, roleId);
                 scheduleUtil.ScheduleJob_ActivityCommand(client, msg.channel, id, time_string)
             });
-
+    
         categoryId = '841529629290266706' // 綜合討論區
         createActivityChannel(msg, categoryId, roleId)*/
 
