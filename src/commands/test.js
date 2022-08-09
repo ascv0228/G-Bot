@@ -18,10 +18,10 @@ module.exports = {
         console.log(msg1.embeds[0].title);
         console.log('==================================')
         const repVoteEmbed = new Discord.MessageEmbed(msg1.embeds[0])
-            .setDescription('verify')
-            .setFooter({ text: 'verify' })
+            .setDescription(undefined)
+            .setFooter({ text: undefined })
         msg.channel.send({ embeds: [repVoteEmbed] })
-
+        console.log(!(msg1.embeds && msg1.embeds.length != 0))
         // let guild = msg.guild;
         // RewardUtil.getRewardText(client, guild);
         // RewardUtil.getRecordText(client, guild, ["記錄區", "867811395474423838", "normal"], [["x!award", 'x!point'], ""])
