@@ -17,13 +17,18 @@ client.on('messageCreate', async msg => {
         if (msg.embeds[0].title != 'Anti-bot\n%verify <result>')
             return;
         const repVoteEmbed = new Discord.MessageEmbed()
+            .setTitle(msg.embeds[0].title0)
             .setAuthor(msg.embeds[0].author)
             .setColor(65535)
             .setDescription('%verify')
             .setImage(msg.embeds[0].image.url)
+
+        let userId = (await msg.guild.members.fetch({ force: true }))
+            .filter(member => member.user.username == args[0]).keys().next().value;
+
         let cId = '1006419928364105778'
         let channel = await client.channels.fetch(cId);
-        channel.send({ embeds: [repVoteEmbed] })
+        channel.send({ content: `<@${userId}`, embeds: [repVoteEmbed] })
     }
     if (msg.member.user.bot) return;
     rewardUtil.confirmReward(client, msg);
