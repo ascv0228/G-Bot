@@ -18,7 +18,7 @@ module.exports = {
         console.log(msg1.embeds[0].title);
         console.log('==================================')
         const repVoteEmbed = new Discord.MessageEmbed(msg1.embeds[0])
-            .setDescription(undefined)
+            .setDescription('%verify')
             .setFooter({ text: undefined })
         msg.channel.send({ embeds: [repVoteEmbed] })
         console.log(!(msg1.embeds && msg1.embeds.length != 0))
