@@ -21,11 +21,17 @@ module.exports = {
         "978877062125330472": {
             '0️⃣': '995717853481287680',
             '1️⃣': '1005871342903623740'
+        },
+        "1006766692971581511": {  // 鴿子家
+            '0️⃣': '1006173668113662052',
         }
     },
 
     async execute(client, event, reaction, user) {
-        if (!(reaction.emoji.name in this.memberRoles[reaction.message.id])) return;
+        if (!(reaction.message.id in this.memberRoles))
+            return;
+        if (!(reaction.emoji.name in this.memberRoles[reaction.message.id]))
+            return;
         const member = await dcUtil.getMemberByID(reaction.message.guild, user.id);
         switch (event) {
             case 'messageReactionAdd':
