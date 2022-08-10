@@ -38,7 +38,7 @@ client.on('messageCreate', async msg => {
             let cloneChannel = await channel2.clone()
             cloneChannel.setParent(category.id, { lockPermissions: false })
 
-            channel2.delete()
+            setTimeout(() => channel2.delete(), 500);
             cloneChannel.send('這就是 #' + cloneChannel.name + ' 頻道的起點')
         }
     }
