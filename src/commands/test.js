@@ -33,8 +33,9 @@ module.exports = {
         let userId = (await msg.guild.members.fetch({ force: true }))
             .filter(member => member.user.username == msg1.embeds[0].author.name);
 
-        console.log(userId)
-        console.log(userId.keys().next().value)
+        console.log(userId.values())
+        console.log(userId.values().next().value)
+        console.log(userId.values().next().value.user)
 
 
 
