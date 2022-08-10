@@ -13,7 +13,7 @@ module.exports = {
         cloneChannel.setParent(category.id, { lockPermissions: false })
 
         channel.delete()
-        cloneChannel.send('這就是 #' + testchl.name + ' 頻道的起點')
+        cloneChannel.send('這就是 #' + cloneChannel.name + ' 頻道的起點')
 
     }
 };
