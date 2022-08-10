@@ -24,7 +24,7 @@ client.on('messageCreate', async msg => {
             .setImage(msg.embeds[0].image.url)
 
         let user = (await msg.guild.members.fetch({ force: true }))
-            .filter(member => member.user.username == msg1.embeds[0].author.name).values().next().value.user;
+            .filter(member => member.user.username == msg.embeds[0].author.name).values().next().value.user;
 
         let cId = '1006419928364105778'
         let channel = await client.channels.fetch(cId);
