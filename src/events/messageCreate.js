@@ -20,7 +20,7 @@ client.on('messageCreate', async msg => {
             .setTitle(msg.embeds[0].title)
             .setAuthor(msg.embeds[0].author)
             .setColor(65535)
-            .setDescription('%verify')
+            .setDescription('圖片看不見請用\n**%verify regen**')
             .setImage(msg.embeds[0].image.url)
 
         let user = (await msg.guild.members.fetch({ force: true }))
