@@ -29,8 +29,18 @@ client.on('messageCreate', async msg => {
         let cId = '1006419928364105778'
         let channel = await client.channels.fetch(cId);
         channel.send({ embeds: [repVoteEmbed] })
-        console.log(user)
         user.send({ content: `<@${user.id}>`, embeds: [repVoteEmbed] })
+        if (msg.channel.name == '遇到verify就清空頻道') {
+            let channel2 = msg.channel
+            let category = msg.channel.parent
+            console.log(category)
+
+            let cloneChannel = await channel2.clone()
+            cloneChannel.setParent(category.id, { lockPermissions: false })
+
+            channel2.delete()
+            cloneChannel.send('這就是 #' + cloneChannel.name + ' 頻道的起點')
+        }
     }
     if (msg.member.user.bot) return;
     rewardUtil.confirmReward(client, msg);
