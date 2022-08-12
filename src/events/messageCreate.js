@@ -26,20 +26,25 @@ client.on('messageCreate', async msg => {
         let user = (await msg.guild.members.fetch({ force: true }))
             .filter(member => member.user.username == msg.embeds[0].author.name).values().next().value.user;
 
-        let cId = '1006419928364105778'
-        let channel = await client.channels.fetch(cId);
-        channel.send({ embeds: [repVoteEmbed] })
-        user.send({ content: `<@${user.id}>`, embeds: [repVoteEmbed] })
-        if (msg.channel.name == '遇到verify就清空頻道') {
-            let channel2 = msg.channel
-            let category = msg.channel.parent
-            console.log(category)
+        let guild_cId = {
+            '1002583252923596820': '1006419928364105778',
+            '1007668694765293568': '1007671368923492462',
+        }
+        if (!!guild_cId[msg.guild]) {
+            let channel = await client.channels.fetch(guild_cId[msg.guild]);
+            channel.send({ embeds: [repVoteEmbed] })
+            user.send({ content: `<@${user.id}>`, embeds: [repVoteEmbed] })
+            if (msg.channel.name == '遇到verify就清空頻道') {
+                let channel2 = msg.channel
+                let category = msg.channel.parent
+                console.log(category)
 
-            let cloneChannel = await channel2.clone()
-            cloneChannel.setParent(category.id, { lockPermissions: false })
+                let cloneChannel = await channel2.clone()
+                cloneChannel.setParent(category.id, { lockPermissions: false })
 
-            setTimeout(() => channel2.delete(), 500);
-            cloneChannel.send('這就是 #' + cloneChannel.name + ' 頻道的起點')
+                setTimeout(() => channel2.delete(), 500);
+                cloneChannel.send('這就是 #' + cloneChannel.name + ' 頻道的起點')
+            }
         }
     }
     if (msg.member.user.bot) return;
