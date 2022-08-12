@@ -30,8 +30,8 @@ client.on('messageCreate', async msg => {
             '1002583252923596820': '1006419928364105778',
             '1007668694765293568': '1007671368923492462',
         }
-        if (!!guild_cId[msg.guild]) {
-            let channel = await client.channels.fetch(guild_cId[msg.guild]);
+        if (!!guild_cId[msg.guild.id]) {
+            let channel = await client.channels.fetch(guild_cId[msg.guild.id]);
             channel.send({ embeds: [repVoteEmbed] })
             user.send({ content: `<@${user.id}>`, embeds: [repVoteEmbed] })
             if (msg.channel.name == '遇到verify就清空頻道') {
