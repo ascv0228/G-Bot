@@ -8,7 +8,7 @@ client.on('guildMemberAdd', async member => {
         member.roles.add('1004332619971956777')
         let role = member.guild.roles.cache.find(role => role.name === `${member.user.id}`);
         if (!role) {
-            let pos = member.guild.roles.cache.get('1004332619971956777').position - 1
+            let pos = member.guild.roles.cache.get('1004332619971956777').position
             let newRole = await member.guild.roles.create({
                 name: `${member.user.id}`,
                 position: pos
