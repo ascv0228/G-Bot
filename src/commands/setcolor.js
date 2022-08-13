@@ -15,7 +15,7 @@ module.exports = {
     Owner: '411895879935590411',
 
     async execute(client, msg, args) {
-        let role = msg.guild.roles.cache.find(role => role.name === `${member.user.id}`);
+        let role = msg.guild.roles.cache.find(role => role.name === `${msg.author.id}`);
         console.log(role)
         if (!role)
             return msg.reply({ content: '無可用私人的身分組' })
