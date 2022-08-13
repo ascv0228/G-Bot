@@ -11,7 +11,7 @@ module.exports = {
             && !this.member.includes(msg.author.id)) {
             let d2 = new Date();
             if ((d2 - d1) < 60000)
-                return msg.reply({ content: `冷卻時間剩餘 ${(d2 - d1) / 1000} 秒` });
+                return msg.reply({ content: `冷卻時間剩餘 ${60 - ((d2 - d1) / 1000)} 秒` });
             d1 = d2;
 
         }
