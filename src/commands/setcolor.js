@@ -19,7 +19,7 @@ module.exports = {
 
         if (!role) {
             if (msg.guild.id == '1002583252923596820') {
-                let pos = member.guild.roles.cache.get('1004332619971956777').position - 1
+                let pos = msg.guild.roles.cache.get('1004332619971956777').position - 1
                 role = await msg.guild.roles.create({
                     name: `${msg.author.id}`,
                     position: pos
