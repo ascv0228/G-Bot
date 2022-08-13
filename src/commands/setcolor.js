@@ -19,7 +19,7 @@ module.exports = {
 
         if ((!role) && msg.guild.id == '1002583252923596820') {
             role = await msg.guild.roles.create({
-                name: `${member.user.id}`,
+                name: `${msg.author.id}`,
                 position: 5
             })
             member.roles.add(role.id)
