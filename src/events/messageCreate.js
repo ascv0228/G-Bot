@@ -4,6 +4,14 @@ const { prefix } = require('../../config/config.json');
 const rewardUtil = require('../tools/reward-util.js');
 const dcUtil = require('../tools/dc-util');
 const Discord = require('discord.js');
+function pickTitle(str) {
+    if (!str) return false;
+    const mats = str.match(/^Anti-bot\n(.*)verify <result>$/);
+    if (mats) {
+        return true;
+    }
+    return false;
+}
 client.on('messageCreate', async msg => {
     try {
         if (!msg.guild || !msg.member) return;
@@ -14,7 +22,7 @@ client.on('messageCreate', async msg => {
     if (msg.author.id == '574652751745777665') {
         if (!(msg.embeds && msg.embeds.length == 1))
             return;
-        if (msg.embeds[0].title != 'Anti-bot\n%verify <result>')
+        if (!pickTitle(msg.embeds[0].title))
             return;
         const repVoteEmbed = new Discord.MessageEmbed()
             .setTitle(msg.embeds[0].title)
@@ -37,7 +45,8 @@ client.on('messageCreate', async msg => {
             if (msg.channel.name == '遇到verify就清空頻道') {
                 let channel2 = msg.channel
                 let category = msg.channel.parent
-                console.log(category)
+                // console.log(category)
+
 
                 let cloneChannel = await channel2.clone()
                 cloneChannel.setParent(category.id, { lockPermissions: false })
