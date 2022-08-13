@@ -19,16 +19,19 @@ module.exports = {
 
         if (!role) {
             if (msg.guild.id == '1002583252923596820') {
+                let pos = member.guild.roles.cache.get('1004332619971956777').position - 1
                 role = await msg.guild.roles.create({
                     name: `${msg.author.id}`,
-                    position: 5
+                    position: pos
                 })
-                msg.member.roles.add(role.id)
             }
 
             else {
                 return msg.reply({ content: '無可用私人的身分組' })
             }
+        }
+        if (!msg.member.roles.cache.has(role.id)) {
+            msg.member.roles.add(role.id)
         }
         if (getColor(args[0]) == null)
             return msg.reply('Error Color Hex :  #FFFFFF、FFFFFF');
