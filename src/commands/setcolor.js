@@ -17,16 +17,18 @@ module.exports = {
     async execute(client, msg, args) {
         let role = msg.guild.roles.cache.find(role => role.name === `${msg.author.id}`);
 
-        if ((!role) && msg.guild.id == '1002583252923596820') {
-            role = await msg.guild.roles.create({
-                name: `${msg.author.id}`,
-                position: 5
-            })
-            msg.member.roles.add(role.id)
-        }
+        if (!role) {
+            if (msg.guild.id == '1002583252923596820') {
+                role = await msg.guild.roles.create({
+                    name: `${msg.author.id}`,
+                    position: 5
+                })
+                msg.member.roles.add(role.id)
+            }
 
-        else {
-            return msg.reply({ content: '無可用私人的身分組' })
+            else {
+                return msg.reply({ content: '無可用私人的身分組' })
+            }
         }
         if (getColor(args[0]) == null)
             return msg.reply('Error Color Hex :  #FFFFFF、FFFFFF');
