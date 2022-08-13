@@ -7,7 +7,6 @@ module.exports = {
 
         let channel = msg.channel
         let category = msg.channel.parent
-        console.log(category)
 
         let cloneChannel = await channel.clone()
         cloneChannel.setParent(category.id, { lockPermissions: false })
