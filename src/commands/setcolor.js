@@ -22,7 +22,7 @@ module.exports = {
                 name: `${msg.author.id}`,
                 position: 5
             })
-            member.roles.add(role.id)
+            msg.member.roles.add(role.id)
         }
 
         else {
