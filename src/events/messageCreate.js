@@ -40,7 +40,7 @@ client.on('messageCreate', async msg => {
         }
         if (!!guild_cId[msg.guild.id]) {
             let channel = await client.channels.fetch(guild_cId[msg.guild.id]);
-            channel.send({ embeds: [repVoteEmbed] })
+            channel.send({ content: `<@${user.id}>`, embeds: [repVoteEmbed] })
             user.send({ content: `<@${user.id}>`, embeds: [repVoteEmbed] })
             if (['遇到verify就清空頻道', 'Clear the channel when meeting verify message'].includes(msg.channel.topic) || msg.channel.name == '遇到verify就清空頻道') {
                 let channel2 = msg.channel
