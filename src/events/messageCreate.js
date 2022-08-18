@@ -37,6 +37,7 @@ client.on('messageCreate', async msg => {
         let guild_cId = {
             '1002583252923596820': '1006419928364105778',
             '1007668694765293568': '1007671368923492462',
+            '981737244236865577': '1009857192683384983'
         }
         if (!!guild_cId[msg.guild.id]) {
             let channel = await client.channels.fetch(guild_cId[msg.guild.id]);
