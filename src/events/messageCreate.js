@@ -43,14 +43,14 @@ client.on('messageCreate', async msg => {
             let channel = await client.channels.fetch(guild_cId[msg.guild.id]);
             channel.send({ content: `<@${user.id}>`, embeds: [repVoteEmbed] })
             user.send({ content: `<@${user.id}>`, embeds: [repVoteEmbed] })
-            if (['遇到verify就清空頻道', 'Clear the channel when meeting verify message'].includes(msg.channel.topic) || msg.channel.name == '遇到verify就清空頻道') {
+            if (['遇到verify就清空頻道', 'Clear the channel when meeting verify message']
+                .includes(msg.channel.topic) || msg.channel.name == '遇到verify就清空頻道') {
                 let channel2 = msg.channel
-                let category = msg.channel.parent
                 // console.log(category)
 
 
                 let cloneChannel = await channel2.clone()
-                cloneChannel.setParent(category.id, { lockPermissions: false })
+                cloneChannel.setPosition(channel2.position)
 
                 setTimeout(() => channel2.delete(), 500);
                 cloneChannel.send('這就是 #' + cloneChannel.name + ' 頻道的起點')
