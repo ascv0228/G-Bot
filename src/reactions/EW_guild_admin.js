@@ -6,7 +6,7 @@ let handle_Obj = new Map(Object.entries({
             'guild': '856793573194465300',
             'role': '987326459402145852',
             'permissions': {
-                'messageReactionAdd': [Discord.PermissionFlagsBits.Administrator],
+                'messageReactionAdd': ['ADMINISTRATOR'],
                 'messageReactionRemove': []
             }
         },
