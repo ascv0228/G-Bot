@@ -25,8 +25,8 @@ module.exports = {
         if (str.length == 0)
             return;
         let roleIds = dcUtil.pickAllRoleId(str)
-        str = str.replace('@everyone', `@ everyone`);
-        str = str.replace('@here', `@ here`);
+        str = str.replaceAll('@everyone', `@ everyone`);
+        str = str.replaceAll('@here', `@ here`);
         let msg1;
         let output_function = msg.channel.send;
         if (msg.type === 'REPLY') {
@@ -40,7 +40,7 @@ module.exports = {
 
             for (let roleId of roleIds) {
                 let role = await dcUtil.getRoleByID(msg.guild, roleId[1]);
-                str = str.replace(roleId[0], `@${role.name}`);
+                str = str.replaceAll(roleId[0], `@${role.name}`);
             }
             msg.delete()
                 .then(msg1.reply({ content: str }));
@@ -53,7 +53,7 @@ module.exports = {
 
         for (let roleId of roleIds) {
             let role = await dcUtil.getRoleByID(msg.guild, roleId[1]);
-            str = str.replace(roleId[0], `@${role.name}`);
+            str = str.replaceAll(roleId[0], `@${role.name}`);
         }
         msg.delete()
             .then(channel.send({ content: str }));
@@ -63,5 +63,5 @@ module.exports = {
 };
 
 function newlines(str) {
-    return str.replace('\\n', `\n`);
+    return str.replaceAll('\\n', `\n`);
 }
