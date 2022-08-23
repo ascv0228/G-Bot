@@ -31,7 +31,7 @@ function pickUserId(str) {
 
 function pickRoleId(str) {
     if (!str) return null;
-    const mats = str.match(/<@&(\d{18})>/);
+    const mats = str.match(/<@&(\d{17,})>/);
     if (mats) {
         return mats[1];
     }
@@ -40,7 +40,7 @@ function pickRoleId(str) {
 
 function pickAllRoleId(str) {
     if (!str) return null;
-    const regexp = /<@&(\d{18})>/g;
+    const regexp = /<@&(\d{17,})>/g;
     const array = [...str.matchAll(regexp)];
     if (array.length) {
         return array;
