@@ -23,7 +23,7 @@ module.exports = {
             output.push(`${id}`)
         }
 
-        const attachment = new Discord.MessageAttachment(Buffer.from(output.join('\n')), `log.txt`);
+        const attachment = new Discord.MessageAttachment(Buffer.from(output.join('\n')), `${role.name}.txt`);
         msg.author.send({ files: [attachment] });
 
     }
