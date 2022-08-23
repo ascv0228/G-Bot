@@ -10,7 +10,7 @@ module.exports = {
     async execute(client, msg, args) {
         if (!msg.member.permissions.has('ADMINISTRATOR'))
             return;
-        if (args.length)
+        if (!args.length)
             return msg.reply('需要標記身分組')
 
         if (!dcUtil.pickRoleId(args[0]))
