@@ -44,6 +44,8 @@ function pickAllEmojiId(str) {
     const array = [...str.matchAll(regexp)];
     if (array.length) {
         const unique = [...new Set(array.map(x => x[1]))];
+        console.log(array)
+        console.log(unique)
         return unique;
     }
     return null;
