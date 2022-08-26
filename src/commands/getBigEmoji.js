@@ -43,7 +43,8 @@ function pickAllEmojiId(str) {
     const regexp = /<a?:\w+:(\d+)>/g;
     const array = [...str.matchAll(regexp)];
     if (array.length) {
-        return array;
+        const unique = [...new Set(array.map(x => x[1]))];
+        return unique;
     }
     return null;
 }
