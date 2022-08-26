@@ -83,6 +83,6 @@ async function loadMongodb(client) {
         console.log(err)
     });
     let db = await mongoose.connection;
-    console.log(db)
+    // console.log(db)
     client.Mdbcollection = await db.collection('Clients');
 }
