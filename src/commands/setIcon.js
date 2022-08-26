@@ -64,7 +64,7 @@ let colorMap = {
 
 function pickEmojiId(str) {
     if (!str) return null;
-    const mats = str.match(/^<:(\w+):(\d+)>$/);
+    const mats = str.match(/^<a?:(\w+):(\d+)>$/);
     if (mats) {
         return mats[2];
     }
