@@ -7,8 +7,8 @@ module.exports = {
         let categoryId = '1005021325519233106'
         let category = await client.channels.fetch(categoryId)
         let chl = category.children
-        console.log(chl)
-        console.log(typeof chl)
+        // console.log(chl)
+        // console.log(typeof chl)
         for (let [id, channel] of chl) {
             let testchl = await channel.clone()
             testchl.setParent(categoryId, { lockPermissions: false })
