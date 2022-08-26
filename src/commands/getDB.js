@@ -38,6 +38,8 @@ module.exports = {
 
 
 async function getAll(client, msg, args) {
+
+    console.log(client.Mdbcollection.find({}))
     let temp = await client.Mdbcollection.find({}).toArray();
     jsonString = JSON.stringify({ ...temp }, null, 4);
     const attachment = new Discord.MessageAttachment(Buffer.from(jsonString, 'utf-8'), 'log.json');
