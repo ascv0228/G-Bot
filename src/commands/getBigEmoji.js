@@ -29,9 +29,7 @@ async function getEmojiByReply(msg) {
     let args = pickAllEmojiId(msg1.content);
     if (!args || !args.length) return msg.reply({ content: 'no emoji' });
     // console.log(args)
-    for (let arg of args) {
-        console.log(arg)
-        let emoji_id = arg[1]
+    for (let emoji_id of args) {
         let url = await getUrl(emoji_id)
         if (url == null) continue;
         msg.reply({ content: `${url}` });
@@ -44,8 +42,6 @@ function pickAllEmojiId(str) {
     const array = [...str.matchAll(regexp)];
     if (array.length) {
         const unique = [...new Set(array.map(x => x[1]))];
-        console.log(array)
-        console.log(unique)
         return unique;
     }
     return null;
