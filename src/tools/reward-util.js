@@ -226,7 +226,7 @@ function get4000Reward(msg) {
     if (!str) return 'NaN'
     if (pickAllMentionId(str)) {
         for (let mat of pickAllMentionId(str))
-            str = str.replace(mat[0], '');
+            str = str.replaceAll(mat[0], '');
     }
     let args = pickMoneyId(str)
     if (!args || !args.length) return 'NaN'
