@@ -16,6 +16,7 @@ client.on('messageUpdate', async function (oldMessage, newMessage) {
         let gbotlogchannel = await client.channels.fetch('964516826811858984')
         let gbotlogchannel2 = await client.channels.fetch('994873994597646468')
         let reward = get4000Reward(newMessage)
+        console.log(reward)
         newMessage.react(reward == 'NaN' ? '995540046117609492' : '858466486011035668')
         client.Mdbcollection.updateOne({ type: 'reward-4000-ticket' }, { "$set": { [`msg.${newMessage.member.id}`]: `${reward}` } });
         gbotlogchannel.send({ content: '```' + `${newMessage.member.user.tag} 在記錄區更改文字\n` + `(old) :${oldMessage.content}\n` + `=> (new) :${newMessage.content}` + '```' + newMessage.url })
@@ -46,7 +47,7 @@ function pickMoneyId(str) {
 
 function pickAllMentionId(str) {
     if (!str) return null;
-    const regexp = /<@!?(\d{17, })>/g;
+    const regexp = /<@!?(\d{15,})>/g;
     const array = [...str.matchAll(regexp)];
     if (array.length) {
         return array;
@@ -59,7 +60,19 @@ function get4000Reward(msg) {
     if (!str) return 'NaN'
     if (pickAllMentionId(str)) {
         for (let mat of pickAllMentionId(str))
-            str = str.replace(mat[0], '');
+            str = str.replaceAll(mat[0], '');
+    }
+    let args = pickMoneyId(str)
+    if (!args || !args.length) return 'NaN'
+    return pickMoneyId(str)[1]
+}
+
+function get4000Reward(msg) {
+    let str = msg.content;
+    if (!str) return 'NaN'
+    if (pickAllMentionId(str)) {
+        for (let mat of pickAllMentionId(str))
+            str = str.replaceAll(mat[0], '');
     }
     let args = pickMoneyId(str)
     if (!args || !args.length) return 'NaN'
