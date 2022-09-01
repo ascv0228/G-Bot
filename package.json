@@ -1,15 +1,49 @@
 {
-  "dependencies": {
-    "@discordjs/rest": "^0.4.1",
-    "discord-banners": "^1.0.1",
-    "discord.js": "^13.8.1",
-    "erela.js": "^2.3.3",
-    "filereader": "^0.10.3",
-    "image-hash": "^5.0.2",
-    "imghash": "^0.0.9",
-    "mongoose": "^6.3.0",
-    "node-fetch": "^3.2.3",
-    "node-schedule": "^2.1.0",
-    "xhr2": "^0.2.1"
-  }
+    "name": "discord",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.ts",
+    "scripts": {
+        "js": "node -r dotenv/config ./built/app.js",
+        "ts": "ts-node -r dotenv/config ./src/app.ts",
+        "build": "tsc",
+        "eslint": "eslint . --ext .js,.jsx,.ts,.tsx",
+        "eslint-fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@cspotcode/source-map-support": "^0.8.1",
+        "@discordjs/voice": "^0.10.0",
+        "canvas": "^2.9.3",
+        "canvas-constructor": "^6.0.1",
+        "crc": "^4.1.1",
+        "crypto": "^1.0.1",
+        "discord-banners": "^1.0.1",
+        "discord.js": "^14.0.3",
+        "dotenv": "^16.0.1",
+        "erela.js": "github:MenuDocs/erela.js#build",
+        "firebase": "^9.8.4",
+        "image-hash": "^5.3.1",
+        "moment-duration-format": "^2.3.2",
+        "moment-timezone": "^0.5.34",
+        "mongodb": "^4.7.0",
+        "mongoose": "^6.5.3",
+        "node-schedule": "^2.1.0",
+        "request": "^2.88.2",
+        "skia-canvas": "^0.9.30",
+        "zlib": "^1.0.5"
+    },
+    "engines": {
+        "node": "17.x"
+    },
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^5.30.0",
+        "@typescript-eslint/parser": "^5.30.0",
+        "eslint": "^8.18.0",
+        "eslint-plugin-unused-imports": "^2.0.0",
+        "ts-node": "^10.8.1",
+        "typescript": "^4.7.4"
+    }
 }

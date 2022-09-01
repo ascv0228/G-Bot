@@ -1,1 +1,1 @@
-worker: node bot.js
+service: chmod u+x run.sh && ./run.sh
