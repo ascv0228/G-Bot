@@ -12,7 +12,7 @@ export = {
 
     async execute(client: ZClient, message: Discord.Message, deletor: Discord.User) {
 
-        if (deletor) console.log('AAA')
+        // if (deletor) console.log('AAA')
         // if (deletor) {
         //     const textData: string[] = config.event.eggsAppear.delete[deletor.id];
         //     if (textData) {
@@ -37,13 +37,13 @@ export = {
             if (!auth.isAuthChannel(message, egg)) return;
 
             if (egg.eggType == EggType.Delete && deletor) {
-                console.log('DD')
+                // console.log('DD')
                 egg.execute(client, message, deletor);
                 return
             }
 
             if (!egg.bot && message.author.bot) return;
-            if (deletor) console.log('BB')
+            // if (deletor) console.log('BB')
             let content = message.content;
             let execed = false
             if (
@@ -51,15 +51,14 @@ export = {
                 egg.eggType == EggType.PartSame && content.includes(name) ||
                 egg.eggType == EggType.PartWithStartSame && content.startsWith(name) ||
                 egg.eggType == EggType.PartWithEndSame && content.endsWith(name) ||
-                egg.eggType == EggType.Mention && message.mentions.has(client.user.id) ||
-                egg.eggType == EggType.Delete && deletor
+                egg.eggType == EggType.Mention && message.mentions.has(client.user.id)
             )
                 execed = true;
 
-            if (deletor) console.log('CC')
             if (!execed) return;
+            if (deletor) console.log('execed')
 
-            if (deletor) console.log('EE')
+            // if (deletor) console.log('EE')
             egg.execute(client, message, name)
             // let eggContents: any = [egg.content];
 

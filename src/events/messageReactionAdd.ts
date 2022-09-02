@@ -10,33 +10,35 @@ export = {
 
     async execute(client: ZClient, reaction: Discord.MessageReaction, user: Discord.User) {
         if (user.bot) return;
-        if (user.id == process.env.BOT_OWNER) console.log('user.bot')
-        if (!reaction.message.member) return;
-        if (user.id == process.env.BOT_OWNER) console.log('!reaction.message.member')
-        if (reaction.message.webhookId) return;
-        if (user.id == process.env.BOT_OWNER) console.log('reaction.message.webhookId')
-        if (!reaction.message.guild) return;
-        if (user.id == process.env.BOT_OWNER) console.log('reaction.message.guild')
-        if (!auth.isAuthGuild(reaction.message.guild.id)) return;
-        if (user.id == process.env.BOT_OWNER) console.log('!auth.isAuthGuild(reaction.message.guild.id)')
-        const exec = client.reactions.get(reaction.message.id);
+
+        const message = reaction.message.partial ? await reaction.message.fetch() : reaction.message;
+
+        if (!message.member) return;
+        if (user.id == process.env.BOT_OWNER) console.log('!message.member')
+        if (message.webhookId) return;
+        if (user.id == process.env.BOT_OWNER) console.log('message.webhookId')
+        if (!message.guild) return;
+        if (user.id == process.env.BOT_OWNER) console.log('message.guild')
+        if (!auth.isAuthGuild(message.guild.id)) return;
+        if (user.id == process.env.BOT_OWNER) console.log('!auth.isAuthGuild(message.guild.id)')
+        const exec = client.reactions.get(message.id);
         if (exec) {
             if (user.id == process.env.BOT_OWNER) console.log('has reaction')
-            const member = await dcUtil.getMemberByID(reaction.message.guild, user.id);
-            if (!auth.ReactionEmojiAuth(reaction, member, exec.handle_Obj.get(reaction.message.id)))
+            const member = await dcUtil.getMemberByID(message.guild, user.id);
+            if (!auth.ReactionEmojiAuth(reaction, member, exec.handle_Obj.get(message.id)))
                 return;
             exec.execute(client, this.name, reaction, user);
         }
-        const msg = reaction.message.partial ? await reaction.message.fetch() : reaction.message;
-        if (auth.isOwnerBot(reaction.message.member)) {
-            if (!(reaction.message.embeds && reaction.message.embeds.length == 1))
+        const msg = message.partial ? await message.fetch() : message;
+        if (auth.isOwnerBot(message.member)) {
+            if (!(message.embeds && message.embeds.length == 1))
                 return;
 
-            for (let embed of reaction.message.embeds) {
+            for (let embed of message.embeds) {
                 if (!embed.title) continue;
                 const exec = client.embedReactions.find(v => !!(embed.title.match(v.mat)));
                 if (!exec) continue;
-                const member = await dcUtil.getMemberByID(reaction.message.guild, user.id);
+                const member = await dcUtil.getMemberByID(message.guild, user.id);
                 if (!auth.ReactionEmojiAuth(reaction, member, exec.handle_Obj)) continue;
                 try {
                     exec.execute(client, this.name, reaction, user);

@@ -83,10 +83,12 @@ export = {
     },
     async messageReactionAdd(client: ZClient, reaction: Discord.MessageReaction, member: Discord.GuildMember) {
         let roleId = handle_Obj.get(reaction.message.id).emoji[dcUtil.uniqueEmoji(reaction.emoji)]
+        console.log(roleId)
         member.roles.add(roleId)
     },
     async messageReactionRemove(client: ZClient, reaction: Discord.MessageReaction, member: Discord.GuildMember) {
         let roleId = handle_Obj.get(reaction.message.id).emoji[dcUtil.uniqueEmoji(reaction.emoji)]
+        console.log(roleId)
         member.roles.remove(roleId)
     }
 };
