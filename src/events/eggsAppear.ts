@@ -56,7 +56,6 @@ export = {
                 execed = true;
 
             if (!execed) return;
-            if (deletor) console.log('execed')
 
             // if (deletor) console.log('EE')
             egg.execute(client, message, name)

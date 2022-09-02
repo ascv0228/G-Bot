@@ -10,24 +10,29 @@ export = {
 
     async execute(client: ZClient, reaction: Discord.MessageReaction, user: Discord.User) {
         if (user.bot) return;
-        if (reaction.message.webhookId) return;
-        if (!reaction.message.guild) return;
-        if (!auth.isAuthGuild(reaction.message.guild.id)) return;
-        const exec = client.reactions.get(reaction.message.id);
+
+        const message = reaction.message.partial ? await reaction.message.fetch() : reaction.message;
+
+        if (!message.member) return;
+        if (message.webhookId) return;
+        if (!message.guild) return;
+        if (!auth.isAuthGuild(message.guild.id)) return;
+
+        const exec = client.reactions.get(message.id);
         if (exec) {
-            const member = await dcUtil.getMemberByID(reaction.message.guild, user.id);
+            const member = await dcUtil.getMemberByID(message.guild, user.id);
             exec.execute(client, this.name, reaction, user);
         }
-        const msg = reaction.message.partial ? await reaction.message.fetch() : reaction.message;
-        if (auth.isOwnerBot(reaction.message.member)) {
-            if (!(reaction.message.embeds && reaction.message.embeds.length == 1))
+        const msg = message.partial ? await message.fetch() : message;
+        if (auth.isOwnerBot(message.member)) {
+            if (!(message.embeds && message.embeds.length == 1))
                 return;
 
-            for (let embed of reaction.message.embeds) {
+            for (let embed of message.embeds) {
                 if (!embed.title) continue;
                 const exec = client.embedReactions.find(v => !!(embed.title.match(v.mat)));
                 if (!exec) continue;
-                const member = await dcUtil.getMemberByID(reaction.message.guild, user.id);
+                const member = await dcUtil.getMemberByID(message.guild, user.id);
                 try {
                     exec.execute(client, this.name, reaction, user);
                 } catch (error) {

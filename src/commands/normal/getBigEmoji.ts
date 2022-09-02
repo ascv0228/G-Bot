@@ -32,7 +32,6 @@ async function getEmojiByReply(msg: Discord.Message) {
     let args = pickAllEmojiId(msg1.content);
     if (!args || !args.length) return msg.reply({ content: 'no emoji' });
     for (let emoji_id of args) {
-        console.log(emoji_id)
         let url = await getUrl(emoji_id)
         if (url == null) continue;
         msg.reply({ content: `${url}` });

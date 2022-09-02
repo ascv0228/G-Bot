@@ -11,7 +11,6 @@ export = {
     eggType: EggType.Delete,
 
     async execute(client: ZClient, msg: Discord.Message, deletor: Discord.User) {
-        console.log('AAAAA')
         switch (deletor.id) {
             case "411895879935590411":
                 let texts = [

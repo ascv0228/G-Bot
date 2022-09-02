@@ -14,18 +14,14 @@ export = {
         const message = reaction.message.partial ? await reaction.message.fetch() : reaction.message;
 
         if (!message.member) return;
-        if (user.id == process.env.BOT_OWNER) console.log('!message.member')
         if (message.webhookId) return;
-        if (user.id == process.env.BOT_OWNER) console.log('message.webhookId')
         if (!message.guild) return;
-        if (user.id == process.env.BOT_OWNER) console.log('message.guild')
         if (!auth.isAuthGuild(message.guild.id)) return;
-        if (user.id == process.env.BOT_OWNER) console.log('!auth.isAuthGuild(message.guild.id)')
         const exec = client.reactions.get(message.id);
         if (exec) {
-            if (user.id == process.env.BOT_OWNER) console.log('has reaction')
             const member = await dcUtil.getMemberByID(message.guild, user.id);
-            if (!auth.ReactionEmojiAuth(reaction, member, exec.handle_Obj.get(message.id)))
+
+            if (!!exec.handle_Obj && !auth.ReactionEmojiAuth(reaction, member, exec.handle_Obj.get(message.id)))
                 return;
             exec.execute(client, this.name, reaction, user);
         }

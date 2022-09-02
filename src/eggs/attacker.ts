@@ -19,10 +19,6 @@ export = {
 
     async execute(client: ZClient, msg: Discord.Message, listen: string) {
         if (msg.member.permissions.has(Discord.PermissionsBitField.Flags.Administrator)) return;
-        if (!this.channels.includes(msg.channel.id) &&
-            !(msg.channel.isThread() && this.channels.includes(msg.channel.parentId)) &&
-            !msg.member.permissions.has(Discord.PermissionFlagsBits.Administrator))
-            return msg.reply({ content: '頻道錯誤' });
 
         return msg.reply({ content: rolesMap[listen] + `${msg.member} 找你` });
 

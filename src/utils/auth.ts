@@ -108,7 +108,7 @@ export default {
             }
         }
 
-        return !tools.checkInArrayOrObject(emoji_Tag, reactionHandle.emoji)
+        return tools.checkInArrayOrObject(emoji_Tag, reactionHandle.emoji)
     },
     isFriendUser(member: Discord.GuildMember): boolean {
         return [
@@ -197,7 +197,7 @@ export default {
 
     isAuthChannel(msg: Discord.Message, exec: Executor): boolean {
         const channels = tools.getChannelConfig(msg, exec);
-        return !channels || channels.length <= 0 || channels.includes(msg.channel.id);
+        return !channels || channels.length <= 0 || channels.includes(msg.channel.id) || (msg.channel.isThread() && channels.includes(msg.channel.parentId));
     },
 
     isAllowWebhook(member: Discord.GuildMember): boolean {
