@@ -24,7 +24,7 @@ export = {
         );
 
         if (auditEntry && auditEntry.executor && auditEntry.executor.id != client.user.id && message.author.id == client.user.id) {
-            console.log('DEL')
+            // console.log('DEL')
             client.emit(EventType.eggsAppear, message, auditEntry.executor);
         }
     },
