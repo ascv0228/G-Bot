@@ -17,7 +17,6 @@ export default {
         try {
             const collection = db.svr.db('G-Bot').collection('Clients');
             const item = await collection.find({ type: type }).toArray();
-            console.log(item)
             originCount = item[0]['msg'][authorId]
         } finally {
 
