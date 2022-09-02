@@ -2,7 +2,7 @@ import Discord from "discord.js";
 import { ZClient } from "../structure/client";
 import { CmdType } from "../utils/types";
 import dcUtil from "../utils/discord-util";
-import { ReactionHandle } from "../structure/ReactionExecutor";
+import { ReactionHandle } from "../structure/reactionExecutor";
 import auth from "../utils/auth";
 import tools from "../utils/tools";
 

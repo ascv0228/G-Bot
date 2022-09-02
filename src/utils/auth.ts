@@ -2,7 +2,7 @@ import Discord from "discord.js";
 import tools from "./tools";
 import { Executor } from "../structure/executor";
 import { CmdType } from "../utils/types";
-import { ReactionHandle } from "../structure/ReactionExecutor";
+import { ReactionHandle } from "../structure/reactionExecutor";
 import dcUtil from "../utils/discord-util";
 
 export default {
