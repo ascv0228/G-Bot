@@ -52,7 +52,7 @@ async function replyMsgAddEmoji(client: ZClient, msg: Discord.Message, args: str
     let msg1 = await msg.fetchReference();
     let reaction = matchEmoji(args[0]);
     msg1.react(reaction).catch(() => { msg.reply('error reaction') });
-    msg.delete();
+    msg.delete().catch(e => { });
     return true
 }
 
@@ -64,7 +64,7 @@ async function useChannelAndMsgId(client: ZClient, msg: Discord.Message, args: s
     let channel = await client.channels.fetch(channelID) as Discord.TextChannel;
     let message = await channel.messages.fetch(msg_id);
     message.react(reaction).catch(() => { msg.reply('error reaction') });
-    msg.delete();
+    msg.delete().catch(e => { });
     return true
 }
 
@@ -76,7 +76,7 @@ async function useMsgUrl(client: ZClient, msg: Discord.Message, args: string[]) 
     let channel = await client.channels.fetch(mat.channel) as Discord.TextChannel;
     let message = await channel.messages.fetch(mat.msg);
     message.react(reaction).catch(() => { msg.reply('error reaction') });
-    msg.delete();
+    msg.delete().catch(e => { });
     return true
 }
 

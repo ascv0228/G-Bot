@@ -14,6 +14,7 @@ function loadReactions(this: ZClient) {
             if (Reaction.message_Id) {
                 Reaction.message_Id.forEach(message_Id => {
                     this.reactions.set(message_Id, Reaction);
+                    console.log(message_Id)
                 });
             }
         }

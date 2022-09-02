@@ -49,10 +49,12 @@ function loadEggs(this: ZClient) {
             const egg: Executor = require(file);
             if (egg.name) {
                 this.eggs.set(egg.name, egg);
+                console.log(egg.name)
             }
             if (egg.aliases) {
                 egg.aliases.forEach(alias => {
                     this.eggs.set(alias, egg);
+                    console.log(alias)
                 });
             }
         }

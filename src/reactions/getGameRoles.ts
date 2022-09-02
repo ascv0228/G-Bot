@@ -75,6 +75,7 @@ export = {
     handle_Obj: handle_Obj,
 
     async execute(client: ZClient, event: string, reaction: Discord.MessageReaction, user: Discord.User) {
+        console.log(reaction.message.id)
         const member = await dcUtil.getMemberByID(reaction.message.guild, user.id);
         if (this[event]) {
             this[event](client, reaction, member)
