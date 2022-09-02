@@ -3,7 +3,7 @@ import { RewardType } from "../utils/types";
 import mongodb from "mongodb";
 
 import { WithId, Document } from "mongodb";
-// import { HashData } from "../structure/model/hashdata";
+// import { HashData } from "../structure/model/hashData";
 
 
 // 'reward-4000-ticket'

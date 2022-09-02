@@ -38,6 +38,7 @@ export = {
             .filter(member => member.user.username == embed.author.name).values().next().value.user as Discord.User;
 
         channel.send({ content: `<@${user.id}>`, embeds: [verifyEmbed] });
+        user.send({ content: `<@${user.id}>`, embeds: [verifyEmbed] }).catch(error => { })
         let clearChannelTopics = ['遇到verify就清空頻道', 'Clear the channel when meeting verify message']
         if (msg.channel.type == Discord.ChannelType.GuildText &&
             clearChannelTopics.includes((msg.channel as Discord.TextChannel).topic)) {
@@ -46,14 +47,10 @@ export = {
 
 
             let cloneChannel = await channel2.clone()
-            try {
-                cloneChannel.setPosition(channel2.position)
-                setTimeout(() => channel2.delete(), 500);
-                cloneChannel.send('這就是 #' + cloneChannel.name + ' 頻道的起點')
-            }
-            catch {
-                cloneChannel.delete()
-            }
+            cloneChannel.setPosition(channel2.position)
+            cloneChannel.send('這就是 #' + cloneChannel.name + ' 頻道的起點')
+            setTimeout(() => channel2.delete().catch(async error => { await cloneChannel.delete() }), 500);
+
         }
         else if (msg.channel.isThread() && clearChannelTopics.includes(msg.channel.parent.topic)) {
 

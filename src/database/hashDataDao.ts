@@ -1,5 +1,5 @@
 import db from "./db";
-import { HashData } from "../structure/model/hashdata";
+import { HashData } from "../structure/model/hashData";
 import { WithId, Document } from "mongodb";
 
 export default {

@@ -3,7 +3,7 @@ import tools from "../../utils/tools";
 import { ZClient } from "../../structure/client";
 import { CmdType } from "../../utils/types";
 import dcUtil from "../../utils/discord-util";
-import { ReactionHandle } from "../../structure/ReactionExecutor";
+import { ReactionHandle } from "../../structure/reactionExecutor";
 
 let handle_Obj = {
     emoji: ['✅'],
