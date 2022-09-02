@@ -10,12 +10,18 @@ export = {
 
     async execute(client: ZClient, reaction: Discord.MessageReaction, user: Discord.User) {
         if (user.bot) return;
+        if (user.id == process.env.BOT_OWNER) console.log('user.bot')
         if (!reaction.message.member) return;
+        if (user.id == process.env.BOT_OWNER) console.log('!reaction.message.member')
         if (reaction.message.webhookId) return;
+        if (user.id == process.env.BOT_OWNER) console.log('reaction.message.webhookId')
         if (!reaction.message.guild) return;
+        if (user.id == process.env.BOT_OWNER) console.log('reaction.message.guild')
         if (!auth.isAuthGuild(reaction.message.guild.id)) return;
+        if (user.id == process.env.BOT_OWNER) console.log('!auth.isAuthGuild(reaction.message.guild.id)')
         const exec = client.reactions.get(reaction.message.id);
         if (exec) {
+            if (user.id == process.env.BOT_OWNER) console.log('has reaction')
             const member = await dcUtil.getMemberByID(reaction.message.guild, user.id);
             if (!auth.ReactionEmojiAuth(reaction, member, exec.handle_Obj.get(reaction.message.id)))
                 return;
