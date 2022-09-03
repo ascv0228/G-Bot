@@ -28,7 +28,7 @@ export default {
                 type: 'check-msg',
                 channelId: channelId
             }, {
-                $set: {
+                $push: {
                     users: { $each: [authorId] },
                 }
             });
