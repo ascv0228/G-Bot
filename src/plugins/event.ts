@@ -9,7 +9,7 @@ function loadEvents(this: ZClient) {
     return tools.readDirAll(dirPath, (file) => {
         if (file.match(/(\.js|\.ts)$/)) {
             const event: Executor = require(file);
-            console.log(file)
+            // console.log(file)
             if (event.once) {
                 this.once(event.name, (...args) => event.execute(this, ...args));
             } else {
