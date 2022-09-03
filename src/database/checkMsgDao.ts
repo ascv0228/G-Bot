@@ -56,6 +56,7 @@ export default {
         let temp = await collection.find({ type: "check-msg", channelId: channelId }).toArray();
         console.log(temp)
         let user_ids = temp[0].users
+        console.log(user_ids)
         return user_ids.includes(user_id)
     },
 
