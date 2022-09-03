@@ -14,6 +14,7 @@ import { Executor } from "../structure/executor";
 import { BindDataCollection } from "../structure/model/binddata";
 import { Member, MembersInfo } from "../structure/model/teaminfo";
 import { ZClient } from "../structure/client";
+import auth from "./auth";
 
 export default {
     async sendMultiMessage<T>(
@@ -623,7 +624,33 @@ export default {
         client.botStatus['timezone'] = MyOffset
     },
 
-    fixDate(d1: Date) {
-        return new Date(d1.getTime() - 8 * 60 * 60 * 1000)
+    outputGuilds(client: ZClient) {
+        let guilds = client.guilds.cache.map(guild => new Array(guild.id, guild.name, String(auth.isAuthGuild(guild.id))));
+        console.log(guilds);
+    },
+
+    async initCatopen(client: ZClient) {
+        let channelID = '991256310563733564'
+        let msg_id = '991257219356168242'
+        let channel = await client.channels.fetch(channelID) as Discord.TextChannel
+        let message = await channel.messages.fetch(msg_id);
+        client.botStatus['catOpen'] = message.content.includes('開') ? true : false
+    },
+    ExecShedule(client: ZClient) {
+
+        if (client.botStatus['timezone'] != 0) {
+            console.log(`'timezone' : ${client.botStatus['timezone']}`);
+            return;
+
+        }
+        for (let [n, s] of client.schedules) {
+            s.execute(client);
+        }
+    },
+
+    loadInitBotStatus(client: ZClient) {
+        this.setTimeZone(client);
+        this.initCatopen(client);
+        this.outputGuilds(client);
     }
 };

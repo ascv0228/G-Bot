@@ -13,22 +13,10 @@ export = {
         client.user.setActivity(`GG的大GG`, { type: Discord.ActivityType.Playing });
         client.loadMessages();
         client.application?.commands.set(client.slashCommands.map(c => c));
-        tools.setTimeZone(client);
-        if (client.botStatus['timezone'] == 0) {
-            ExecShedule(client);
-        }
-        else {
-            console.log(`'timezone' : ${client.botStatus['timezone']}`)
-        }
+        tools.loadInitBotStatus(client);
     },
 };
 
-
-function ExecShedule(client: ZClient) {
-    for (let [n, s] of client.schedules) {
-        s.execute(client);
-    }
-}
 
 
 // async function loadMongodb(client: ZClient) {
