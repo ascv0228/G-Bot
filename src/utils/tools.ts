@@ -636,6 +636,7 @@ export default {
         let message = await channel.messages.fetch(msg_id);
         client.botStatus['catOpen'] = message.content.includes('開') ? true : false
     },
+
     ExecShedule(client: ZClient) {
 
         if (client.botStatus['timezone'] != 0) {
@@ -643,6 +644,7 @@ export default {
             return;
 
         }
+        console.log(client.schedules.keys())
         for (let [n, s] of client.schedules) {
             s.execute(client);
         }
