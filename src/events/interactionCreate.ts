@@ -52,8 +52,8 @@ export = {
         // ———————————————[Context Menu]———————————————
         if (interaction.isContextMenuCommand()) {
             await interaction.deferReply({ ephemeral: false });
-            const command = client.slashCommands.get(interaction.commandName);
-            if (command) command.execute(client, interaction);
+            const cmd = client.slashCommands.get(interaction.commandName);
+            if (cmd) cmd.execute(client, interaction);
         }
     }
 };
