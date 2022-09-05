@@ -652,7 +652,6 @@ export default {
         } else {
             client.botStatus['daily'] = message.content.includes('已完成');
         }
-        console.log(client.botStatus['daily'] ? '已完成 (✅)' : '未完成 (❌)')
     },
 
     ExecShedule(client: ZClient) {
