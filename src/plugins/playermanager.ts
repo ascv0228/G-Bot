@@ -60,7 +60,7 @@ export function install(client: ZClient) {
         nodes: [{
             host: "localhost", // Optional if Lavalink is local
             port: 1122, // Optional if Lavalink is set to default
-            password: "", // Optional if Lavalink is set to default
+            password: "password", // Optional if Lavalink is set to default
         }],
 
         send(id, payload) {
