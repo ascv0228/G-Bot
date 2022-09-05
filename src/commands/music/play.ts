@@ -42,6 +42,7 @@ export = {
         if (state != "CONNECTED") {
             player.connect();
             player.stop();
+            console.log('我進來了')
         }
 
         const res = await client.manager.search({
@@ -82,6 +83,7 @@ export = {
 
         if (!player.playing && !player.paused && player.queue.current) {
             player.play();
+            console.log('我播放了')
         }
     },
 };
