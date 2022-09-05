@@ -54,8 +54,6 @@ async function restoreMusicStatus(this: ZClient) {
 
 export function install(client: ZClient) {
     client.restoreMusicStatus = restoreMusicStatus;
-    console.log('restoreMusicStatus')
-    console.log(restoreMusicStatus)
     client.manager = new erela.Manager({
         nodes: [{
             host: "localhost", // Optional if Lavalink is local

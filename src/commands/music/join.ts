@@ -16,8 +16,6 @@ export = {
             await msg.channel.send({ content: `此命令需在語音頻道中使用!` });
             return;
         }
-        console.log(client.manager)
-        console.log(client.manager.players)
         let player = client.manager.players.get(msg.guild.id);
         if (!player) {
             player = client.manager.create({
