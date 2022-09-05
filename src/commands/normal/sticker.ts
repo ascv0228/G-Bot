@@ -36,5 +36,5 @@ export = {
 }
 
 function getWeb_1(id: string) {
-    return `https://media.discordapp.net/stickers/${id}.png?size=240`
+    return `https://media.discordapp.net/stickers/${id}.png?size=320`
 }
