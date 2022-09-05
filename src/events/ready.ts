@@ -14,6 +14,7 @@ export = {
         client.loadMessages();
         client.application?.commands.set(client.slashCommands.map(c => c));
         tools.loadInitBotStatus(client);
+        client.manager.init(client.user.id);
     },
 };
 
