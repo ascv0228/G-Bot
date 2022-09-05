@@ -637,6 +637,24 @@ export default {
         client.botStatus['catOpen'] = message.content.includes('開') ? true : false
     },
 
+    async initVfDaily(client: ZClient) {
+        // https://discord.com/channels/988795992667193395/991256310563733564/1016235047797407754
+
+        let channelID = '991256310563733564'
+        let msg_id = '1016235047797407754'
+        let channel = await client.channels.fetch(channelID) as Discord.TextChannel
+        let message = await channel.messages.fetch(msg_id);
+        let msgEditTime = new Date(message.editedTimestamp ? message.editedTimestamp : message.createdTimestamp)
+        let Now = new Date()
+        if (msgEditTime.getUTCDate() != Now.getUTCDate()) {
+            message.edit('`釣魚機器人` 狀態: 未完成 (❌)')
+            client.botStatus['daily'] = false;
+        } else {
+            client.botStatus['daily'] = message.content.includes('已完成');
+        }
+        console.log(client.botStatus['daily'] ? '已完成 (✅)' : '未完成 (❌)')
+    },
+
     ExecShedule(client: ZClient) {
 
         if (client.botStatus['timezone'] != 0) {
@@ -655,6 +673,6 @@ export default {
         this.initCatopen(client);
         this.ExecShedule(client);
         this.outputGuilds(client);
-        client.botStatus['daily'] = false;
+        this.initVfDaily(client);
     }
 };

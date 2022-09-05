@@ -8,10 +8,9 @@ export = {
     name: "vf-daily",
 
     async execute(client: ZClient) {
+        if (client.botStatus['daily']) return;
         schedule.scheduleJob("0 0 */6 * * *", async function () {
-            if (client.botStatus['daily']) return;
-            let channels = ['966189840603414528', '964528474809323610', '964699991601995787',
-                '1014502360422289408', '988805115538456576']
+            let channels = ['964699991601995787', '990817755328573441']
 
             for (let channelId of channels) {
                 let channel = await client.channels.fetch(channelId) as Discord.TextChannel;
