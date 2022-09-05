@@ -16,7 +16,7 @@ export = {
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
         msg.reply(`client.botStatus['daily']: ${String(client.botStatus['daily'])}\n` +
-            client.botStatus['daily'] ? '已完成' : '未完成');
+            (client.botStatus['daily'] ? '已完成' : '未完成'));
 
     }
 };
