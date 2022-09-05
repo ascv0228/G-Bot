@@ -655,5 +655,6 @@ export default {
         this.initCatopen(client);
         this.ExecShedule(client);
         this.outputGuilds(client);
+        client.botStatus['daily'] = false;
     }
 };

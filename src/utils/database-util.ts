@@ -1,18 +1,8 @@
-// const mongoose = require('mongoose');
+
 import Discord from "discord.js";
 import { ZClient } from "../structure/client";
 import db from "../database/db"
 
-// module.exports = {
-//     dbInitAll: dbInitAll,
-//     dbInitReward: dbInitReward,
-//     dbInitCheckMsg: dbInitCheckMsg,
-//     dbInitHashData: dbInitHashData,
-//     checkMsgNotInChannel: checkMsgNotInChannel,
-//     loadMongodb: loadMongodb,
-//     dbInitActivityCommand: dbInitActivityCommand,
-//     dbInitHash: dbInitHash
-// }
 export default {
     async dbInitAll() {
         await db.svr.db('G-Bot').collection('Clients').drop()
@@ -64,15 +54,4 @@ export default {
         await db.svr.db('G-Bot').collection('Clients').deleteMany({ type: 'ActivityCommand' })
         await db.svr.db('G-Bot').collection('Clients').insertOne({ type: 'ActivityCommand', msg: new Map() });
     }
-}
-
-
-
-
-
-
-
-async function checkMsgNotInChannel(client, target_channel, msg) {
-    let temp = await db.svr.db('G-Bot').collection('Clients').find({ type: 'check-msg', channelId: target_channel }).toArray()
-    return !temp[0].users.includes(msg.author.id);
 }
