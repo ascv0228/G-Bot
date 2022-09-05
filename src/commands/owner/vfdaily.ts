@@ -15,7 +15,7 @@ export = {
     type: [CmdType.Owner],
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
-        msg.reply(`client.botStatus['daily']: ${String(client.botStatus['daily'])} => ${String(true)}`)
+        msg.reply(`['daily']: ${String(client.botStatus['daily'])} => ${String(true)}`)
         client.botStatus['daily'] = true
         msg.channel.send(`<@${process.env.BOT_OWNER}> 已經關閉daily提醒， 記得確實完成`);
     }
