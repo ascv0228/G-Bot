@@ -38,7 +38,7 @@ export = {
             .filter(member => member.user.username == embed.author.name).values().next().value.user as Discord.User;
 
         channel.send({ content: `<@${user.id}>`, embeds: [verifyEmbed] });
-        user.send({ content: `<@${user.id}>`, embeds: [verifyEmbed] }).catch(error => { })
+        // user.send({ content: `<@${user.id}>`, embeds: [verifyEmbed] }).catch(error => { })
         let clearChannelTopics = ['遇到verify就清空頻道', 'Clear the channel when meeting verify message']
         if (msg.channel.type == Discord.ChannelType.GuildText &&
             clearChannelTopics.includes((msg.channel as Discord.TextChannel).topic)) {
