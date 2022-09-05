@@ -671,8 +671,8 @@ export default {
     loadInitBotStatus(client: ZClient) {
         this.setTimeZone(client);
         this.initCatopen(client);
+        this.initVfDaily(client);
         this.ExecShedule(client);
         this.outputGuilds(client);
-        this.initVfDaily(client);
     }
 };

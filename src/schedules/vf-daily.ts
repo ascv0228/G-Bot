@@ -8,8 +8,8 @@ export = {
     name: "vf-daily",
 
     async execute(client: ZClient) {
-        if (client.botStatus['daily']) return;
         schedule.scheduleJob("0 0 */6 * * *", async function () {
+            if (client.botStatus['daily']) return;
             let channels = ['964699991601995787', '990817755328573441']
 
             for (let channelId of channels) {
