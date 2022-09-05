@@ -5,8 +5,8 @@ import { CmdType } from "../../utils/types";
 import dcUtil from "../../utils/discord-util";
 
 export = {
-    name: "vfdaily",
-    aliases: ['daily', 'vf-daily'],
+    name: 'daily',
+    aliases: [],
     guilds: [],
     permissions: [],
     users: ['411895879935590411'],
