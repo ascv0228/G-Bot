@@ -53,9 +53,7 @@ export = {
         for (let index in args) {
             await msg2.react(emojiArray[index])
         }
-        try {
-            msg.delete()
-        } catch { }
+        msg.delete().catch(() => { });
     }
 }
 

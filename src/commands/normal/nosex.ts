@@ -20,7 +20,7 @@ export = {
             'https://cdn.discordapp.com/attachments/964528474809323610/986532513419780096/image2.gif'
         ]
         let channel = msg.channel
-        msg.delete();
+        msg.delete().catch(() => { });
         channel.send({ content: urls[Math.random() * urls.length | 0] });
 
 
