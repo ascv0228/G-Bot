@@ -31,6 +31,7 @@ export = {
                     let player = client.manager.players.get(newState.guild.id);
                     if (player) {
                         player.destroy();
+                        (oldState.channel as Discord.VoiceChannel).send({ content: `<@${client.user.id}>, 已經離開 <#${oldState.channelId}>` })
                     }
                 }, 15000);
             }
