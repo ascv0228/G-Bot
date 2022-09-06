@@ -8,6 +8,16 @@ export = {
     name: "vf-daily",
 
     async execute(client: ZClient) {
+        schedule.scheduleJob("0 0 0 * * *", async function () {
+            client.botStatus['daily'] = false;
+
+            let channelID = '991256310563733564'
+            let msg_id = '1016235047797407754'
+            let channel = await client.channels.fetch(channelID) as Discord.TextChannel
+            let message = await channel.messages.fetch(msg_id);
+            message.edit('`釣魚機器人` 狀態: 未完成 (❌)')
+        })
+
         schedule.scheduleJob("0 0 */6 * * *", async function () {
             if (client.botStatus['daily']) return;
             let channels = ['964699991601995787', '990817755328573441']
