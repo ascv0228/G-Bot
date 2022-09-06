@@ -646,6 +646,7 @@ export default {
         let message = await channel.messages.fetch(msg_id);
         let msgEditTime = new Date(message.editedTimestamp ? message.editedTimestamp : message.createdTimestamp)
         let Now = new Date()
+        console.log(msgEditTime.getUTCDate() != Now.getUTCDate())
         if (msgEditTime.getUTCDate() != Now.getUTCDate()) {
             message.edit('`釣魚機器人` 狀態: 未完成 (❌)')
             client.botStatus['daily'] = false;
