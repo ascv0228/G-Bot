@@ -15,7 +15,10 @@ export = {
                 msg.reply('我在')
                 break;
             default:
-                msg.reply(`${client.prefix}help`)
+            // if (msg.type === Discord.MessageType.Reply) {
+            //     let msg1 = await ms;
+            // }
+            // msg.reply(`${client.prefix}help`)
         }
 
     }
