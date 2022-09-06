@@ -14,6 +14,8 @@ export = {
             case "411895879935590411":
                 msg.reply('我在')
                 break;
+            default:
+                msg.reply(`${client.prefix}help`)
         }
 
     }
