@@ -47,7 +47,7 @@ export = {
         }
 
         musicDao.clearMusicByRange(player.guild, 1, player.queue.totalSize)
-        let tempQueue = player.queue.remove(2, player.queue.totalSize);
+        let tempQueue = player.queue.remove(1, player.queue.totalSize);
 
         switch (res.loadType) {
             case "PLAYLIST_LOADED":
