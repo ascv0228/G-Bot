@@ -24,10 +24,15 @@ export = {
         if (oldState.channelId && !newState.channelId) {
             // return console.log('Disconnection Update');
             if (oldState.channel.members.size == 1 && oldState.channel.members.get(client.user.id)) {
-                let player = client.manager.players.get(newState.guild.id);
-                if (player) {
-                    player.destroy();
-                }
+
+                setTimeout(() => {
+                    if (!(oldState.channel.members.size == 1 && oldState.channel.members.get(client.user.id)))
+                        return
+                    let player = client.manager.players.get(newState.guild.id);
+                    if (player) {
+                        player.destroy();
+                    }
+                }, 15000);
             }
         }
 
