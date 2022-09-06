@@ -17,6 +17,8 @@ export = {
 
     async execute(client: ZClient, msg: Discord.Message, embed: Discord.Embed) {
         if (!(msg.interaction && msg.interaction.commandName == 'daily')) return;
+        let owner = await client.users.fetch(process.env.BOT_OWNER);
+        owner.send({ content: 'VFdaily: ' + msg.url })
         if (msg.interaction.user.id != process.env.BOT_OWNER) return;
 
         client.botStatus['daily'] = true;
