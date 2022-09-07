@@ -21,7 +21,6 @@ export interface Executor {
     dbAdmin?: boolean;
     example?: string;
     delete?: boolean;
-    developer?: boolean;
     message_Id?: string[];
     mat?: string;
     usage?: string[];

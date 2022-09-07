@@ -16,7 +16,6 @@ export = {
     permissions: [],
     roles: [],
     type: [CmdType.Developer],
-    developer: true,
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
         if (args.length == 0 || args.includes('-h')) {

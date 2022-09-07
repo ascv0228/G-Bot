@@ -49,12 +49,9 @@ export default {
             isAuth = member.permissions.has(Discord.PermissionsBitField.Flags.ManageGuild);
         }
 
-        if (isAuth && exec.developer) {
-            isAuth = this.isDeveloperUser(member);
-        }
-        if (isAuth && exec.type && exec.type.includes(CmdType.Owner)) {
-            isAuth = this.isOwnerUser(member);
-        }
+        isAuth = (isAuth && (exec.type.includes(CmdType.Universal) || exec.type.includes(CmdType.Music))
+            || exec.type.includes(CmdType.Developer) && this.isDeveloperUser(member)
+            || exec.type.includes(CmdType.Owner) && this.isOwnerUser(member))
 
         return isAuth;
     },
