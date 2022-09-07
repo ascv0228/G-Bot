@@ -43,7 +43,7 @@ function RoleInfo(msg: Discord.Message, role: Discord.Role) {
         .addFields(
             { name: '身分組名稱', value: `<@&${role.id}>`, inline: true },
             { name: 'ID', value: `${role.id}`, inline: true },
-            { name: '顏色', value: `${role.hexColor}` },
+            { name: '顏色', value: `${role.hexColor}`, inline: true },
         )
         .addFields(
             { name: `可提及`, value: `${role.mentionable}`, inline: true },
@@ -52,7 +52,8 @@ function RoleInfo(msg: Discord.Message, role: Discord.Role) {
 
         )
         .setFooter({
-            text: role.createdAt.toUTCString(),
+            // text: role.createdAt.toUTCString(),
+            text: '身分組創建時間: ' + role.createdAt.toLocaleString(),
             iconURL: msg.member.displayAvatarURL({ forceStatic: false })
         });
     if (role.icon) infoEmbed.setThumbnail(role.iconURL({ extension: 'png', size: 4096 }))
