@@ -48,10 +48,12 @@ export default {
         if (isAuth && exec.dbAdmin) {
             isAuth = member.permissions.has(Discord.PermissionsBitField.Flags.ManageGuild);
         }
+        if (exec.type) {
 
-        isAuth = (isAuth && (exec.type.includes(CmdType.Universal) || exec.type.includes(CmdType.Music))
-            || exec.type.includes(CmdType.Developer) && this.isDeveloperUser(member)
-            || exec.type.includes(CmdType.Owner) && this.isOwnerUser(member))
+            isAuth = (isAuth && (exec.type.includes(CmdType.Universal) || exec.type.includes(CmdType.Music))
+                || exec.type.includes(CmdType.Developer) && this.isDeveloperUser(member)
+                || exec.type.includes(CmdType.Owner) && this.isOwnerUser(member))
+        }
 
         return isAuth;
     },
