@@ -50,7 +50,7 @@ export default {
         }
         if (exec.type) {
 
-            isAuth = (isAuth && (exec.type.includes(CmdType.Universal) || exec.type.includes(CmdType.Music))
+            isAuth = (isAuth && (exec.type.includes(CmdType.Universal) || exec.type.includes(CmdType.Music) || exec.type.includes(CmdType.Bot))
                 || exec.type.includes(CmdType.Developer) && this.isDeveloperUser(member)
                 || exec.type.includes(CmdType.Owner) && this.isOwnerUser(member))
         }
