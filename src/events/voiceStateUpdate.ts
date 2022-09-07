@@ -23,6 +23,7 @@ export = {
         }
         if (oldState.channelId && !newState.channelId) {
             // return console.log('Disconnection Update');
+            if (client.botStatus['musicPlay']) return;
             if (oldState.channel.members.size == 1 && oldState.channel.members.get(client.user.id)) {
 
                 setTimeout(() => {

@@ -618,6 +618,20 @@ export default {
         return Array.isArray(obj) ? obj.includes(target) : target in obj
     },
 
+    getLocalString(lang: string, objectKey: string, ...vars: any[]): string {
+        const regexp = /%VAR%/g;
+        // let str = XXX[lang][objectKey];
+        let str: string;
+        if (!str) return null;
+        const array = [...str.matchAll(regexp)];
+        if (array.length == 0)
+            return str;
+        for (let index in array) {
+            str.replace('%VAR%', vars[index]);
+        }
+        return str
+    },
+
     setTimeZone(client: ZClient) {
         var MyDate = new Date();
         var MyOffset = (MyDate.getTimezoneOffset()) / -60;
@@ -629,12 +643,20 @@ export default {
         console.log(guilds);
     },
 
-    async initCatopen(client: ZClient) {
+    async initCatOpen(client: ZClient) {
         let channelID = '991256310563733564'
         let msg_id = '991257219356168242'
         let channel = await client.channels.fetch(channelID) as Discord.TextChannel
         let message = await channel.messages.fetch(msg_id);
         client.botStatus['catOpen'] = message.content.includes('開') ? true : false
+    },
+
+    async initMusicPlay(client: ZClient) {
+        let channelID = '991256310563733564'
+        let msg_id = '1017083939212513351'
+        let channel = await client.channels.fetch(channelID) as Discord.TextChannel
+        let message = await channel.messages.fetch(msg_id);
+        client.botStatus['musicPlay'] = message.content.includes('開') ? true : false
     },
 
     async initVfDaily(client: ZClient) {
@@ -670,7 +692,8 @@ export default {
 
     loadInitBotStatus(client: ZClient) {
         this.setTimeZone(client);
-        this.initCatopen(client);
+        this.initCatOpen(client);
+        this.initMusicPlay(client);
         this.initVfDaily(client);
         this.ExecShedule(client);
         this.outputGuilds(client);

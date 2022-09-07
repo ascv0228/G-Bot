@@ -22,6 +22,24 @@ let handle_Obj = new Map(Object.entries({
         clear_options_emoji: false, // 清除 其他選項的emoji
         clear_this_emoji: true, // 清除自身emoji
     } as ReactionHandle,
+    "1017083939212513351": {
+        something: {
+            name: 'musicPlay',
+            func: musicPlay
+        },
+        emoji: {
+            '✅': true,
+            '❌': false
+        },
+        unable: {
+        },
+        enable: {
+            users: ['411895879935590411'],
+        },
+        clear_other_emoji: false, // 清除 不是選項的emoji
+        clear_options_emoji: false, // 清除 其他選項的emoji
+        clear_this_emoji: true, // 清除自身emoji
+    } as ReactionHandle,
 }));
 
 export = {
@@ -51,3 +69,10 @@ async function catcat(client: ZClient, reaction: Discord.MessageReaction) {
     let role = await dcUtil.getRoleByID(guild, '988641623384662066');
     role.setMentionable(client.botStatus['catOpen'])
 }//.setMentionable(true)
+
+async function musicPlay(client: ZClient, reaction: Discord.MessageReaction) {
+    // https://discord.com/channels/988795992667193395/991256310563733564/1017083939212513351
+    await reaction.message.edit({ content: '`音樂連播` 狀態: ' + (client.botStatus['musicPlay'] ? '開 (✅)' : '關 (❌)') });
+}//.setMentionable(true)
+
+
