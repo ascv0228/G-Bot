@@ -5,7 +5,7 @@ import { CmdType } from "../../utils/types";
 
 
 export = {
-    name: "Virtual Fisher Verify",
+    name: "Virtual Fisher Daily",
     mat: /^Daily reward$/,
     guilds: [],
     description: 'Virtual Fisher 每日提醒',
