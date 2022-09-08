@@ -17,12 +17,10 @@ export = {
 
     async execute(client: ZClient, msg: Discord.Message, embed: Discord.Embed) {
         if (!(msg.interaction && msg.interaction.commandName == 'daily')) return;
-        let owner = await client.users.fetch(process.env.BOT_OWNER);
-        owner.send({ content: 'VFdaily: ' + msg.url })
+
         if (msg.interaction.user.id != process.env.BOT_OWNER) return;
 
         client.botStatus['daily'] = true;
-        msg.channel.send(`<@${msg.interaction.user.id}> 今天完成vf-daily`);
         let channelID = '991256310563733564'
         let msg_id = '1016235047797407754'
         let channel = await client.channels.fetch(channelID) as Discord.TextChannel
