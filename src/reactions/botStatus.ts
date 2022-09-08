@@ -74,7 +74,7 @@ async function musicPlay(client: ZClient, reaction: Discord.MessageReaction) {
     // https://discord.com/channels/988795992667193395/991256310563733564/1017083939212513351
     await reaction.message.edit({ content: '`音樂連播` 狀態: ' + (client.botStatus['musicPlay'] ? '開 (✅)' : '關 (❌)') });
 
-    if (client.botStatus['musicPlay']) return;
+    console.log(client.botStatus['musicPlay'])
     for (let [guildId, player] of client.manager.players) {
         let channels = await dcUtil.getGuildByID(client, guildId).channels.fetch();
         console.log('A  ', channels.keys())
