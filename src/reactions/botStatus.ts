@@ -73,6 +73,28 @@ async function catcat(client: ZClient, reaction: Discord.MessageReaction) {
 async function musicPlay(client: ZClient, reaction: Discord.MessageReaction) {
     // https://discord.com/channels/988795992667193395/991256310563733564/1017083939212513351
     await reaction.message.edit({ content: '`音樂連播` 狀態: ' + (client.botStatus['musicPlay'] ? '開 (✅)' : '關 (❌)') });
+
+    if (client.botStatus['musicPlay']) return;
+    for (let [guildId, player] of client.manager.players) {
+        let channels = await dcUtil.getGuildByID(client, guildId).channels.fetch();
+        console.log('A  ', channels.keys())
+        let voiceChannel = channels.filter(c => c.type == Discord.ChannelType.GuildVoice).filter(c => !!c.members.get(client.user.id))
+        console.log('B  ', voiceChannel.keys())
+        console.log('C  ', Array.from(voiceChannel.keys()))
+    }
+    // if (oldState.channel.members.size == 1 && oldState.channel.members.get(client.user.id)) {
+
+    //     setTimeout(() => {
+    //         if (!(oldState.channel.members.size == 1 && oldState.channel.members.get(client.user.id)))
+    //             return
+    //         let player = client.manager.players.get(newState.guild.id);
+    //         if (player) {
+    //             player.destroy();
+    //             (oldState.channel as Discord.VoiceChannel).send({ content: `<@${client.user.id}>, 已經離開 <#${oldState.channelId}>` })
+    //         }
+    //     }, 15000);
+    // }
+
 }//.setMentionable(true)
 
 
