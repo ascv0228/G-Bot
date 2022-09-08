@@ -49,13 +49,16 @@ export = {
 
     async execute(client: ZClient, event: string, reaction: Discord.MessageReaction, user: Discord.User) {
         const member = await dcUtil.getMemberByID(reaction.message.guild, user.id);
+        console.log(reaction.message.id)
         if (this[event]) {
             this[event](client, reaction, member)
         }
     },
     async messageReactionAdd(client: ZClient, reaction: Discord.MessageReaction, member: Discord.GuildMember) {
         let handle = handle_Obj.get(reaction.message.id)
+        console.log('before ', client.botStatus[handle.something['name']])
         client.botStatus[handle.something['name']] = handle.emoji[dcUtil.uniqueEmoji(reaction.emoji)]
+        console.log('after ', client.botStatus[handle.something['name']])
         if (handle.something['func']) {
             handle.something['func'](client, reaction)
         }
