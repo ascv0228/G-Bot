@@ -90,7 +90,7 @@ export default {
         }
         if (reactionHandle.clear_this_emoji) {
             reaction.users.remove(member.user.id);
-            return !tools.checkInArrayOrObject(emoji_Tag, reactionHandle.emoji)
+            return tools.checkInArrayOrObject(emoji_Tag, reactionHandle.emoji)
         }
         if (reactionHandle.clear_other_emoji && !tools.checkInArrayOrObject(emoji_Tag, reactionHandle.emoji)) {
             reaction.users.remove(member.user.id);
