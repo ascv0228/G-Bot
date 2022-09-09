@@ -693,7 +693,7 @@ export default {
         }
         client.botStatus['Before_fish_count'] = Number(mats[1]);
         client.botStatus['Now_fish_count'] = Number(mats[2]);
-        client.botStatus[] = message;
+        client.botStatus['fish_count_message'] = message;
 
     },
 
