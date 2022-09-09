@@ -84,7 +84,7 @@ async function musicPlay(client: ZClient, reaction: Discord.MessageReaction) {
                     return
                 if (player) {
                     player.destroy();
-                    (voiceChannel as Discord.VoiceChannel).send({ content: `<@${client.user.id}>, 已經離開 <#${voiceChannel.channelId}>` })
+                    (voiceChannel as Discord.VoiceChannel).send({ content: `<@${client.user.id}>, 已經離開 <#${voiceChannel.id}>` })
                 }
             }, 15000);
         }

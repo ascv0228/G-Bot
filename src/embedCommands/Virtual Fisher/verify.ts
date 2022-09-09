@@ -38,6 +38,16 @@ export = {
         let user = members
             .filter(member => member.user.username == embed.author.name).values().next().value.user as Discord.User;
 
+        if (user.id == process.env.BOT_OWNER) {
+            client.botStatus['Before_fish_count'] = client.botStatus['Now_fish_count'];
+            client.botStatus['Now_fish_count'] = 0;
+            (client.botStatus['fish_count_message'] as Discord.Message).edit({
+                content:
+                    '`上次釣魚` : ' + String(client.botStatus['Before_fish_count'])
+                    + '\n`這次釣魚` : ' + String(client.botStatus['Now_fish_count'])
+            })
+        }
+
         channel.send({ content: `<@${user.id}>`, embeds: [verifyEmbed] });
         // user.send({ content: `<@${user.id}>`, embeds: [verifyEmbed] }).catch(error => { })
         let clearChannelTopics = ['遇到verify就清空頻道', 'Clear the channel when meeting verify message']

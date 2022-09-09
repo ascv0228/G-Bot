@@ -677,6 +677,26 @@ export default {
         }
     },
 
+    async initFishCount(client: ZClient) {
+        // https://discord.com/channels/988795992667193395/991256310563733564/1016235047797407754
+
+        let channelID = '991256310563733564'
+        let msg_id = '1017773944637493339'
+        let channel = await client.channels.fetch(channelID) as Discord.TextChannel
+        let message = await channel.messages.fetch(msg_id);
+        const content = message.content
+        const mats = content.match(/^`上次釣魚` : (\d+)\n`這次釣魚` : (\d+)$/);
+        if (!mats) {
+            console.log(content)
+            console.log(mats)
+            return;
+        }
+        client.botStatus['Before_fish_count'] = Number(mats[1]);
+        client.botStatus['Now_fish_count'] = Number(mats[2]);
+        client.botStatus[] = message;
+
+    },
+
     ExecShedule(client: ZClient) {
 
         if (client.botStatus['timezone'] != 0) {
@@ -695,6 +715,7 @@ export default {
         this.initCatOpen(client);
         this.initMusicPlay(client);
         this.initVfDaily(client);
+        this.initFishCount(client);
         this.ExecShedule(client);
         this.outputGuilds(client);
     }
