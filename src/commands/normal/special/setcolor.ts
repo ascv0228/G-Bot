@@ -27,6 +27,7 @@ export = {
 
         switch (msg.guild.id) {
             case '1002583252923596820':
+                /*
                 role = msg.guild.roles.cache.find(role => role.name === `${msg.author.id}`);
                 if (!!role)
                     break;
@@ -34,7 +35,7 @@ export = {
                 role = await msg.guild.roles.create({
                     name: `${msg.author.id}`,
                     position: pos
-                })
+                })*/
                 break;
 
             case '829673608791851038':
