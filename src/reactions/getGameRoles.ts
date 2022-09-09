@@ -65,6 +65,17 @@ let handle_Obj = new Map(Object.entries({
         clear_options_emoji: false, // 清除 其他選項的emoji
         clear_this_emoji: false, // 清除自身emoji
     } as ReactionHandle,
+    "1017348001271906304": {
+        emoji: {// 拓荒
+            '1️⃣': "1017346767366398022", //藍BUFF
+            '2️⃣': "1017346838208204840", //APEX m
+            '3️⃣': "1017346885356355584", //打瓦
+            '4️⃣': "1017346926594773032", //PUBG
+        },
+        clear_other_emoji: false, // 清除 不是選項的emoji
+        clear_options_emoji: false, // 清除 其他選項的emoji
+        clear_this_emoji: false, // 清除自身emoji
+    } as ReactionHandle,
 }));
 
 
