@@ -51,9 +51,12 @@ async function OtherAddReaction(client: ZClient, msg: Discord.Message, args: str
 
 async function replyMsgAddEmoji(client: ZClient, msg: Discord.Message, args: string[]) {
     if (!msg || !args || args.length < 1 || msg.type != Discord.MessageType.Reply) return null;
+    console.log("REPLY")
     let msg1 = await msg.fetchReference();
     let reaction = matchEmoji(args[0]);
+    console.log("REPLY1")
     MessageReact(client, msg1, reaction, msg);
+    console.log("REPLY2")
     return true
 }
 
@@ -94,6 +97,7 @@ function matchEmoji(str: string): null | string {
     if (!str) return null;
     const mats = str.match(/https:\/\/cdn\.discordapp\.com\/emojis\/(\d+)\.(?:png|gif|webp)(?:\?size\=\d+&quality=\w*)?/);
     if (mats) {
+        console.log(mats)
         return mats[1];
     }
     return str;
