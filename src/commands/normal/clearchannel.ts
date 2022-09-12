@@ -4,16 +4,18 @@ import { CmdType } from "../../utils/types";
 export = {
     name: "clearchannel",
     aliases: ['clrchl'],
-    permissions: [],
-    users: ['411895879935590411'],
+    permissions: ['Administrator'],
+    users: [],
     description: '刪除並克隆頻道 (清空)',
     roles: [],
-    type: [CmdType.Owner],
+    type: [CmdType.Universal],
 
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
-        if (msg.guild.id != '1002583252923596820' && args.pop() != 'confirm')
-            return msg.reply('需要confirm')
+        if (msg.member.id != msg.guild.ownerId && msg.member.id != process.env.BOT_OWNER)
+            return msg.reply({ content: `<@${msg.guild.ownerId}>, <@${msg.member.id}> 想刪除此頻道` })
+        if (args.pop() != 'confirm')
+            return msg.reply('需要參數 confirm')
 
         let channel = args.length ? await client.channels.fetch(args[0]) as Discord.TextChannel : msg.channel as Discord.TextChannel
 

@@ -1,0 +1,6 @@
+{
+    "description.wurst.hack.anchoraura": "自動放置（可選）、充電和引爆重生錨，以殺死你周圍的人。",
+    "description.wurst.hack.antiafk": "隨機走動，以隱藏你的AFK檢測器。需要至少3x3方塊的自由空間。",
+    "description.wurst.hack.antiblind": "防止失明。\n與 OptiFine 不相容。",
+    "description.wurst.hack.anticactus": "保護你免受仙人掌的傷害。"
+}

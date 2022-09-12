@@ -619,17 +619,30 @@ export default {
     },
 
     getLocalString(lang: string, objectKey: string, ...vars: any[]): string {
-        const regexp = /%VAR%/g;
         // let str = XXX[lang][objectKey];
-        let str: string;
-        if (!str) return null;
-        const array = [...str.matchAll(regexp)];
-        if (array.length == 0)
-            return str;
-        for (let index in array) {
-            str.replace('%VAR%', vars[index]);
-        }
-        return str
+        // if (!str ) return null;
+        let str = "A %VAR% is %VAR% %VAR%"
+        let ss = str.split("%VAR%");
+        let output = ss.map(function (x, i) {
+            return i < ss.length - 1 ? (vars[i] ? x + vars[i] : x + "%VAR%") : x
+        }.bind(this)).join('');
+        return output
+    },
+
+    getLocalString2(lang: string, objectKey: string, vars: any[] | Object): string {
+        // let str = XXX[lang][objectKey];
+        // if (!str ) return null;
+        let str = "A %VAR% is %VAR% %VAR%"
+        let ss = str.split("%VAR%");
+        let output = ss.map(function (x, i) {
+            return i < ss.length - 1 ? (vars[i] ? x + vars[i] : x + "%VAR%") : x
+        }.bind(this)).join('');
+        return output
+    },
+
+    isless(snowflake1: string, snowflake2: string): boolean {
+        return ((snowflake1 < snowflake2 && snowflake1.length == snowflake2.length)
+            || snowflake1.length < snowflake2.length)
     },
 
     setTimeZone(client: ZClient) {
@@ -694,6 +707,23 @@ export default {
         client.botStatus['Before_fish_count'] = Number(mats[1]);
         client.botStatus['Now_fish_count'] = Number(mats[2]);
         client.botStatus['fish_count_message'] = message;
+
+    },
+
+    async setRewardSnowflake(client: ZClient) {
+        let channelID = '991256310563733564'
+        let msg_id = '1018729939748528128'
+        let channel = await client.channels.fetch(channelID) as Discord.TextChannel
+        let message = await channel.messages.fetch(msg_id);
+        const content = message.content
+        const mats = content.match(/^`昨日紀錄區` : (\d{18,})\n`當日紀錄區` : (\d{18,})$/);
+        if (!mats) {
+            console.log(content)
+            console.log(mats)
+            return;
+        }
+        client.botStatus['Yesterday_reward_snowflake'] = mats[1]
+        client.botStatus['Now_reward_snowflake'] = mats[2]
 
     },
 

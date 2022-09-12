@@ -3,6 +3,8 @@ import tools from "../../utils/tools";
 import { ZClient } from "../../structure/client";
 import { CmdType } from "../../utils/types";
 import auth from "../../utils/auth";
+import messageCreate from "../../events/messageCreate";
+import dcUtil from "../../utils/discord-util";
 
 export = {
     name: "addreaction",
@@ -51,8 +53,7 @@ async function replyMsgAddEmoji(client: ZClient, msg: Discord.Message, args: str
     if (!msg || !args || args.length < 1 || msg.type != Discord.MessageType.Reply) return null;
     let msg1 = await msg.fetchReference();
     let reaction = matchEmoji(args[0]);
-    msg1.react(reaction).catch(() => { msg.reply('error reaction') });
-    msg.delete().catch(e => { });
+    MessageReact(client, msg1, reaction, msg);
     return true
 }
 
@@ -63,8 +64,8 @@ async function useChannelAndMsgId(client: ZClient, msg: Discord.Message, args: s
     let reaction = matchEmoji(args[2]);
     let channel = await client.channels.fetch(channelID) as Discord.TextChannel;
     let message = await channel.messages.fetch(msg_id);
-    message.react(reaction).catch(() => { msg.reply('error reaction') });
-    msg.delete().catch(e => { });
+    MessageReact(client, message, reaction, msg);
+
     return true
 }
 
@@ -75,10 +76,19 @@ async function useMsgUrl(client: ZClient, msg: Discord.Message, args: string[]) 
     let reaction = matchEmoji(args[1]);
     let channel = await client.channels.fetch(mat.channel) as Discord.TextChannel;
     let message = await channel.messages.fetch(mat.msg);
-    message.react(reaction).catch(() => { msg.reply('error reaction') });
-    msg.delete().catch(e => { });
+    MessageReact(client, message, reaction, msg);
     return true
 }
+
+async function MessageReact(client: ZClient, targetMessage: Discord.Message, reaction_id: string, del_Message: Discord.Message) {
+    targetMessage.react(reaction_id).catch(async () => {
+        let new_emoji_id = await createEmoji(client, reaction_id);
+        await targetMessage.react(new_emoji_id);
+        deleteEmoji(client, reaction_id)
+    });
+    del_Message.delete().catch(e => { });
+}
+
 
 function matchEmoji(str: string): null | string {
     if (!str) return null;
@@ -97,3 +107,16 @@ function matchMsgUrl(str: string): any {
     }
     return null;
 }
+
+async function createEmoji(client: ZClient, emoji_id: string) {
+    let guild_id = "901498054077714462"; // CHEGG
+    let guild = client.guilds.cache.get(guild_id);
+    return (await guild.emojis.create({ attachment: await dcUtil.getUrl(emoji_id), name: 'temp' })).id;
+}
+
+async function deleteEmoji(client: ZClient, emoji_id: string) {
+    let guild_id = "901498054077714462"; // CHEGG
+    let guild = client.guilds.cache.get(guild_id);
+    return (await guild.emojis.delete(emoji_id));
+}
+

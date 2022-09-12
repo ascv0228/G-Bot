@@ -8,7 +8,7 @@ export = {
     name: "unban",
     aliases: [],
     description: '解除封鎖使用者',
-    permissions: ["ManageMessages"],
+    permissions: ["ManageGuild"],
     roles: [],
     type: [CmdType.Universal],
 
