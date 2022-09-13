@@ -3,8 +3,8 @@ import tools from "../../utils/tools";
 import { ZClient } from "../../structure/client";
 import { CmdType } from "../../utils/types";
 import auth from "../../utils/auth";
-import messageCreate from "../../events/messageCreate";
 import dcUtil from "../../utils/discord-util";
+import { Executor } from "../../structure/executor";
 
 export = {
     name: "addreaction",
@@ -14,40 +14,28 @@ export = {
     permissions: ['Administrator'],
     roles: [],
     type: [CmdType.Universal],
+    usage: [
+        ["(using reply)", "<reaction>"],
+        ["             ", "<channel_Id> <msg_Id> <reaction>"]
+    ],
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
         // if (!this.member.includes(msg.author.id)) return;
-        try {
-            if (auth.isOwnerUser(msg.member))
-                return myAddReaction(client, msg, args);
+        if (auth.isOwnerUser(msg.member))
+            return (await replyMsgAddEmoji(client, msg, args)
+                || await useMsgUrl(client, msg, args)
+                || await useChannelAndMsgId(client, msg, args)
+                || await msg.reply(tools.usageString(client, this)));
 
-            return OtherAddReaction(client, msg, args);
-        }
-        catch {
-            msg.reply('cannot use other server emoji')
-        }
+        return (await replyMsgAddEmoji(client, msg, args)
+            || await useMsgUrl(client, msg, args)
+            || await msg.reply(tools.usageString(client, this)));
+
 
     }
 };
 
-async function myAddReaction(client: ZClient, msg: Discord.Message, args: string[]) {
-    let name = "addreaction";
-    return (await replyMsgAddEmoji(client, msg, args)
-        || await useMsgUrl(client, msg, args)
-        || await useChannelAndMsgId(client, msg, args)
-        || await msg.reply('`1.(using reply)` ' + `${client.prefix}${name}  <reaction>\n`
-            + '`2.             ` ' + `${client.prefix}${name} <msg_url> <reaction>\n`
-            + '`3.             ` ' + `${client.prefix}${name} <channel_Id> <msg_Id> <reaction>`))
 
 
-}
-
-async function OtherAddReaction(client: ZClient, msg: Discord.Message, args: string[]) {
-    let name = "addreaction";
-    return (await replyMsgAddEmoji(client, msg, args)
-        || await useMsgUrl(client, msg, args)
-        || await msg.reply('`1.(using reply)` ' + `${client.prefix}${name}  <reaction>\n`
-            + '`2.             ` ' + `${client.prefix}${name} <msg_url> <reaction>`))
-}
 
 async function replyMsgAddEmoji(client: ZClient, msg: Discord.Message, args: string[]) {
     if (!msg || !args || args.length < 1 || msg.type != Discord.MessageType.Reply) return null;

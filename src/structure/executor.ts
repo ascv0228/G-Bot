@@ -23,7 +23,7 @@ export interface Executor {
     delete?: boolean;
     message_Id?: string[];
     mat?: string;
-    usage?: string[];
+    usage?: string[] | string[][];
     eggType?: number;
 
 

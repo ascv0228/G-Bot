@@ -748,5 +748,18 @@ export default {
         this.initFishCount(client);
         this.ExecShedule(client);
         this.outputGuilds(client);
+    },
+
+    usageString(client: ZClient, exec: Executor | any): string {
+        if (!exec.usage || !exec.usage.length) return null;
+        let temp: string[] = [];
+        temp.push(exec.name + " 使用說明:")
+        for (let i = 0; i < exec.usage.length; ++i) {
+            if (Array.isArray(exec.usage[i]))
+                temp.push(`${i}. ${exec.usage[i][0]} ${'`' + client.prefix + exec.name + ' ' + exec.usage[i][1] + '`'}`);
+            else
+                temp.push(`${i}. ${'`' + client.prefix + exec.name + ' ' + exec.usage[i][1] + '`'}`);
+        }
+        return temp.join('\n')
     }
 };

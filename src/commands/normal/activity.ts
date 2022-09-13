@@ -4,6 +4,7 @@ import { CmdType } from "../../utils/types";
 import dcUtil from "../../utils/discord-util";
 import scheduleUtil from "../../utils/schedule-util";
 import db from "../../database/db"
+import tools from "../../utils/tools";
 
 export = {
     roles: [],
@@ -18,11 +19,11 @@ export = {
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
         if (args.length == 0) {
-            return msg.channel.send({ content: `${client.prefix}${this.name} <month-day-hour-min> <content>` })
+            return msg.channel.send({ content: tools.usageString(client, this) })
         }
         let arr = args[0].split('-').map(Number)
         if (!checkString(arr)) {
-            return msg.channel.send({ content: `<month-day-hour-min>` })
+            return msg.channel.send({ content: tools.usageString(client, this) })
         }
         let time_string = schedule_time_string(need_time(arr))
         const repVoteEmbed = new Discord.EmbedBuilder();

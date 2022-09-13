@@ -16,11 +16,12 @@ export = {
     description: '設定私人身分組顏色',
     roles: [],
     type: [CmdType.Universal],
+    usage: ["<ColorHex>"],
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
-        if (args.length == 0)
-            return msg.reply('Need Color Hex');
-        if (getColor(args[0]) == null)
+        if (!args.length)
+            return msg.reply({ content: tools.usageString(client, this) });
+        if (!getColor(args[0]))
             return msg.reply('Error Color Hex :  #FFFFFF、FFFFFF、Random');
 
         let role: Discord.Role

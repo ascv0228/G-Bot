@@ -10,19 +10,26 @@ let roleMap = {
 
 
 export = {
-    name: "seticon",
-    aliases: ['si'],
+    name: "setIcon",
+    aliases: ['si', "seticon"],
     guilds: ['829673608791851038', '988795992667193395', /*'1002583252923596820'*/],
 
     description: '設定私人身分組圖像',
     roles: [],
     type: [CmdType.Universal],
+    usage: [
+        ["(image_attachment)", ""],
+        ["                  ", "<image's url>"],
+        ["                  ", "<emoji>"],
+        ["                  ", "<ColorHex>"],
+    ],
+
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
         if (msg.guild.premiumTier < 2)
             return msg.reply('伺服器加成等級不足2');
         if (args.length == 0 && msg.attachments.size == 0)
-            return msg.reply('Need __image__ or __image\'s url__ or __emoji__ or __Color(white、白色、透明.....)__ or __Color\'s Hex(#FFFFFF、#36393f)__');
+            return msg.reply({ content: tools.usageString(client, this) });
         let icon = getImgUrlFromAttachment(msg);
         if (!icon) {
             icon = colorMap[args[0]];

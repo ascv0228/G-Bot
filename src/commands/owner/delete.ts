@@ -20,5 +20,6 @@ export = {
         }
         let msg1 = await msg.fetchReference();
         msg1.delete().catch(() => { });
+        msg.delete().catch(() => { });
     }
 }
