@@ -16,7 +16,7 @@ export = {
             let channel = await client.channels.fetch(channelID) as Discord.TextChannel
             let message = await channel.messages.fetch(msg_id);
             message.edit('`釣魚機器人` 狀態: 未完成 (❌)')
-        })
+        });
 
         schedule.scheduleJob("0 0 */6 * * *", async function () {
             if (client.botStatus['daily']) return;
@@ -27,5 +27,11 @@ export = {
                 channel.send(`<@${process.env.BOT_OWNER}> 記得完成vf-daily`);
             }
         });
+
+        schedule.scheduleJob("0 0 4 * * *", async function () {
+            let channelID = '1019238134900338709'
+            let channel = await client.channels.fetch(channelID) as Discord.TextChannel
+            channel.send("<@1019235291598442566>, Virtual Fisher Daily");
+        })
     }
 }

@@ -65,17 +65,38 @@ let handle_Obj = new Map(Object.entries({
         clear_options_emoji: false, // 清除 其他選項的emoji
         clear_this_emoji: false, // 清除自身emoji
     } as ReactionHandle,
-    "1017348001271906304": {
-        emoji: {// 拓荒
-            '1️⃣': "1017346767366398022", //藍BUFF
-            '2️⃣': "1017346838208204840", //APEX m
-            '3️⃣': "1017346885356355584", //打瓦
-            '4️⃣': "1017346926594773032", //PUBG
+    "1017348001271906304": {// 臭鴿子
+        emoji: {
+            '1️⃣': "1017346767366398022", //輸出
+            '2️⃣': "1017346838208204840", //輔助
         },
         clear_other_emoji: false, // 清除 不是選項的emoji
         clear_options_emoji: false, // 清除 其他選項的emoji
         clear_this_emoji: false, // 清除自身emoji
     } as ReactionHandle,
+    "1019232655256068127": {// CHEGG
+        emoji: {
+            '0️⃣': "1019232187087863879", //fish
+            '1️⃣': "1019235291598442566"// daily-reminder
+        },
+        clear_other_emoji: false, // 清除 不是選項的emoji
+        clear_options_emoji: false, // 清除 其他選項的emoji
+        clear_this_emoji: false, // 清除自身emoji
+    } as ReactionHandle,
+    "1019236672291995698": {
+        emoji: {// 拓荒
+            '0️⃣': "1019235540341637151", //blue
+            '1️⃣': "1019235997474631761", //green
+            '2️⃣': "1019236034376110110", //purple
+            '3️⃣': "1019236076587593869", //pink
+            '4️⃣': "1019236171638906942", //yellow
+            '5️⃣': "1019236225581862974", //orange
+        },
+        clear_other_emoji: false, // 清除 不是選項的emoji
+        clear_options_emoji: false, // 清除 其他選項的emoji
+        clear_this_emoji: false, // 清除自身emoji
+    } as ReactionHandle,
+
 }));
 
 
