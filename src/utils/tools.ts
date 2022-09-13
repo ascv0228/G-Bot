@@ -756,9 +756,9 @@ export default {
         temp.push(exec.name + " 使用說明:")
         for (let i = 0; i < exec.usage.length; ++i) {
             if (Array.isArray(exec.usage[i]))
-                temp.push('`' + `${i}. ${exec.usage[i][0] + '`'} **=>** ${'`' + client.prefix + exec.name + ' ' + exec.usage[i][1] + '`'}`);
+                temp.push('`' + `${i + 1}. ${exec.usage[i][0] + '`'} **⇨** ${'`' + client.prefix + exec.name + ' ' + exec.usage[i][1] + '`'}`);
             else
-                temp.push('`' + `${i}.\` ${'`' + client.prefix + exec.name + ' ' + exec.usage[i][1] + '`'}`);
+                temp.push('`' + `${i + 1}.\` ${'`' + client.prefix + exec.name + ' ' + exec.usage[i] + '`'}`);
         }
         return temp.join('\n')
     }
