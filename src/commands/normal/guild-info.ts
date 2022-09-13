@@ -12,8 +12,9 @@ export = {
     permissions: [],
     roles: [],
     type: [CmdType.Universal],
-
-    members: ["411895879935590411"],
+    usage: [
+        ""
+    ],
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
         let guild: Discord.Guild;

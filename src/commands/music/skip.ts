@@ -12,6 +12,7 @@ export = {
     roles: [],
     users: [],
     type: [CmdType.Music],
+    usage: ["<number>"],
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
         let target = 0;

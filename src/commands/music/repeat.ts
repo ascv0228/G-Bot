@@ -12,6 +12,7 @@ export = {
     roles: [],
     users: [],
     type: [CmdType.Music],
+    usage: [""],
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
         const player = client.manager.players.get(msg.guild.id);

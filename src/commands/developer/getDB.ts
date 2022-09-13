@@ -2,7 +2,7 @@ import Discord from "discord.js";
 import auth from "../../utils/auth";
 import tools from "../../utils/tools";
 import { ZClient } from "../../structure/client";
-import { CmdType, CmdTypeName } from "../../utils/types";
+import { CmdType } from "../../utils/types";
 import db from "../../database/db";
 import rewardDao from "../../database/rewardDao"
 import hashDataDao from "../../database/hashDataDao"
@@ -16,16 +16,13 @@ export = {
     permissions: [],
     roles: [],
     type: [CmdType.Developer],
+    usage: [
+        "<all / reward / check-msg / music / activity / hashData>"
+    ],
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
         if (args.length == 0 || args.includes('-h')) {
-            let temp = [
-                '`' + 'all' + '`' + " : 查看全部",
-                '`' + 'reward' + '`' + " : 查看輔助獎勵",
-                '`' + 'check-msg' + '`' + " : 查看當日紀錄區發文紀錄",
-                '`' + '-h' + '`' + " : 查看參數"
-            ]
-            return msg.reply({ content: temp.join("\n") });
+            return msg.reply({ content: tools.usageString(client, this) });
         }
         if (args.includes('all'))
             getAll(client, msg, args);

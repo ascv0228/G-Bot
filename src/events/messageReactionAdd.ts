@@ -16,7 +16,7 @@ export = {
         if (!message.member) return;
         if (message.webhookId) return;
         if (!message.guild) return;
-        if (!auth.isAuthGuild(message.guild.id)) return;
+        if (!auth.isAuthGuild(message.guild.id) && message.guild.id != '1002583252923596820') return;
         const exec = client.reactions.get(message.id);
         if (exec) {
             const member = await dcUtil.getMemberByID(message.guild, user.id);

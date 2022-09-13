@@ -11,11 +11,14 @@ export = {
     permissions: ['Administrator'],
     roles: [],
     type: [CmdType.Universal],
+    usage: [
+        "<mention someone>"
+    ],
 
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
 
-        if (args.length == 0) return msg.reply('You need tag someone.')
+        if (!args.length) return msg.reply('You need tag someone.')
         try {
             let user = await msg.guild.members.ban(dcUtil.pickUserId(args[0])) as any
 

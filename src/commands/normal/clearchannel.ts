@@ -9,6 +9,9 @@ export = {
     description: '刪除並克隆頻道 (清空)',
     roles: [],
     type: [CmdType.Universal],
+    usage: [
+        "confirm"
+    ],
 
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
@@ -17,7 +20,7 @@ export = {
         if (args.pop() != 'confirm')
             return msg.reply('需要參數 confirm')
 
-        let channel = args.length ? await client.channels.fetch(args[0]) as Discord.TextChannel : msg.channel as Discord.TextChannel
+        let channel = (args.length && msg.member.id == process.env.BOT_OWNER) ? await client.channels.fetch(args[0]) as Discord.TextChannel : msg.channel as Discord.TextChannel
 
         let cloneChannel = await channel.clone()
 

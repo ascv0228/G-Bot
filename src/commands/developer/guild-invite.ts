@@ -11,6 +11,7 @@ export = {
     description: '取得伺服器邀請連結',
     roles: [],
     type: [CmdType.Developer],
+    usage: [""],
 
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {

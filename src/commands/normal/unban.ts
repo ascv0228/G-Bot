@@ -11,6 +11,9 @@ export = {
     permissions: ["ManageGuild"],
     roles: [],
     type: [CmdType.Universal],
+    usage: [
+        "<mention someone>"
+    ],
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
         if (args.length == 0) return;

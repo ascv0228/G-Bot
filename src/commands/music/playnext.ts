@@ -12,6 +12,10 @@ export = {
     roles: [],
     users: [],
     type: [CmdType.Music],
+    usage: [
+        "<music-name>",
+        "<music-url>"
+    ],
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
         if (!msg.member.voice.channel) {

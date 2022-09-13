@@ -10,10 +10,13 @@ export = {
     permissions: ["ManageGuild"],
     roles: [],
     type: [CmdType.Universal],
+    usage: [
+        "<mention someone> <command name>"
+    ],
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
         if (args.length < 2) {
-            await msg.channel.send({ content: '參數需至少二個!' });
+            await msg.channel.send({ content: tools.usageString(client, this) });
             return;
         }
 
@@ -21,7 +24,7 @@ export = {
         const execname = args[1];
 
         if (!dcId) {
-            await msg.channel.send({ content: '需提供標記名稱!' });
+            await msg.channel.send({ content: tools.usageString(client, this) });
             return;
         }
 
@@ -30,7 +33,7 @@ export = {
         if (client.cooldown.delete(cooldownTag)) {
             await msg.channel.send({ content: '重設成功!' });
         } else {
-            await msg.channel.send({ content: '重設失敗!' });
+            await msg.channel.send({ content: tools.usageString(client, this) });
         }
     },
 };

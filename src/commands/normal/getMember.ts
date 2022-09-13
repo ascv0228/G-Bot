@@ -11,6 +11,9 @@ export = {
     permissions: ['Administrator'],
     roles: [],
     type: [CmdType.Universal],
+    usage: [
+        "<mention role>"
+    ],
 
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {

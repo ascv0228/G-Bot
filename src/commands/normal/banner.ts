@@ -11,6 +11,10 @@ export = {
     permissions: ['Administrator'],
     roles: [],
     type: [CmdType.Universal],
+    usage: [
+        "",
+        "<mention someone>"
+    ],
 
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
