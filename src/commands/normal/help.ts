@@ -72,7 +72,7 @@ export = {
 
         client.commands.forEach((command) => {
             if (command.hide) return;
-            // if (command.type.includes(CmdType.Bot) || command.type.includes(CmdType.Owner)) return;
+            if (command.type.includes(CmdType.Bot) || command.type.includes(CmdType.Owner)) return;
             if (auth.isOnlyAuthMusicGuild(msg.guild.id) && !auth.isOnlyAuthMusicCommand(command)) return;
             if (cmdKey && (!command.type || !command.type.includes(cmdKey))) return;
             if (!auth.hasCommmandAuth(msg.member, command)) return;
