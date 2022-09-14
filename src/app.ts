@@ -5,18 +5,20 @@ import tools from "./utils/tools";
 import { ZClient } from "./structure/client";
 import { Installer } from "./structure/plugin/installer";
 
-process.on('uncaughtException', (err, origin) => {
-    console.error(err.stack);
-});
-
-process.on('unhandledRejection', (reason, promise) => {
-    console.error(reason);
-});
-
 const client = new Discord.Client({
     intents: tools.expandEnumValues(Discord.GatewayIntentBits) as number[],
     partials: tools.expandEnumValues(Discord.Partials) as number[]
 }) as ZClient;
+
+process.on('uncaughtException', (err, origin) => {
+    console.error(err.stack);
+    tools.Console_Send(client, err.stack);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+    console.error(reason);
+    tools.Console_Send(client, reason);
+});
 
 const pluginDir = `${__dirname}/plugins`;
 
@@ -46,5 +48,5 @@ dbMgr.connectAll()
     })
     .catch(console.error)
     .finally(() => {
-        //dbMgr.closeAll();
+        // dbMgr.closeAll();
     });
