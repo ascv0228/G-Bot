@@ -4,10 +4,28 @@ import { CmdType } from "../utils/types";
 import dcUtil from "../utils/discord-util";
 import { ReactionHandle } from "../structure/reactionExecutor";
 let handle_Obj = new Map(Object.entries({
-    "991257219356168242": {
+    "1019553857568768141": {
         something: {
             name: 'catOpen',
             func: catcat
+        },
+        emoji: {
+            '✅': true,
+            '❌': false
+        },
+        unable: {
+        },
+        enable: {
+            users: ['411895879935590411', '832777502848974920'],
+        },
+        clear_other_emoji: false, // 清除 不是選項的emoji
+        clear_options_emoji: false, // 清除 其他選項的emoji
+        clear_this_emoji: true, // 清除自身emoji
+    } as ReactionHandle,
+    "1019555357363814420": {
+        something: {
+            name: 'catAdmin',
+            func: catAdmin
         },
         emoji: {
             '✅': true,
@@ -68,6 +86,15 @@ async function catcat(client: ZClient, reaction: Discord.MessageReaction) {
     let guild = client.guilds.cache.get('829673608791851038');
     let role = await dcUtil.getRoleByID(guild, '988641623384662066');
     role.setMentionable(client.botStatus['catOpen'])
+}//.setMentionable(true)
+
+async function catAdmin(client: ZClient, reaction: Discord.MessageReaction) {
+    // https://discord.com/channels/988795992667193395/991256310563733564/991257219356168242
+    await reaction.message.edit({ content: '`釣魚伺服器` 領取 **`管理員`** 身分組 : ' + (client.botStatus['catAdmin'] ? '開 (✅)' : '關 (❌)') });
+    let guild = client.guilds.cache.get('901498054077714462');
+    let member = await dcUtil.getMemberByID(guild, "832777502848974920");
+    member.roles.add('1019231631724253265');
+
 }//.setMentionable(true)
 
 async function musicPlay(client: ZClient, reaction: Discord.MessageReaction) {
