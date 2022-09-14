@@ -11,7 +11,7 @@ export = {
     aliases: ["ae"],
     users: ["411895879935590411", "976785151126282250", "832777502848974920"],
     description: '增加表情符號',
-    permissions: [],
+    permissions: ['Administrator'],
     roles: [],
     type: [CmdType.Universal],
     usage: [
@@ -27,8 +27,6 @@ export = {
         let name: string
         if (!emoji_url) {
             emoji_url = args[0].startsWith('http') ? args[0] : await dcUtil.getUrl(dcUtil.matchEmoji(args[0]));
-            console.log(args[0])
-            console.log(emoji_url)
             if (!emoji_url)
                 return msg.reply({ content: tools.usageString(client, this) });
             name = args[1] || "temp"
@@ -37,7 +35,6 @@ export = {
         }
 
         let emoji = await msg.guild.emojis.create({ attachment: emoji_url, name: name }).catch((e) => {
-            tools.Console_Send(client, e);
             if (`${e}`.includes("maximum size")) {
                 msg.reply({ content: `image file's size is too large` })
                 return false
@@ -47,6 +44,7 @@ export = {
                 return false
             }
             msg.reply({ content: `${e}` })
+            tools.Console_Send(client, e);
             return false
         })
         if (emoji)
