@@ -46,34 +46,34 @@ let handle_Obj = new Map(Object.entries({
         clear_options_emoji: false, // 清除 其他選項的emoji
         clear_this_emoji: false, // 清除自身emoji
     } as ReactionHandle,
-    "1006766692971581511": {
-        emoji: {// 鴿子家
-            '0️⃣': '1006173668113662052',
-        },
-        clear_other_emoji: true, // 清除 不是選項的emoji
-        clear_options_emoji: false, // 清除 其他選項的emoji
-        clear_this_emoji: false, // 清除自身emoji
-    } as ReactionHandle,
+    // "1006766692971581511": {
+    //     emoji: {// 鴿子家
+    //         '0️⃣': '1006173668113662052',
+    //     },
+    //     clear_other_emoji: true, // 清除 不是選項的emoji
+    //     clear_options_emoji: false, // 清除 其他選項的emoji
+    //     clear_this_emoji: false, // 清除自身emoji
+    // } as ReactionHandle,
     "1015102083957018634": {
         emoji: {// 拓荒
-            '1️⃣': "1015101442283024425", //藍BUFF
-            '2️⃣': "1015101496355987456", //APEX m
-            '3️⃣': "1015101500768399373", //打瓦
-            '4️⃣': "1015101506745282615", //PUBG
+            '1️⃣': "1015101442283024425", // 拓荒1
+            '2️⃣': "1015101496355987456", // 拓荒2
+            '3️⃣': "1015101500768399373", // 拓荒3
+            '4️⃣': "1015101506745282615", // 拓荒4
         },
         clear_other_emoji: false, // 清除 不是選項的emoji
         clear_options_emoji: false, // 清除 其他選項的emoji
         clear_this_emoji: false, // 清除自身emoji
     } as ReactionHandle,
-    "1017348001271906304": {// 臭鴿子
-        emoji: {
-            '1️⃣': "1017346767366398022", //輸出
-            '2️⃣': "1017346838208204840", //輔助
-        },
-        clear_other_emoji: false, // 清除 不是選項的emoji
-        clear_options_emoji: false, // 清除 其他選項的emoji
-        clear_this_emoji: false, // 清除自身emoji
-    } as ReactionHandle,
+    // "1017348001271906304": {// 臭鴿子
+    //     emoji: {
+    //         '1️⃣': "1017346767366398022", //輸出
+    //         '2️⃣': "1017346838208204840", //輔助
+    //     },
+    //     clear_other_emoji: false, // 清除 不是選項的emoji
+    //     clear_options_emoji: false, // 清除 其他選項的emoji
+    //     clear_this_emoji: false, // 清除自身emoji
+    // } as ReactionHandle,
     "1019232655256068127": {// CHEGG
         emoji: {
             '0️⃣': "1019232187087863879", //fish
@@ -114,10 +114,12 @@ export = {
     },
     async messageReactionAdd(client: ZClient, reaction: Discord.MessageReaction, member: Discord.GuildMember) {
         let roleId = handle_Obj.get(reaction.message.id).emoji[dcUtil.uniqueEmoji(reaction.emoji)]
+        if (!roleId) return;
         member.roles.add(roleId)
     },
     async messageReactionRemove(client: ZClient, reaction: Discord.MessageReaction, member: Discord.GuildMember) {
         let roleId = handle_Obj.get(reaction.message.id).emoji[dcUtil.uniqueEmoji(reaction.emoji)]
+        if (!roleId) return;
         member.roles.remove(roleId)
     }
 };
