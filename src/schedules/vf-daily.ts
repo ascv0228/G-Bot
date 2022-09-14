@@ -31,7 +31,7 @@ export = {
         schedule.scheduleJob("0 0 4 * * *", async function () {
             let channelID = '1019238134900338709'
             let channel = await client.channels.fetch(channelID) as Discord.TextChannel
-            channel.send("<@1019235291598442566>, Virtual Fisher Daily");
+            channel.send("<@&1019235291598442566>, Virtual Fisher Daily");
         })
     }
 }
