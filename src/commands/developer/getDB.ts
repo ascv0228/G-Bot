@@ -46,7 +46,7 @@ export = {
         if (args.includes('activity') || args.includes('ActivityCommand'))
             getActivityCommand(client, msg, args);
 
-        return msg.reply('Finish!');
+        return msg.react("☑️");;
     }
 };
 
