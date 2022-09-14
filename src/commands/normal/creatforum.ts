@@ -21,10 +21,9 @@ export = {
         if (args.length == 0)
             return msg.reply({ content: tools.usageString(client, this) });
 
-        let forum = await createForumChannel(msg.guild, 'new forum', args[0]).catch(() => { });
+        let forum = await createForumChannel(msg.guild, 'new forum', args[0]).catch(() => { return false });
 
-        msg.reply({ content: forum ? "Finish" : "Error" })
-        console.log(forum);
+        msg.react(forum ? "☑️" : "❌");
 
     }
 };
