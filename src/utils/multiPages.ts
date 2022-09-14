@@ -50,7 +50,7 @@ function createCollectorMessage(
 
     reactionCollector.on('end', (collected) => {
         endFlag = true;
-        message.reactions.removeAll();
+        message.reactions.removeAll().catch();
     });
 
     message.react(prevBtn)
@@ -118,7 +118,7 @@ function createCollectorInputMessage(
 
     reactionCollector.on('end', (collected, reason) => {
         endFlag = true;
-        message.reactions.removeAll();
+        message.reactions.removeAll().catch();
     });
 
 
