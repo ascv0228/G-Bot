@@ -13,6 +13,7 @@ export = {
     description: 'vf-bot daily',
     roles: [],
     type: [CmdType.Owner],
+    usage: [""],
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
         msg.reply(`['daily']: ${String(client.botStatus['daily'])} => ${String(true)}`)

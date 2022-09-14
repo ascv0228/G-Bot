@@ -14,7 +14,7 @@ export = {
     type: [CmdType.Universal],
     usage: [
         "",
-        "<mention someone>"
+        "<user>"
     ],
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {

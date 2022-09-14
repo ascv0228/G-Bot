@@ -13,7 +13,7 @@ export = {
     type: [CmdType.Universal],
     usage: [
         "",
-        "<mention someone>"
+        "<user>"
     ],
 
 

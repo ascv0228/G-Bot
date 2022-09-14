@@ -12,6 +12,9 @@ export = {
     description: '取得伺服器管理員',
     roles: [],
     type: [CmdType.Owner],
+    usage: [
+        "<guild_id> <member_id>"
+    ],
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
         if (args.length < 2) return msg.reply(`${client.prefix}${this.name} <server-id> <tag-someone>`);

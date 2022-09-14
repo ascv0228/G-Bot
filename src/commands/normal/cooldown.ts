@@ -11,7 +11,7 @@ export = {
     roles: [],
     type: [CmdType.Universal],
     usage: [
-        "<mention someone> <command name>"
+        "<user> <command name>"
     ],
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {

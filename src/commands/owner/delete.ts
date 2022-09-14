@@ -12,6 +12,10 @@ export = {
     permissions: [],
     roles: [],
     type: [CmdType.Owner],
+    usage: [
+        ["(using reply)", ""]
+    ],
+
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
         if (msg.type !== Discord.MessageType.Reply) {

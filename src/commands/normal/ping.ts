@@ -9,6 +9,9 @@ export = {
     permissions: [],
     roles: [],
     type: [CmdType.Universal],
+    usage: [
+        ""
+    ],
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
         const resMsg = await msg.channel.send({ content: 'Ping...' });

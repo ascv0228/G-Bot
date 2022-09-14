@@ -2,6 +2,7 @@ import Discord from "discord.js";
 import { ZClient } from "../../structure/client";
 import { CmdType } from "../../utils/types";
 import dcUtil from "../../utils/discord-util";
+import tools from "../../utils/tools";
 
 
 export = {
@@ -11,10 +12,15 @@ export = {
     permissions: ['Administrator'],
     roles: ['MANAGE_CHANNELS', 'MANAGE_GUILD', 'MANAGE_MESSAGES', 'MANAGE_THREADS'],
     type: [CmdType.Universal],
+    usage: [
+        ["**(1~11 options)**", "<title> <options> ... "]
+    ],
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
         if (args.length > 12)
             return msg.reply({ content: '投票的選項最多11個' })
+        if (args.length < 2)
+            return msg.reply({ content: '投票的選項至少1個' })
         let title = `${args.shift()} 的投票`
         let description = [];
         for (let index in args) {

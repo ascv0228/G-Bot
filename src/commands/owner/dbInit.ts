@@ -13,7 +13,7 @@ export = {
     description: '編輯database',
     type: [CmdType.Owner],
     permissions: [],
-    usage: [`<dbClass> <user-id> <count>`],
+    usage: [`<dbClass>`],
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
         if (args.length == 0 || args.includes('-h')) {

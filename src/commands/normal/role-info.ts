@@ -12,6 +12,9 @@ export = {
     permissions: [],
     roles: [],
     type: [CmdType.Universal, CmdType.Developer],
+    usage: [
+        "<role>"
+    ],
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
         if (msg.member.permissions.has(Discord.PermissionsBitField.Flags.Administrator) || auth.isDeveloperUser(msg.member)) {

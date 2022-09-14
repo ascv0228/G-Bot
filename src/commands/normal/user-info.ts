@@ -12,6 +12,10 @@ export = {
     permissions: [],
     roles: [],
     type: [CmdType.Universal],
+    usage: [
+        "",
+        "<user>"
+    ],
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
         let mention = args.length && dcUtil.pickUserId(args[0]) ? (await dcUtil.getMemberByTag(msg.guild, args[0])) : msg.member;

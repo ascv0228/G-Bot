@@ -9,8 +9,8 @@ import { Executor } from "../../structure/executor";
 export = {
     name: "addreaction",
     aliases: ["ar"],
-    users: ["411895879935590411", "976785151126282250"],
-    description: '增加表情符號 (表情限制使用機器人所在的伺服器)',
+    users: ["411895879935590411", "976785151126282250", "832777502848974920"],
+    description: '對特定訊息加上反應(表情符號/圖片網址)',
     permissions: ['Administrator'],
     roles: [],
     type: [CmdType.Universal],
