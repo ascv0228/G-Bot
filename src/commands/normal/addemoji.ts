@@ -38,8 +38,12 @@ export = {
 
         let emoji = await msg.guild.emojis.create({ attachment: emoji_url, name: name }).catch((e) => {
             tools.Console_Send(client, e);
-            if (e.includes("maximum size")) {
+            if (`${e}`.includes("maximum size")) {
                 msg.reply({ content: `image file's size is too large` })
+                return false
+            }
+            if (`${e}`.includes("DiscordAPIError[50035]")) {
+                msg.reply({ content: `this url \`${emoji_url}\`is not image url` })
                 return false
             }
             msg.reply({ content: `${e}` })
