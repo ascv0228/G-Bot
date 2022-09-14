@@ -29,6 +29,9 @@ export = {
         }
 
         let player = client.manager.players.get(msg.guild.id);
+        if (!!player && player.voiceChannel == null) {
+            player.destroy()
+        }
         if (!player) {
             player = client.manager.create({
                 guild: msg.guild.id,

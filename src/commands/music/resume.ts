@@ -4,7 +4,7 @@ import { CmdType } from "../../utils/types";
 
 export = {
     name: "resume",
-    aliases: [],
+    aliases: ["restart"],
     description: '恢復音樂狀態',
     permissions: [],
     roles: [],
@@ -14,6 +14,9 @@ export = {
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
         const player = client.manager.get(msg.guild.id);
+        if (!player.paused) {
+            return await msg.reply({ content: "當前未暫停音樂狀態" })
+        }
 
         if (!player) {
             await msg.channel.send({ content: "尚未創建音樂播放器!" });

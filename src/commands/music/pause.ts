@@ -5,7 +5,7 @@ import { CmdType } from "../../utils/types";
 export = {
     name: "pause",
     aliases: [],
-    description: '暫停音樂狀態',
+    description: '暫停(/重啟)音樂狀態',
     permissions: [],
     roles: [],
     users: [],
@@ -29,8 +29,7 @@ export = {
             await msg.channel.send({ content: `此命令需和機器人相同頻道才可使用!` });
             return;
         }
-
-        player.pause(true);
+        player.pause(!player.paused); //⏸️ ⏯️
 
         await msg.react("☑️");
     },
