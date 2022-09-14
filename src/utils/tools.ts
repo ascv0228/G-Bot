@@ -657,11 +657,17 @@ export default {
     },
 
     async initCatOpen(client: ZClient) {
-        let channelID = '991256310563733564'
-        let msg_id = '991257219356168242'
+        let channelID = '1019553714635280394'
+        let msg_id = '1019553857568768141'
         let channel = await client.channels.fetch(channelID) as Discord.TextChannel
         let message = await channel.messages.fetch(msg_id);
         client.botStatus['catOpen'] = message.content.includes('開') ? true : false
+
+
+        let msg_id2 = '1019555357363814420'
+        let message2 = await channel.messages.fetch(msg_id2);
+        client.botStatus['catAdmin'] = message2.content.includes('開') ? true : false
+        // `釣魚伺服器` 領取 **`管理員`** 身分組 : 關 (:x:)
     },
 
     async initMusicPlay(client: ZClient) {
@@ -724,7 +730,18 @@ export default {
         }
         client.botStatus['Yesterday_reward_snowflake'] = mats[1]
         client.botStatus['Now_reward_snowflake'] = mats[2]
+    },
 
+    Console_Send(client: ZClient, obj: any) {
+        if (!obj) return;
+        (client.botStatus["Error_Log_Channel"] as Discord.TextChannel).send({ content: `𝔾:${obj}` });
+    },
+
+    async setErrorLogChannel(client: ZClient) {
+        let channelId = "1019513132093292654";
+        let channel = await client.channels.fetch(channelId) as Discord.TextChannel;
+
+        client.botStatus["Error_Log_Channel"] = channel;
     },
 
     ExecShedule(client: ZClient) {
@@ -753,7 +770,7 @@ export default {
     usageString(client: ZClient, exec: Executor | any): string {
         if (!exec.usage || !exec.usage.length) return null;
         let temp: string[] = [];
-        temp.push(exec.name + " 使用說明:")
+        temp.push(exec.name + " 使用說明: ")
         for (let i = 0; i < exec.usage.length; ++i) {
             if (Array.isArray(exec.usage[i]))
                 temp.push('`' + `${i + 1}. ${exec.usage[i][0] + '`'} **⇨** ${'`' + client.prefix + exec.name + ' ' + exec.usage[i][1] + '`'}`);
