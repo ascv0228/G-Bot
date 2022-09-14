@@ -7,8 +7,8 @@ import dcUtil from "../../utils/discord-util";
 import { Executor } from "../../structure/executor";
 
 export = {
-    name: "addreaction",
-    aliases: ["ar"],
+    name: "addemoji",
+    aliases: ["am"],
     users: ["411895879935590411", "976785151126282250", "832777502848974920"],
     description: '增加表情符號',
     permissions: [],
