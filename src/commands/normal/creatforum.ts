@@ -13,25 +13,26 @@ export = {
     roles: [],
     type: [CmdType.Universal],
     usage: [
+        "",
         "<categoryChannel-Id>"
     ],
 
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
-        if (args.length == 0)
-            return msg.reply({ content: tools.usageString(client, this) });
-
-        let forum = await createForumChannel(msg.guild, 'new forum', args[0]).catch(() => { return false });
+        let forum = await createForumChannel(msg.guild, 'new forum', args[0] || "").catch(() => { return false });
 
         msg.react(forum ? "☑️" : "❌");
 
     }
 };
 
-async function createForumChannel(guild: Discord.Guild, name: string, categoryId: string): Promise<Discord.GuildChannel> {
-    return await guild.channels.create({
+async function createForumChannel(guild: Discord.Guild, name: string, categoryId: string = ""): Promise<Discord.GuildChannel> {
+    return categoryId ? (await guild.channels.create({
         name: name,
         type: Discord.ChannelType.GuildForum,
         parent: categoryId,
-    });
+    })) : (await guild.channels.create({
+        name: name,
+        type: Discord.ChannelType.GuildForum,
+    }));
 }
