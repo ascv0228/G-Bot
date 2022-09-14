@@ -25,6 +25,7 @@ export interface Executor {
     mat?: string;
     usage?: string[] | string[][];
     eggType?: number;
+    slash?: { [key: string]: Object[] },
 
 
     execute?(client: ZClient): Promise<void>;
