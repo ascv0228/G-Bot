@@ -738,9 +738,9 @@ export default {
     },
 
     async setErrorLogChannel(client: ZClient) {
+        let guild = client.guilds.cache.get("988795992667193395")
         let channelId = "1019513132093292654";
-        let channel = await client.channels.fetch(channelId) as Discord.TextChannel;
-
+        let channel = await guild.channels.fetch(channelId) as Discord.TextChannel;
         client.botStatus["Error_Log_Channel"] = channel;
     },
 
@@ -758,7 +758,9 @@ export default {
     },
 
     loadInitBotStatus(client: ZClient) {
+        this.setErrorLogChannel(client);
         this.setTimeZone(client);
+        this.setRewardSnowflake(client);
         this.initCatOpen(client);
         this.initMusicPlay(client);
         this.initVfDaily(client);
