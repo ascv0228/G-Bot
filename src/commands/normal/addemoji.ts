@@ -26,7 +26,8 @@ export = {
         let emoji_url = getImgUrlFromAttachment(msg);
         let name: string
         if (!emoji_url) {
-            emoji_url = args[0].startsWith['http'] ? args[0] : await dcUtil.getUrl(dcUtil.matchEmoji(args[0]));
+            emoji_url = args[0].startsWith('http') ? args[0] : await dcUtil.getUrl(dcUtil.matchEmoji(args[0]));
+            console.log(args[0])
             console.log(emoji_url)
             if (!emoji_url)
                 return msg.reply({ content: tools.usageString(client, this) });
