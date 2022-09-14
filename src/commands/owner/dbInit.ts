@@ -52,7 +52,7 @@ export = {
             dbUtil.dbInitActivityCommand(args);
             msg.reply('activity 清空');
         }
-        return msg.reply('Finish!');
+        return msg.react("☑️");
     }
 
 }
