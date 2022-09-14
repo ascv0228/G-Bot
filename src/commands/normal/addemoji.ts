@@ -8,7 +8,7 @@ import { Executor } from "../../structure/executor";
 
 export = {
     name: "addemoji",
-    aliases: ["am"],
+    aliases: ["ae"],
     users: ["411895879935590411", "976785151126282250", "832777502848974920"],
     description: '增加表情符號',
     permissions: [],
@@ -27,6 +27,7 @@ export = {
         let name: string
         if (!emoji_url) {
             emoji_url = args[0].startsWith['http'] ? args[0] : await dcUtil.getUrl(dcUtil.matchEmoji(args[0]));
+            console.log
             if (!emoji_url)
                 return msg.reply({ content: tools.usageString(client, this) });
             name = args[1] || "temp"
@@ -34,7 +35,11 @@ export = {
             name = args[0] || "temp"
         }
 
-        await msg.guild.emojis.create({ attachment: emoji_url, name: name })
+        let emoji = msg.guild.emojis.create({ attachment: emoji_url, name: name })
+        emoji.catch((e) => { msg.reply({ content: `${e}` }) })
+        if (emoji)
+            return msg.reply({ content: `增加 ${emoji}` })
+        return msg.reply({ content: `Error` })
 
 
     }
