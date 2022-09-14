@@ -21,13 +21,13 @@ export = {
     ],
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
         // if (!this.member.includes(msg.author.id)) return;
-        if (args.length == 0 && msg.attachments.size == 0)
+        if (!args.length && !msg.attachments.size)
             return msg.reply({ content: tools.usageString(client, this) });
         let emoji_url = getImgUrlFromAttachment(msg);
         let name: string
         if (!emoji_url) {
             emoji_url = args[0].startsWith['http'] ? args[0] : await dcUtil.getUrl(dcUtil.matchEmoji(args[0]));
-            console.log
+            console.log(emoji_url)
             if (!emoji_url)
                 return msg.reply({ content: tools.usageString(client, this) });
             name = args[1] || "temp"
@@ -35,11 +35,16 @@ export = {
             name = args[0] || "temp"
         }
 
-        let emoji = msg.guild.emojis.create({ attachment: emoji_url, name: name })
-        emoji.catch((e) => { msg.reply({ content: `${e}` }) })
+        let emoji = await msg.guild.emojis.create({ attachment: emoji_url, name: name }).catch((e) => {
+            if (e.includes("maximum size")) {
+                msg.reply({ content: `image file's size is too large` })
+                return false
+            }
+            msg.reply({ content: `${e}` })
+            return false
+        })
         if (emoji)
             return msg.reply({ content: `增加 ${emoji}` })
-        return msg.reply({ content: `Error` })
 
 
     }
