@@ -20,7 +20,7 @@ export = {
         if (args.length < 2) return msg.reply(`${client.prefix}!${this.name} <dbClass> <something> ...`);
         if (args[0] == 'reward-4000-ticket' || args[0] == 'reward-4000') {
             Reward4000(client, args)
-            return msg.reply('Finish!');
+            return msg.react("☑️");
         }
 
     }
