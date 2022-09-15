@@ -58,8 +58,10 @@ export default {
         return isAuth;
     },
 
-    ReactionEmojiAuth(reaction: Discord.MessageReaction, member: Discord.GuildMember, reactionHandle: ReactionHandle): boolean {
+    ReactionEmojiAuth(reaction: Discord.MessageReaction, member: Discord.GuildMember, reactionHandle: ReactionHandle, event: string = "messageReactionAdd"): boolean {
         let emoji_Tag = dcUtil.uniqueEmoji(reaction.emoji);
+        if (event != "messageReactionAdd")
+            return tools.checkInArrayOrObject(emoji_Tag, reactionHandle.emoji)
         if (reactionHandle.unable) {
             if (reactionHandle.unable['roles'] && reactionHandle.unable['roles'].length != 0) {
                 if (member.roles.cache.hasAny(...reactionHandle.unable['roles'])) {

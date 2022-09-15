@@ -10,7 +10,6 @@ export = {
 
     async execute(client: ZClient, reaction: Discord.MessageReaction, user: Discord.User) {
         if (user.bot) return;
-
         const message = reaction.message.partial ? await reaction.message.fetch() : reaction.message;
 
         if (!message.member) return;
@@ -21,6 +20,8 @@ export = {
         const exec = client.reactions.get(message.id);
         if (exec) {
             const member = await dcUtil.getMemberByID(message.guild, user.id);
+            if (!!exec.handle_Obj && !auth.ReactionEmojiAuth(reaction, member, exec.handle_Obj.get(message.id), this.name))
+                return;
             exec.execute(client, this.name, reaction, user);
         }
         const msg = message.partial ? await message.fetch() : message;
@@ -33,6 +34,7 @@ export = {
                 const exec = client.embedReactions.find(v => !!(embed.title.match(v.mat)));
                 if (!exec) continue;
                 const member = await dcUtil.getMemberByID(message.guild, user.id);
+                if (!auth.ReactionEmojiAuth(reaction, member, exec.handle_Obj, this.name)) continue;
                 try {
                     exec.execute(client, this.name, reaction, user);
                 } catch (error) {
