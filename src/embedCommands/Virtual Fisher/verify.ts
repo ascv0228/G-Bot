@@ -61,12 +61,12 @@ export = {
             let cloneChannel = await channel2.clone()
             cloneChannel.setPosition(channel2.position)
             cloneChannel.send('這就是 #' + cloneChannel.name + ' 頻道的起點')
-            setTimeout(() => channel2.delete().catch(async error => { await cloneChannel.delete() }), 500);
+            setTimeout(() => channel2.delete().catch(async error => { await cloneChannel.delete().catch(); }), 500);
 
         }
         else if (msg.channel.isThread() && clearChannelTopics.includes(msg.channel.parent.topic)) {
 
-            setTimeout(() => msg.channel.delete(), 500);
+            setTimeout(() => msg.channel.delete().catch(), 500);
 
         }
     }

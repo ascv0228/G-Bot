@@ -12,7 +12,8 @@ export enum RewardChannel {
     NormalChannel = "867811395474423838",
     EverydayRewardChannel = "886269472158138429", // 棄用
     DalaoChannel = "948120050458574878",
-    TestChannel = "989138173953183744"
+    TestChannel = "989138173953183744",
+    NitroChannel = "1020573892890349669"
 }
 
 export enum RctType {

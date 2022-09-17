@@ -2,6 +2,7 @@ import { imageHash } from 'image-hash';
 import Discord, { TextChannel } from "discord.js";
 import { ZClient } from "../structure/client";
 import hashDataDao from "../database/hashDataDao"
+import { RewardChannel } from "./types";
 
 
 import crypto from "crypto";
@@ -84,13 +85,21 @@ async function getHashDataFromUrl(url: string) {
 }
 
 async function insertHashToDatabase(client: ZClient, msg: Discord.Message, hashData: string) {
-    let channelId = msg.channel.id
+    let channelId = !msg.channel.isThread() ? msg.channel.id : msg.channel.parentId
     let guildId = msg.guild.id
     let flag = await hashDataDao.checkNotInDatabase(channelId, hashData)
     if (flag == undefined) {
         hashDataDao.update(channelId, hashData, msg.url)
         return true;
     } else {
+        if (msg.channel.isThread()) {
+            channelId = msg.channel.id;
+            (await msg.reply({
+                content: '<@' + msg.member + '>' + ' use same image! in <#' + channelId + '> , ' + msg.url + '\n'
+                    + 'origin url in: ' + decodeUrl(flag, guildId, channelId)
+            })).react("❌");
+            msg.react("❌");
+        }
         let gbotlogchannel = await client.channels.fetch('964516826811858984') as TextChannel
         let gbotlogchannel2 = await client.channels.fetch('994873994597646468') as TextChannel
         gbotlogchannel.send({

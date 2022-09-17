@@ -24,7 +24,7 @@ export = {
 
         let cloneChannel = await channel.clone()
 
-        channel.delete()
+        channel.delete().catch();
         cloneChannel.send({ content: '這就是 #' + cloneChannel.name + ' 頻道的起點' })
 
     }

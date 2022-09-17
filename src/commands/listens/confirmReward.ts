@@ -13,15 +13,16 @@ export = {
     description: '外星群獎勵',
     permissions: [],
     roles: [],
-    listens: [RewardChannel.NormalChannel, RewardChannel.SupporterChannel, RewardChannel.DalaoChannel],
+    listens: [RewardChannel.NormalChannel, RewardChannel.SupporterChannel, RewardChannel.DalaoChannel, RewardChannel.NitroChannel],
     hide: true,
     bot: true,
 
     async execute(client: ZClient, msg: Discord.Message) {
         let count = await imgUtil.getNotDupeCountFromMsg(client, msg);
         if (count == 0 || count == NaN) return;
-        checkMsgDao.update(msg.channel.id, msg.author.id);
         msg.react('844246188492193812')
+        if (msg.channel.isThread() && msg.channel.parentId == RewardChannel.NitroChannel) return;
+        checkMsgDao.update(msg.channel.id, msg.author.id);
         let originCount: number;
         switch (msg.channel.id) {
             case RewardChannel.NormalChannel:
