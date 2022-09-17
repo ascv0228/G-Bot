@@ -1,4 +1,4 @@
-import Discord, { Guild, GuildMember, TextChannel } from "discord.js";
+import Discord from "discord.js";
 import { ZClient } from "../structure/client";
 import imgUtil from './img-util';
 import { RewardChannel, RewardChannelName } from "./types";
@@ -160,7 +160,7 @@ export default {
             if (temp2[`${id}`] == 'NaN')
                 output.push(`x!award ${order_userTag.get(id)} ${temp2[`${id}`] ?? 'NaN'}`)
         }
-        let channel = client.channels.cache.get(SendChannel['gbot-草稿'].id) as TextChannel;
+        let channel = client.channels.cache.get(SendChannel['gbot-草稿'].id) as Discord.TextChannel;
         for (let i = 0; i < output.length / 75; ++i) {
             channel.send({ content: '```' + (output_prefix.concat(output.slice(i * 75, (i + 1) * 75 - 1))).join('\n') + '```' });
         }

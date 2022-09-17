@@ -1,4 +1,4 @@
-import Discord, { TextChannel } from "discord.js";
+import Discord from "discord.js";
 import auth from "../utils/auth";
 import tools from "../utils/tools";
 import dcUtil from "../utils/discord-util";

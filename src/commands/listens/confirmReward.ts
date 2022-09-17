@@ -1,4 +1,4 @@
-import Discord, { Guild, GuildMember, TextChannel } from "discord.js";
+import Discord from "discord.js";
 import { ZClient } from "../../structure/client";
 import imgUtil from '../../utils/img-util';
 import rewardUtil from '../../utils/reward-util';

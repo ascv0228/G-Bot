@@ -1,4 +1,4 @@
-import Discord, { Role } from "discord.js";
+import Discord from "discord.js";
 import tools from "../../utils/tools";
 import { ZClient } from "../../structure/client";
 import { CmdType } from "../../utils/types";

@@ -1,5 +1,5 @@
 
-import Discord, { TextChannel } from "discord.js";
+import Discord from "discord.js";
 import { ZClient } from "../../structure/client";
 import { CmdType } from "../../utils/types";
 import dcUtil from "../../utils/discord-util";
@@ -57,7 +57,7 @@ export = {
                 .then(msg1.reply({ content: str }));
             return
         }
-        let channel = msg.channel as TextChannel
+        let channel = msg.channel as Discord.TextChannel
 
         (msg as any).delete()
             .then(channel.send({ content: str }));
