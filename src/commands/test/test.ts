@@ -18,8 +18,19 @@ export = {
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
         let url = args[0];
-        let b = await dcUtil.IsValidImageUrl(url, true);
-        msg.reply({ content: `${url} is ${b}` });
-
+        if (!matchMsgUrl(url)) return msg.reply({ content: 'error url' })
+        let mat = matchMsgUrl(url);
+        let channel = await client.channels.fetch(mat.channel) as Discord.TextChannel;
+        let message = await channel.messages.fetch(mat.msg);
+        msg.reply({ content: message.content })
     }
 };
+
+function matchMsgUrl(str: string): any {
+    if (!str) return null;
+    const mats = str.match(/https:\/\/discord\.com\/channels\/(\d+)\/(\d+)\/(\d+)/);
+    if (mats) {
+        return { guild: mats[1], channel: mats[2], msg: mats[3] };
+    }
+    return null;
+}
