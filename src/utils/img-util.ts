@@ -93,20 +93,25 @@ async function insertHashToDatabase(client: ZClient, msg: Discord.Message, hashD
         return true;
     } else {
 
-        let gbotlogchannel = await client.channels.fetch('964516826811858984') as Discord.TextChannel
+
         if (msg.channel.isThread()) {
             channelId = msg.channel.id;
-            // (await msg.reply({
-            //     content: '<@' + msg.member + '>' + ' use same image! in <#' + channelId + '> , ' + msg.url + '\n'
-            //         + 'origin url in: ' + decodeUrl(flag, guildId, channelId)
-            // })).react("❌");
-            msg.react("❌");
-            gbotlogchannel.send({
-                content: '<@' + msg.member + '>' + ' use same image! in <#' + channelId + '> , ' + msg.url + '\n'
-                    + 'origin url in: ' + decodeUrl(flag, guildId, channelId)
-            });
-            return
+
+            let channel = await client.channels.fetch(channelId) as Discord.TextChannel;
+            let message = await channel.messages.fetch(flag).catch(() => { return null });
+            if (!message) { return true; }
+            else {
+                msg.react("❌");
+                let temp = await client.channels.fetch('1020843902762242068') as Discord.TextChannel
+                temp.send({
+                    content: '<@' + msg.member + '>' + ' use same image! in <#' + channelId + '> , ' + msg.url + '\n'
+                        + 'origin url in: ' + decodeUrl(flag, guildId, channelId)
+                });
+                return false;
+
+            }
         }
+        let gbotlogchannel = await client.channels.fetch('964516826811858984') as Discord.TextChannel
         let gbotlogchannel2 = await client.channels.fetch('994873994597646468') as Discord.TextChannel
         gbotlogchannel.send({
             content: '<@' + msg.member + '>' + ' use same image! in <#' + channelId + '> , ' + msg.url + '\n'
