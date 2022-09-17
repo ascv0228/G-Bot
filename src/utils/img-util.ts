@@ -99,7 +99,10 @@ async function insertHashToDatabase(client: ZClient, msg: Discord.Message, hashD
 
             let channel = await client.channels.fetch(channelId) as Discord.TextChannel;
             let message = await channel.messages.fetch(flag).catch(() => { return null });
-            if (!message) { return true; }
+            if (!message) {
+                hashDataDao.update(channelId, hashData, msg.url);
+                return true;
+            }
             else {
                 msg.react("❌");
                 let temp = await client.channels.fetch('1020843902762242068') as Discord.TextChannel
