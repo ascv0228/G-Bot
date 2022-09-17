@@ -40,7 +40,7 @@ async function getNotDupeCount(client: ZClient, msg: Discord.Message, ImageUrlAr
     let count = 0
     for (let i = 0; i < ImageUrlArray.length; ++i) {
         const hash = await getHashDataFromUrl(ImageUrlArray[i]);
-        if (hash == 'error') {
+        if (hash == 'error' || undefined) {
             console.log(ImageUrlArray[i] + "has error.")
             count++;
             continue;

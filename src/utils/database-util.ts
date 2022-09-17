@@ -9,6 +9,7 @@ export default {
         await db.svr.db('G-Bot').collection('Clients').insertOne({ type: 'hashData', channelId: '963831403001307167', hash: new Map() });
         await db.svr.db('G-Bot').collection('Clients').insertOne({ type: 'hashData', channelId: '867811395474423838', hash: new Map() });
         await db.svr.db('G-Bot').collection('Clients').insertOne({ type: 'hashData', channelId: '948120050458574878', hash: new Map() });
+        await db.svr.db('G-Bot').collection('Clients').insertOne({ type: 'hashData', channelId: '1020573892890349669', hash: new Map() });
         await db.svr.db('G-Bot').collection('Clients').insertOne({ type: 'reward-ticket', msg: new Map() });
         await db.svr.db('G-Bot').collection('Clients').insertOne({ type: 'reward-big-ticket', msg: new Map() });
         await db.svr.db('G-Bot').collection('Clients').insertOne({ type: 'reward-4000-ticket', msg: new Map() });

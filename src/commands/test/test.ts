@@ -2,6 +2,7 @@ import Discord from "discord.js";
 import { ZClient } from "../../structure/client";
 import { CmdType } from "../../utils/types";
 import dcUtil from "../../utils/discord-util";
+import db from "../../database/db"
 
 export = {
     name: "test",
@@ -15,13 +16,7 @@ export = {
 
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
-        let msg1 = await msg.fetchReference();
-
-        console.log("msg1.interaction && msg1.interaction.commandName == 'daily': ", msg1.interaction && msg1.interaction.commandName == 'daily')
-
-        console.log("msg1.interaction.user.id != process.env.BOT_OWNER: ", msg1.interaction.user.id != process.env.BOT_OWNER)
-
-        // msg.channel.send(`<@${msg.interaction.user.id}> 今天完成vf-daily`);
+        await db.svr.db('G-Bot').collection('Clients').insertOne({ type: 'hashData', channelId: '1020573892890349669', hash: new Map() });
 
     }
 };
