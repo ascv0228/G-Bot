@@ -1,4 +1,4 @@
-import Discord, { TextChannel } from "discord.js";
+import Discord from "discord.js";
 import schedule from 'node-schedule';
 import { ZClient } from "../structure/client";
 import dbUtil from './database-util';
