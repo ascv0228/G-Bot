@@ -18,10 +18,11 @@ export = {
     bot: true,
 
     async execute(client: ZClient, msg: Discord.Message) {
+        if (msg.channel.isThread() && msg.channel.parentId == RewardChannel.NitroChannel && msg.channel.ownerId != msg.author.id) return;
         let count = await imgUtil.getNotDupeCountFromMsg(client, msg);
         if (count == 0 || count == NaN) return;
         msg.react('844246188492193812')
-        if (msg.channel.isThread() && msg.channel.parentId == RewardChannel.NitroChannel) return;
+        if (msg.channel.isThread() && msg.channel.parentId == RewardChannel.NitroChannel && msg.channel.ownerId == msg.author.id) return;
         checkMsgDao.update(msg.channel.id, msg.author.id);
         let originCount: number;
         switch (msg.channel.id) {
