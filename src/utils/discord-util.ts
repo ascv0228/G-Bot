@@ -214,12 +214,13 @@ export default {
         return `https://cdn.discordapp.com/emojis/${id}.gif?size=4096&quality=lossless`
     },
 
-    async IsValidImageUrl(url: string) {
+    async IsValidImageUrl(url: string, isPrint: boolean = false) {
         return new Promise(function (resolve, reject) {
             const gzip = zlib.createGzip();
 
             request.get(url)
                 .on('response', function (response) {
+                    if (isPrint) console.log(response)
                     if (response.statusCode != 200) resolve(null);
                     resolve(response.headers['content-length']);
                 })

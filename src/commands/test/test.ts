@@ -3,6 +3,7 @@ import { ZClient } from "../../structure/client";
 import { CmdType } from "../../utils/types";
 import dcUtil from "../../utils/discord-util";
 import db from "../../database/db"
+import tools from "../../utils/tools";
 
 export = {
     name: "test",
@@ -16,7 +17,9 @@ export = {
 
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
-        await db.svr.db('G-Bot').collection('Clients').insertOne({ type: 'hashData', channelId: '1020573892890349669', hash: new Map() });
+        let url = args[0];
+        let b = await dcUtil.IsValidImageUrl(url, true);
+        msg.reply({ content: `${url} is ${b}` });
 
     }
 };

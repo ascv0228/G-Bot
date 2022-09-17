@@ -1,5 +1,5 @@
 import { imageHash } from 'image-hash';
-import Discord, { TextChannel } from "discord.js";
+import Discord from "discord.js";
 import { ZClient } from "../structure/client";
 import hashDataDao from "../database/hashDataDao"
 import { RewardChannel } from "./types";
@@ -92,16 +92,22 @@ async function insertHashToDatabase(client: ZClient, msg: Discord.Message, hashD
         hashDataDao.update(channelId, hashData, msg.url)
         return true;
     } else {
+
+        let gbotlogchannel = await client.channels.fetch('964516826811858984') as Discord.TextChannel
         if (msg.channel.isThread()) {
             channelId = msg.channel.id;
-            (await msg.reply({
+            // (await msg.reply({
+            //     content: '<@' + msg.member + '>' + ' use same image! in <#' + channelId + '> , ' + msg.url + '\n'
+            //         + 'origin url in: ' + decodeUrl(flag, guildId, channelId)
+            // })).react("❌");
+            msg.react("❌");
+            gbotlogchannel.send({
                 content: '<@' + msg.member + '>' + ' use same image! in <#' + channelId + '> , ' + msg.url + '\n'
                     + 'origin url in: ' + decodeUrl(flag, guildId, channelId)
-            })).react("❌");
-            msg.react("❌");
+            });
+            return
         }
-        let gbotlogchannel = await client.channels.fetch('964516826811858984') as TextChannel
-        let gbotlogchannel2 = await client.channels.fetch('994873994597646468') as TextChannel
+        let gbotlogchannel2 = await client.channels.fetch('994873994597646468') as Discord.TextChannel
         gbotlogchannel.send({
             content: '<@' + msg.member + '>' + ' use same image! in <#' + channelId + '> , ' + msg.url + '\n'
                 + 'origin url in: ' + decodeUrl(flag, guildId, channelId)
