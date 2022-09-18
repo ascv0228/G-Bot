@@ -16,7 +16,7 @@ export = {
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
 
-        let channel = msg.channel;
+        let channel = (args.length && msg.member.id == process.env.BOT_OWNER) ? await client.channels.fetch(args[0]) as Discord.TextChannel : msg.channel as Discord.TextChannel
         console.log(channel)
 
 
