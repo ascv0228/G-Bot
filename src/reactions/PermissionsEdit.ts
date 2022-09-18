@@ -36,10 +36,10 @@ export = {
     async execute(client: ZClient, event: string, reaction: Discord.MessageReaction, user: Discord.User) {
         console.log(this.name)
         let obj = this.handle_Obj.get(reaction.message.id)
-        let role_id = obj.something['role'];
+        let roleId = obj.something['role'];
         let guild = client.guilds.cache.get(obj.something['guild']);
-        if (!role_id) return;
-        let role = await dcUtil.getRoleByID(guild, role_id);
+        if (!roleId) return;
+        let role = await dcUtil.getRoleByID(guild, roleId);
         console.log(role.name, event)
         console.log(obj.something['permissions'][event])
 

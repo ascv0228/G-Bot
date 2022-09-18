@@ -60,7 +60,7 @@ export default {
 
     ReactionEmojiAuth(reaction: Discord.MessageReaction, member: Discord.GuildMember, reactionHandle: ReactionHandle, event: string = "messageReactionAdd"): boolean {
         let emoji_Tag = dcUtil.uniqueEmoji(reaction.emoji);
-        if (event != "messageReactionAdd")
+        if (event == 'messageReactionRemove')
             return tools.checkInArrayOrObject(emoji_Tag, reactionHandle.emoji)
         if (reactionHandle.unable) {
             if (reactionHandle.unable['roles'] && reactionHandle.unable['roles'].length != 0) {
@@ -188,7 +188,7 @@ export default {
             '981737244236865577', // Infinite™
             // '1007668694765293568' //舊釣魚
             "856793573194465300", // 呵呵YA
-            "986575688159084545"
+            "986575688159084545", // 血眼龍
         ].includes(id);
     },
 
