@@ -18,8 +18,6 @@ export = {
 
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
-        console.log(await hashDataDao.deleteOne("1020573892890349669", args[0], args[1]));
-
     }
 };
 
