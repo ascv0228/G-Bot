@@ -91,9 +91,16 @@ async function catcat(client: ZClient, reaction: Discord.MessageReaction) {
 async function catAdmin(client: ZClient, reaction: Discord.MessageReaction) {
     // https://discord.com/channels/988795992667193395/991256310563733564/991257219356168242
     await reaction.message.edit({ content: '`釣魚伺服器` 領取 **`管理員`** 身分組 : ' + (client.botStatus['catAdmin'] ? '開 (✅)' : '關 (❌)') });
+
     let guild = client.guilds.cache.get('901498054077714462');
     let member = await dcUtil.getMemberByID(guild, "832777502848974920");
-    member.roles.add('1019231631724253265');
+    let roleId = '1019231631724253265'
+    if (client.botStatus['catAdmin']) {
+        member.roles.add(roleId);
+    }
+    else {
+        member.roles.remove(roleId);
+    }
 
 }//.setMentionable(true)
 
