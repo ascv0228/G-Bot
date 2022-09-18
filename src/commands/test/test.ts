@@ -18,6 +18,14 @@ export = {
 
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
+        let categoryId = '834103866772946944'
+        let category = await client.channels.fetch(categoryId) as Discord.CategoryChannel
+        let chl = category.children.cache
+        for (let [id, channel] of chl) {
+            console.log(channel)
+
+        }
+
     }
 };
 
