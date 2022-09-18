@@ -36,6 +36,7 @@ export = {
             gethashData(msg, '963831403001307167')
             gethashData(msg, '867811395474423838')
             gethashData(msg, '948120050458574878')
+            gethashData(msg, '1020573892890349669')
         }
         if (args.includes('check-msg')) {
             getCheckMsg(client, msg, args)
