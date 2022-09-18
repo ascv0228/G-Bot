@@ -6,7 +6,7 @@ import tools from "../../utils/tools";
 
 
 export = {
-    name: "creatforum",
+    name: "createforum",
     aliases: [],
     description: '建立 **論壇** 頻道',
     permissions: ['Administrator'],
