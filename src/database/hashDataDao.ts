@@ -34,6 +34,20 @@ export default {
         } finally { }
     },
 
+    async deleteOne(channelId: string, hashData: string, msg_id: string) {
+        try {
+            const collection = db.svr.db('G-Bot').collection('Clients');
+            let temp = await collection.find({ type: 'hashData', channelId: channelId, [`hash.${hashData}`]: msg_id }).toArray();
+            return temp[0].hash[hashData]
+            // await collection.updateOne({
+            //     type: 'hashData', channelId: channelId
+            // }, {
+            //     $set: {
+            //         [`hash.${hashData}`]: urlEncode(msg_url),
+            //     }
+            // }, { upsert: true });
+        } finally { }
+    },
     /*
         async findAll(): Promise<BindDataCollection> {
             const ret = {};
