@@ -35,10 +35,8 @@ export = {
                     .setTitle(`${msg.author.tag} 移動 ${client.user.tag}`)
                     .setThumbnail(msg.member.displayAvatarURL({ size: 4096, forceStatic: false }) || msg.author.displayAvatarURL({ size: 4096, forceStatic: false }))
                     .addFields(
-                        { name: `**${org_voicechannel.name}** 成員`, value: `${org_voicechannel.members.filter((m, id) => id != client.user.id).map((m, id) => `<@${id}>`)}` },
-                    )
-                    .addFields(
-                        { name: `**${tgt_voicechannel.name}** 成員`, value: `${tgt_voicechannel.members.filter((m, id) => id != client.user.id).map((m, id) => `<@${id}>`)}` },
+                        { name: `**${org_voicechannel.name}** 成員`, value: `${org_voicechannel.members.filter((m, id) => id != client.user.id).map((m, id) => `<@${id}>`)}`, inline: false },
+                        { name: `**${tgt_voicechannel.name}** 成員`, value: `${tgt_voicechannel.members.filter((m, id) => id != client.user.id).map((m, id) => `<@${id}>`)}`, inline: false }
                     )
                     .setTimestamp()
                     .setFooter({
