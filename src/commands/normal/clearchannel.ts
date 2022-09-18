@@ -22,7 +22,8 @@ export = {
 
         let channel = (args.length && msg.member.id == process.env.BOT_OWNER) ? await client.channels.fetch(args[0]) as Discord.TextChannel : msg.channel as Discord.TextChannel
 
-        let cloneChannel = await channel.clone()
+        let cloneChannel = await channel.clone().catch(() => { return false }) as any;
+        if (!cloneChannel) return msg.reply({ content: '無法克隆頻道、亦無法進行清空' })
 
         channel.delete().catch();
         cloneChannel.send({ content: '這就是 #' + cloneChannel.name + ' 頻道的起點' })
