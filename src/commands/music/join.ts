@@ -28,9 +28,32 @@ export = {
             player.connect();
         } else {
             if (player.voiceChannel != msg.member.voice.channel.id) { // check another user using or not
-                msg.reply({ content: `從 ${(await client.channels.fetch(player.voiceChannel) as Discord.VoiceChannel).name} 移動到 ${msg.member.voice.channel.name}` })
+                let org_voicechannel = await client.channels.fetch(player.voiceChannel) as Discord.VoiceChannel;
+                let tgt_voicechannel = msg.member.voice.channel
+                let joinEmbed = new Discord.EmbedBuilder()
+                    .setColor('#0099ff')
+                    .setTitle(`${msg.author.tag} 移動 ${client.user.tag}`)
+                    .setThumbnail(msg.member.displayAvatarURL({ size: 4096, forceStatic: false }) || msg.author.displayAvatarURL({ size: 4096, forceStatic: false }))
+                    .addFields(
+                        { name: `**${org_voicechannel.name}** 成員`, value: `${org_voicechannel.members.filter((m, id) => id != client.user.id).map((m, id) => `<@${id}>`)}` },
+                    )
+                    .addFields(
+                        { name: `**${tgt_voicechannel.name}** 成員`, value: `${tgt_voicechannel.members.filter((m, id) => id != client.user.id).map((m, id) => `<@${id}>`)}` },
+                    )
+                    .setTimestamp()
+                    .setFooter({
+                        text: msg.author.tag,
+                        iconURL: msg.member.displayAvatarURL({ forceStatic: false })
+                    });
+
+
+                msg.reply({ embeds: [joinEmbed] })
                 player.setVoiceChannel(msg.member.voice.channel.id);
+
             }
         }
     },
 };
+
+
+
