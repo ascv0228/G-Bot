@@ -16,7 +16,17 @@ export = {
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
 
-        let channel = (args.length && msg.member.id == process.env.BOT_OWNER) ? await client.channels.fetch(args[0]) as Discord.TextChannel : msg.channel as Discord.TextChannel
+
+        let channel: Discord.TextChannel | Discord.NewsChannel
+        if (args.length && msg.member.id == process.env.BOT_OWNER && args[0] == 'parent' && [10, 11, 12].includes(msg.channel.type)) {
+            if ((msg.channel as Discord.TextChannel).parentId) {
+                channel = (msg.channel as Discord.ThreadChannel).parent
+            }
+        }
+        if (!!channel) {
+            channel = (args.length && msg.member.id == process.env.BOT_OWNER) ? await client.channels.fetch(args[0]) as Discord.TextChannel : msg.channel as Discord.TextChannel
+        }
+
         console.log(channel)
 
 
