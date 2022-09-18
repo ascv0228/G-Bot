@@ -22,7 +22,7 @@ export = {
         let category = await client.channels.fetch(categoryId) as Discord.CategoryChannel
         let chl = category.children.cache
         for (let [id, channel] of chl) {
-            console.log(channel)
+            console.log(id, channel.name)
 
         }
 
