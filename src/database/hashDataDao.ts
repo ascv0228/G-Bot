@@ -38,7 +38,7 @@ export default {
         try {
             const collection = db.svr.db('G-Bot').collection('Clients');
             let temp = await collection.find({ type: 'hashData', channelId: channelId, [`hash.${hashData}`]: msg_id }).toArray();
-            return temp[0].hash[hashData]
+            return temp
             // await collection.updateOne({
             //     type: 'hashData', channelId: channelId
             // }, {

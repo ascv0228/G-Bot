@@ -107,7 +107,7 @@ async function insertHashToDatabase(client: ZClient, msg: Discord.Message, hashD
             let channel = await client.channels.fetch(channelId) as Discord.TextChannel;
             let message = await channel.messages.fetch(flag).catch(() => { return null });
             if (!message) {
-                hashDataDao.update(channelId, hashData, msg.url);
+                hashDataDao.update(msg.channel.parentId, hashData, msg.url);
                 return true;
             }
             else {
