@@ -27,7 +27,8 @@ export = {
 
             player.connect();
         } else {
-            if (player.voiceChannel != msg.member.voice.channel.id) {
+            if (player.voiceChannel != msg.member.voice.channel.id) { // check another user using or not
+                msg.reply({ content: `從 ${(await client.channels.fetch(player.voiceChannel) as Discord.VoiceChannel).name} 移動到 ${msg.member.voice.channel.name}` })
                 player.setVoiceChannel(msg.member.voice.channel.id);
             }
         }
