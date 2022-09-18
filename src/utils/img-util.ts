@@ -88,6 +88,13 @@ async function insertHashToDatabase(client: ZClient, msg: Discord.Message, hashD
     let channelId = !msg.channel.isThread() ? msg.channel.id : msg.channel.parentId
     let guildId = msg.guild.id
     let flag = await hashDataDao.checkNotInDatabase(channelId, hashData)
+    if (msg.channel.isThread()) {
+        let temp = await client.channels.fetch('1020843902762242068') as Discord.TextChannel;
+        temp.send({
+            content: msg.url + '\n'
+                + `hashData: \`${hashData}\``
+        });
+    }
     if (flag == undefined) {
         hashDataDao.update(channelId, hashData, msg.url)
         return true;
