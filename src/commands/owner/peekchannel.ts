@@ -31,7 +31,7 @@ export = {
         console.log('=======================')
         console.log(channel.type)
         console.log(channel.id, channel.name)
-        console.log(channel.permissionOverwrites)
+        console.log(channel.permissionOverwrites.cache)
 
 
     }
