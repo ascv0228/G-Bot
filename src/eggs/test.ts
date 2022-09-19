@@ -15,10 +15,10 @@ export = {
     eggType: EggType.PartSame,
 
     async execute(client: ZClient, msg: Discord.Message, listen: string) {
-        // if (dcUtil.pickRoleId(listen) && !msg.mentions.roles.get(dcUtil.pickRoleId(listen))) {
-        //     msg.reply({ content: rolesMap[listen] + `, ${msg.member} 找你, test1` });
-        // }
-        // msg.reply({ content: rolesMap[listen] + `, ${msg.member} 找你, test2` });
+        if (dcUtil.pickRoleId(listen) && msg.mentions.roles.get(dcUtil.pickRoleId(listen))) {
+            msg.reply({ content: rolesMap[listen] + `, ${msg.member} 找你, test1` });
+        }
+        msg.reply({ content: rolesMap[listen] + `, ${msg.member} 找你, test2` });
 
 
     }

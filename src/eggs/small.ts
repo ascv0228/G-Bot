@@ -17,7 +17,7 @@ export = {
     eggType: EggType.PartSame,
 
     async execute(client: ZClient, msg: Discord.Message, listen: string) {
-        if (dcUtil.pickRoleId(listen) && !msg.mentions.roles.get(dcUtil.pickRoleId(listen))) return;
+        if (dcUtil.pickRoleId(listen) && msg.mentions.roles.get(dcUtil.pickRoleId(listen))) return;
         if (!this.channels.includes(msg.channel.id) &&
             !(msg.channel.isThread() && this.channels.includes(msg.channel.parentId)))
             return msg.reply({ content: '頻道錯誤' });

@@ -18,7 +18,7 @@ export = {
     eggType: EggType.PartSame,
 
     async execute(client: ZClient, msg: Discord.Message, listen: string) {
-        if (dcUtil.pickRoleId(listen) && !msg.mentions.roles.get(dcUtil.pickRoleId(listen))) return;
+        if (dcUtil.pickRoleId(listen) && msg.mentions.roles.get(dcUtil.pickRoleId(listen))) return;
 
         return msg.reply({ content: rolesMap[listen] + `, ${msg.member} 找你` });
 
