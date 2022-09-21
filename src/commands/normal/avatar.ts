@@ -3,7 +3,6 @@ import tools from "../../utils/tools";
 import { ZClient } from "../../structure/client";
 import { CmdType } from "../../utils/types";
 import dcUtil from "../../utils/discord-util";
-import { DiscordBanners } from 'discord-banners';
 
 export = {
     name: 'avatar',
@@ -49,10 +48,8 @@ export = {
 
 
 async function checkHasBanner(client: ZClient, userId: string) {
-
-    const discordBanners = new DiscordBanners(client);
     try {
-        const banner = await discordBanners.getBanner(userId, { size: 2048, format: "png", forceStatic: false });
+        const banner = await dcUtil.getBanner(client, userId, { size: "2048", format: "png", dynamic: true });
         if (!banner.includes('http')) return null;
         return banner;
     }

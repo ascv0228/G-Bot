@@ -2,7 +2,6 @@ import Discord from "discord.js";
 import { ZClient } from "../../structure/client";
 import { CmdType } from "../../utils/types";
 import dcUtil from "../../utils/discord-util";
-import { DiscordBanners } from 'discord-banners';
 
 export = {
     name: "banner",
@@ -17,13 +16,9 @@ export = {
     ],
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
-        const discordBanners = new DiscordBanners(client);
         let member = await dcUtil.getMemberByTag(msg.guild, args[0]) || msg.member;
-        const banner = await discordBanners.getBanner(member.user.id, { size: 2048, format: "png", dynamic: true })
-        if (banner) {
-            msg.channel.send(banner);
-            msg.channel.send({ content: "test: " + await dcUtil.getBanner(client, member.user.id, { size: "2048", format: "png", dynamic: true }) })
-        }
+        const banner = await dcUtil.getBanner(client, member.user.id, { size: "2048", format: "png", dynamic: true })
+        if (banner) { return msg.channel.send(banner); }
         else if (!banner) return msg.channel.send("User banner not found!")
     }
 };

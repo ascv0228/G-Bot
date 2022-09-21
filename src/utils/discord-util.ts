@@ -254,6 +254,7 @@ export default {
                 }
             }).then(res => res.json())
                 .then(async user => {
+                    console.log(user)
                     if (user.code == 50035) throw new SyntaxError("User not found.")
                     if (user.banner !== null) Data = await this.createBannerURL(user.id, user.banner, format, size, dynamic)
                     if (user.banner === null && user.banner_color !== null) Data = user.banner_color

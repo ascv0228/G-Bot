@@ -1,5 +1,4 @@
 
-import { DiscordBanners } from 'discord-banners';
 import Discord from "discord.js";
 import { ZClient } from "../structure/client";
 import { CmdType } from "../utils/types";
@@ -9,11 +8,10 @@ export = {
     name: "banner",
 
     async execute(client: ZClient, interaction: Discord.SelectMenuInteraction, args: string[]) {
-        const discordBanners = new DiscordBanners(client);
         let member = interaction.member;
 
         let user = await dcUtil.getMemberByTag(interaction.guild, args[0]) || interaction.member;
-        const banner = await discordBanners.getBanner(user.user.id, { size: 2048, forceStatic: false })
+        const banner = await dcUtil.getBanner(client, user.user.id, { size: "2048" })
         console.log(banner);
         if (banner) {
             const avatarEmbed = new Discord.EmbedBuilder()
