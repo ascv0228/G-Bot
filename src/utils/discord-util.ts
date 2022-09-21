@@ -3,6 +3,7 @@ import Discord from "discord.js";
 import { ZClient } from "../structure/client";
 import tools from "../utils/tools";
 
+const fetch = require("node-fetch");
 
 var request = require('request').defaults({ encoding: null });
 
@@ -233,5 +234,40 @@ export default {
                 .pipe(gzip);
 
         });
+    },
+
+    async createBannerURL(userId: string, banner: string, format: string = "png", size: string = "1024", dynamic = true) {
+        if (dynamic) format = banner.startsWith("a_") ? "gif" : format;
+        return `https://cdn.discordapp.com/banners/${userId}/${banner}.${format}${parseInt(size) ? `?size=${parseInt(size)}` : ''}`
+    },
+
+    async getBanner(client: ZClient, userId: string, { format = "png", size = "1024", dynamic = true } = {}) {
+        if (format && !allowedFormats.includes(format)) throw new SyntaxError("Please specify an available format.");
+        if (size && (!allowedSizes.includes(parseInt(size)) || isNaN(parseInt(size)))) throw new SyntaxError("Please specify an avaible size.");
+        if (dynamic && typeof dynamic !== "boolean") throw new SyntaxError("Dynamic option must be Boolean.")
+        let Data = ""
+        try {
+            await fetch(`https://discord.com/api/v9/users/${userId}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bot ${client.token}`
+                }
+            }).then(res => res.json())
+                .then(async user => {
+                    if (user.code == 50035) throw new SyntaxError("User not found.")
+                    if (user.banner !== null) Data = await this.createBannerURL(user.id, user.banner, format, size, dynamic)
+                    if (user.banner === null && user.banner_color !== null) Data = user.banner_color
+                    if (user.banner === null && user.banner_color === null) throw new SyntaxError("User has no banner or banner color.");
+                })
+        } catch (err) {
+            throw new Error("An unexpected error occurred.");
+        }
+        return Data
     }
 };
+
+
+const allowedFormats = ["webp", "png", "jpg", "jpeg", "gif"];
+const allowedSizes = Array.from({
+    length: 9
+}, (e, i) => 2 ** (i + 4));
