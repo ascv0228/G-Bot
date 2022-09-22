@@ -236,35 +236,36 @@ export default {
         });
     },
 
-    async createBannerURL(userId: string, banner: string, format: string = "png", size: string = "1024", dynamic = true) {
-        if (dynamic) format = banner.startsWith("a_") ? "gif" : format;
-        return `https://cdn.discordapp.com/banners/${userId}/${banner}.${format}${parseInt(size) ? `?size=${parseInt(size)}` : ''}`
+    async createBannerURL(userId: string, banner: string, size: string | number) {
+        let format = banner.startsWith("a_") ? "gif" : "png";
+        return `https://cdn.discordapp.com/banners/${userId}/${banner}.${format}?size=${size}`
     },
 
-    async getBanner(client: ZClient, userId: string, { format = "png", size = "1024", dynamic = true } = {}) {
-        if (format && !allowedFormats.includes(format)) throw new SyntaxError("Please specify an available format.");
-        if (size && (!allowedSizes.includes(parseInt(size)) || isNaN(parseInt(size)))) throw new SyntaxError("Please specify an avaible size.");
-        if (dynamic && typeof dynamic !== "boolean") throw new SyntaxError("Dynamic option must be Boolean.")
-        let Data = ""
+    async getBanner(userId: string) {
+        let size = 4096;
+        if (size && (!allowedSizes.includes(size) || isNaN(size))) return null;
+        let Data: string;
         try {
-            await fetch(`https://discord.com/api/v9/users/${userId}`, {
+            await fetch(`https://discord.com/api/v10/users/${userId}`, {
                 method: 'GET',
                 headers: {
-                    'Authorization': `Bot ${client.token}`
+                    'Authorization': `Bot ${process.env.BOT_TOKEN}`
                 }
-            }).then(res => res.json())
+            })
+                .then(res => res.json())
                 .then(async user => {
-                    console.log(user)
-                    if (user.code == 50035) throw new SyntaxError("User not found.")
-                    if (user.banner !== null) Data = await this.createBannerURL(user.id, user.banner, format, size, dynamic)
+                    if (user.code == 50035) Data = null;
+                    if (user.banner === null && user.banner_color === null) Data = null;
+                    if (user.banner !== null) Data = await this.createBannerURL(user.id, user.banner, size)
                     if (user.banner === null && user.banner_color !== null) Data = user.banner_color
-                    if (user.banner === null && user.banner_color === null) throw new SyntaxError("User has no banner or banner color.");
                 })
-        } catch (err) {
-            throw new Error("An unexpected error occurred.");
         }
-        return Data
+        catch (err) {
+            console.error(err)
+        }
+        return Data;
     }
+
 };
 
 
