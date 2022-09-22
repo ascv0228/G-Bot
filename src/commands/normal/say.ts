@@ -5,7 +5,6 @@ import { CmdType } from "../../utils/types";
 import dcUtil from "../../utils/discord-util";
 import auth from "../../utils/auth";
 
-let substring = ['@everyone', '@here'];
 let allow_users = '832777502848974920'
 let d1 = new Date().getTime();
 
@@ -34,23 +33,11 @@ export = {
             }
         }
         let str = args.join(" ")
-        str = newlines(str)
-        if (str.length == 0)
-            return;
-        let roleIds = dcUtil.pickAllRoleId(str)
-        str = str.replaceAll('@everyone', `@ everyone`);
-        str = str.replaceAll('@here', `@ here`);
+        str = await dcUtil.dealStringMention(msg.guild, str);
         let msg1: Discord.Message;
         if (msg.type === Discord.MessageType.Reply) {
             msg1 = await msg.fetchReference();
         }
-        if (roleIds != null) {
-            for (let roleId of roleIds) {
-                let role = await dcUtil.getRoleByID(msg.guild, roleId[1]);
-                str = str.replaceAll(roleId[0], `@${role.name}`);
-            }
-        }
-
 
         if (msg1) {
             (msg as any).delete()
@@ -66,7 +53,3 @@ export = {
 
     }
 };
-
-function newlines(str: string): string {
-    return str.replaceAll('\\n', `\n`);
-}

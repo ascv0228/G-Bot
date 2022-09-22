@@ -264,6 +264,33 @@ export default {
             console.error(err)
         }
         return Data;
+    },
+
+    async dealStringMention(guild: Discord.Guild, str: string,
+        { newlines = true, AllowEveryone = false, AllowRole = false, AllowMention = true } = {}): Promise<string> {
+        if (newlines) {
+            str = str.replaceAll('\\n', `\n`);
+        }
+        if (str.search("@") == -1)
+            return str;
+        if (!AllowEveryone) {
+            str = str.replaceAll('@everyone', `@ everyone`);
+            str = str.replaceAll('@here', `@ here`);
+        }
+        if (!AllowRole) {
+            let roleIds = this.pickAllRoleId(str);
+            if (roleIds != null) {
+                for (let roleId of roleIds) {
+                    let role = await this.getRoleByID(guild, roleId[1]);
+                    if (role)
+                        str = str.replaceAll(roleId[0], `@${role.name}`);
+                }
+            }
+        }
+        if (!AllowMention) {
+            // no finish
+        }
+        return str;
     }
 
 };
