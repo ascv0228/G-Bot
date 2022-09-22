@@ -9,6 +9,7 @@ export = {
     name: 'voiceStateUpdate',
 
     async execute(client: ZClient, oldState: Discord.VoiceState, newState: Discord.VoiceState) {
+        if (process.env.BOT_PREFIX != "g!") return
         if (!auth.isAuthGuild(oldState.guild.id)) return;
         if (!auth.isAuthGuild(newState.guild.id)) return;
         if (!(oldState.channelId && oldState.channel.members.get(client.user.id))

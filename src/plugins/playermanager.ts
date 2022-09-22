@@ -53,6 +53,7 @@ async function restoreMusicStatus(this: ZClient) {
 }
 
 export function install(client: ZClient) {
+    if (process.env.BOT_PREFIX != "g!") return
     client.restoreMusicStatus = restoreMusicStatus;
     client.manager = new erela.Manager({
         nodes: [{
