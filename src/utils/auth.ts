@@ -59,6 +59,7 @@ export default {
     },
 
     ReactionEmojiAuth(reaction: Discord.MessageReaction, member: Discord.GuildMember, reactionHandle: ReactionHandle, event: string = "messageReactionAdd"): boolean {
+        if (!member) return false;
         let emoji_Tag = dcUtil.uniqueEmoji(reaction.emoji);
         if (event == 'messageReactionRemove')
             return tools.checkInArrayOrObject(emoji_Tag, reactionHandle.emoji)
