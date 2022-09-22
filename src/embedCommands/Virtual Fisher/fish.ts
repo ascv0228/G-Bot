@@ -3,11 +3,6 @@ import tools from "../../utils/tools";
 import dcUtil from "../../utils/discord-util";
 import { ZClient } from "../../structure/client";
 import { CmdType } from "../../utils/types";
-let guild_cId = {
-    '1002583252923596820': '1006419928364105778',
-    '1007668694765293568': '1007671368923492462',
-    '981737244236865577': '1009857192683384983',
-}
 
 export = {
     name: "Virtual Fisher Fish",
