@@ -241,8 +241,7 @@ export default {
         return `https://cdn.discordapp.com/banners/${userId}/${banner}.${format}?size=${size}`
     },
 
-    async getBanner(userId: string) {
-        let size = 4096;
+    async getBanner(userId: string, size: number = 4096) {
         if (size && (!allowedSizes.includes(size) || isNaN(size))) return null;
         let Data: string;
         try {
