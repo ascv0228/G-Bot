@@ -13,4 +13,5 @@ export interface Preference {
     updateCoolDown(this: ZClient, message: Discord.Message, exec: Executor): void;
     coolDownExpired(this: ZClient, message: Discord.Message, exec: Executor): boolean;
     getChannelInfo(this: ZClient, gid: string, cid: string, author?: Discord.User): BotMessage;
+    DiscordLog(this: ZClient, message?: any, ...optionalParams: any[]): void;
 }
