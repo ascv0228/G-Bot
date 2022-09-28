@@ -49,7 +49,7 @@ export = {
 
 async function checkHasBanner(client: ZClient, userId: string) {
     try {
-        const banner = await dcUtil.getBanner(userId, { size: "2048", format: "png", dynamic: true });
+        const banner = await dcUtil.getBanner(userId);
         if (!banner.includes('http')) return null;
         return banner;
     }
