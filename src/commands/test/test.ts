@@ -5,6 +5,7 @@ import dcUtil from "../../utils/discord-util";
 import db from "../../database/db"
 import tools from "../../utils/tools";
 import hashDataDao from "../../database/hashDataDao"
+const fetch = require("node-fetch");
 
 export = {
     name: "test",
@@ -23,17 +24,26 @@ export = {
         let chl = category.children.cache
         for (let [id, channel] of chl) {
             console.log(id, channel.name)
-
         }
+        // dcApi(client, args[0])
 
     }
 };
+// `https://discord.com/api/v10/users/@me/guilds/${guildId}/member`
+async function dcApi(client, api) {
 
-function matchMsgUrl(str: string): any {
-    if (!str) return null;
-    const mats = str.match(/https:\/\/discord\.com\/channels\/(\d+)\/(\d+)\/(\d+)/);
-    if (mats) {
-        return { guild: mats[1], channel: mats[2], msg: mats[3] };
+    try {
+        await fetch(api, {
+            method: 'GET', headers: { 'Authorization': `Bot ${process.env.BOT_TOKEN}` }
+        }).then(res => res.json()).then(d => {
+            let data = JSON.stringify(d);
+            const attachment = new Discord.AttachmentBuilder(Buffer.from(data, 'utf-8'), { name: 'test-api.json' });
+            (client.botStatus["Error_Log_Channel"] as Discord.TextChannel).send({ files: [attachment] });
+        })
+
+
+    } catch (err) {
+        console.log(err)
     }
-    return null;
+
 }
