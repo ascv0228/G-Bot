@@ -11,7 +11,7 @@ export = {
         let member = interaction.member;
 
         let user = await dcUtil.getMemberByTag(interaction.guild, args[0]) || interaction.member;
-        const banner = await dcUtil.getBanner(user.user.id, { size: "2048" })
+        const banner = await dcUtil.getBanner(user.user.id)
         console.log(banner);
         if (banner) {
             const avatarEmbed = new Discord.EmbedBuilder()
