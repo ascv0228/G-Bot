@@ -120,6 +120,7 @@ dist
 
 # test
 
-commands/test/
+src/commands/test/
 logs/
 built/
+package-lock.json
