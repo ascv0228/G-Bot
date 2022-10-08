@@ -6,9 +6,9 @@ import dcUtil from "../../utils/discord-util";
 export = {
     name: "getBigEmoji",
     aliases: ['gbe'],
+    permissions: ['Administrator'],
 
     description: '取得emoji大圖',
-    permissions: [],
     roles: [],
     type: [CmdType.Universal],
     usage: [
