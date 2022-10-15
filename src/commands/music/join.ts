@@ -27,6 +27,9 @@ export = {
 
             player.connect();
         } else {
+            if (!player.voiceChannel){
+                player.setVoiceChannel(msg.member.voice.channel.id);
+            }
             if (player.voiceChannel != msg.member.voice.channel.id) { // check another user using or not
                 let org_voicechannel = await client.channels.fetch(player.voiceChannel) as Discord.VoiceChannel;
                 let tgt_voicechannel = msg.member.voice.channel

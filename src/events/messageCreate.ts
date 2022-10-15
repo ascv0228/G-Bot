@@ -12,7 +12,7 @@ export = {
         if (!message.member) return;
         if (message.webhookId && !auth.isAllowWebhook(message.member)) return;
         if (!message.guild) return;
-        if (!auth.isAuthGuild(message.guild.id) && message.guild.id != '1002583252923596820') return;
+        if (!auth.isAuthGuild(message.guild.id) /*&& message.guild.id != '1002583252923596820'*/) return;
 
 
         if (message.embeds) {
@@ -34,7 +34,7 @@ export = {
             }
 
         }
-        if (message.guild.id == '1002583252923596820') return;
+        // if (message.guild.id == '1002583252923596820') return;
 
         // rewardUtil.confirmReward(client, message);
 

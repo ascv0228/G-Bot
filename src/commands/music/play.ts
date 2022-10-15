@@ -39,6 +39,9 @@ export = {
                 textChannel: msg.channel.id,
             });
         } else {
+            if (!player.voiceChannel){
+                player.setVoiceChannel(msg.member.voice.channel.id);
+            }
             if (msg.member.voice.channel.id != player.voiceChannel) {
                 await msg.channel.send({ content: `此命令需和機器人相同頻道才可使用!` });
                 return;
