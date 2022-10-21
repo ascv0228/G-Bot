@@ -5,7 +5,8 @@ import auth from "../utils/auth";
 import { ZClient } from "../structure/client";
 
 let guild_cId = {
-    '901498054077714462': '1019254792670949436'
+    '901498054077714462': '1019254792670949436',
+    '1032880609883856937': '1032880609909026845'
 }
 
 export = {
