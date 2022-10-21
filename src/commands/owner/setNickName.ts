@@ -17,7 +17,7 @@ export = {
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
         if (args.length < 1) return msg.reply({ content: '參數錯誤' });
         let member = await dcUtil.getMemberByID(msg.guild, client.user.id);;
-        member.setNickname(args[0]);
+        member.setNickname(args.join(' '));
     }
 };
 

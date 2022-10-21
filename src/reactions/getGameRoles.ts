@@ -96,6 +96,32 @@ let handle_Obj = new Map(Object.entries({
         clear_options_emoji: false, // 清除 其他選項的emoji
         clear_this_emoji: false, // 清除自身emoji
     } as ReactionHandle,
+    "1032883643619745893": {
+        emoji: {// 拓荒
+            '0️⃣': "1032880609883856944", //blue
+            '1️⃣': "1032880609883856943", //green
+            '2️⃣': "1032880609883856942", //purple
+            '3️⃣': "1032880609883856941", //pink
+            '4️⃣': "1032880609883856940", //yellow
+            '5️⃣': "1032880609883856939", //orange
+        },
+        clear_other_emoji: false, // 清除 不是選項的emoji
+        clear_options_emoji: false, // 清除 其他選項的emoji
+        clear_this_emoji: false, // 清除自身emoji
+    } as ReactionHandle,
+    "1032887406115946506": {
+        emoji: {// 拓荒
+            '0️⃣': "1032886047283089418", //噁男
+            '1️⃣': "1032886279974690816", //夜貓子
+            '2️⃣': "1032886414590873650", //ㄌㄌㄎ
+            '3️⃣': "1032886590944575508", //變態腿控
+            '4️⃣': "1032886602168537118", //單身廢宅
+            '5️⃣': "1032885420280782878", //可以瑟瑟
+        },
+        clear_other_emoji: false, // 清除 不是選項的emoji
+        clear_options_emoji: false, // 清除 其他選項的emoji
+        clear_this_emoji: false, // 清除自身emoji
+    } as ReactionHandle,
 
 }));
 
