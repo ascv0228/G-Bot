@@ -70,9 +70,9 @@ export default {
 
         let file_name = `${date.getMonth() + 1}-${date.getDate()}(support).txt`
         const attachment = new Discord.AttachmentBuilder(Buffer.from(output.join('\n')), { name: file_name });
-        let channel = client.channels.cache.get(SendChannel['gbot-草稿'].id) as Discord.TextChannel;
-        channel.send({ files: [attachment] });
-        channel.send({ content: file_name + '```' + output.join('\n') + '```' });
+        // let channel = client.channels.cache.get(SendChannel['gbot-草稿'].id) as Discord.TextChannel;
+        // channel.send({ files: [attachment] });
+        // channel.send({ content: file_name + '```' + output.join('\n') + '```' });
     },
 
     async getRecordText(client: ZClient, guild: Discord.Guild, args: string[], prefix_suffix: string[]) {
@@ -84,11 +84,11 @@ export default {
         let file_name = `${date.getMonth() + 1}-${date.getDate()}(${args[2]}).txt`
         const attachment = new Discord.AttachmentBuilder(Buffer.from((output_prefix.concat(output)).join('\n')), { name: file_name });
 
-        let channel = client.channels.cache.get(SendChannel['gbot-草稿'].id) as Discord.TextChannel;
-        channel.send({ files: [attachment] });
-        for (let i = 0; i < output.length / 75; ++i) {
-            channel.send({ content: file_name + '```' + (output_prefix.concat(output.slice(i * 75, (i + 1) * 75 - 1))).join('\n') + '```' });
-        }
+        // let channel = client.channels.cache.get(SendChannel['gbot-草稿'].id) as Discord.TextChannel;
+        // channel.send({ files: [attachment] });
+        // for (let i = 0; i < output.length / 75; ++i) {
+        //     channel.send({ content: file_name + '```' + (output_prefix.concat(output.slice(i * 75, (i + 1) * 75 - 1))).join('\n') + '```' });
+        // }
         // client.channels.cache.get(sendChannel).send({ content: file_name + '```' + (output_prefix.concat(output)).join('\n') + '```' });
     },
 
@@ -160,10 +160,10 @@ export default {
             if (temp2[`${id}`] == 'NaN')
                 output.push(`x!award ${order_userTag.get(id)} ${temp2[`${id}`] ?? 'NaN'}`)
         }
-        let channel = client.channels.cache.get(SendChannel['gbot-草稿'].id) as Discord.TextChannel;
-        for (let i = 0; i < output.length / 75; ++i) {
-            channel.send({ content: '```' + (output_prefix.concat(output.slice(i * 75, (i + 1) * 75 - 1))).join('\n') + '```' });
-        }
+        // let channel = client.channels.cache.get(SendChannel['gbot-草稿'].id) as Discord.TextChannel;
+        // for (let i = 0; i < output.length / 75; ++i) {
+        //     channel.send({ content: '```' + (output_prefix.concat(output.slice(i * 75, (i + 1) * 75 - 1))).join('\n') + '```' });
+        // }
     },
     get4000Reward: get4000Reward,
 };

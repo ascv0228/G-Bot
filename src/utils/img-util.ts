@@ -115,15 +115,15 @@ async function insertHashToDatabase(client: ZClient, msg: Discord.Message, hashD
             }
         }
         let gbotlogchannel = await client.channels.fetch('964516826811858984') as Discord.TextChannel
-        let gbotlogchannel2 = await client.channels.fetch('994873994597646468') as Discord.TextChannel
+        // let gbotlogchannel2 = await client.channels.fetch('994873994597646468') as Discord.TextChannel
         gbotlogchannel.send({
             content: '<@' + msg.member + '>' + ' use same image! in <#' + channelId + '> , ' + msg.url + '\n'
                 + 'origin url in: ' + decodeUrl(flag, guildId, channelId)
         });
-        gbotlogchannel2.send({
-            content: '<@' + msg.member + '>' + ' use same image! in <#' + channelId + '> , ' + msg.url + '\n'
-                + 'origin url in: ' + decodeUrl(flag, guildId, channelId)
-        });
+        // gbotlogchannel2.send({
+        //     content: '<@' + msg.member + '>' + ' use same image! in <#' + channelId + '> , ' + msg.url + '\n'
+        //         + 'origin url in: ' + decodeUrl(flag, guildId, channelId)
+        // });
         return false;
     }
 }
