@@ -32,6 +32,7 @@ export = {
         if (!!player && player.voiceChannel == null) {
             player.destroy()
         }
+        msg.reply({ content: `機器人在 ${player.voiceChannel}` })
         if (!player) {
             player = client.manager.create({
                 guild: msg.guild.id,
@@ -39,7 +40,7 @@ export = {
                 textChannel: msg.channel.id,
             });
         } else {
-            if (!player.voiceChannel){
+            if (!player.voiceChannel) {
                 player.setVoiceChannel(msg.member.voice.channel.id);
             }
             if (msg.member.voice.channel.id != player.voiceChannel) {
