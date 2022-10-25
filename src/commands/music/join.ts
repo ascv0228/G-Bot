@@ -27,7 +27,7 @@ export = {
 
             player.connect();
         } else {
-            if (!player.voiceChannel){
+            if (!player.voiceChannel || !msg.guild.channels.cache.get(player.voiceChannel)) {
                 player.setVoiceChannel(msg.member.voice.channel.id);
             }
             if (player.voiceChannel != msg.member.voice.channel.id) { // check another user using or not

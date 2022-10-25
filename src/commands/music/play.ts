@@ -29,11 +29,9 @@ export = {
         }
 
         let player = client.manager.players.get(msg.guild.id);
-        if (!!player && (player.voiceChannel == null || msg.guild.channels.cache.get(player.voiceChannel))) {
+        if (!!player && (player.voiceChannel == null || !msg.guild.channels.cache.get(player.voiceChannel))) {
             player.destroy()
         }
-        msg.reply({ content: `機器人在 ${player.voiceChannel}` })
-        console.log(`機器人在 ${msg.guild.channels.cache.get(player.voiceChannel)}`)
         if (!player) {
             player = client.manager.create({
                 guild: msg.guild.id,

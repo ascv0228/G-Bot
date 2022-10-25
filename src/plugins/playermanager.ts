@@ -2,6 +2,7 @@ import * as erela from "erela.js";
 import Discord from "discord.js";
 import musicDao from "../database/musicDao";
 import { ZClient } from "../structure/client";
+import dcUtil from "../utils/discord-util";
 
 async function restoreMusicStatus(this: ZClient) {
     const musicCaches = await musicDao.loadCacheMusics();
@@ -15,6 +16,8 @@ async function restoreMusicStatus(this: ZClient) {
                 textChannel: cache.textChannel,
             });
             player.connect();
+        } if (!dcUtil.getGuildByID(this, cache.guildId).channels.cache.get(player.voiceChannel)) {
+            player.destroy();
         } else {
             if (player.voiceChannel != cache.voiceChannel) {
                 player.setVoiceChannel(cache.voiceChannel);

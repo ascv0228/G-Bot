@@ -31,6 +31,9 @@ export = {
             await msg.channel.send({ content: `隊列當前無任何曲目 請用 \`${client.prefix}play\`` });
             return
         }
+        if (!msg.guild.channels.cache.get(player.voiceChannel)) {
+            player.setVoiceChannel(msg.member.voice.channel.id);
+        }
         if (msg.member.voice.channel.id != player.voiceChannel) {
             await msg.channel.send({ content: `此命令需和機器人相同頻道才可使用!` });
             return;
