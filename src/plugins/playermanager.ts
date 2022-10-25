@@ -16,9 +16,10 @@ async function restoreMusicStatus(this: ZClient) {
                 textChannel: cache.textChannel,
             });
             player.connect();
-        } if (!dcUtil.getGuildByID(this, cache.guildId).channels.cache.get(player.voiceChannel)) {
-            player.destroy();
         } else {
+            if (!dcUtil.getGuildByID(this, cache.guildId).channels.cache.get(player.voiceChannel)) {
+                player.destroy();
+            }
             if (player.voiceChannel != cache.voiceChannel) {
                 player.setVoiceChannel(cache.voiceChannel);
             }
