@@ -24,7 +24,7 @@ export = {
         let msg_id = '1016235047797407754'
         let channel = await client.channels.fetch(channelID) as Discord.TextChannel
         let message = await channel.messages.fetch(msg_id);
-        message.edit('`釣魚機器人` 狀態: 已完成 (✅)')
+        message.edit('`釣魚機器人` 狀態: 已完成 (✅)').catch()
     }
 };
 
