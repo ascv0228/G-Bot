@@ -41,13 +41,13 @@ export = {
 
         if (msg1) {
             (msg as any).delete()
-                .then(msg1.reply({ content: str }));
+                .then(msg1.reply({ content: str })).catch(() => { });
             return
         }
         let channel = msg.channel as Discord.TextChannel
 
         (msg as any).delete()
-            .then(channel.send({ content: str }));
+            .then(channel.send({ content: str })).catch(() => { });
         return
 
 
