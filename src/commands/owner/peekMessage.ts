@@ -2,6 +2,7 @@ import Discord from "discord.js";
 import { ZClient } from "../../structure/client";
 import { CmdType } from "../../utils/types";
 import dcUtil from "../../utils/discord-util";
+import tools from "../../utils/tools";
 
 
 export = {
@@ -19,17 +20,19 @@ export = {
             return msg.reply('需要一則回覆訊息')
         let msg1 = await msg.fetchReference();
         console.log(msg1)
+
+        let output: string[] = []
         if (msg1.attachments.size) {
-            console.log('=============attachments=============')
-            console.log(msg1.attachments)
+            output.push('=============attachments=============')
+            output.push(`${msg1.attachments}`)
         }
         if (msg1.components.length) {
-            console.log('=============components=============')
-            console.log(msg1.components)
+            output.push('=============components=============')
+            output.push(`${msg1.components}`)
             for (let c of msg1.components) {
-                console.log('##')
-                console.log(c.data)
-                console.log(c.components)
+                output.push('##')
+                output.push(`${c.data}`)
+                output.push(`${c.components}`)
             }
         }
         if (msg1.embeds.length) {

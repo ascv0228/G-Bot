@@ -41,6 +41,15 @@ function getChannelInfo(this: ZClient, gid: string, cid: string, author?: Discor
     } as BotMessage;
 }
 
+function DiscordLog(this: ZClient, message?: any, ...optionalParams: any[]): void {
+    if (!message) return;
+    if (!this.botStatus["Error_Log_Channel"])
+        tools.setErrorLogChannel(this);
+
+    (this.botStatus["Error_Log_Channel"] as Discord.TextChannel).send({ content: `𝔾:${message}` });
+}
+
+
 export function install(client: ZClient) {
     client.prefix = process.env.BOT_PREFIX;
     client.mainGuild = process.env.MAIN_GUILD;
@@ -49,4 +58,5 @@ export function install(client: ZClient) {
     client.updateCoolDown = updateCoolDown;
     client.coolDownExpired = coolDownExpired;
     client.getChannelInfo = getChannelInfo;
+    client.DiscordLog = DiscordLog
 }

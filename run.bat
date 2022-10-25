@@ -1,3 +1,4 @@
+echo %cd%
 @echo off
 
 rem java -Xmx128m -jar ./resource/service/Server.jar &

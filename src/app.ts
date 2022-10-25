@@ -12,7 +12,6 @@ const client = new Discord.Client({
 
 process.on('uncaughtException', (err, origin) => {
     console.error(err.stack);
-    tools.Console_Send(client, err.stack);
 });
 
 process.on('unhandledRejection', (reason, promise) => {
@@ -20,6 +19,7 @@ process.on('unhandledRejection', (reason, promise) => {
     tools.Console_Send(client, reason);
 });
 
+// console['discord'] = 
 const pluginDir = `${__dirname}/plugins`;
 
 fs.readdirSync(pluginDir)
