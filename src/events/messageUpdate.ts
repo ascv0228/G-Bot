@@ -28,9 +28,9 @@ export = {
             newMessage.react(reward == 'NaN' ? '995540046117609492' : '858466486011035668')
             rewardDao.update('reward-4000-ticket', newMessage.member.id, `${reward}`)
             let gbotlogchannel = await client.channels.fetch('964516826811858984') as Discord.TextChannel
-            // let gbotlogchannel2 = await client.channels.fetch('994873994597646468') as Discord.TextChannel
+            let gbotlogchannel2 = await client.channels.fetch('1034372605215510558') as Discord.TextChannel
             gbotlogchannel.send({ content: '```' + `${newMessage.member.user.tag} 在紀錄區更改文字\n` + `(old) :${oldMessage.content}\n` + `=> (new) :${newMessage.content}` + '```' + newMessage.url })
-            // gbotlogchannel2.send({ content: '```' + `${newMessage.member.user.tag} 在紀錄區更改文字\n` + `(old) :${oldMessage.content}\n` + `=> (new) :${newMessage.content}` + '```' + newMessage.url })
+            gbotlogchannel2.send({ content: '```' + `${newMessage.member.user.tag} 在紀錄區更改文字\n` + `(old) :${oldMessage.content}\n` + `=> (new) :${newMessage.content}` + '```' + newMessage.url })
         }
     }
 }
