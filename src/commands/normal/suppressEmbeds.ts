@@ -9,7 +9,7 @@ import { Executor } from "../../structure/executor";
 export = {
     name: "suppressEmbeds",
     aliases: ["se", "suppressembeds"],
-    description: '對特定訊息刪除附加檔案',
+    description: '對特定訊息嵌入內容',
     permissions: ['Administrator', 'ManageMessages'],
     roles: [],
     type: [CmdType.Universal],
@@ -17,10 +17,15 @@ export = {
         ["(using reply)", ""],
     ],
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
-        // if (!this.member.includes(msg.author.id)) return;
-        if (!msg || !args || args.length < 1 || msg.type != Discord.MessageType.Reply) return null;
+        let flag = msg.member.permissions.has(Discord.PermissionsBitField.Flags.Administrator) || msg.member.permissions.has(Discord.PermissionsBitField.Flags.ManageMessages)
+
+        if (!msg || msg.type != Discord.MessageType.Reply) return null;
         let msg1 = await msg.fetchReference();
-        return msg1.suppressEmbeds(true)
+        if (!flag && msg.author.id != msg1.author.id)
+            return;
+
+        msg1.suppressEmbeds(true);
+        msg.delete().catch()
     }
 };
 
