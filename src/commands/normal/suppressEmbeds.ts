@@ -7,8 +7,8 @@ import dcUtil from "../../utils/discord-util";
 import { Executor } from "../../structure/executor";
 
 export = {
-    name: "suppressEmbeds",
-    aliases: ["se", "suppressembeds"],
+    name: "removeEmbeds",
+    aliases: ["removeEmbed", "re"],
     description: '對特定訊息嵌入內容',
     permissions: [],
     roles: [],
