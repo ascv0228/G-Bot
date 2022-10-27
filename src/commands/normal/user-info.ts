@@ -31,7 +31,7 @@ function AdminUserInfo(msg: Discord.Message, mention: Discord.GuildMember) {
     const memberRoles = mention.roles.cache.map((role) => role.toString());
     memberRoles.pop()
     const infoEmbed = new Discord.EmbedBuilder()
-        .setColor('#0099ff')
+        .setColor(mention.displayHexColor)
         .setTitle(`${mention.user.tag} 使用者資訊`)
         .setThumbnail(mention.displayAvatarURL({ size: 4096, forceStatic: false }) || mention.user.displayAvatarURL({ size: 4096, forceStatic: false }))
         .addFields(
@@ -63,7 +63,7 @@ function BaseUserInfo(msg: Discord.Message, mention: Discord.GuildMember) {
     const memberRoles = mention.roles.cache.map((role) => role.toString());
     memberRoles.pop()
     const infoEmbed = new Discord.EmbedBuilder()
-        .setColor('#0099ff')
+        .setColor(mention.displayHexColor)
         .setTitle(`${mention.user.tag} 使用者資訊`)
         .setThumbnail(mention.displayAvatarURL({ size: 4096, forceStatic: false }) || mention.user.displayAvatarURL({ size: 4096, forceStatic: false }))
         .addFields(
