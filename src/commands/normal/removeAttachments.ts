@@ -10,7 +10,7 @@ export = {
     name: "removeAttachments",
     aliases: ["ra", "removeattachments"],
     description: '對特定訊息刪除附加檔案',
-    permissions: ['Administrator', 'ManageMessages'],
+    permissions: [],
     roles: [],
     type: [CmdType.Universal],
     usage: [

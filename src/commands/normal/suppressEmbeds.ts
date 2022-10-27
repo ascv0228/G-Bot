@@ -10,7 +10,7 @@ export = {
     name: "suppressEmbeds",
     aliases: ["se", "suppressembeds"],
     description: '對特定訊息嵌入內容',
-    permissions: ['Administrator', 'ManageMessages'],
+    permissions: [],
     roles: [],
     type: [CmdType.Universal],
     usage: [
