@@ -772,7 +772,7 @@ export default {
     usageString(client: ZClient, exec: Executor | any): string {
         if (!exec.usage || !exec.usage.length) return null;
         let temp: string[] = [];
-        temp.push(exec.name + " 使用說明: ")
+        if (exec.description) temp.push(exec.description);
         for (let i = 0; i < exec.usage.length; ++i) {
             if (Array.isArray(exec.usage[i]))
                 temp.push('`' + `${i + 1}. ${exec.usage[i][0] + '`'} **⇨** ${'`' + client.prefix + exec.name + ' ' + exec.usage[i][1] + '`'}`);
