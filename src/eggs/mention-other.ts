@@ -25,7 +25,8 @@ export = {
         switch (mid) {
             case "781714966234529793":
                 contents.push('正電 %% 負電 %% ㄆ一ㄚㄆ一ㄚㄆ一ㄚ交流電閃光彈彈閃蝦各位所有人（≧∇≦）愛吃臭麻糬跟玩影子和GG的電鼠');
-                contents.push('<:cc_papa:1038786123226415164>')
+                contents.push('<:cc_papa:1038786123226415164>');
+                break;
 
         }
 
