@@ -774,6 +774,7 @@ export default {
         this.initMusicPlay(client);
         this.initVfDaily(client);
         this.initFishCount(client);
+        this.initMentionsEgg(client);
         this.ExecShedule(client);
         this.outputGuilds(client);
     },
