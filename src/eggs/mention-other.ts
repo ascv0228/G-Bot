@@ -21,7 +21,8 @@ export = {
         let member = await dcUtil.getMemberByID(msg.guild, mid);
         if (!msg.mentions.has(mid))
             return;
-        if (!member.permissions.has(Discord.PermissionsBitField.Flags.SendMessages))
+        let flag = (msg.channel as Discord.TextChannel).permissionsFor(member).has(Discord.PermissionsBitField.Flags.SendMessages)
+        if (!flag)
             return;
         let contents: string[] = [];
         switch (mid) {
