@@ -21,18 +21,19 @@ export = {
             return;
         if (!member.permissions.has(Discord.PermissionsBitField.Flags.SendMessages))
             return;
-        let content: string;
+        let contents: string[] = [];
         switch (mid) {
             case "781714966234529793":
-                content = '正電 %% 負電 %% ㄆ一ㄚㄆ一ㄚㄆ一ㄚ交流電閃光彈彈閃蝦各位所有人（≧∇≦）愛吃臭麻糬跟玩影子和GG的電鼠';
+                contents.push('正電 %% 負電 %% ㄆ一ㄚㄆ一ㄚㄆ一ㄚ交流電閃光彈彈閃蝦各位所有人（≧∇≦）愛吃臭麻糬跟玩影子和GG的電鼠');
+                contents.push('<:cc_papa:1038786123226415164>')
 
         }
 
-        return msg.reply({
+        return contents.forEach(content => msg.reply({
             content: content, allowedMentions: {
                 repliedUser: false
             }
-        });
+        }));
 
     }
 };
