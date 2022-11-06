@@ -1,8 +1,8 @@
 import Discord from "discord.js";
-import auth from "../../utils/auth";
-import tools from "../../utils/tools";
-import { ZClient } from "../../structure/client";
-import { CmdType, CmdTypeName } from "../../utils/types";
+import auth from "../../../utils/auth";
+import tools from "../../../utils/tools";
+import { ZClient } from "../../../structure/client";
+import { CmdType, CmdTypeName } from "../../../utils/types";
 
 export = {
     name: 'help',
@@ -60,12 +60,13 @@ export = {
                         const m = collected.first();
                         resolve(m.values[0]);
                     } else {
-                        reject(`${this.name}命令超時未有資料`);
+                        resolve(CmdType.Nothing);
                     }
                 });
             });
         });
-
+        if (cmdKey == CmdType.Nothing)
+            return;
         cmdKey = cmdKey == CmdType.All ? null : cmdKey;
 
         const msgs = [];

@@ -4,7 +4,8 @@ export enum CmdType {
     Universal = "universal",
     Developer = "developer",
     Owner = "owner",
-    Bot = "bot"
+    Bot = "bot",
+    Nothing = "nothing"
 }
 
 export enum RewardChannel {

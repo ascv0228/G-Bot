@@ -4,11 +4,13 @@ import { CmdType } from "../../utils/types";
 
 export = {
     name: "sticker",
-
     description: '獲取回覆訊息的貼圖',
     permissions: [],
     roles: [],
     type: [CmdType.Universal],
+    usage: [
+        ["(sticker_attachment)", ""],
+    ],
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
         let msg1: Discord.Message;

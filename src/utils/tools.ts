@@ -738,8 +738,8 @@ export default {
     },
 
     async setErrorLogChannel(client: ZClient) {
-        let guild = client.guilds.cache.get("988795992667193395")
-        let channelId = "1019513132093292654";
+        let guild = client.guilds.cache.get(process.env.LOG_GUILD)
+        let channelId = process.env.LOG_CHANNEL;
         let channel = await guild.channels.fetch(channelId) as Discord.TextChannel;
         client.botStatus["Error_Log_Channel"] = channel;
     },

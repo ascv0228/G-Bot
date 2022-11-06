@@ -4,9 +4,12 @@ import { CmdType } from "../utils/types";
 import dcUtil from "../utils/discord-util";
 import { EggRuleType, EggType } from "../utils/types";
 
+let front = ["早", "找", "棗", "澡", "鑿"]
+let end = ["安", "ㄢ", "鞍", "氨", "ㄤ"]
+
 export = {
     name: "早安",
-    aliases: ["早ㄢ", "早ㄤ", "棗安", "棗ㄢ", "棗ㄤ", "澡ㄢ"],
+    aliases: front.map(f => end.map(e => f + e)).flat(),
     users: ["411895879935590411", "976785151126282250"],
     eggType: EggType.PartWithStartSame,
 

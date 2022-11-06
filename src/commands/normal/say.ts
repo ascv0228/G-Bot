@@ -4,6 +4,7 @@ import { ZClient } from "../../structure/client";
 import { CmdType } from "../../utils/types";
 import dcUtil from "../../utils/discord-util";
 import auth from "../../utils/auth";
+import tools from "../../utils/tools";
 
 let allow_users = '832777502848974920'
 let d1 = new Date().getTime();
@@ -15,8 +16,13 @@ export = {
     permissions: [],
     roles: [],
     type: [CmdType.Universal],
+    usage: [
+        "<one or more thing> ..."
+    ],
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
+        if (!args.length)
+            return msg.reply({ content: tools.usageString(client, this) });
 
         if (!msg.member.permissions.has(Discord.PermissionFlagsBits.Administrator)
             && !allow_users.includes(msg.author.id)

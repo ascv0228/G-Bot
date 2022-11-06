@@ -12,7 +12,6 @@ export = {
     name: 'setcolor',
     aliases: ["sc"],
     guilds: ['829673608791851038', '988795992667193395', /*'1002583252923596820'*/],
-
     description: '設定私人身分組顏色',
     roles: [],
     type: [CmdType.Universal],
