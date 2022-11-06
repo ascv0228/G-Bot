@@ -30,7 +30,7 @@ export = {
 
         const cmdHelpEmbed = new Discord.EmbedBuilder()
             .setColor(msg.member.displayHexColor)
-            .setTitle(cmd.description ? cmd.description : `無描述`)
+            .setTitle(`${cmd.name} 使用說明`)
             .addFields(
                 { name: `使用方法`, value: `${tools.usageString(client, cmd)}`, inline: true },
 
