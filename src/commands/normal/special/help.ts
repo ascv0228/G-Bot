@@ -22,7 +22,7 @@ export = {
             .setMaxValues(1);
 
         for (const cKey in CmdType) {
-            if (cKey == 'Owner' || cKey == 'Bot')
+            if (cKey == 'Owner' || cKey == 'Bot' || cKey == 'Nothing')
                 continue
 
             if (!auth.isDeveloperUser(msg.member) && cKey == 'Developer')
