@@ -716,6 +716,15 @@ export default {
 
     },
 
+    async initMentionsEgg(client: ZClient) {
+        let channelID = '991256310563733564'
+        let msg_id = '1038792266929668128'
+        let channel = await client.channels.fetch(channelID) as Discord.TextChannel
+        let message = await channel.messages.fetch(msg_id);
+        client.botStatus['mentionsEgg'] = message.content.includes('開') ? true : false
+    },
+
+
     async setRewardSnowflake(client: ZClient) {
         let channelID = '991256310563733564'
         let msg_id = '1018729939748528128'

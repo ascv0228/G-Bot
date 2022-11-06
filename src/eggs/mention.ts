@@ -10,6 +10,8 @@ export = {
     eggType: EggType.Mention,
 
     async execute(client: ZClient, msg: Discord.Message, listen: string) {
+        if (!client.botStatus['mentionsEgg'])
+            return;
         switch (msg.author.id) {
             case "411895879935590411":
                 msg.reply('我在')

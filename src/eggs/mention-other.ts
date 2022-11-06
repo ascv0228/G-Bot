@@ -15,6 +15,8 @@ export = {
     eggType: EggType.PartSame,
 
     async execute(client: ZClient, msg: Discord.Message, listen: string) {
+        if (!client.botStatus['mentionsEgg'])
+            return;
         let mid = dcUtil.pickUserId(listen);
         let member = await dcUtil.getMemberByID(msg.guild, mid);
         if (!msg.mentions.has(mid))

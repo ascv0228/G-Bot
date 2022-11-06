@@ -58,6 +58,24 @@ let handle_Obj = new Map(Object.entries({
         clear_options_emoji: false, // 清除 其他選項的emoji
         clear_this_emoji: true, // 清除自身emoji
     } as ReactionHandle,
+    "1038792266929668128": {
+        something: {
+            name: 'mentionsEgg',
+            func: mentionsEgg
+        },
+        emoji: {
+            '✅': true,
+            '❌': false
+        },
+        unable: {
+        },
+        enable: {
+            users: ['411895879935590411'],
+        },
+        clear_other_emoji: false, // 清除 不是選項的emoji
+        clear_options_emoji: false, // 清除 其他選項的emoji
+        clear_this_emoji: true, // 清除自身emoji
+    } as ReactionHandle,
 }));
 
 export = {
@@ -127,4 +145,6 @@ async function musicPlay(client: ZClient, reaction: Discord.MessageReaction) {
     }
 }
 
-
+async function mentionsEgg(client: ZClient, reaction: Discord.MessageReaction) {
+    await reaction.message.edit({ content: '`音樂連播` 狀態: ' + (client.botStatus['mentionsEgg'] ? '開 (✅)' : '關 (❌)') });
+}
