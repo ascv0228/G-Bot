@@ -30,10 +30,9 @@ export = {
 
         const cmdHelpEmbed = new Discord.EmbedBuilder()
             .setColor(msg.member.displayHexColor)
-            .setTitle(`${cmd.name} 指令說明`)
-            .setDescription(cmd.description ? cmd.description : `無描述`)
+            .setTitle(cmd.description ? cmd.description : `無描述`)
             .addFields(
-                { name: `使用發法`, value: `${tools.usageString(client, cmd)}`, inline: true },
+                { name: `使用方法`, value: `${tools.usageString(client, cmd)}`, inline: true },
 
             ).setFooter({
                 text: msg.member.user.tag,
