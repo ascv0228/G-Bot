@@ -146,5 +146,5 @@ async function musicPlay(client: ZClient, reaction: Discord.MessageReaction) {
 }
 
 async function mentionsEgg(client: ZClient, reaction: Discord.MessageReaction) {
-    await reaction.message.edit({ content: '`音樂連播` 狀態: ' + (client.botStatus['mentionsEgg'] ? '開 (✅)' : '關 (❌)') });
+    await reaction.message.edit({ content: '`mention彩蛋` 狀態: ' + (client.botStatus['mentionsEgg'] ? '開 (✅)' : '關 (❌)') });
 }
