@@ -3,11 +3,6 @@ import tools from "../../../utils/tools";
 import dcUtil from "../../../utils/discord-util";
 import { ZClient } from "../../../structure/client";
 import { CmdType } from "../../../utils/types";
-let roleMap = {
-    '829673608791851038': '988641623384662066',
-    '988795992667193395': '988804577509904414'
-}
-
 
 export = {
     name: "setIcon",
@@ -15,7 +10,7 @@ export = {
     guilds: ['829673608791851038', '988795992667193395', /*'1002583252923596820'*/],
 
     description: '設定私人身分組圖像',
-    roles: [],
+    roles: ['988641623384662066', '1033396349573533747', '1033396492779663464', '1033396565617938534', '988804577509904414'],
     type: [CmdType.Universal],
     usage: [
         ["(image_attachment)", ""],
