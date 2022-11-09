@@ -61,10 +61,14 @@ export = {
                 break;
 
             case '829673608791851038':
-                if (!msg.member.roles.cache.has('988641623384662066'))
-                    return msg.reply({ content: '無可用私人的身分組' })
-                role = await msg.guild.roles.fetch('988641623384662066');
+                for (let roleId of ['988641623384662066', '1033396349573533747', '1033396492779663464', '1033396565617938534']) {
+                    if (msg.member.roles.cache.has(roleId)) {
+                        role = await msg.guild.roles.fetch(roleId);
+                        break;
+                    }
+                }
                 break;
+
 
             case '988795992667193395':
                 role = await msg.guild.roles.fetch('988804577509904414');
@@ -74,6 +78,9 @@ export = {
                 return msg.reply({ content: '無可用私人的身分組' })
 
 
+        }
+        if (!role) {
+            return msg.reply({ content: '無可用私人的身分組' })
         }
         // console.log(icon)
         role.setIcon(icon)
@@ -101,9 +108,13 @@ let colorMap = {
 
 function pickEmojiId(str: string): string {
     if (!str) return null;
-    const mats = str.match(/^<a?:(\w+):(\d+)>$/);
+    let mats = str.match(/^<a?:(\w+):(\d+)>$/);
     if (mats) {
         return mats[2];
+    }
+    mats = str.match(/^https:\/\/cdn\.discordapp\.com\/emojis\/(\d+)\.(?:png|gif|webp)(\?(?:size|quality)\=[A-Za-z0-9]+(&(?:size|quality)\=[A-Za-z0-9]+)?)?$/)
+    if (mats) {
+        return mats[1];
     }
     return null;
 }
