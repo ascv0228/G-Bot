@@ -22,7 +22,7 @@ export = {
         if (!args.length)
             return msg.reply({ content: tools.usageString(client, this) });
 
-        let cmd = client.commands.get(args[0]);
+        let cmd = client.commands.get(args[0]) || client.aliases.get(args[0]);
         if (!cmd || !auth.hasCommmandAuth(msg.member, cmd))
             return msg.reply({ content: tools.usageString(client, this) });
         if (!cmd.usage || !cmd.usage.length)
