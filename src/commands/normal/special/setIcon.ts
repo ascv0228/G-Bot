@@ -103,7 +103,8 @@ export = {
 let colorMap = {
     'white': 'https://www.analogouscolors.com/image/512x512/ffffff.jpg',
     '白色': 'https://www.analogouscolors.com/image/512x512/ffffff.jpg',
-    '透明': 'https://www.analogouscolors.com/image/512x512/36393f.jpg',
+    '透明': 'https://cdn.discordapp.com/emojis/1038517255845200022.png?quality=lossless&size=4096'
+    // '透明': 'https://www.analogouscolors.com/image/512x512/36393f.jpg',
 };
 
 function pickEmojiId(str: string): string {
