@@ -25,14 +25,17 @@ export = {
         let cmd = client.commands.get(args[0]) || client.aliases.get(args[0]);
         if (!cmd || !auth.hasCommmandAuth(msg.member, cmd))
             return msg.reply({ content: tools.usageString(client, this) });
-        if (!cmd.usage || !cmd.usage.length)
-            return msg.reply({ content: `暫無說明` });
+
+        let HowToUse = (!cmd.usage || !cmd.usage.length) ? `暫無說明` : tools.usageString(client, cmd)
+        let aliases = (!cmd.aliases || !cmd.aliases.length) ? `暫無別名` : (Array.isArray(cmd.aliases)) ? cmd.aliases.join(', ') : cmd.aliases
+
 
         const cmdHelpEmbed = new Discord.EmbedBuilder()
             .setColor(msg.member.displayHexColor)
             .setTitle(`${cmd.name} 使用說明`)
             .addFields(
-                { name: `使用方法`, value: `${tools.usageString(client, cmd)}`, inline: true },
+                { name: `別名`, value: aliases },
+                { name: `使用方法`, value: HowToUse, inline: true },
 
             ).setFooter({
                 text: msg.member.user.tag,
