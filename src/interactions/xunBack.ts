@@ -11,12 +11,12 @@ export = {
         let whoCanUse = interaction.user.id;
         let opts = [
             {
-                label: '返回',
-                value: `${client.prefix}xunBack ${whoCanUse}`,
-            },
-            {
                 label: '阿薰87',
                 value: `${client.prefix}xun87 ${whoCanUse}`,
+            },
+            {
+                label: '阿薰9487',
+                value: `${client.prefix}xun9487 ${whoCanUse}`,
             }
         ]
         const avatarEmbed = new Discord.EmbedBuilder()
