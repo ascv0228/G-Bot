@@ -28,7 +28,7 @@ export = {
         const row = new Discord.ActionRowBuilder<Discord.SelectMenuBuilder>()
             .addComponents(
                 new Discord.SelectMenuBuilder()
-                    .setCustomId('select del')
+                    .setCustomId('select')
                     .setPlaceholder('阿薰')
                     .addOptions(opts),
             );
