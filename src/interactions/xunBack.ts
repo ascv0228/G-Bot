@@ -20,7 +20,7 @@ export = {
             }
         ]
         const avatarEmbed = new Discord.EmbedBuilder()
-            .setDescription("確實9487")
+            .setDescription("阿薰是不是87")
             .setFooter({
                 text: (interaction.user as Discord.User).tag,
                 iconURL: (interaction.member as Discord.GuildMember).displayAvatarURL({ forceStatic: false })
