@@ -17,12 +17,16 @@ export = {
                 {
                     name: "cake",
                     value: "cake",
-                }
+                },
+                {
+                    name: "hamburger",
+                    value: "hamburger",
+                },
             ]
         },
     ],
 
     async execute(client: ZClient, interaction: Discord.CommandInteraction, args: string[]) {
-        await interaction.followUp({ content: `${args[0] + args[1]}` })
+        await interaction.followUp({ content: `You want to eat ${interaction.options.get("food").value}` })
     },
 };

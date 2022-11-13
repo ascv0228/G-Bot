@@ -11,18 +11,20 @@ export = {
         {
             name: "number1",
             description: "number1",
-            type: Discord.ApplicationCommandOptionType.Number,
+            type: Discord.ApplicationCommandOptionType.String,
             required: true,
         },
         {
             name: "number2",
             description: "number2",
-            type: Discord.ApplicationCommandOptionType.Number,
+            type: Discord.ApplicationCommandOptionType.String,
             required: true,
         },
     ],
 
     async execute(client: ZClient, interaction: Discord.CommandInteraction, args: string[]) {
-        await interaction.followUp({ content: `${interaction.options.get("food").value}` })
+        let num1 = parseInt(interaction.options.get("number1").value as string);
+        let num2 = parseInt(interaction.options.get("number2").value as string);
+        await interaction.followUp({ content: `${num1 + num2}` })
     },
 };
