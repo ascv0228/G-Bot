@@ -5,11 +5,12 @@ import { CmdType } from "../../utils/types";
 import auth from "../../utils/auth";
 import dcUtil from "../../utils/discord-util";
 import { Executor } from "../../structure/executor";
+import dataJson from "../../data";
 
 export = {
     name: "addreaction",
     aliases: ["ar"],
-    users: ["411895879935590411", "976785151126282250", "832777502848974920"],
+    users: [dataJson["user"]["me"], dataJson["user"]["catcatBug"], dataJson["user"]["lover"]],
     description: '對特定訊息加上反應(表情符號/圖片網址)',
     permissions: ['Administrator'],
     roles: [],

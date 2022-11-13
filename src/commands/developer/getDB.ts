@@ -6,12 +6,13 @@ import { CmdType } from "../../utils/types";
 import db from "../../database/db";
 import rewardDao from "../../database/rewardDao"
 import hashDataDao from "../../database/hashDataDao"
+import dataJson from "../../data"
 
 export = {
     name: "getDB",
     // users: ['411895879935590411', '702385586941722654', '342604295520124939',
     //     '830469275528986695', '765629373084074064'],
-    guilds: ['829673608791851038', '864925734581043280'],
+    guilds: ['829673608791851038'],
     description: '查看當前database',
     permissions: [],
     roles: [],

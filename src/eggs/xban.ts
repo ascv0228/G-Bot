@@ -3,10 +3,12 @@ import { ZClient } from "../structure/client";
 import { CmdType } from "../utils/types";
 import dcUtil from "../utils/discord-util";
 import { EggRuleType, EggType } from "../utils/types";
+import dataJson from "../data";
+
 export = {
     name: "x!ban ",
     aliases: [],
-    users: ['411895879935590411', "832777502848974920"],
+    users: [dataJson["user"]["me"], dataJson["user"]["catcatBug"]],
     eggType: EggType.PartWithStartSame,
 
     async execute(client: ZClient, msg: Discord.Message, listen: string) {

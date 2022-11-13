@@ -18,7 +18,7 @@ export = {
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
         if (args.length < 2) return msg.reply(`${client.prefix}${this.name} <server-id> <tag-someone>`);
-        let guild = dcUtil.getGuildByID(client, args[0]);
+        let guild = await dcUtil.getGuildByID(client, args[0]);
         if (guild == null) return msg.reply(`Unknown ${args[0]}`)
         let member = await dcUtil.getMemberByTag(guild, args[1])
         if (member == null) return msg.reply(`Unknown ${args[1]}`)

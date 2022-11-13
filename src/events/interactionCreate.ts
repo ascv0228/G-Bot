@@ -1,7 +1,6 @@
 import Discord from "discord.js";
 import auth from "../utils/auth";
 import tools from "../utils/tools";
-import listenMsgs from "../utils/listenMsgs";
 import { ZClient } from "../structure/client";
 import { EchoMessage } from "../structure/plugin/message";
 

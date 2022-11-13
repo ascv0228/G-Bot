@@ -19,7 +19,7 @@ export = {
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
         let guild: Discord.Guild;
         if (auth.isDeveloperUser(msg.member))
-            guild = dcUtil.getGuildByID(client, args[0]) || msg.guild;
+            guild = await dcUtil.getGuildByID(client, args[0]) || msg.guild;
         else
             guild = msg.guild
 

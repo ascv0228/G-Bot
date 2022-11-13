@@ -7,7 +7,7 @@ import dcUtil from "../utils/discord-util";
 async function restoreMusicStatus(this: ZClient) {
     const musicCaches = await musicDao.loadCacheMusics();
 
-    musicCaches.forEach((cache) => {
+    musicCaches.forEach(async (cache) => {
         let player = this.manager.players.get(cache.guildId);
         if (!player) {
             player = this.manager.create({
@@ -17,7 +17,7 @@ async function restoreMusicStatus(this: ZClient) {
             });
             player.connect();
         } else {
-            if (!dcUtil.getGuildByID(this, cache.guildId).channels.cache.get(player.voiceChannel)) {
+            if (!(await dcUtil.getGuildByID(this, cache.guildId)).channels.cache.get(player.voiceChannel)) {
                 player.destroy();
             }
             if (player.voiceChannel != cache.voiceChannel) {

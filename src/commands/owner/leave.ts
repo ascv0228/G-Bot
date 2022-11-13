@@ -16,7 +16,7 @@ export = {
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
         if (args.length < 1) return msg.reply({ content: '參數錯誤' });
-        let server = dcUtil.getGuildByID(client, args[0]);
+        let server = await dcUtil.getGuildByID(client, args[0]);
         server.leave();
     }
 };

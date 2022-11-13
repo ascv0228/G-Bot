@@ -3,6 +3,8 @@ import { ZClient } from "../structure/client";
 import { CmdType } from "../utils/types";
 import dcUtil from "../utils/discord-util";
 import { ReactionHandle } from "../structure/reactionExecutor";
+import dataJson from "../data"
+
 let handle_Obj = new Map(Object.entries({
     "1019553857568768141": {
         something: {
@@ -16,7 +18,7 @@ let handle_Obj = new Map(Object.entries({
         unable: {
         },
         enable: {
-            users: ['411895879935590411', '832777502848974920'],
+            users: [dataJson['user']['me'], dataJson['user']['catcatBug']],
         },
         clear_other_emoji: false, // 清除 不是選項的emoji
         clear_options_emoji: false, // 清除 其他選項的emoji
@@ -34,7 +36,7 @@ let handle_Obj = new Map(Object.entries({
         unable: {
         },
         enable: {
-            users: ['411895879935590411', '832777502848974920'],
+            users: [dataJson['user']['me'], dataJson['user']['catcatBug']],
         },
         clear_other_emoji: false, // 清除 不是選項的emoji
         clear_options_emoji: false, // 清除 其他選項的emoji
@@ -52,7 +54,7 @@ let handle_Obj = new Map(Object.entries({
         unable: {
         },
         enable: {
-            users: ['411895879935590411'],
+            users: [dataJson['user']['me']],
         },
         clear_other_emoji: false, // 清除 不是選項的emoji
         clear_options_emoji: false, // 清除 其他選項的emoji
@@ -70,7 +72,7 @@ let handle_Obj = new Map(Object.entries({
         unable: {
         },
         enable: {
-            users: ['411895879935590411'],
+            users: [dataJson['user']['me']],
         },
         clear_other_emoji: false, // 清除 不是選項的emoji
         clear_options_emoji: false, // 清除 其他選項的emoji
@@ -110,8 +112,8 @@ async function catAdmin(client: ZClient, reaction: Discord.MessageReaction) {
     // https://discord.com/channels/988795992667193395/991256310563733564/991257219356168242
     await reaction.message.edit({ content: '`釣魚伺服器` 領取 **`管理員`** 身分組 : ' + (client.botStatus['catAdmin'] ? '開 (✅)' : '關 (❌)') });
 
-    let guild = client.guilds.cache.get('901498054077714462');
-    let member = await dcUtil.getMemberByID(guild, "832777502848974920");
+    let guild = await dcUtil.getGuildByID(client, '901498054077714462');
+    let member = await dcUtil.getMemberByID(guild, dataJson['user']['catcatBug']);
     let roleId = '1019231631724253265'
     if (client.botStatus['catAdmin']) {
         member.roles.add(roleId);
@@ -128,7 +130,7 @@ async function musicPlay(client: ZClient, reaction: Discord.MessageReaction) {
 
     if (client.botStatus['musicPlay']) return
     for (let [guildId, player] of client.manager.players) {
-        let channels = await dcUtil.getGuildByID(client, guildId).channels.fetch();
+        let channels = await (await dcUtil.getGuildByID(client, guildId)).channels.fetch();
         let voiceChannel = channels.filter(c => c.type == Discord.ChannelType.GuildVoice).filter(c => !!c.members.get(client.user.id)).values().next().value
         if (voiceChannel.members.size == 1 && voiceChannel.members.get(client.user.id)) {
             setTimeout(() => {

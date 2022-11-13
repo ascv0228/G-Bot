@@ -9,7 +9,7 @@ import { Executor } from "../../structure/executor";
 export = {
     name: "addemoji",
     aliases: ["ae"],
-    users: ["411895879935590411", "976785151126282250", "832777502848974920"],
+    users: ["411895879935590411", /*"976785151126282250"*/, "832777502848974920"],
     description: '增加表情符號',
     permissions: ['Administrator'],
     roles: [],

@@ -8,7 +8,7 @@ import db from "../../database/db"
 export = {
     name: "dbPush",
     aliases: [],
-    guilds: ['829673608791851038', '864925734581043280'],
+    guilds: ['829673608791851038'],
     description: '編輯database',
     type: [CmdType.Owner],
     permissions: [],

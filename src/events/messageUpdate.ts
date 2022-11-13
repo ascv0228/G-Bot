@@ -2,7 +2,6 @@ import Discord from "discord.js";
 import auth from "../utils/auth";
 import tools from "../utils/tools";
 import dcUtil from "../utils/discord-util";
-import listenMsgs from "../utils/listenMsgs";
 import { ZClient } from "../structure/client";
 import rewardDao from "../database/rewardDao"
 import checkMsgDao from "../database/checkMsgDao"

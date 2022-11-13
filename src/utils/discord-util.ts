@@ -103,16 +103,16 @@ export default {
         }
     },
 
-    getGuildByID(client: ZClient, GuildID: string): Discord.Guild | null {
-        if (!GuildID) return null
+    async getGuildByID(client: ZClient, guildId: string): Promise<Discord.Guild> {
+        if (!guildId) return null
         try {
-            let guild = client.guilds.cache.get(GuildID);
-            return guild;
+            return client.guilds.cache.get(guildId) || await client.guilds.fetch(guildId);
         }
         catch {
             return null;
         }
     },
+
     async getRoleByID(guild: Discord.Guild, RoleID: string): Promise<Discord.Role> {
         if (!RoleID) return null
         try {
@@ -131,9 +131,9 @@ export default {
         return await channel.createInvite(options)
     },
 
-    matchEmoji(str: string) {
+    matchEmoji(str: string, org = true) {
         if (!str) return null;
-        let mats = str.match(/https:\/\/cdn\.discordapp\.com\/emojis\/(\d+)\.(?:png|gif|webp)(?:\?size\=\d+&quality=\w*)?/);
+        let mats = str.match(/https:\/\/cdn\.discordapp\.com\/emojis\/(\d+)\.(?:png|gif|webp)(\?(?:size|quality)\=[A-Za-z0-9]+(&(?:size|quality)\=[A-Za-z0-9]+)?)?/)
         if (mats) {
             return mats[1];
         }
@@ -145,7 +145,33 @@ export default {
         if (mats) {
             return mats[1];
         }
-        return str;
+        mats = str.match(/(\d{16,})/);
+        if (mats) {
+            return mats[1];
+        }
+
+        return org ? str : null;
+    },
+
+    matchEmojiFull(str: string, org = true) {
+        if (!str) return null;
+        let mats = str.match(/^https:\/\/cdn\.discordapp\.com\/emojis\/(\d+)\.(?:png|gif|webp)(\?(?:size|quality)\=[A-Za-z0-9]+(&(?:size|quality)\=[A-Za-z0-9]+)?)?$/)
+        if (mats) {
+            return mats[1];
+        }
+        mats = str.match(/^<a?:.+:(\d+)>$/);
+        if (mats) {
+            return mats[1];
+        }
+        mats = str.match(/^<e:(\d+)>$/);
+        if (mats) {
+            return mats[1];
+        }
+        mats = str.match(/^(\d{16,})$/);
+        if (mats) {
+            return mats[1];
+        }
+        return org ? str : null;
     },
 
 

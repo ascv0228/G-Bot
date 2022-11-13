@@ -1,5 +1,6 @@
 import Discord from "discord.js";
 import tools from "../../utils/tools";
+import dcUtil from "../../utils/discord-util";
 import { ZClient } from "../../structure/client";
 import { CmdType } from "../../utils/types";
 
@@ -20,7 +21,7 @@ export = {
             return;
         }
 
-        const dcId = tools.pickUserId(args[0]);
+        const dcId = dcUtil.pickUserId(args[0]);
         const execname = args[1];
 
         if (!dcId) {

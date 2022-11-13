@@ -15,6 +15,7 @@ import { BindDataCollection } from "../structure/model/binddata";
 import { Member, MembersInfo } from "../structure/model/teaminfo";
 import { ZClient } from "../structure/client";
 import auth from "./auth";
+import dataJson from "../data";
 
 export default {
     async sendMultiMessage<T>(
@@ -137,16 +138,6 @@ export default {
         }
 
         return ret;
-    },
-
-    pickUserId(str: string): string {
-        const mats = str.match(/^<@!?(\d+)>$/);
-
-        if (mats) {
-            return mats[1];
-        }
-
-        return null;
     },
 
     sleep(ms: number): Promise<void> {
@@ -510,87 +501,71 @@ export default {
             .toBuffer("png");
     },
 
-    async getGuild(guildsMgr: Discord.GuildManager, guildId: string): Promise<Discord.Guild> {
-        return guildsMgr.cache.get(guildId) || await guildsMgr.fetch(guildId);
-    },
+    // filtUnBindGuildMembers(members: Discord.Collection<string, Discord.GuildMember>, bindData: BindDataCollection, subscribeList: MembersInfo): Discord.GuildMember[] {
+    //     const ret: Discord.GuildMember[] = [];
 
-    async getGuildMember(membersMgr: Discord.GuildMemberManager, userId: string): Promise<Discord.GuildMember> {
-        let members = membersMgr.cache;
-        let member = members.get(userId);
+    //     members.forEach((member) => {
+    //         if (member.user.bot || member.permissions.has(Discord.PermissionsBitField.Flags.ManageGuild)) {
+    //             return;
+    //         }
 
-        if (!member) {
-            members = await membersMgr.fetch();
-            member = members.get(userId);
-        }
+    //         const crew_usr = bindData[member.id];
+    //         if (!crew_usr) {
+    //             ret.push(member);
+    //             return;
+    //         }
 
-        return member;
-    },
+    //         const acc = crew_usr.accounts;
+    //         if (!acc || acc.length <= 0) {
+    //             ret.push(member);
+    //             return;
+    //         }
 
-    filtUnBindGuildMembers(members: Discord.Collection<string, Discord.GuildMember>, bindData: BindDataCollection, subscribeList: MembersInfo): Discord.GuildMember[] {
-        const ret: Discord.GuildMember[] = [];
+    //         const bindid = acc.find((e) => !!subscribeList[e]);
+    //         if (!bindid) {
+    //             ret.push(member);
+    //         }
+    //     });
 
-        members.forEach((member) => {
-            if (member.user.bot || member.permissions.has(Discord.PermissionsBitField.Flags.ManageGuild)) {
-                return;
-            }
+    //     return ret;
+    // },
 
-            const crew_usr = bindData[member.id];
-            if (!crew_usr) {
-                ret.push(member);
-                return;
-            }
+    // filtUnBindCrewMembers(members: Discord.Collection<string, Discord.GuildMember>, bindData: BindDataCollection, subscribeList: MembersInfo): MembersInfo {
+    //     const subscribes: MembersInfo = JSON.parse(JSON.stringify(subscribeList));
 
-            const acc = crew_usr.accounts;
-            if (!acc || acc.length <= 0) {
-                ret.push(member);
-                return;
-            }
+    //     // 篩選出團隊中所有仍未綁定的遊戲帳號
+    //     members.forEach((member) => {
+    //         if (member.user.bot) {
+    //             return;
+    //         }
 
-            const bindid = acc.find((e) => !!subscribeList[e]);
-            if (!bindid) {
-                ret.push(member);
-            }
-        });
+    //         const bind = bindData[member.id];
+    //         if (!bind || !bind.accounts) {
+    //             return;
+    //         }
 
-        return ret;
-    },
+    //         bind.accounts.forEach((uuid) => {
+    //             // 綁定過且之前綁定的帳號在群內則直接把遊戲內清單移除
+    //             if (subscribes[uuid]) {
+    //                 delete subscribes[uuid];
+    //             }
+    //         });
+    //     });
 
-    filtUnBindCrewMembers(members: Discord.Collection<string, Discord.GuildMember>, bindData: BindDataCollection, subscribeList: MembersInfo): MembersInfo {
-        const subscribes: MembersInfo = JSON.parse(JSON.stringify(subscribeList));
+    //     return subscribes;
+    // },
 
-        // 篩選出團隊中所有仍未綁定的遊戲帳號
-        members.forEach((member) => {
-            if (member.user.bot) {
-                return;
-            }
+    // isEnvelopeMessage(message: Discord.Message): boolean {
+    //     if (message.author.id == dataJson["bot"]["X_bot"]) {
+    //         if (message.components && message.components.length) {
+    //             return message.content.includes("紅包") && !!message.components.find(row => {
+    //                 return row.components.find(c => c.type == Discord.ComponentType.Button);
+    //             });
+    //         }
+    //     }
 
-            const bind = bindData[member.id];
-            if (!bind || !bind.accounts) {
-                return;
-            }
-
-            bind.accounts.forEach((uuid) => {
-                // 綁定過且之前綁定的帳號在群內則直接把遊戲內清單移除
-                if (subscribes[uuid]) {
-                    delete subscribes[uuid];
-                }
-            });
-        });
-
-        return subscribes;
-    },
-
-    isEnvelopeMessage(message: Discord.Message): boolean {
-        if (message.author.id == "858570251242700832") {
-            if (message.components && message.components.length) {
-                return message.content.includes("紅包") && !!message.components.find(row => {
-                    return row.components.find(c => c.type == Discord.ComponentType.Button);
-                });
-            }
-        }
-
-        return false;
-    },
+    //     return false;
+    // },
 
     strcmp(a: string, b: string): number {
         if (a < b) return -1;
@@ -657,22 +632,22 @@ export default {
     },
 
     async initCatOpen(client: ZClient) {
-        let channelID = '1019553714635280394'
-        let msg_id = '1019553857568768141'
+        let channelID = dataJson["channel"]["botStatus_cat"]
+        let msg_id = dataJson["msg_id"]["CatOpen"]
         let channel = await client.channels.fetch(channelID) as Discord.TextChannel
         let message = await channel.messages.fetch(msg_id);
         client.botStatus['catOpen'] = message.content.includes('開') ? true : false
 
 
-        let msg_id2 = '1019555357363814420'
+        let msg_id2 = dataJson["msg_id"]["CatAdmin"]
         let message2 = await channel.messages.fetch(msg_id2);
         client.botStatus['catAdmin'] = message2.content.includes('開') ? true : false
         // `釣魚伺服器` 領取 **`管理員`** 身分組 : 關 (:x:)
     },
 
     async initMusicPlay(client: ZClient) {
-        let channelID = '991256310563733564'
-        let msg_id = '1017083939212513351'
+        let channelID = dataJson["channel"]["botStatus_main"]
+        let msg_id = dataJson["msg_id"]["MusicPlay"]
         let channel = await client.channels.fetch(channelID) as Discord.TextChannel
         let message = await channel.messages.fetch(msg_id);
         client.botStatus['musicPlay'] = message.content.includes('開') ? true : false
@@ -681,8 +656,8 @@ export default {
     async initVfDaily(client: ZClient) {
         // https://discord.com/channels/988795992667193395/991256310563733564/1016235047797407754
 
-        let channelID = '991256310563733564'
-        let msg_id = '1016235047797407754'
+        let channelID = dataJson["channel"]["botStatus_main"]
+        let msg_id = dataJson["msg_id"]["VfDaily"]
         let channel = await client.channels.fetch(channelID) as Discord.TextChannel
         let message = await channel.messages.fetch(msg_id);
         let msgEditTime = new Date(message.editedTimestamp ? message.editedTimestamp : message.createdTimestamp)
@@ -699,8 +674,8 @@ export default {
     async initFishCount(client: ZClient) {
         // https://discord.com/channels/988795992667193395/991256310563733564/1016235047797407754
 
-        let channelID = '991256310563733564'
-        let msg_id = '1017773944637493339'
+        let channelID = dataJson["channel"]["botStatus_main"]
+        let msg_id = dataJson["msg_id"]["FishCount"]
         let channel = await client.channels.fetch(channelID) as Discord.TextChannel
         let message = await channel.messages.fetch(msg_id);
         const content = message.content
@@ -717,8 +692,8 @@ export default {
     },
 
     async initMentionsEgg(client: ZClient) {
-        let channelID = '991256310563733564'
-        let msg_id = '1038792266929668128'
+        let channelID = dataJson["channel"]["botStatus_main"]
+        let msg_id = dataJson["msg_id"]["MentionsEgg"]
         let channel = await client.channels.fetch(channelID) as Discord.TextChannel
         let message = await channel.messages.fetch(msg_id);
         client.botStatus['mentionsEgg'] = message.content.includes('開') ? true : false
@@ -726,8 +701,8 @@ export default {
 
 
     async setRewardSnowflake(client: ZClient) {
-        let channelID = '991256310563733564'
-        let msg_id = '1018729939748528128'
+        let channelID = dataJson["channel"]["botStatus_main"]
+        let msg_id = dataJson["msg_id"]["RewardSnowflake"]
         let channel = await client.channels.fetch(channelID) as Discord.TextChannel
         let message = await channel.messages.fetch(msg_id);
         const content = message.content

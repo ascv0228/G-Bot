@@ -2,6 +2,7 @@ import Discord from "discord.js";
 import tools from "../../utils/tools";
 import { ZClient } from "../../structure/client";
 import { CmdType } from "../../utils/types";
+import dcUtil from "../../utils/discord-util";
 
 export = {
     name: "nowplaying",
@@ -22,7 +23,7 @@ export = {
 
         const playing = player.playing ? `▶` : `⏸`;
         const requester = (player.queue.current.requester as Discord.User);
-        const member = await tools.getGuildMember(msg.guild.members, requester.id);
+        const member = await dcUtil.getGuildMember(msg.guild.members, requester.id);
 
         await msg.channel.send({
             embeds: [

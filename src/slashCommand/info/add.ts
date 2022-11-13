@@ -23,6 +23,6 @@ export = {
     ],
 
     async execute(client: ZClient, interaction: Discord.CommandInteraction, args: string[]) {
-        await interaction.followUp({ content: `${args[0] + args[1]}` })
+        await interaction.followUp({ content: `${interaction.options.get("food").value}` })
     },
 };
