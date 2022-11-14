@@ -38,7 +38,8 @@ export = {
         }
 
         if (message.guild.id == dataJson.guild['RD_main'] &&
-            message.attachments && message.attachments.size) {
+            message.attachments && message.attachments.size &&
+            !message.author.bot) {
 
             let ImgLogChannel = await message.guild.channels.fetch("1041588918434406490") as Discord.TextChannel
             if (!((message.channel as Discord.TextChannel).nsfw && !ImgLogChannel.nsfw))
