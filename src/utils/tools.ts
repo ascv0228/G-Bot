@@ -593,6 +593,34 @@ export default {
         return Array.isArray(obj) ? obj.includes(target) : target in obj
     },
 
+    fileType(str: string) {
+        let found = [
+            '.webp', '.png', '.jpg', '.jpeg',
+            '.WEBP', '.PNG', '.JPG', '.JPEG',
+            '.gif', '.GIF'
+        ].find(v => str.endsWith(v));
+        if (found) return "圖片";
+        found = [
+            '.mp4', '.MP4', '.mov', '.MOV',
+            '.wmv', '.WMV', '.flv', '.FLV',
+            '.avi', '.AVI'
+        ].find(v => str.endsWith(v));
+        if (found) return "影片";
+        return "檔案"
+
+    },
+
+    async messageWithAttachments(message: Discord.Message, OutputChannel: Discord.TextChannel) {
+        for (const [_, att] of message.attachments) {
+            let attEmbed = new Discord.EmbedBuilder()
+                .setTitle(`${message.member.displayName} 傳送 ${this.fileType(att.name)}`)
+                .setDescription(`<@${message.author.id}>位於 <#${message.channel.id}>\n`)
+                .setTimestamp();
+            const attachment = new Discord.AttachmentBuilder(att.proxyURL, { name: att.name });
+            OutputChannel.send({ embeds: [attEmbed], files: [attachment] });
+        }
+    },
+
     getLocalString(lang: string, objectKey: string, ...vars: any[]): string {
         // let str = XXX[lang][objectKey];
         // if (!str ) return null;

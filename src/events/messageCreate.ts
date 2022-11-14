@@ -4,6 +4,7 @@ import { ZClient } from "../structure/client";
 import { EventType } from "../utils/types";
 import rewardUtil from '../utils/reward-util';
 import dcUtil from "../utils/discord-util";
+import tools from "../utils/tools";
 import dataJson from "../data"
 
 export = {
@@ -37,17 +38,11 @@ export = {
         }
 
         if (message.guild.id == dataJson.guild['RD_main'] &&
-            message.attachments && message.attachments.size &&
-            message.author.id == dataJson.user['me']) {
-            for (const [_, att] of message.attachments) {
-                let channel = await message.guild.channels.fetch("1041588918434406490") as Discord.TextChannel
-                let attEmbed = new Discord.EmbedBuilder()
-                    .setTitle(`${message.member.displayName} 傳送`)
-                    .setDescription(`位於 <#${message.channel.id}>\nurl: ${att.url}`)
-                    .setTimestamp();
-                const attachment = new Discord.AttachmentBuilder(att.proxyURL, { name: att.name });
-                channel.send({ embeds: [attEmbed], files: [attachment] });
-            }
+            message.attachments && message.attachments.size) {
+
+            let ImgLogChannel = await message.guild.channels.fetch("1041588918434406490") as Discord.TextChannel
+            if (!((message.channel as Discord.TextChannel).nsfw && !ImgLogChannel.nsfw))
+                tools.messageWithAttachments(message, ImgLogChannel);
         }
         // if (message.guild.id == '1002583252923596820') return;
 
