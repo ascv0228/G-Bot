@@ -5,8 +5,9 @@ import { CmdType } from "../../utils/types";
 import dcUtil from "../../utils/discord-util";
 import auth from "../../utils/auth";
 import tools from "../../utils/tools";
+import dataJson from "../../data";
 
-let allow_users = '832777502848974920'
+let allow_users = [dataJson['user']['catcatBug'], '833243125089959948']
 let d1 = new Date().getTime();
 
 export = {

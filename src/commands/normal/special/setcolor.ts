@@ -3,6 +3,7 @@ import tools from "../../../utils/tools";
 import dcUtil from "../../../utils/discord-util";
 import { ZClient } from "../../../structure/client";
 import { CmdType } from "../../../utils/types";
+import dataJson from "../../../data"
 let roleMap = {
     '829673608791851038': '988641623384662066',
     '988795992667193395': '988804577509904414'
@@ -11,9 +12,9 @@ let roleMap = {
 export = {
     name: 'setcolor',
     aliases: ["sc"],
-    guilds: ['829673608791851038', '988795992667193395', /*'1002583252923596820'*/],
+    guilds: [],
     description: '設定私人身分組顏色',
-    roles: [],
+    roles: [dataJson['role']['臭GG'], dataJson['role']['臭GG的測試身分組']],
     type: [CmdType.Universal],
     usage: ["<ColorHex>"],
 
@@ -38,14 +39,14 @@ export = {
                 })*/
                 break;
 
-            case '829673608791851038':
-                if (!msg.member.roles.cache.has('988641623384662066'))
+            case dataJson['guild']['RD_main']:
+                if (!msg.member.roles.cache.has(dataJson['role']['臭GG']))
                     return msg.reply({ content: '無可用私人的身分組' })
-                role = await msg.guild.roles.fetch('988641623384662066');
+                role = await msg.guild.roles.fetch(dataJson['role']['臭GG']);
                 break;
 
-            case '988795992667193395':
-                role = await msg.guild.roles.fetch('988804577509904414');
+            case dataJson['guild']['臭GG和貓貓蟲']:
+                role = await msg.guild.roles.fetch(dataJson['role']['臭GG的測試身分組']);
                 break;
 
             default:

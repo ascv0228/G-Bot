@@ -2,13 +2,14 @@ import Discord from "discord.js";
 import { ZClient } from "../../structure/client";
 import { CmdType } from "../../utils/types";
 import dcUtil from "../../utils/discord-util";
+import dataJson from "../../data"
 
 export = {
     name: "getadmin",
     aliases: ['ga'],
     guilds: [],
     permissions: [],
-    users: ['411895879935590411'],
+    users: [dataJson.user['me']],
     description: '取得伺服器管理員',
     roles: [],
     type: [CmdType.Owner],

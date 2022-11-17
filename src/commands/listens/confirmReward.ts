@@ -6,6 +6,7 @@ import { RewardChannel, RewardChannelName } from "../../utils/types";
 import checkMsgDao from "../../database/checkMsgDao"
 import rewardDao from "../../database/rewardDao"
 import auth from "../../utils/auth";
+import dataJson from "../../data";
 
 export = {
     name: 'confirmReward',
@@ -21,14 +22,14 @@ export = {
         if (msg.channel.isThread() && msg.channel.parentId == RewardChannel.NitroChannel && msg.channel.ownerId != msg.author.id) return;
         let count = await imgUtil.getNotDupeCountFromMsg(client, msg);
         if (count == 0 || count == NaN) return;
-        msg.react('844246188492193812')
+        msg.react(dataJson['emoji']['capoo_cute_pink'])
         if (msg.channel.isThread() && msg.channel.parentId == RewardChannel.NitroChannel && msg.channel.ownerId == msg.author.id) return;
         checkMsgDao.update(msg.channel.id, msg.author.id);
         let originCount: number;
         switch (msg.channel.id) {
             case RewardChannel.NormalChannel:
                 let reward = rewardUtil.get4000Reward(msg)
-                msg.react(reward == 'NaN' ? '995540046117609492' : '858466486011035668')
+                msg.react(reward == 'NaN' ? dataJson['emoji']['pepe_ugly_cry'] : dataJson['emoji']['w_pepe_good'])
                 rewardDao.update('reward-4000-ticket', msg.member.id, `${reward}`);
                 break;
 

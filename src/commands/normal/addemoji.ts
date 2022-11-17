@@ -4,12 +4,13 @@ import { ZClient } from "../../structure/client";
 import { CmdType } from "../../utils/types";
 import auth from "../../utils/auth";
 import dcUtil from "../../utils/discord-util";
-import { Executor } from "../../structure/executor";
+import dataJson from "../../data";
+
 
 export = {
     name: "addemoji",
     aliases: ["ae"],
-    users: ["411895879935590411", /*"976785151126282250"*/, "832777502848974920"],
+    users: [dataJson["user"]["me"], dataJson["user"]["catcatBug"], dataJson["user"]['lover']],
     description: '增加表情符號',
     permissions: ['Administrator'],
     roles: [],

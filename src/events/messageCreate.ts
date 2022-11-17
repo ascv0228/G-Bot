@@ -45,10 +45,6 @@ export = {
             if (!((message.channel as Discord.TextChannel).nsfw && !ImgLogChannel.nsfw))
                 tools.messageWithAttachments(message, ImgLogChannel);
         }
-        // if (message.guild.id == '1002583252923596820') return;
-
-        // rewardUtil.confirmReward(client, message);
-
 
         client.listens.forEach((exec) => {
             if (!auth.hasCommmandAuth(message.member, exec)) return;

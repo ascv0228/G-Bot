@@ -3,6 +3,7 @@ import { ZClient } from "../../structure/client";
 import { CmdType } from "../../utils/types";
 import dcUtil from "../../utils/discord-util";
 import tools from "../../utils/tools";
+import dataJson from "../../data";
 
 
 export = {
@@ -41,7 +42,7 @@ export = {
             });
         let opts = [
             {
-                emoji: { id: '1009463709661413446', name: 'statistic' } as Discord.APIMessageComponentEmoji,
+                emoji: { id: dataJson['emoji']['statistic'], name: 'statistic' } as Discord.APIMessageComponentEmoji,
                 label: '結束投票 (慎)',
                 description: '關閉投票, 並顯示統計結果',
                 value: `${client.prefix}vote end all`,

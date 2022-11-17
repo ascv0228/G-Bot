@@ -3,14 +3,15 @@ import tools from "../../../utils/tools";
 import dcUtil from "../../../utils/discord-util";
 import { ZClient } from "../../../structure/client";
 import { CmdType } from "../../../utils/types";
+import dataJson from "../../../data"
 
 export = {
     name: "setIcon",
     aliases: ['si', "seticon"],
-    guilds: ['829673608791851038', '988795992667193395', /*'1002583252923596820'*/],
+    guilds: [dataJson.guild['RD_main'], dataJson.guild['臭GG和貓貓蟲'], /*'1002583252923596820'*/],
 
     description: '設定私人身分組圖像',
-    roles: ['988641623384662066', '1033396349573533747', '1033396492779663464', '1033396565617938534', '988804577509904414'],
+    roles: [dataJson.role['臭GG'], dataJson.role['臭GG的測試身分組'], dataJson.role['No.1'], dataJson.role['No.2'], dataJson.role['No.3']],
     type: [CmdType.Universal],
     usage: [
         ["(image_attachment)", ""],
@@ -55,8 +56,8 @@ export = {
                 })*/
                 break;
 
-            case '829673608791851038':
-                for (let roleId of ['988641623384662066', '1033396349573533747', '1033396492779663464', '1033396565617938534']) {
+            case dataJson.guild['RD_main']:
+                for (let roleId of [dataJson.role['臭GG'], dataJson.role['No.1'], dataJson.role['No.2'], dataJson.role['No.3']]) {
                     if (msg.member.roles.cache.has(roleId)) {
                         role = await msg.guild.roles.fetch(roleId);
                         break;
@@ -65,8 +66,8 @@ export = {
                 break;
 
 
-            case '988795992667193395':
-                role = await msg.guild.roles.fetch('988804577509904414');
+            case dataJson.guild['臭GG和貓貓蟲']:
+                role = await msg.guild.roles.fetch(dataJson.role['臭GG的測試身分組']);
                 break;
 
             default:

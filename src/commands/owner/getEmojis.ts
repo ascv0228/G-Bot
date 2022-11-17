@@ -3,13 +3,14 @@ import Discord from "discord.js";
 import { ZClient } from "../../structure/client";
 import { CmdType } from "../../utils/types";
 import dcUtil from "../../utils/discord-util";
+import dataJson from "../../data"
 
 export = {
     name: "getEmojis",
     aliases: ['ge'],
     guilds: [],
     permissions: [],
-    users: ['411895879935590411'],
+    users: [dataJson.user['me']],
     description: '離開伺服器',
     roles: [],
     type: [CmdType.Owner],

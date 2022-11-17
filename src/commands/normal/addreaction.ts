@@ -4,7 +4,6 @@ import { ZClient } from "../../structure/client";
 import { CmdType } from "../../utils/types";
 import auth from "../../utils/auth";
 import dcUtil from "../../utils/discord-util";
-import { Executor } from "../../structure/executor";
 import dataJson from "../../data";
 
 export = {
@@ -98,13 +97,13 @@ function matchMsgUrl(str: string): any {
 }
 
 async function createEmoji(client: ZClient, emoji_id: string) {
-    let guild_id = "901498054077714462"; // CHEGG
+    let guild_id = dataJson['guild']['CHEGG']; // CHEGG
     let guild = client.guilds.cache.get(guild_id);
     return (await guild.emojis.create({ attachment: await dcUtil.getUrl(emoji_id), name: 'temp' })).id;
 }
 
 async function deleteEmoji(client: ZClient, emoji_id: string) {
-    let guild_id = "901498054077714462"; // CHEGG
+    let guild_id = dataJson['guild']['CHEGG']; // CHEGG
     let guild = client.guilds.cache.get(guild_id);
     return (await guild.emojis.delete(emoji_id));
 }
