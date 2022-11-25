@@ -3,18 +3,44 @@ name: Automatically Deploy
 on:
   push:
     branches:
-    - main
+    - master
 
 jobs:
-  heroku_1:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - name: Checkout Master
+        uses: actions/checkout@master
         with:
-          ref: main
+          ref: master
           fetch-depth: 0
-      - uses: ZeroKen5969/git-https-push-action@master
-        name: heroku_1
+      - name: Setup Node
+        uses: actions/setup-node@v3
         with:
-          remoteUrl: '${{ secrets.HEROKU_1 }}'
-          skipHooks: false
+          node-version: 17
+      - name: Build Code
+        run: |
+          npm i
+          npm run build
+      - name: Copy Code
+        uses: ZeroKen5969/scp-action@master
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          source: ./built/*
+          target: ~/botenv/bot/built
+          strip_components: 1
+          overwrite: true
+          rm: true
+      - name: Run Code
+        uses: ZeroKen5969/ssh-action@master
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script_stop: true
+          script: |
+            cd ~/botenv
+            chmod +x *.sh
+            ./hotstart.sh
