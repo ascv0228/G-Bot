@@ -21,7 +21,7 @@ export = {
     async execute(client: ZClient, msg: Discord.Message) {
         if (msg.channel.isThread() && msg.channel.parentId == RewardChannel.NitroChannel && msg.channel.ownerId != msg.author.id) return;
         let count = await imgUtil.getNotDupeCountFromMsg(client, msg);
-        if (count == 0 || count == NaN) return;
+        if (!count) return false;
         msg.react(dataJson['emoji']['capoo_cute_pink'])
         if (msg.channel.isThread() && msg.channel.parentId == RewardChannel.NitroChannel && msg.channel.ownerId == msg.author.id) return;
         checkMsgDao.update(msg.channel.id, msg.author.id);
@@ -35,7 +35,7 @@ export = {
 
             case RewardChannel.SupporterChannel:
                 originCount = await rewardDao.getOriginCount('reward-ticket', msg.member.id) as number
-                originCount = (originCount == undefined || originCount == NaN) ? 0 : originCount / 2
+                originCount = (!originCount) ? 0 : originCount / 2
 
                 count = (count + originCount > 5) ? 5 : count + originCount;
                 rewardDao.update('reward-ticket', msg.member.id, `${2 * count}`)
@@ -43,7 +43,7 @@ export = {
 
             case RewardChannel.DalaoChannel:
                 originCount = await rewardDao.getOriginCount('reward-big-ticket', msg.member.id) as number
-                originCount = (originCount == undefined || originCount == NaN) ? 0 : originCount / 3
+                originCount = (!originCount) ? 0 : originCount / 3
 
                 count = (count + originCount > 5) ? 5 : count + originCount;
                 rewardDao.update('reward-big-ticket', msg.member.id, `${3 * count}`);

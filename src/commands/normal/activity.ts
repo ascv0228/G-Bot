@@ -5,13 +5,14 @@ import dcUtil from "../../utils/discord-util";
 import scheduleUtil from "../../utils/schedule-util";
 import db from "../../database/db"
 import tools from "../../utils/tools";
+import dataJson from "../../data"
 
 export = {
     roles: [],
     name: "activity",
     aliases: ["act"],
-    guilds: ['829673608791851038'],
-    channels: ['869585329072537680'],
+    guilds: [dataJson['guild']['RD_main']],
+    channels: [dataJson['channel']['【🎉】自發活動區']],
     description: '建立活動',
     type: [CmdType.Universal],
     permissions: ['Administrator'],
@@ -51,7 +52,7 @@ export = {
                 scheduleUtil.ScheduleJob_ActivityCommand(client, msg.channel as Discord.TextChannel, id, time_string)
             });
 
-        let categoryId = '841529629290266706' // 綜合討論區
+        let categoryId = dataJson.category['外星-綜合討論區'] // 綜合討論區
         createActivityChannel(msg, categoryId, roleId)
     }
 };

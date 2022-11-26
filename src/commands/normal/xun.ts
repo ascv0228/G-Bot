@@ -3,6 +3,7 @@ import tools from "../../utils/tools";
 import { ZClient } from "../../structure/client";
 import { CmdType } from "../../utils/types";
 import dcUtil from "../../utils/discord-util";
+import dataJson from "../../data"
 
 export = {
     name: 'xun',
@@ -10,7 +11,7 @@ export = {
     description: '阿薰',
     permissions: [],
     roles: [],
-    users: ['688704833687126017', '411895879935590411'],
+    users: [dataJson.user['xun'], dataJson.user['me']],
     type: [CmdType.Universal],
     usage: [
     ],
@@ -43,3 +44,4 @@ export = {
         await msg.channel.send({ embeds: [avatarEmbed], components: [row] });
     }
 };
+

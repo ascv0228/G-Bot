@@ -17,6 +17,8 @@ export = {
                 msg.reply('我在')
                 break;
             default:
+
+                break;
             // if (msg.type === Discord.MessageType.Reply) {
             //     let msg1 = await ms;
             // }

@@ -14,7 +14,7 @@ export default {
         // if (!channelList.includes(msg.channel.id)) return;
 
         let count = await imgUtil.getNotDupeCountFromMsg(client, msg);
-        if (count == 0 || count == NaN) return;
+        if (!count) return;
 
         checkMsgDao.update(msg.channel.id, msg.author.id);
         msg.react('844246188492193812')
@@ -25,14 +25,14 @@ export default {
         }
         if (msg.channel.id == RewardChannel.SupporterChannel) {
             let originCount = await rewardDao.getOriginCount('reward-ticket', msg.member.id) as number
-            originCount = (originCount == undefined || originCount == NaN) ? 0 : originCount / 2
+            originCount = (!originCount) ? 0 : originCount / 2
 
             count = (count + originCount > 5) ? 5 : count + originCount;
             rewardDao.update('reward-ticket', msg.member.id, `${2 * count}`)
         }
         if (msg.channel.id == RewardChannel.DalaoChannel) {
             let originCount = await rewardDao.getOriginCount('reward-big-ticket', msg.member.id) as number
-            originCount = (originCount == undefined || originCount == NaN) ? 0 : originCount / 3
+            originCount = (!originCount) ? 0 : originCount / 3
 
             count = (count + originCount > 5) ? 5 : count + originCount;
             rewardDao.update('reward-big-ticket', msg.member.id, `${3 * count}`);

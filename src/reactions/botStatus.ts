@@ -6,7 +6,7 @@ import { ReactionHandle } from "../structure/reactionExecutor";
 import dataJson from "../data"
 
 let handle_Obj = new Map(Object.entries({
-    "1019553857568768141": {
+    [dataJson['msg_id']['CatOpen']]: {
         something: {
             name: 'catOpen',
             func: catcat
@@ -24,7 +24,7 @@ let handle_Obj = new Map(Object.entries({
         clear_options_emoji: false, // 清除 其他選項的emoji
         clear_this_emoji: true, // 清除自身emoji
     } as ReactionHandle,
-    "1019555357363814420": {
+    [dataJson['msg_id']['CatAdmin']]: {
         something: {
             name: 'catAdmin',
             func: catAdmin
@@ -42,7 +42,7 @@ let handle_Obj = new Map(Object.entries({
         clear_options_emoji: false, // 清除 其他選項的emoji
         clear_this_emoji: true, // 清除自身emoji
     } as ReactionHandle,
-    "1017083939212513351": {
+    [dataJson['msg_id']['MusicPlay']]: {
         something: {
             name: 'musicPlay',
             func: musicPlay
@@ -60,7 +60,7 @@ let handle_Obj = new Map(Object.entries({
         clear_options_emoji: false, // 清除 其他選項的emoji
         clear_this_emoji: true, // 清除自身emoji
     } as ReactionHandle,
-    "1038792266929668128": {
+    [dataJson['msg_id']['MentionsEgg']]: {
         something: {
             name: 'mentionsEgg',
             func: mentionsEgg
@@ -103,8 +103,8 @@ export = {
 async function catcat(client: ZClient, reaction: Discord.MessageReaction) {
     // https://discord.com/channels/988795992667193395/991256310563733564/991257219356168242
     await reaction.message.edit({ content: '`臭貓貓` 狀態: ' + (client.botStatus['catOpen'] ? '開 (✅)' : '關 (❌)') });
-    let guild = client.guilds.cache.get('829673608791851038');
-    let role = await dcUtil.getRoleByID(guild, '988641623384662066');
+    let guild = client.guilds.cache.get(dataJson['guild']['RD_main']);
+    let role = await dcUtil.getRoleByID(guild, dataJson['role']['臭GG']);
     role.setMentionable(client.botStatus['catOpen'])
 }//.setMentionable(true)
 
@@ -112,9 +112,9 @@ async function catAdmin(client: ZClient, reaction: Discord.MessageReaction) {
     // https://discord.com/channels/988795992667193395/991256310563733564/991257219356168242
     await reaction.message.edit({ content: '`釣魚伺服器` 領取 **`管理員`** 身分組 : ' + (client.botStatus['catAdmin'] ? '開 (✅)' : '關 (❌)') });
 
-    let guild = await dcUtil.getGuildByID(client, '901498054077714462');
+    let guild = await dcUtil.getGuildByID(client, dataJson['guild']['Fisher Grind']);
     let member = await dcUtil.getMemberByID(guild, dataJson['user']['catcatBug']);
-    let roleId = '1019231631724253265'
+    let roleId = dataJson['role']['Fisher Grind Admin']
     if (client.botStatus['catAdmin']) {
         member.roles.add(roleId);
     }

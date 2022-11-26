@@ -3,6 +3,7 @@ import schedule from 'node-schedule';
 import { ZClient } from "../structure/client";
 import dbUtil from '../utils/database-util';
 import rewardUtil from '../utils/reward-util';
+import dataJson from "../data"
 
 export = {
     name: "vf-daily",
@@ -11,8 +12,8 @@ export = {
         schedule.scheduleJob("0 0 0 * * *", async function () {
             client.botStatus['daily'] = false;
 
-            let channelID = '991256310563733564'
-            let msg_id = '1016235047797407754'
+            let channelID = dataJson["channel"]["botStatus_main"]
+            let msg_id = dataJson["msg_id"]["VfDaily"]
             let channel = await client.channels.fetch(channelID) as Discord.TextChannel
             let message = await channel.messages.fetch(msg_id);
             message.edit('`釣魚機器人` 狀態: 未完成 (❌)')
@@ -20,7 +21,7 @@ export = {
 
         schedule.scheduleJob("0 0 */6 * * *", async function () {
             if (client.botStatus['daily']) return;
-            let channels = ['964699991601995787', '990817755328573441']
+            let channels = [dataJson["channel"]['vfDailyReeminder']]
 
             for (let channelId of channels) {
                 let channel = await client.channels.fetch(channelId) as Discord.TextChannel;
@@ -29,7 +30,7 @@ export = {
         });
 
         schedule.scheduleJob("0 0 4 * * *", async function () {
-            let channelID = '1019238134900338709'
+            let channelID = dataJson["channel"]['vfDailyReeminder']
             let channel = await client.channels.fetch(channelID) as Discord.TextChannel
             channel.send("<@&1019235291598442566>, Virtual Fisher Daily");
         })

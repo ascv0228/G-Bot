@@ -130,15 +130,6 @@ let handle_Obj = new Map(Object.entries({
         clear_options_emoji: false, // 清除 其他選項的emoji
         clear_this_emoji: false, // 清除自身emoji
     } as ReactionHandle,
-    "1043508440955371570": {
-        emoji: {
-            '0️⃣': "1043508182665936966", //輔助
-            '1️⃣': "1043508245307867196", //輸出
-        },
-        clear_other_emoji: true, // 清除 不是選項的emoji
-        clear_options_emoji: false, // 清除 其他選項的emoji
-        clear_this_emoji: false, // 清除自身emoji
-    }
 }));
 
 

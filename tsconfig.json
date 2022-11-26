@@ -21,6 +21,7 @@
     "exclude": [
         "gulpfile.js",
         "node_modules",
-        "built"
+        "built",
+        "./src/*.json"
     ]
 }

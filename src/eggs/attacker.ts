@@ -18,6 +18,7 @@ export = {
     description: '協同區找人',
     roles: [],
     eggType: EggType.PartSame,
+    index: null,
 
     async execute(client: ZClient, msg: Discord.Message, listen: string) {
         if (dcUtil.pickRoleId(listen) && msg.mentions.roles.get(dcUtil.pickRoleId(listen))) return;
