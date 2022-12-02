@@ -54,7 +54,7 @@ let handle_Obj = new Map(Object.entries({
     //     clear_options_emoji: false, // 清除 其他選項的emoji
     //     clear_this_emoji: false, // 清除自身emoji
     // } as ReactionHandle,
-    "1015102083957018634": {
+    "1046581417301266512": {
         emoji: {// 拓荒
             '1️⃣': "1015101442283024425", // 拓荒1
             '2️⃣': "1015101496355987456", // 拓荒2
