@@ -35,7 +35,7 @@ export = {
             name = args[0] || "temp"
         }
 
-        let sticker = await msg.guild.stickers.create({ attachment: sticker_url, name: name, tags: name}).catch((e) => {
+        let sticker = await msg.guild.stickers.create({ file: sticker_url, name: name, tags: name}).catch((e) => {
             if (`${e}`.includes("maximum size")) {
                 msg.reply({ content: `image file's size is too large` })
                 return false
