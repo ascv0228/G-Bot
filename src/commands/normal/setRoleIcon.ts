@@ -6,77 +6,46 @@ import { CmdType } from "../../../utils/types";
 import dataJson from "../../../data"
 
 export = {
-    name: "setIcon",
-    aliases: ['si', "seticon"],
-    guilds: [dataJson.guild['RD_main'], dataJson.guild['臭GG和貓貓蟲'], /*'1002583252923596820'*/],
+    name: "setRoleIcon",
+    aliases: ['sri', 'setroleicon', 'roleicon'],
+    guilds: [],
 
-    description: '設定私人身分組圖像',
-    roles: [dataJson.role['臭GG'], dataJson.role['臭GG的測試身分組'], dataJson.role['No.1'], dataJson.role['No.2'], dataJson.role['No.3'],dataJson.role['Q']],
+    description: '設定身分組圖像',
+    permissions: ['Administrator'],
+    roles: [],
     type: [CmdType.Universal],
     usage: [
-        ["(image_attachment)", ""],
-        ["                  ", "<image's url>"],
-        ["                  ", "<emoji>"],
-        ["                  ", "<ColorHex>"],
+        ["(image_attachment)", "<role>", ""],
+        ["                  ", "<role>", "<image's url>"],
+        ["                  ", "<role>", "<emoji>"],
+        ["                  ", "<role>", "<ColorHex>"],
     ],
 
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
         if (msg.guild.premiumTier < 2)
             return msg.reply('伺服器加成等級不足2');
-        if (args.length == 0 && msg.attachments.size == 0)
+        if (args.length < 2  || (args.length < 1 && msg.attachments.size == 0))
             return msg.reply({ content: tools.usageString(client, this) });
         let icon = getImgUrlFromAttachment(msg);
         if (!icon) {
-            icon = colorMap[args[0]];
+            icon = colorMap[args[1]];
         }
         if (!icon) {
-            let emoji_id = pickEmojiId(args[0]);
+            let emoji_id = pickEmojiId(args[1]);
             if (emoji_id) icon = emoji_url(emoji_id);
         }
         if (!icon) {
-            let color = pickColorHex(args[0])
+            let color = pickColorHex(args[1])
             if (color != null) icon = getColorUrl(color)
         }
         if (!icon) {
-            icon = args[0];
+            icon = args[1];
         }
-        let role: Discord.Role
+        let role = await msg.guild.roles.fetch(dcUtil.pickRoleId(args[0]));
 
-        switch (msg.guild.id) {
-            case '1002583252923596820':
-                /*
-                role = msg.guild.roles.cache.find(role => role.name === `${msg.author.id}`);
-                if (!!role)
-                    break;
-                let pos = msg.guild.roles.cache.get('1004332619971956777').position
-                role = await msg.guild.roles.create({
-                    name: `${msg.author.id}`,
-                    position: pos
-                })*/
-                break;
-
-            case dataJson.guild['RD_main']:
-                for (let roleId of [dataJson.role['臭GG'], dataJson.role['No.1'], dataJson.role['No.2'], dataJson.role['No.3']]) {
-                    if (msg.member.roles.cache.has(roleId)) {
-                        role = await msg.guild.roles.fetch(roleId);
-                        break;
-                    }
-                }
-                break;
-
-
-            case dataJson.guild['臭GG和貓貓蟲']:
-                role = await msg.guild.roles.fetch(dataJson.role['臭GG的測試身分組']);
-                break;
-
-            default:
-                return msg.reply({ content: '無可用私人的身分組' })
-
-
-        }
         if (!role) {
-            return msg.reply({ content: '無可用私人的身分組' })
+            return msg.reply({ content: '無效的身分組' })
         }
         // console.log(icon)
         role.setIcon(icon)
