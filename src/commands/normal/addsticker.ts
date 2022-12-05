@@ -49,7 +49,7 @@ export = {
             return false
         })
         if (sticker)
-            return msg.reply({ stickers: [sticker] })
+            return msg.reply({ stickers: [sticker as Discord. Sticker] })
 
 
     }
