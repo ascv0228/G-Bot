@@ -61,7 +61,7 @@ export = {
 function buildEmbed(description: string):Discord.EmbedBuilder{
     const embed = new Discord.EmbedBuilder()
     .setColor('Aqua')
-    .setTitle('投票進行中')
+    .setTitle('Welcome')
     .setDescription(description)
     .setTimestamp();
     return embed;
