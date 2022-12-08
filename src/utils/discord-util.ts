@@ -103,6 +103,15 @@ export default {
         }
     },
 
+    async msg_content(client: ZClient, channelId: string, msg_Id: string) : Promise<string>{
+        // const channel = client.channels.cache.get(channel_Id)
+        let channel = await client.channels.fetch(channelId) as Discord.TextChannel
+        if(!channel)
+            return 'error channel'
+        const message = await channel.messages.fetch(msg_Id);
+        return message.content;
+    },
+
     async getGuildByID(client: ZClient, guildId: string): Promise<Discord.Guild> {
         if (!guildId) return null
         try {
