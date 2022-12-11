@@ -1,6 +1,5 @@
 import { ZClient } from "../structure/client";
 import Discord from "discord.js";
-import mongoose from "mongoose"
 import db from "../database/db"
 import tools from "../utils/tools";
 
