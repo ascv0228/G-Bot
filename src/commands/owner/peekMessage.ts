@@ -35,6 +35,7 @@ export = {
                 output.push(`${c.components}`)
             }
         }
+        console.log(output.join('\n'))
         if (msg1.embeds.length) {
             console.log('=============embeds=============')
             console.log(msg1.embeds)
