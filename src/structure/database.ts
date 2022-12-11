@@ -1,5 +1,4 @@
 import { MongoClient } from "mongodb";
-import mongoose from "mongoose"
 
 export interface GMongoClient extends MongoClient {
     connect2DB(): Promise<any>;
