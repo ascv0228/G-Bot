@@ -31,8 +31,8 @@ export = {
             output.push(`${msg1.components}`)
             for (let c of msg1.components) {
                 output.push('##')
-                output.push(`${c.data}`)
-                output.push(`${c.components}`)
+                output.push(`${JSON.stringify(c.data)}`)
+                output.push(`${JSON.stringify(c.components)}`)
             }
         }
         console.log(output.join('\n'))
