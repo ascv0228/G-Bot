@@ -770,15 +770,16 @@ export default {
     },
 
     loadInitBotStatus(client: ZClient) {
+        let flag = process.env.BOT_PREFIX == process.env.MAIN_BOT_PREFIX
         this.setErrorLogChannel(client);
         this.setTimeZone(client);
-        this.setRewardSnowflake(client);
-        this.initCatOpen(client);
-        this.initMusicPlay(client);
-        this.initVfDaily(client);
-        this.initFishCount(client);
-        this.initMentionsEgg(client);
-        this.ExecShedule(client);
+        if (flag) this.setRewardSnowflake(client);
+        if (flag) this.initCatOpen(client);
+        if (flag) this.initMusicPlay(client);
+        if (flag) this.initVfDaily(client);
+        if (flag) this.initFishCount(client);
+        if (flag) this.initMentionsEgg(client);
+        if (flag) this.ExecShedule(client);
         this.outputGuilds(client);
     },
 

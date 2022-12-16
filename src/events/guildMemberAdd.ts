@@ -16,5 +16,8 @@ export = {
         if (member.guild.id == '1002583252923596820') {
             member.roles.add('1018762530241384489')
         }
+        if (member.guild.id == '1042333554085998662'){
+            member.roles.add('1052903492592873513');
+        }
     }
 }
