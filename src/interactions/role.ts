@@ -1,4 +1,4 @@
-import Discord from "discord.js";
+import Discord, { Collection } from "discord.js";
 import { ZClient } from "../structure/client";
 import { CmdType } from "../utils/types";
 import dcUtil from "../utils/discord-util";
@@ -24,8 +24,6 @@ export = {
                     let embeds = interaction.message.embeds;
                     interaction.update({ content: "空的選擇身分組", embeds: embeds });
                 }
-                // console.log(JSON.stringify(interaction.values))
-                // console.log(JSON.stringify(interaction.roles))
                 let roles = interaction.roles.filter((role, roleId) => {
                     if (role.managed)
                         return false;
@@ -34,8 +32,11 @@ export = {
                     if (interaction.guild.roles.premiumSubscriberRole && interaction.guild.roles.premiumSubscriberRole.id == roleId)
                         return false;
                     return true;
-                }).reverse() as Discord.Collection<string, Discord.Role>;
-                // console.log(JSON.stringify( roles))
+                }) as Discord.Collection<string, Discord.Role>;
+
+                roles = new Collection([...roles.entries()].sort(
+                    ([k1, r1], [k2, r2]) => interaction.values.indexOf(k1) - interaction.values.indexOf(k2)
+                ))
                 if (roles.size == 0) {
                     return interaction.update({ content: "Error roles to set: " + interaction.roles.map(r => r.name).join(', ') })
                 }
