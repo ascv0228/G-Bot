@@ -26,5 +26,23 @@ export = {
             // console.log(output)
 
         });
+
+        schedule.scheduleJob('50 59 15 * * *', async function () {
+            let d = new Date().getTime()
+            const guildid = '1042333554085998662';
+            const roleId = '1052903492592873513';
+            let guild = client.guilds.cache.get(guildid)
+
+            let members = (await guild.members.fetch({ force: true }))
+                .filter(member => !!member.roles.cache.get(roleId))
+
+            // let output = new Array();
+            for (const [id, member] of members) {
+                if (d - member.joinedAt.getTime() > (5 * 1000 * 3600 * 24))
+                    member.roles.remove(roleId);
+            }
+            // console.log(output)
+
+        });
     }
 }
