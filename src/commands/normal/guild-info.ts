@@ -27,26 +27,31 @@ export = {
         if (guild.icon)
             opts.push({
                 label: '伺服器頭像',
-                value: `${client.prefix}guild-icon ${guild.id} ${msg.author.id}`,
+                value: `guild-icon ${guild.id}`,
             })
         if (guild.banner)
             opts.push({
                 label: '伺服器橫幅',
-                value: `${client.prefix}guild-banner ${guild.id} ${msg.author.id}`,
+                value: `guild-banner ${guild.id}`,
             })
         if (guild.splash)
             opts.push({
                 label: '伺服器邀請連結背景',
-                value: `${client.prefix}guild-splash ${guild.id} ${msg.author.id}`,
+                value: `guild-splash ${guild.id}`,
             })
+
+        opts.push({
+            label: '伺服器一般資訊',
+            value: `guild-info ${guild.id}`,
+        })
         opts.push({
             label: '伺服器邀請連結',
-            value: `${client.prefix}guild-invite ${guild.id} ${msg.author.id}`,
+            value: `guild-invite ${guild.id}`,
         })
-        const row = new Discord.ActionRowBuilder<Discord.SelectMenuBuilder>()
+        const row = new Discord.ActionRowBuilder<Discord.StringSelectMenuBuilder>()
             .addComponents(
-                new Discord.SelectMenuBuilder()
-                    .setCustomId('select del')
+                new Discord.StringSelectMenuBuilder()
+                    .setCustomId(`guild###${msg.author.id}`)
                     .setPlaceholder('請選擇伺服器頭像/橫幅/邀請連結背景/邀請連結')
                     .addOptions(opts),
             );

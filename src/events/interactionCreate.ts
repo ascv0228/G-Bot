@@ -31,21 +31,63 @@ export = {
         }
         // ———————————————[Button]———————————————
         if (interaction.isButton()) {
+            const { customId, member } = interaction
+            // console.log(JSON.stringify(values))
+            // console.log(JSON.stringify(roles))
+            let allowMember = customId.trimEnd().split(/###/)[1] || "all"
+            if (allowMember != 'all' && allowMember != interaction.user.id)
+                return interaction.reply({ content: 'You cannot use others\' commands.', ephemeral: true });
+
+            let cmds = customId.trimEnd().split(/###/)[0].split(/\s+/);
+
+            if (!cmds) return;
+            const cmd = client.interactions.get(cmds[0]);
+            if (!cmd) return;
+            await cmd.execute(client, interaction);
         }
         // ———————————————[Select Menu]———————————————
-        if (interaction.isSelectMenu()) {
-            let content = interaction.values[0];
-            if (!content.startsWith(`${client.prefix}`)) return;
-            const [cmd, ...args] = content.slice(client.prefix.length).trimEnd().split(/\s+/);
-            let allow_user = args.pop();
-            if (allow_user != 'all' && allow_user != interaction.user.id)
+        if (interaction.isStringSelectMenu()) {
+
+            const { customId, values, member } = interaction    //確切字符串
+            let allowMember = customId.trimEnd().split(/###/)[1] || "all"
+            if (allowMember != 'all' && allowMember != interaction.user.id)
                 return interaction.reply({ content: 'You cannot use others\' commands.', ephemeral: true });
-            const exec = client.interactions.get(cmd);
-            if (!exec) return;
-            exec.execute(client, interaction, args);
-            if (interaction.customId == 'select del') {
-                await interaction.message.delete();
-            }
+
+            let cmdName = customId.trimEnd().split(/###/)[0];
+
+            if (!cmdName) return;
+            const cmd = client.interactions.get(cmdName);
+            if (!cmd) return;
+            await cmd.execute(client, interaction);
+            // let content = interaction.values[0];
+            // if (!content.startsWith(`${client.prefix}`)) return;
+            // const [cmd, ...args] = content.slice(client.prefix.length).trimEnd().split(/\s+/);
+            // let allow_user = args.pop();
+            // if (allow_user != 'all' && allow_user != interaction.user.id)
+            //     return interaction.reply({ content: 'You cannot use others\' commands.', ephemeral: true });
+            // const exec = client.interactions.get(cmd);
+            // if (!exec) return;
+            // exec.execute(client, interaction, args);
+            // if (interaction.customId == 'select del') {
+            //     await interaction.message.delete();
+            // }
+
+        }
+        if (interaction.isRoleSelectMenu()) {
+            const { customId, values, member, roles } = interaction
+            // console.log(JSON.stringify(values))
+            // console.log(JSON.stringify(roles))
+            let allowMember = customId.trimEnd().split(/###/)[1] || "all"
+            if (allowMember != 'all' && allowMember != interaction.user.id)
+                return interaction.reply({ content: 'You cannot use others\' commands.', ephemeral: true });
+
+            let cmdName = customId.trimEnd().split(/###/)[0];
+
+            if (!cmdName) return;
+            let cmds = cmdName.split(/\s+/)
+            const cmd = client.interactions.get(cmds[0]);
+            if (!cmd) return;
+            await cmd.execute(client, interaction);
 
         }
         // ———————————————[Context Menu]———————————————

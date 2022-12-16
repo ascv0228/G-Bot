@@ -21,23 +21,23 @@ export = {
         let opts = [
             {
                 label: '使用者頭像',
-                value: `${client.prefix}avatar <@${member.id}> ${msg.author.id}`,
+                value: `avatar <@${member.id}>`,
             }
         ]
         if (member.avatar)
             opts.push({
                 label: '伺服器頭像',
-                value: `${client.prefix}memberavatar <@${member.id}> ${msg.author.id}`,
+                value: `memberavatar <@${member.id}>`,
             })
         if (await checkHasBanner(client, member.user.id))
             opts.push({
                 label: '橫幅',
-                value: `${client.prefix}banner <@${member.id}> ${msg.author.id}`,
+                value: `banner <@${member.id}>`,
             })
-        const row = new Discord.ActionRowBuilder<Discord.SelectMenuBuilder>()
+        const row = new Discord.ActionRowBuilder<Discord.StringSelectMenuBuilder>()
             .addComponents(
-                new Discord.SelectMenuBuilder()
-                    .setCustomId('select del')
+                new Discord.StringSelectMenuBuilder()
+                    .setCustomId(`avatar###${msg.author.id}`)
                     .setPlaceholder('請選擇頭像來源/橫幅')
                     .addOptions(opts),
             );

@@ -48,9 +48,9 @@ export = {
                 value: `${client.prefix}vote end all`,
             }
         ]
-        const row = new Discord.ActionRowBuilder<Discord.SelectMenuBuilder>()
+        const row = new Discord.ActionRowBuilder<Discord.StringSelectMenuBuilder>()
             .addComponents(
-                new Discord.SelectMenuBuilder()
+                new Discord.StringSelectMenuBuilder()
                     .setCustomId('select')
                     .setPlaceholder('投票操作')
                     .addOptions(opts),

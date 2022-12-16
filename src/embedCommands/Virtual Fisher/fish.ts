@@ -17,6 +17,7 @@ export = {
     async execute(client: ZClient, msg: Discord.Message, embed: Discord.Embed) {
         let owner = await dcUtil.getMemberByID(msg.guild, process.env.BOT_OWNER)
         if (![owner.nickname, owner.user.username].includes(embed.author.name)) return;
+        if(process.env.BOT_PREFIX != process.env.MAIN_BOT_PREFIX) return;
         client.botStatus['Now_fish_count'] += 1;
         if (client.botStatus['Now_fish_count'] % 10 == 0) {
             (client.botStatus['fish_count_message'] as Discord.Message).edit({

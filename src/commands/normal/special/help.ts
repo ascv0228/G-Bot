@@ -16,7 +16,7 @@ export = {
     ],
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
-        const menu = new Discord.SelectMenuBuilder()
+        const menu = new Discord.StringSelectMenuBuilder()
             .setCustomId("menu")
             .setMinValues(1)
             .setMaxValues(1);
@@ -34,7 +34,7 @@ export = {
             });
         }
 
-        const comps = new Discord.ActionRowBuilder<Discord.SelectMenuBuilder>()
+        const comps = new Discord.ActionRowBuilder<Discord.StringSelectMenuBuilder>()
             .addComponents(menu)
             ;
 

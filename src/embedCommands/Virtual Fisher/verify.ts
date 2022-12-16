@@ -39,7 +39,7 @@ export = {
         let user = members
             .filter(member => member.user.username == embed.author.name).values().next().value.user as Discord.User;
 
-        if (user.id == process.env.BOT_OWNER) {
+        if (user.id == process.env.BOT_OWNER && process.env.BOT_PREFIX == process.env.MAIN_BOT_PREFIX) {
             client.botStatus['Before_fish_count'] = client.botStatus['Now_fish_count'];
             client.botStatus['Now_fish_count'] = 0;
             (client.botStatus['fish_count_message'] as Discord.Message).edit({

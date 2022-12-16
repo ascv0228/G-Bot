@@ -33,9 +33,9 @@ export = {
                 text: (msg.member.user as Discord.User).tag,
                 iconURL: (msg.member as Discord.GuildMember).displayAvatarURL({ forceStatic: false })
             });
-        const row = new Discord.ActionRowBuilder<Discord.SelectMenuBuilder>()
+        const row = new Discord.ActionRowBuilder<Discord.StringSelectMenuBuilder>()
             .addComponents(
-                new Discord.SelectMenuBuilder()
+                new Discord.StringSelectMenuBuilder()
                     .setCustomId('select')
                     .setPlaceholder('阿薰')
                     .addOptions(opts),
