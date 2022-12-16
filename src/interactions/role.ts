@@ -24,7 +24,8 @@ export = {
                     let embeds = interaction.message.embeds;
                     interaction.update({ content: "空的選擇身分組", embeds: embeds });
                 }
-
+                // console.log(JSON.stringify(interaction.values))
+                // console.log(JSON.stringify(interaction.roles))
                 let roles = interaction.roles.filter((role, roleId) => {
                     if (role.managed)
                         return false;
@@ -33,8 +34,7 @@ export = {
                     if (interaction.guild.roles.premiumSubscriberRole && interaction.guild.roles.premiumSubscriberRole.id == roleId)
                         return false;
                     return true;
-                }
-                ) as Discord.Collection<string, Discord.Role>;
+                }).reverse() as Discord.Collection<string, Discord.Role>;
                 // console.log(JSON.stringify( roles))
                 if (roles.size == 0) {
                     return interaction.update({ content: "Error roles to set: " + interaction.roles.map(r => r.name).join(', ') })
