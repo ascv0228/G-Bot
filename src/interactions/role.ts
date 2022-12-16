@@ -47,7 +47,8 @@ export = {
             case 'add':
                 let roleId = cmds[2];
                 let hasRole = member.roles.cache.has(roleId);
-                let temp = (hasRole) ? (member.roles.remove) : member.roles.add(roleId).catch(() => false);
+                let temp = (hasRole) ? member.roles.remove(roleId).catch(() => false) :
+                    member.roles.add(roleId).catch(() => false);
                 if (!temp) {
                     return interaction.reply({
                         content: '變更身分組: `' + (await dcUtil.getRoleByID(interaction.guild, roleId)).name + '`失敗',
@@ -106,7 +107,7 @@ function getSelectOpt(interaction: Discord.RoleSelectMenuInteraction,
                 .setLabel(`${roles[i].name}`)
                 .setStyle(Discord.ButtonStyle.Primary)
         )
-        description.push(`${index}. <@&${roles[i].id}> **(${roles[i].name})**`)
+        description.push(`${index+1}. <@&${roles[i].id}> **(${roles[i].name})**`)
 
     }
 
