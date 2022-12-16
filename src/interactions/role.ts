@@ -24,13 +24,15 @@ export = {
                     let embeds = interaction.message.embeds;
                     interaction.update({ content: "空的選擇身分組", embeds: embeds });
                 }
-                // for(let [_, r] of interaction.roles){
-                //     console.log(JSON.stringify(r));
-                //     console.log((interaction.message.member.roles.highest.position >= r.position)? "yes": "no")
-                // }
-                // console.log(JSON.stringify( interaction.roles))
+
                 let roles = interaction.roles.filter((role, roleId) => {
-                    return interaction.message.member.roles.highest.position > role.position
+                    if (role.managed)
+                        return false;
+                    if (interaction.message.member.roles.highest.position <= role.position)
+                        return false;
+                    if (interaction.guild.roles.premiumSubscriberRole && interaction.guild.roles.premiumSubscriberRole.id == roleId)
+                        return false;
+                    return true;
                 }
                 ) as Discord.Collection<string, Discord.Role>;
                 // console.log(JSON.stringify( roles))
@@ -107,7 +109,7 @@ function getSelectOpt(interaction: Discord.RoleSelectMenuInteraction,
                 .setLabel(`${roles[i].name}`)
                 .setStyle(Discord.ButtonStyle.Primary)
         )
-        description.push(`${index+1}. <@&${roles[i].id}> **(${roles[i].name})**`)
+        description.push(`${index + 1}. <@&${roles[i].id}> **(${roles[i].name})**`)
 
     }
 

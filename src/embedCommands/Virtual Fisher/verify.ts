@@ -49,7 +49,10 @@ export = {
             })
         }
 
-        channel.send({ content: `<@${user.id}>`, embeds: [verifyEmbed] });
+        channel.send({
+            content: `<@${user.id}>`, embeds: [verifyEmbed], files: [
+                new Discord.AttachmentBuilder(embed.image.proxyURL, { name: "verify" })]
+        });
         // user.send({ content: `<@${user.id}>`, embeds: [verifyEmbed] }).catch(error => { })
         let clearChannelTopics = ['遇到verify就清空頻道', 'Clear the channel when meeting verify message']
         if (msg.channel.type == Discord.ChannelType.GuildText &&
