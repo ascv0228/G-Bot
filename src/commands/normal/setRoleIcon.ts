@@ -78,7 +78,7 @@ function pickEmojiId(str: string): string {
     if (mats) {
         return mats[2];
     }
-    mats = str.match(/^https:\/\/cdn\.discordapp\.com\/emojis\/(\d+)\.(?:png|gif|webp)(\?(?:size|quality)\=[A-Za-z0-9]+(&(?:size|quality)\=[A-Za-z0-9]+)?)?$/)
+    mats = str.match(/^https:\/\/cdn\.discordapp\.com\/emojis\/(\d+)\.(?:png|gif|webp)(?:\?.*)?$/)
     if (mats) {
         return mats[1];
     }
