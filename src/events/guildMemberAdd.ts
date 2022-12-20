@@ -18,6 +18,10 @@ export = {
         }
         if (member.guild.id == '1042333554085998662'){
             member.roles.add('1052903492592873513');
+            member.roles.add('1054738844651618375');
+            member.roles.add('1054738667987542016');
+            member.roles.add('1054738470637154374');
+            member.roles.add('1054738954013917224');
         }
     }
 }

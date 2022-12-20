@@ -142,7 +142,7 @@ export default {
 
     matchEmoji(str: string, org = true) {
         if (!str) return null;
-        let mats = str.match(/https:\/\/cdn\.discordapp\.com\/emojis\/(\d+)\.(?:png|gif|webp)(\?(?:size|quality)\=[A-Za-z0-9]+(&(?:size|quality)\=[A-Za-z0-9]+)?)?/)
+        let mats = str.match(/https:\/\/cdn\.discordapp\.com\/emojis\/(\d+)\.(?:png|gif|webp)(?:\?.*)?/)
         if (mats) {
             return mats[1];
         }
@@ -164,7 +164,7 @@ export default {
 
     matchEmojiFull(str: string, org = true) {
         if (!str) return null;
-        let mats = str.match(/^https:\/\/cdn\.discordapp\.com\/emojis\/(\d+)\.(?:png|gif|webp)(\?(?:size|quality)\=[A-Za-z0-9]+(&(?:size|quality)\=[A-Za-z0-9]+)?)?$/)
+        let mats = str.match(/^https:\/\/cdn\.discordapp\.com\/emojis\/(\d+)\.(?:png|gif|webp)(?:\?.*)?$/)
         if (mats) {
             return mats[1];
         }
