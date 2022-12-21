@@ -8,6 +8,7 @@ export interface Command {
     listens: Discord.Collection<string, Executor>;
     embedCommands: Discord.Collection<string, Executor>;
     eggs: Discord.Collection<string, Executor>;
+    monitors: Discord.Collection<string, Executor>;
 
     loadCommands(this: ZClient): Promise<any>;
     loadEmbedCommands(this: ZClient): Promise<any>;

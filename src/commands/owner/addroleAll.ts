@@ -18,13 +18,10 @@ export = {
 
         let members = (await msg.guild.members.fetch({ force: true }))
 
-        let roleIds = args.map(a => dcUtil.pickRoleId(a)).filter(r => !!r);
+        let roleIds = args.map(a => dcUtil.pickRoleId(a)).filter(r => !!r) as string[];
 
         for (const [id, member] of members) {
-            for (let roleId of roleIds) {
-                member.roles.add(roleId).catch(() => { });
-
-            }
+            member.roles.add(roleIds).catch(() => { });
         }
 
     }

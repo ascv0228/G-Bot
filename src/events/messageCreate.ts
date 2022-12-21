@@ -61,6 +61,12 @@ export = {
             }
         });
 
+        do{
+            let m = client.monitors.get(message.author.id);
+            if (!m) break;
+            m.execute(client, message);
+        }while(0);
+
         let execed = false;
         let deleted = false;
         const lines = message.content.trim().split("\n");

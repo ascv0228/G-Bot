@@ -20,7 +20,12 @@ function loadCommands(this: ZClient) {
             if (command.name) {
                 if (command.listens && command.listens.length > 0) {
                     this.listens.set(command.name, command);
-                } else {
+                } else if (command.monitorUsers && command.monitorUsers.length > 0) {
+                    command.monitorUsers.forEach(userId => {
+                        this.monitors.set(userId, command);
+                    }); 
+                }
+                else {
                     this.commands.set(command.name, command);
                 }
             }
@@ -64,6 +69,7 @@ export function install(client: ZClient) {
     client.aliases = new Discord.Collection();
     client.listens = new Discord.Collection();
     client.eggs = new Discord.Collection();
+    client.monitors = new Discord.Collection();
 
     client.embedCommands = new Discord.Collection();
 
