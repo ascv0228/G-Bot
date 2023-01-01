@@ -96,6 +96,19 @@ export = {
             const cmd = client.slashCommands.get(interaction.commandName);
             if (cmd) cmd.execute(client, interaction);
         }
+        if (interaction.isModalSubmit()) {
+            let allowMember = interaction.customId.trimEnd().split(/###/)[1] || "all"
+            if (allowMember != 'all' && allowMember != interaction.user.id)
+                return interaction.reply({ content: 'You cannot use others\' commands.', ephemeral: true });
+
+            let cmdName = interaction.customId.trimEnd().split(/###/)[0];
+
+            if (!cmdName) return;
+            let cmds = cmdName.split(/\s+/)
+            const cmd = client.interactions.get(cmds[0]);
+            if (!cmd) return;
+            await cmd.execute(client, interaction);
+        }
     }
 };
 

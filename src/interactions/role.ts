@@ -15,6 +15,7 @@ export = {
             return
         let cmd = cmds[1];
 
+        //https://discord.com/developers/docs/interactions/message-components
         // let guild = ((guildId) ? (client.guilds.cache.get(guildId) || interaction.guild)
         //     : interaction.guild) as Discord.Guild;
 
