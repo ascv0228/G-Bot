@@ -29,6 +29,7 @@ export = {
             (await dcUtil.getMemberByTag(msg.guild, args[0])).roles.add(dcUtil.pickRoleId(args[1])).catch(() => {
                 msg.reply({ content: tools.usageString(client, this) });
             })
+            msg.react(":o:")
         }
 
     }
