@@ -27,7 +27,7 @@ export = {
         }
         else {
             (await dcUtil.getMemberByTag(msg.guild, args[0])).roles.add(dcUtil.pickRoleId(args[1])).then(() =>
-                msg.react(":o:")).catch(() => {
+                msg.react("⭕️")).catch(() => {
                     msg.reply({ content: tools.usageString(client, this) });
                 })
 
