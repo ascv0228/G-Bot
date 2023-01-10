@@ -26,11 +26,16 @@ export = {
             return msg.reply({ content: tools.usageString(client, this) });
         }
         else {
-            (await dcUtil.getMemberByTag(msg.guild, args[0])).roles.add(dcUtil.pickRoleId(args[1])).then(() =>
-                msg.react("⭕"))
-                .catch(() => {
-                    msg.reply({ content: tools.usageString(client, this) });
-                })
+            try{
+                let roleId = dcUtil.pickRoleId(args.pop());
+                for(let m of args){
+                    (await dcUtil.getMemberByTag(msg.guild, m)).roles.add(roleId)
+                }
+                msg.react("⭕")
+            }
+            catch(e){
+                msg.reply({ content: tools.usageString(client, this) });
+            }
 
         }
 
