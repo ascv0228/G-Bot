@@ -30,7 +30,7 @@ export = {
             emoji_url = args[0].startsWith('http') ? args[0] : await dcUtil.getUrl(dcUtil.matchEmoji(args[0]));
             if (!emoji_url)
                 return msg.reply({ content: tools.usageString(client, this) });
-            name = args[1] || "temp"
+            name = matchEmojiName(args[0]) || args[1] || "temp"
         } else {
             name = args[0] || "temp"
         }
@@ -69,3 +69,12 @@ let suffix_array = [
     '.gif', '.GIF'
 ]
 
+function matchEmojiName(str: string){
+        if (!str) return null;
+        let mats = str.match(/<a?:(.+):(\d+)>/);
+        if (mats) {
+            return mats[1];
+        }
+
+        return null;
+}
