@@ -11,7 +11,8 @@ import dataJson from "../../data";
 let Map = {
     [dataJson['user']['簡倫']]: {
         'guild': '1042333554085998662',
-        'echoChannel': '1043557584193454091',
+        // 'echoChannel': '1043557584193454091',
+        'echoChannel': '1069941949915742298',
 
     },
     // [dataJson['user']['me']]: {
