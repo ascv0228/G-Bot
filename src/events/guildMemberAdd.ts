@@ -22,5 +22,9 @@ export = {
             member.roles.add(roleIds);
 
         }
+        if ( member.guild.id== '997172475999830146'){
+            let textChannel = await member.guild.channels.fetch("997179994948247642") as Discord.TextChannel;
+            textChannel.send(`<@${member.user.id}>,歡迎加入我的伺服器,前往 <#1008001768627634286> 獲得聊天室大門鑰匙`)
+        }
     }
 }

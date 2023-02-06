@@ -23,6 +23,7 @@ export interface ReactionHandle {
     clear_other_emoji?: boolean; // 清除 不是選項的emoji
     clear_options_emoji?: boolean; // 清除 其他選項的emoji
     clear_this_emoji?: boolean; // 清除自身emoji
+    cancel?: boolean; // no messageReactionRemove
 }
 
 export interface EmbedReactionExecutor {

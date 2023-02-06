@@ -130,6 +130,16 @@ let handle_Obj = new Map(Object.entries({
         clear_options_emoji: false, // 清除 其他選項的emoji
         clear_this_emoji: false, // 清除自身emoji
     } as ReactionHandle,
+
+    "1008005195185266718" :{
+        emoji: {// 拓荒
+            '997172563572703422': "997176857407541299", //噁男
+        },
+        clear_other_emoji: false, // 清除 不是選項的emoji
+        clear_options_emoji: false, // 清除 其他選項的emoji
+        clear_this_emoji: false, // 清除自身emoji
+        cancel : false,
+    } as ReactionHandle,
 }));
 
 
@@ -147,12 +157,14 @@ export = {
     },
     async messageReactionAdd(client: ZClient, reaction: Discord.MessageReaction, member: Discord.GuildMember) {
         let roleId = handle_Obj.get(reaction.message.id).emoji[dcUtil.uniqueEmoji(reaction.emoji)]
-        // if (!roleId) return;
+        if (!roleId) return;
         member.roles.add(roleId)
     },
     async messageReactionRemove(client: ZClient, reaction: Discord.MessageReaction, member: Discord.GuildMember) {
-        let roleId = handle_Obj.get(reaction.message.id).emoji[dcUtil.uniqueEmoji(reaction.emoji)]
-        // if (!roleId) return;
+        let obj = handle_Obj.get(reaction.message.id)
+        if (!obj.cancel) return;
+        let roleId = obj.emoji[dcUtil.uniqueEmoji(reaction.emoji)]
+        if (!roleId) return;
         member.roles.remove(roleId)
     }
 };
