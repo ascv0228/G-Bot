@@ -1,5 +1,5 @@
-import dotenv from 'dotenv'
-dotenv.config()
+// import dotenv from 'dotenv'
+// dotenv.config()
 import Discord from "discord.js";
 import fs from "fs";
 import dbMgr from "./database/dbMgr";

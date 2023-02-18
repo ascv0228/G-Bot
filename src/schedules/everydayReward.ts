@@ -9,8 +9,8 @@ export = {
     name: "everydayReward",
 
     async execute(client: ZClient) {
-
-        schedule.scheduleJob('40 59 15 * * *', async function () {
+        let time_str = `50 59 ${(15 + client.botStatus['timezone']) % 24} * * *`;
+        schedule.scheduleJob(time_str, async function () {
             const guildid = '829673608791851038';
             let guild = client.guilds.cache.get(guildid);
             await rewardUtil.giveReward(client);

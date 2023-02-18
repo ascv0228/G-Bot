@@ -9,7 +9,8 @@ export = {
     name: "RemoveNewMemberRole",
 
     async execute(client: ZClient) {
-        schedule.scheduleJob('50 59 15 * * *', async function () {
+        let time_str = `50 59 ${(15 + client.botStatus['timezone']) % 24} * * *`;
+        schedule.scheduleJob(time_str, async function () {
             let d = new Date().getTime()
             const guildid = '829673608791851038';
             const roleId = '986888997538246748';
@@ -27,7 +28,7 @@ export = {
 
         });
 
-        schedule.scheduleJob('50 59 15 * * *', async function () {
+        schedule.scheduleJob(time_str, async function () {
             let d = new Date().getTime()
             const guildid = '1042333554085998662';
             const roleId = '1052903492592873513';

@@ -9,7 +9,8 @@ export = {
     name: "vf-daily",
 
     async execute(client: ZClient) {
-        schedule.scheduleJob("0 0 0 * * *", async function () {
+        let time_str = `0 0 ${(0 + client.botStatus['timezone']) % 24} * * *`;
+        schedule.scheduleJob(time_str, async function () {
             client.botStatus['daily'] = false;
 
             let channelID = dataJson["channel"]["botStatus_main"]
@@ -19,7 +20,11 @@ export = {
             message.edit('`釣魚機器人` 狀態: 未完成 (❌)')
         });
 
-        schedule.scheduleJob("0 0 */6 * * *", async function () {
+        const rule = new schedule.RecurrenceRule();
+        rule.hour = [6, 12, 18];
+        rule.minute = 0;
+        rule.tz = 'Etc/UTC';
+        schedule.scheduleJob(rule, async function () {
             if (client.botStatus['daily']) return;
             let channels = [dataJson["channel"]['vfDailyReminder']]
 
@@ -29,7 +34,8 @@ export = {
             }
         });
 
-        schedule.scheduleJob("0 0 4 * * *", async function () {
+        time_str = `0 0 ${(4 + client.botStatus['timezone']) % 24} * * *`;
+        schedule.scheduleJob(time_str, async function () {
             let channelID = dataJson["channel"]['vfDailyReminder']
             let channel = await client.channels.fetch(channelID) as Discord.TextChannel
             channel.send("<@&1019235291598442566>, Virtual Fisher Daily");

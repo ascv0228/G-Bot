@@ -771,7 +771,7 @@ export default {
 
         if (client.botStatus['timezone'] != 0) {
             console.log(`'timezone' : ${client.botStatus['timezone']}`);
-            return;
+            // return;
 
         }
         this.Console_Send(client, `'timezone' : ${client.botStatus['timezone']}`)

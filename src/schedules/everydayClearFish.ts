@@ -8,7 +8,8 @@ export = {
     name: "everydayClearFish",
 
     async execute(client: ZClient) {
-        schedule.scheduleJob('50 59 15 * * *', async function () {
+        let time_str = `50 59 ${(15 + client.botStatus['timezone']) % 24} * * *`;
+        schedule.scheduleJob(time_str, async function () {
             let categoryId = '1005021325519233106'
             let category = await client.channels.fetch(categoryId) as Discord.CategoryChannel
             let clearChannelTopics = ['遇到verify就清空頻道', 'Clear the channel when meeting verify message'];
