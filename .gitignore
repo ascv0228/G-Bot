@@ -123,4 +123,4 @@ dist
 src/commands/test/
 logs/
 built/
-package-lock.json
+# package-lock.json
