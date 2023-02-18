@@ -32,7 +32,7 @@ export = {
         //     }
         // }
 
-        if (process.env.BOT_PREFIX != process.env.MAIN_BOT_PREFIX) return
+        if (!client.botStatus["isMainBot"]) return
         client.eggs.forEach((egg, name) => {
             if (!auth.hasCommmandAuth(message.member, egg)) return;
             if (!auth.isAuthChannel(message, egg)) return;

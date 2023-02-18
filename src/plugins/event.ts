@@ -21,4 +21,5 @@ function loadEvents(this: ZClient) {
 
 export function install(client: ZClient) {
     client.loadEvents = loadEvents;
+    client.loadEvents();
 }

@@ -19,7 +19,7 @@ export = {
     async execute(client: ZClient, msg: Discord.Message, embed: Discord.Embed) {
         if (!(msg.interaction && msg.interaction.commandName == 'daily')) return;
 
-        if (msg.interaction.user.id != process.env.BOT_OWNER) return;
+        if (msg.interaction.user.id != dataJson['user']['me']) return;
 
         client.botStatus['daily'] = true;
         let channelID = dataJson["channel"]["botStatus_main"]

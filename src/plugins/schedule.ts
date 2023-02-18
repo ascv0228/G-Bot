@@ -23,4 +23,5 @@ export function install(client: ZClient) {
     client.schedules = new Discord.Collection();
 
     client.loadSchedules = loadSchedules;
+    client.loadSchedules();
 }

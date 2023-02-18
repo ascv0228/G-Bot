@@ -18,7 +18,7 @@ export default {
 
         "【🎉】自發活動區": "869585329072537680",
         "left Fisher Grind": "1019254792670949436",
-        "vfDailyReeminder": "1019238134900338709",
+        "vfDailyReminder": "1019238134900338709",
 
         "commandUseEmbed": "992063045167759554",
 

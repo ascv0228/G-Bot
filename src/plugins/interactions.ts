@@ -40,5 +40,8 @@ export function install(client: ZClient) {
 
     client.loadSlashCommands = loadSlashCommands
     client.loadInteractions = loadInteractions
+
+    client.loadSlashCommands();
+    client.loadInteractions();
 }
 

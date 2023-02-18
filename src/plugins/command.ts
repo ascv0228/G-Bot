@@ -76,4 +76,7 @@ export function install(client: ZClient) {
     client.loadCommands = loadCommands;
     client.loadEmbedCommands = loadEmbedCommands;
     client.loadEggs = loadEggs;
+    client.loadCommands();
+    client.loadEmbedCommands();
+    client.loadEggs();
 }

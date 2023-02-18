@@ -4,6 +4,7 @@ import tools from "../utils/tools";
 import { ZClient } from "../structure/client";
 import { BotMessage } from "../structure/botinfo";
 import { Executor } from "../structure/executor";
+// require('dotenv').config();
 
 function coolDownExpired(this: ZClient, message: Discord.Message, exec: Executor) {
     const cooldownTag = `${message.member.id}_${exec.name}`;
@@ -58,5 +59,5 @@ export function install(client: ZClient) {
     client.updateCoolDown = updateCoolDown;
     client.coolDownExpired = coolDownExpired;
     client.getChannelInfo = getChannelInfo;
-    client.DiscordLog = DiscordLog
+    client.DiscordLog = DiscordLog;
 }

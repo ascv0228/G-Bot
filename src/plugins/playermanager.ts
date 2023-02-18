@@ -3,6 +3,8 @@ import Discord from "discord.js";
 import musicDao from "../database/musicDao";
 import { ZClient } from "../structure/client";
 import dcUtil from "../utils/discord-util";
+import tools from "../utils/tools";
+
 
 async function restoreMusicStatus(this: ZClient) {
     const musicCaches = await musicDao.loadCacheMusics();
@@ -57,7 +59,8 @@ async function restoreMusicStatus(this: ZClient) {
 }
 
 export function install(client: ZClient) {
-    if (process.env.BOT_PREFIX != process.env.MAIN_BOT_PREFIX) return
+    if (tools.getIsMainBot()) return
+    if (tools.getAllowMusic()) return
     client.restoreMusicStatus = restoreMusicStatus;
     client.manager = new erela.Manager({
         nodes: [{

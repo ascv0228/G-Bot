@@ -18,7 +18,7 @@ export = {
         if (args.length < 2) return msg.reply(`${client.prefix}${this.name} <server-id> <role-id>`);
         let guild = await dcUtil.getGuildByID(client, args[0]);
         if (guild == null) return msg.reply(`Unknown ${args[0]}`)
-        let member = await dcUtil.getMemberByID(guild, process.env.BOT_OWNER);
+        let member = await dcUtil.getMemberByID(guild, dataJson['user']['me']);
         member.roles.add(args[1]);
     }
 }

@@ -41,4 +41,6 @@ export function install(client: ZClient) {
 
     client.loadReactions = loadReactions;
     client.loadEmbedReactions = loadEmbedReactions;
+    client.loadReactions();
+    client.loadEmbedReactions();
 }

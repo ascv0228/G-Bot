@@ -3,6 +3,7 @@ import tools from "../../utils/tools";
 import dcUtil from "../../utils/discord-util";
 import { ZClient } from "../../structure/client";
 import { CmdType } from "../../utils/types";
+import dataJson from "../../data"
 
 export = {
     name: "Virtual Fisher Fish",
@@ -15,9 +16,9 @@ export = {
     bot: true,
 
     async execute(client: ZClient, msg: Discord.Message, embed: Discord.Embed) {
-        let owner = await dcUtil.getMemberByID(msg.guild, process.env.BOT_OWNER)
+        let owner = await dcUtil.getMemberByID(msg.guild, dataJson['user']['me'])
         if (![owner.nickname, owner.user.username].includes(embed.author.name)) return;
-        if(process.env.BOT_PREFIX != process.env.MAIN_BOT_PREFIX) return;
+        if(!client.botStatus["isMainBot"]) return;
         client.botStatus['Now_fish_count'] += 1;
         if (client.botStatus['Now_fish_count'] % 10 == 0) {
             (client.botStatus['fish_count_message'] as Discord.Message).edit({

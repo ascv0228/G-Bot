@@ -21,16 +21,16 @@ export = {
 
         schedule.scheduleJob("0 0 */6 * * *", async function () {
             if (client.botStatus['daily']) return;
-            let channels = [dataJson["channel"]['vfDailyReeminder']]
+            let channels = [dataJson["channel"]['vfDailyReminder']]
 
             for (let channelId of channels) {
                 let channel = await client.channels.fetch(channelId) as Discord.TextChannel;
-                channel.send(`<@${process.env.BOT_OWNER}> 記得完成vf-daily`);
+                channel.send(`<@${dataJson['user']['me']}> 記得完成vf-daily`);
             }
         });
 
         schedule.scheduleJob("0 0 4 * * *", async function () {
-            let channelID = dataJson["channel"]['vfDailyReeminder']
+            let channelID = dataJson["channel"]['vfDailyReminder']
             let channel = await client.channels.fetch(channelID) as Discord.TextChannel
             channel.send("<@&1019235291598442566>, Virtual Fisher Daily");
         })

@@ -15,6 +15,11 @@ export = {
     type: [CmdType.Owner],
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
+        
+        if (!client.manager) {
+            msg.reply("no music")
+            return;
+        }
         msg.reply(JSON.stringify(client.manager.players.keys()))
     }
 };

@@ -27,4 +27,5 @@ function loadMessages(this: ZClient) {
 
 export function install(client: ZClient) {
     client.loadMessages = loadMessages;
+    client.loadMessages()
 }

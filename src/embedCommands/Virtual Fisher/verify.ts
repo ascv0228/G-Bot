@@ -2,6 +2,7 @@ import Discord from "discord.js";
 import tools from "../../utils/tools";
 import { ZClient } from "../../structure/client";
 import { CmdType } from "../../utils/types";
+import dataJson from "../../data"
 let guild_cId = {
     '1002583252923596820': '1022350675566407681',
     '1007668694765293568': '1007671368923492462',
@@ -39,7 +40,7 @@ export = {
         let user = members
             .filter(member => member.user.username == embed.author.name).values().next().value.user as Discord.User;
 
-        if (user.id == process.env.BOT_OWNER && process.env.BOT_PREFIX == process.env.MAIN_BOT_PREFIX) {
+        if (user.id == dataJson['user']['me'] && client.botStatus["isMainBot"]) {
             client.botStatus['Before_fish_count'] = client.botStatus['Now_fish_count'];
             client.botStatus['Now_fish_count'] = 0;
             (client.botStatus['fish_count_message'] as Discord.Message).edit({

@@ -43,6 +43,7 @@ export = {
     async execute(client: ZClient, msg: Discord.Message, listen: string) {
         if (dcUtil.pickRoleId(listen) && msg.mentions.roles.get(dcUtil.pickRoleId(listen))) return;
         let res = (typeof rolesMap[listen] === 'string' || rolesMap[listen] instanceof String)? rolesMap[listen] : rolesMap[listen][msg.guild.id]
+        if(!res) return
 
         return msg.reply({ content: res + `, ${msg.member} 找你` });
 

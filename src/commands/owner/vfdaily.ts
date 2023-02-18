@@ -19,7 +19,7 @@ export = {
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
         msg.reply(`['daily']: ${String(client.botStatus['daily'])} => ${String(true)}`)
         client.botStatus['daily'] = true
-        msg.channel.send(`<@${process.env.BOT_OWNER}> 已經關閉daily提醒， 記得確實完成`);
+        msg.channel.send(`<@${dataJson['user']['me']}> 已經關閉daily提醒， 記得確實完成`);
 
         let channelID = dataJson["channel"]["botStatus_main"]
         let msg_id = dataJson["msg_id"]["VfDaily"]

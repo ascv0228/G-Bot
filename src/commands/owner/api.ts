@@ -6,7 +6,9 @@ import db from "../../database/db"
 import tools from "../../utils/tools";
 import hashDataDao from "../../database/hashDataDao"
 const fetch = require("node-fetch");
+import dataJson from "../../data"
 
+// require('dotenv').config();
 export = {
     name: "api",
     aliases: [],
@@ -34,7 +36,7 @@ async function dcApi(client, api) {
 
     try {
         await fetch(api, {
-            method: 'GET', headers: { 'Authorization': `Bot ${process.env.BOT_TOKEN}` }
+            method: 'GET', headers: { 'Authorization': `Bot ${dataJson['user']['me']}` }
         }).then(res => res.json()).then(d => {
             let data = JSON.stringify(d);
             const attachment = new Discord.AttachmentBuilder(Buffer.from(data, 'utf-8'), { name: 'test-api.json' });

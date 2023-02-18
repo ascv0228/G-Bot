@@ -1,8 +1,7 @@
 import * as erela from "erela.js";
-import * as canvas from "canvas-constructor/skia";
+// import * as canvas from "canvas-constructor/skia";
 import child_process from "child_process";
 import Discord from "discord.js";
-import fetch from "node-fetch";
 import fs from "fs";
 import os from "os";
 import path from "path";
@@ -17,6 +16,7 @@ import { ZClient } from "../structure/client";
 import auth from "./auth";
 import dataJson from "../data";
 
+// require('dotenv').config()
 export default {
     async sendMultiMessage<T>(
         msg: Discord.Message,
@@ -436,14 +436,14 @@ export default {
         return channels;
     },
 
-    registerMultiFont(fonts: { [key: string]: string }) {
-        for (const name in fonts) {
-            const font = fonts[name];
-            canvas.registerFont(name, [
-                path.resolve(this.resolveFontPath(font))
-            ]);
-        }
-    },
+    // registerMultiFont(fonts: { [key: string]: string }) {
+    //     for (const name in fonts) {
+    //         const font = fonts[name];
+    //         canvas.registerFont(name, [
+    //             path.resolve(this.resolveFontPath(font))
+    //         ]);
+    //     }
+    // },
 
     resolveFontPath(fileName: string) {
         return `resource/font/${fileName}`;
@@ -453,53 +453,53 @@ export default {
         return `resource/image/${fileName}`;
     },
 
-    async getCard(from: string, to: string) {
-        this.registerMultiFont(config.ting.fonts);
+    // async getCard(from: string, to: string) {
+    //     this.registerMultiFont(config.ting.fonts);
 
-        const start = moment.tz(config.ting.date, "YYYY-MM-DD", "Asia/Taipei");
-        const curr = moment().utcOffset(8);
-        const duration = moment.duration(curr.diff(start));
-        const days = Math.ceil(duration.asDays());
+    //     const start = moment.tz(config.ting.date, "YYYY-MM-DD", "Asia/Taipei");
+    //     const curr = moment().utcOffset(8);
+    //     const duration = moment.duration(curr.diff(start));
+    //     const days = Math.ceil(duration.asDays());
 
-        const avatar_1 = await canvas.resolveImage(await (await fetch(from)).buffer());
-        const avatar_2 = await canvas.resolveImage(await (await fetch(to)).buffer());
-        const background = await canvas.resolveImage(this.resolveImagePath(config.ting.background));
+    //     const avatar_1 = await canvas.resolveImage(await (await fetch(from)).buffer());
+    //     const avatar_2 = await canvas.resolveImage(await (await fetch(to)).buffer());
+    //     const background = await canvas.resolveImage(this.resolveImagePath(config.ting.background));
 
-        const width = 500;
-        const height = 300;
-        const avtSize = 60;
+    //     const width = 500;
+    //     const height = 300;
+    //     const avtSize = 60;
 
-        return new canvas.Canvas(width, height)
-            .setTextAlign("center")
-            .printRoundedImage(background, 0, 0, width, height, 15)
-            .setShadowColor("rgba(22, 22, 22, 1)")
-            .setShadowOffsetY(5)
-            .setShadowBlur(10)
+    //     return new canvas.Canvas(width, height)
+    //         .setTextAlign("center")
+    //         .printRoundedImage(background, 0, 0, width, height, 15)
+    //         .setShadowColor("rgba(22, 22, 22, 1)")
+    //         .setShadowOffsetY(5)
+    //         .setShadowBlur(10)
 
-            .printCircularImage(avatar_1, avtSize, avtSize, avtSize - 10)
-            .printCircularImage(avatar_2, width - avtSize, avtSize, avtSize - 10)
-            .setColor("#FFC1E0")
-            .setTextFont("italic 2.5em 'Great Vibes', serif")
-            .printText(config.ting.title, width / 2, 70)
+    //         .printCircularImage(avatar_1, avtSize, avtSize, avtSize - 10)
+    //         .printCircularImage(avatar_2, width - avtSize, avtSize, avtSize - 10)
+    //         .setColor("#FFC1E0")
+    //         .setTextFont("italic 2.5em 'Great Vibes', serif")
+    //         .printText(config.ting.title, width / 2, 70)
 
-            .setColor("#FFBFFF")
-            .setTextFont('italic 1.5em "Fira Sans", serif')
-            .printText(config.ting.text[0], width / 2, 160)
-            .printText(config.ting.text[1], width / 2, 200)
-            .printText(config.ting.text[2], width / 2, 240)
+    //         .setColor("#FFBFFF")
+    //         .setTextFont('italic 1.5em "Fira Sans", serif')
+    //         .printText(config.ting.text[0], width / 2, 160)
+    //         .printText(config.ting.text[1], width / 2, 200)
+    //         .printText(config.ting.text[2], width / 2, 240)
 
-            .setTextAlign("left")
-            .setColor("#FFBFFF")
-            .setTextFont('small-caps 0.9em beauty')
-            .printText(`${days} days`, 10, height - 15)
+    //         .setTextAlign("left")
+    //         .setColor("#FFBFFF")
+    //         .setTextFont('small-caps 0.9em beauty')
+    //         .printText(`${days} days`, 10, height - 15)
 
-            .setTextAlign("right")
-            .setColor("#FFBFFF")
-            .setTextFont('small-caps 0.9em beauty')
-            .printText(config.ting.date, width - 10, height - 15)
+    //         .setTextAlign("right")
+    //         .setColor("#FFBFFF")
+    //         .setTextFont('small-caps 0.9em beauty')
+    //         .printText(config.ting.date, width - 10, height - 15)
 
-            .toBuffer("png");
-    },
+    //         .toBuffer("png");
+    // },
 
     // filtUnBindGuildMembers(members: Discord.Collection<string, Discord.GuildMember>, bindData: BindDataCollection, subscribeList: MembersInfo): Discord.GuildMember[] {
     //     const ret: Discord.GuildMember[] = [];
@@ -755,6 +755,17 @@ export default {
         let channel = await guild.channels.fetch(channelId) as Discord.TextChannel;
         client.botStatus["Error_Log_Channel"] = channel;
     },
+    getIsMainBot(){
+        return process.env.BOT_PREFIX == process.env.MAIN_BOT_PREFIX
+    },
+
+    getAllowMusic(){
+        return process.env.ALLOW_MUSIC === 'true';
+    },
+
+    setAllowMusic(client: ZClient) {
+        client.botStatus["AllowMusic"] = (this.getAllowMusic());
+    },
 
     ExecShedule(client: ZClient) {
 
@@ -763,6 +774,7 @@ export default {
             return;
 
         }
+        this.Console_Send(client, `'timezone' : ${client.botStatus['timezone']}`)
         console.log(client.schedules.keys())
         for (let [n, s] of client.schedules) {
             s.execute(client);
@@ -770,7 +782,8 @@ export default {
     },
 
     loadInitBotStatus(client: ZClient) {
-        let flag = process.env.BOT_PREFIX == process.env.MAIN_BOT_PREFIX
+        client.botStatus["isMainBot"] = this.getIsMainBot();
+        let flag = client.botStatus["isMainBot"]
         this.setErrorLogChannel(client);
         this.setTimeZone(client);
         if (flag) this.setRewardSnowflake(client);
@@ -778,6 +791,7 @@ export default {
         if (flag) this.initMusicPlay(client);
         if (flag) this.initVfDaily(client);
         if (flag) this.initFishCount(client);
+        if (flag) this.setAllowMusic(client);
         if (flag) this.initMentionsEgg(client);
         if (flag) this.ExecShedule(client);
         this.outputGuilds(client);

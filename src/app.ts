@@ -1,9 +1,13 @@
+import dotenv from 'dotenv'
+dotenv.config()
 import Discord from "discord.js";
 import fs from "fs";
 import dbMgr from "./database/dbMgr";
 import tools from "./utils/tools";
 import { ZClient } from "./structure/client";
 import { Installer } from "./structure/plugin/installer";
+
+
 
 const client = new Discord.Client({
     intents: tools.expandEnumValues(Discord.GatewayIntentBits) as number[],
@@ -31,17 +35,19 @@ fs.readdirSync(pluginDir)
 
 dbMgr.connectAll()
     .then(() => {
+        console.log("嘗試載入")
         Promise.allSettled([
             // client.loadTasks(),
-            client.loadCommands(),
-            client.loadEmbedCommands(),
-            client.loadEggs(),
-            client.loadEvents(),
-            client.loadSlashCommands(),
-            client.loadInteractions(),
-            client.loadReactions(),
-            client.loadEmbedReactions(),
-            client.loadSchedules(),
+            // console.log("嘗試載入A"),
+            // client.loadCommands(),
+            // client.loadEmbedCommands(),
+            // client.loadEggs(),
+            // client.loadEvents(),
+            // client.loadSlashCommands(),
+            // client.loadInteractions(),
+            // client.loadReactions(),
+            // client.loadEmbedReactions(),
+            // client.loadSchedules(),
         ]).then((result) => {
             client.login(process.env.BOT_TOKEN);
         });
