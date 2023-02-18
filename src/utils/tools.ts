@@ -774,7 +774,7 @@ export default {
             // return;
 
         }
-        this.Console_Send(client, `'timezone' : ${client.botStatus['timezone']}`)
+        // this.Console_Send(client, `'timezone' : ${client.botStatus['timezone']}`)
         console.log(client.schedules.keys())
         for (let [n, s] of client.schedules) {
             s.execute(client);
