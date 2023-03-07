@@ -15,7 +15,8 @@ export = {
     type: [CmdType.Universal, CmdType.Developer, CmdType.Owner],
     usage: [
         "",
-        "<someone> <role>"
+        "<someone...> <role>",
+        "<role...> <roleX> (let members of role get roleX)"
     ],
 
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
@@ -26,14 +27,22 @@ export = {
             return msg.reply({ content: tools.usageString(client, this) });
         }
         else {
-            try{
+            try {
                 let roleId = dcUtil.pickRoleId(args.pop());
-                for(let m of args){
-                    (await dcUtil.getMemberByTag(msg.guild, m)).roles.add(roleId)
+                for (let m of args) {
+                    let member = await dcUtil.getMemberByTag(msg.guild, m);
+                    if (member)
+                        member.roles.add(roleId)
+                    else {
+                        let role = await dcUtil.getRoleByID(msg.guild, dcUtil.pickRoleId(m))
+                        for (let rm of role.members.values()) {
+                            rm.roles.add(roleId)
+                        }
+                    }
                 }
                 msg.react("⭕")
             }
-            catch(e){
+            catch (e) {
                 msg.reply({ content: tools.usageString(client, this) });
             }
 

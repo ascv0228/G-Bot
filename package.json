@@ -7,6 +7,7 @@
         "js": "node -r dotenv/config ./built/app.js",
         "ts": "ts-node -r dotenv/config ./src/app.ts",
         "build": "tsc",
+        "noMusic": "tsc",
         "eslint": "eslint . --ext .js,.jsx,.ts,.tsx",
         "eslint-fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix"
     },
@@ -27,6 +28,7 @@
         "moment-duration-format": "^2.3.2",
         "moment-timezone": "^0.5.34",
         "mongodb": "^4.7.0",
+        "node-fetch": "^2.6.9",
         "node-schedule": "^2.1.0",
         "request": "^2.88.2",
         "skia-canvas": "^0.9.30",
