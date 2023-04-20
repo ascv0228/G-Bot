@@ -149,7 +149,7 @@ export default {
 
         let output = new Array();
         let temp2 = (await rewardDao.getString('reward-4000-ticket'))[0]['msg'];
-        let members = await guild.members.fetch({ user: user_ids, force: true })
+        let members = await guild.members.fetch({ user: user_ids})
         let order_userTag = new Map();
         for (const [id, member] of members) {
             let userTag = `@${member.user.username}#${member.user.discriminator}`;
@@ -236,7 +236,7 @@ async function getRecordOutputArray(client: ZClient, guild: Discord.Guild, args:
     // console.log(user_ids);
     let output = new Array();
     // let members = await guild.members.fetch({ user: user_ids, withPresences: true })
-    let members = await guild.members.fetch({ force: true })
+    let members = await guild.members.fetch()
     let order_userTag = new Map();
     for (const [id, member] of members) {
         let userTag = `@${member.user.username}#${member.user.discriminator}`;

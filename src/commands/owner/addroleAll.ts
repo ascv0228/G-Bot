@@ -16,7 +16,7 @@ export = {
     async execute(client: ZClient, msg: Discord.Message, args: string[]) {
 
 
-        let members = (await msg.guild.members.fetch({ force: true }))
+        let members = (await msg.guild.members.fetch())
 
         let roleIds = args.map(a => dcUtil.pickRoleId(a)).filter(r => !!r) as string[];
 

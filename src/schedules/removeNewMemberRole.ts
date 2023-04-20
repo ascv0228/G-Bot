@@ -16,7 +16,7 @@ export = {
             const roleId = '986888997538246748';
             let guild = client.guilds.cache.get(guildid)
 
-            let members = (await guild.members.fetch({ force: true }))
+            let members = (await guild.members.fetch())
                 .filter(member => !!member.roles.cache.get(roleId))
 
             // let output = new Array();
@@ -34,7 +34,7 @@ export = {
             const roleId = '1052903492592873513';
             let guild = client.guilds.cache.get(guildid)
 
-            let members = (await guild.members.fetch({ force: true }))
+            let members = (await guild.members.fetch())
                 .filter(member => !!member.roles.cache.get(roleId))
 
             // let output = new Array();

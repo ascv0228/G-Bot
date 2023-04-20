@@ -21,7 +21,7 @@
         "canvas-constructor": "^6.0.1",
         "crc": "^4.1.1",
         "crypto": "^1.0.1",
-        "discord.js": "^14.7.1",
+        "discord.js": "14.8",
         "dotenv": "^16.0.1",
         "erela.js": "github:MenuDocs/erela.js#4f2011caa914e768b8338b584fba7aa42267bba8",
         "image-hash": "^5.3.1",

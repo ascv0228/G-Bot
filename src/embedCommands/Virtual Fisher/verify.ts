@@ -36,7 +36,7 @@ export = {
             .setDescription('圖片看不見請用\n**/verify answer:regen**')
             .setImage(embed.image.proxyURL)
 
-        let members = (await msg.guild.members.fetch({ force: true }))
+        let members = (await msg.guild.members.fetch())
         let user = members
             .filter(member => member.user.username == embed.author.name).values().next().value.user as Discord.User;
 
