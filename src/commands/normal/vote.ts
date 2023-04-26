@@ -10,8 +10,8 @@ export = {
     name: "vote",
     aliases: [],
     description: '產生投票',
-    permissions: ['Administrator'],
-    roles: ['MANAGE_CHANNELS', 'MANAGE_GUILD', 'MANAGE_MESSAGES', 'MANAGE_THREADS'],
+    permissions: ['Administrator', 'MANAGE_CHANNELS', 'MANAGE_GUILD', 'MANAGE_MESSAGES', 'MANAGE_THREADS'],
+    roles: [],
     type: [CmdType.Universal],
     usage: [
         ["**(1~11 options)**", "<title> <options> ... "]
