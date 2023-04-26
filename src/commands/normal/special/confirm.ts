@@ -10,7 +10,7 @@ import dataJson from "../../../data";
 export = {
     name: "confirm",
     aliases: ["cf"],
-    users: [],
+    users: [dataJson['user']['me']],
     description: '賦予 團員 或 非團員 身分組',
     permissions: [],
     roles: ['1064189066528182322', '1042340948941754409'],
