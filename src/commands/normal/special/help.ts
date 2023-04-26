@@ -46,7 +46,7 @@ export = {
                 max: num,
                 time: 60 * 1000,
                 filter(m: Discord.Interaction): boolean {
-                    return m.user.id == msg.author.id && m.isSelectMenu();
+                    return m.user.id == msg.author.id && m.isStringSelectMenu();
                 }
             });
 

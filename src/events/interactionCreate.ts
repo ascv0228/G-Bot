@@ -35,6 +35,7 @@ export = {
             // console.log(JSON.stringify(values))
             // console.log(JSON.stringify(roles))
             let allowMember = customId.trimEnd().split(/###/)[1] || "all"
+            if (allowMember == 'ignore') return;
             if (allowMember != 'all' && allowMember != interaction.user.id)
                 return interaction.reply({ content: 'You cannot use others\' commands.', ephemeral: true });
 
@@ -50,6 +51,7 @@ export = {
 
             const { customId, values, member } = interaction    //確切字符串
             let allowMember = customId.trimEnd().split(/###/)[1] || "all"
+            if (allowMember == 'ignore') return;
             if (allowMember != 'all' && allowMember != interaction.user.id)
                 return interaction.reply({ content: 'You cannot use others\' commands.', ephemeral: true });
 
@@ -78,6 +80,7 @@ export = {
             // console.log(JSON.stringify(values))
             // console.log(JSON.stringify(roles))
             let allowMember = customId.trimEnd().split(/###/)[1] || "all"
+            if (allowMember == 'ignore') return;
             if (allowMember != 'all' && allowMember != interaction.user.id)
                 return interaction.reply({ content: 'You cannot use others\' commands.', ephemeral: true });
 
@@ -98,6 +101,7 @@ export = {
         }
         if (interaction.isModalSubmit()) {
             let allowMember = interaction.customId.trimEnd().split(/###/)[1] || "all"
+            if (allowMember == 'ignore') return;
             if (allowMember != 'all' && allowMember != interaction.user.id)
                 return interaction.reply({ content: 'You cannot use others\' commands.', ephemeral: true });
 
