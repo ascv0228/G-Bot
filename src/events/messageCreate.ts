@@ -6,6 +6,7 @@ import rewardUtil from '../utils/reward-util';
 import dcUtil from "../utils/discord-util";
 import tools from "../utils/tools";
 import dataJson from "../data"
+import { CmdType } from "../utils/types";
 
 export = {
     name: 'messageCreate',
@@ -93,7 +94,11 @@ export = {
             if (exec.delete && !deleted && message.deletable) deleted = !!await message.delete();
 
             if (!client.coolDownExpired(message, exec)) continue;
-
+            
+            if (process.env.ALLOW_MUSIC == 'false' && exec.type.includes(CmdType.Music)) {
+                message.reply('暫時關閉音樂功能')
+                continue;
+            }
             try {
                 execed = true;
                 exec.execute(client, message, args);
