@@ -24,33 +24,23 @@ export = {
         if (!args.length)
             return msg.reply({ content: tools.usageString(client, this) });
         for(let arg of args){
-
-            let emoji_url;
-            let name: string
-            if (!emoji_url) {
-                emoji_url = arg.startsWith('http') ? arg : await dcUtil.getUrl(dcUtil.matchEmoji(args[0]));
-                if (!emoji_url)
-                    return msg.reply({ content: tools.usageString(client, this) });
-                name = matchEmojiName(arg)
-            } else {
-                name = arg || "temp"
-            }
+            let emoji_url = await dcUtil.getUrl(dcUtil.matchEmoji(arg));
+            let name = matchEmojiName(arg)
+            
     
             let emoji = await msg.guild.emojis.create({ attachment: emoji_url, name: name }).catch((e) => {
                 if (`${e}`.includes("maximum size")) {
                     msg.reply({ content: `image file's size is too large` })
-                    return false
                 }
                 if (`${e}`.includes("DiscordAPIError[50035]")) {
                     msg.reply({ content: `this url \`${emoji_url}\`is not image url` })
-                    return false
+            
                 }
                 msg.reply({ content: `${e}` })
                 tools.Console_Send(client, e);
-                return false
             })
             if (emoji)
-                return msg.reply({ content: `增加 ${emoji}` })
+                msg.reply({ content: `增加 ${emoji}` })
         }
 
 
