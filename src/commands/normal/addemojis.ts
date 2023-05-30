@@ -28,12 +28,12 @@ export = {
             let emoji_url;
             let name: string
             if (!emoji_url) {
-                emoji_url = args[0].startsWith('http') ? args[0] : await dcUtil.getUrl(dcUtil.matchEmoji(args[0]));
+                emoji_url = arg.startsWith('http') ? arg : await dcUtil.getUrl(dcUtil.matchEmoji(args[0]));
                 if (!emoji_url)
                     return msg.reply({ content: tools.usageString(client, this) });
-                name = matchEmojiName(args[0])
+                name = matchEmojiName(arg)
             } else {
-                name = args[0] || "temp"
+                name = arg || "temp"
             }
     
             let emoji = await msg.guild.emojis.create({ attachment: emoji_url, name: name }).catch((e) => {
